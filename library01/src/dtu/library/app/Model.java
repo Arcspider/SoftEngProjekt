@@ -39,4 +39,8 @@ public class Model {
 		}
 		return null;
 	}
+
+	public boolean canBeCreated(String id){
+		return !projects.contains(id);
+	}
 }
