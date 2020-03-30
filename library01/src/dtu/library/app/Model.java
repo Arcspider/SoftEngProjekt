@@ -15,12 +15,12 @@ public class Model {
 		this.view = view;
 		projects = new ArrayList<Project>();
 		this.calendar = new GregorianCalendar();
-		dateFormat = new SimpleDateFormat("yy-mm");
+		dateFormat = new SimpleDateFormat("MM-yy");
 		random = new Random();
 	}
 	public void createProject() {
 		String date = dateFormat.format(Calendar.getInstance().getTime());
-		String id = date+ random.nextInt(100);
+		String id = date+"-"+ random.nextInt(100);
 		Project newProject = new Project(id);
 		projects.add(newProject);
 		view.showMessage("Project has been created with ID: " + id);
@@ -32,7 +32,9 @@ public class Model {
 			Project currentProject = projects.get(i);
 			String currentId = currentProject.getId();
 			
-			if(currentId.equals(id)) return currentProject;
+			if(currentId.equals(id)) {
+				return currentProject;
+			}
 
 		}
 		return null;

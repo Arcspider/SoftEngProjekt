@@ -3,9 +3,10 @@ import java.util.*;
 public class View{
 	private Model model;
 	private Controller controller;
-	public View(Model model, Controller controller) {
+	public View() {
 		this.model = new Model(this);
 		this.controller = new Controller(this, model);
+		startup();
 	}
 	
 	
@@ -13,13 +14,12 @@ public class View{
 		System.out.println(message);
 		System.out.println();
 	}
-	public static void main(String[] args) {
-
+	
+	public void startup() {
 		while(true) {
 			int nextCommand = controller.getCommand();
 			controller.runCommand(nextCommand);
 		}
 	}
-
 
 }

@@ -19,12 +19,13 @@ public class Controller {
 		if(nextCommand == 2) {
 			view.showMessage("Please enter the id of the project");
 			String userInput = getInput();
-			model.getProject(userInput).toString();
+			System.out.println(model.getProject(userInput).toString());
 		}
 		
 	}
 	
 	public String getInput() {
-		return scanner.nextLine();
+		
+		return scanner.next();
 	}
 }
