@@ -11,10 +11,6 @@ public class Model {
     private Random random;
     private Project newProject;
 
-    public static void main(String[] args) {
-
-    }
-
     public Model(View view) {
         this.view = view;
         projects = new ArrayList<Project>();
@@ -29,10 +25,6 @@ public class Model {
         newProject = new Project(name, id);
         view.showMessage("Project has been created with ID: " + id);
 
-    }
-
-    public boolean exists(String ID) {
-        return (hasID(ID));
     }
 
     public boolean hasID(String ID) {

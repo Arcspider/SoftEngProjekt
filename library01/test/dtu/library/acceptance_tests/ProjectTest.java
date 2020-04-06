@@ -22,9 +22,10 @@ public class ProjectTest {
     private String ID;
     private List<Project> projects;
 
-    public ProjectTest(View view, ErrorMessageHolder errorMessageHolder) {
+    public ProjectTest(View view, ErrorMessageHolder errorMessageHolder, ControllerProject controllerProject) {
         this.view = view;
         this.errorMessageHolder = errorMessageHolder;
+        this.controllerProject = controllerProject;
     }
 
     @Given("a user creates a project with name {string}")
@@ -40,7 +41,7 @@ public class ProjectTest {
     }
 
     @When("a project is created")
-    public void aProjectIsCreatedWithName(Project project) {
+    public void aProjectIsCreatedWithName() {
         controllerProject.addProject(project);
     }
 

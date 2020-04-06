@@ -39,7 +39,7 @@ public class ControllerProject {
     }
 
     public boolean exists(String ID) {
-        return model.exists(ID);
+        return model.hasID(ID);
     }
 
     public Project getProject() {
@@ -49,4 +49,5 @@ public class ControllerProject {
     public String getInput() {
         return scanner.next();
     }
+
 }
