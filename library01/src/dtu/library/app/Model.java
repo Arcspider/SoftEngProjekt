@@ -70,4 +70,8 @@ public class Model {
             throw new OperationNotAllowedException("The project has no name, so it was not created");
         }
     }
+
+    public void removeProject(Project project) {
+        projects.remove(project);
+    }
 }
