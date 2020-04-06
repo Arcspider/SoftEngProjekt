@@ -60,6 +60,14 @@ public class Model {
     }
 
     public void addProject(Project project) {
-            projects.add(project);
+        projects.add(project);
+    }
+
+    public boolean checkName(String name) throws OperationNotAllowedException {
+        if (!name.equals("")) {
+            return true;
+        } else {
+            throw new OperationNotAllowedException("The project has no name, so it was not created");
+        }
     }
 }

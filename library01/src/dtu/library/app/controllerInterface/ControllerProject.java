@@ -49,4 +49,8 @@ public class ControllerProject {
     public String getInput() {
         return scanner.next();
     }
+
+    public boolean checkName(String name) throws OperationNotAllowedException {
+           return model.checkName(name);
+    }
 }
