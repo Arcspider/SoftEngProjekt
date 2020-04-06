@@ -1,20 +1,25 @@
 package dtu.library.acceptance_tests;
 
-import dtu.library.app.Book;
-import dtu.library.app.LibraryApp;
-import dtu.library.app.Project;
-import dtu.library.app.View;
+import dtu.library.app.*;
+import dtu.library.app.controllerInterface.ControllerProject;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 import java.util.List;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class ProjectTest {
 
     private View view;
+    private ControllerProject controllerProject;
     private ErrorMessageHolder errorMessageHolder;
 
     private Project project;
+    private String ID;
     private List<Project> projects;
 
     public ProjectTest(View view, ErrorMessageHolder errorMessageHolder) {
@@ -23,22 +28,28 @@ public class ProjectTest {
     }
 
     @Given("a user creates a project with name {string}")
-    public void aUserCreatesAProjectWithName(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void aUserCreatesAProjectWithName(String name) {
+        controllerProject.runCommand("Create Project", name);
+        project = controllerProject.getProject();
+        ID = project.getId();
     }
 
-    @Given("there is no project with the ID {string}")
-    public void thereIsNoProjectWithTheName(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @Given("there is no project with the {string} from the project")
+    public void thereIsNoProjectWithTheFromTheProject(String ID) {
+        assertFalse(controllerProject.exists(ID));
     }
 
-    @Then("a project is created with name {string}")
-    public void aProjectIsCreatedWithName(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @When("a project is created")
+    public void aProjectIsCreatedWithName(Project project) {
+        controllerProject.addProject(project);
     }
+
+    @Then("the project with the {string} is contained in the list")
+    public void theProjectWithTheIsContainedInTheList(String ID) {
+        assertTrue(controllerProject.exists(ID));
+    }
+
+
 //
 //
 //    @Given("a user creates another project with name {string}")

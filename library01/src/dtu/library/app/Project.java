@@ -5,13 +5,15 @@ public class Project {
 	private String name;
 	private String id;
 	
-	public static void main(String[] args) {
-
-	}
-	public Project(String ID) {
+	public Project(String Name, String ID) {
+		this.name = Name;
 		this.id = ID;
 	}
-	
+
+	public Project getProject(){
+		return this;
+	}
+
 	public String getId() {
 		return this.id;
 	}

@@ -9,23 +9,31 @@ public class Controller {
 		this.model = model;
 		scanner = new Scanner(System.in);
 	}
-	int getCommand() {
-		return scanner.nextInt();
+
+	String getCommand() {
+		return scanner.next();
 	}
-	public void runCommand(int nextCommand) {
-		if(nextCommand == 1) {
-			model.createProject();
+
+	public void runCommand(String nextCommand) {
+		if(nextCommand.equals("Create Project")) {
+//			model.createProject();
 		}
-		if(nextCommand == 2) {
+		if(nextCommand.equals("Get Project")) {
 			view.showMessage("Please enter the id of the project");
 			String userInput = getInput();
 			System.out.println(model.getProject(userInput).toString());
 		}
-		
 	}
-	
+
+//	public boolean exists(){
+//		return model.exists();
+//	}
+
+	public Project getProject(){
+		return model.getNewProject();
+	}
+
 	public String getInput() {
-		
 		return scanner.next();
 	}
 }

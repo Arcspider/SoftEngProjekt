@@ -6,7 +6,7 @@ public class View{
 	public View() {
 		this.model = new Model(this);
 		this.controller = new Controller(this, model);
-		startup();
+//		startup();
 	}
 	
 	
@@ -17,9 +17,10 @@ public class View{
 	
 	public void startup() {
 		while(true) {
-			int nextCommand = controller.getCommand();
+			String nextCommand = controller.getCommand();
 			controller.runCommand(nextCommand);
 		}
 	}
+
 
 }
