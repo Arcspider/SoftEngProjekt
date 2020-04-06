@@ -38,8 +38,9 @@ public class ControllerProject {
         model.addProject(project);
     }
 
-    public void removeProject(Project project) {
-        model.removeProject(project);
+    public void removeProject(String Id) throws OperationNotAllowedException {
+        model.removeProject(Id);
+        
     }
 
     public boolean exists(String ID) {

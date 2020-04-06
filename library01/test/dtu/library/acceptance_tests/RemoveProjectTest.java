@@ -1,14 +1,17 @@
 package dtu.library.acceptance_tests;
 
+import dtu.library.app.OperationNotAllowedException;
 import dtu.library.app.Project;
 import dtu.library.app.View;
 import dtu.library.app.controllerInterface.ControllerProject;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -40,30 +43,36 @@ public class RemoveProjectTest {
     }
 
     @Then("the project is deleted")
-    public void theProjectIsDeleted() {
-        controllerProject.removeProject(project);
+    public void theProjectIsDeleted() throws OperationNotAllowedException {
+        controllerProject.removeProject(project.getId());
     }
 
     @Then("the project {string} no longer exists")
     public void theProjectNoLongerExists(String ID) {
         assertFalse(controllerProject.exists(ID));
     }
-//
-//    @Given("the user deletes project {string}")
-//    public void theUserDeletesProject(String string) {
-//        // Write code here that turns the phrase above into concrete actions
-//        throw new io.cucumber.java.PendingException();
-//    }
-//
-//    @Given("the project {string} doesn't exist")
-//    public void theProjectDoesnTExist(String string) {
-//        // Write code here that turns the phrase above into concrete actions
-//        throw new io.cucumber.java.PendingException();
-//    }
-//
-//    @Then("the error message {string} is shown")
-//    public void theErrorMessageIsShown(String string) {
-//        // Write code here that turns the phrase above into concrete actions
-//        throw new io.cucumber.java.PendingException();
-//    }
+    @Given("that the project {string} doesn't exist")
+    public void thatTheProjectDoesnTExist(String string) {
+    	  project = new Project("Beta", string);
+    	 assertFalse(controllerProject.exists(string));
+    }
+
+    @Given("the user tries to delete the project")
+    public void theUserTriesToDeleteTheProject() {
+    	 try {
+    		 controllerProject.removeProject(project.getId());
+         } catch (OperationNotAllowedException e) {
+             errorMessageHolder.setErrorMessage(e.getMessage());
+         }
+    }
+
+    @Then("the error message {string} is shown")
+    public void theErrorMessageIsShown(String errorMessage) {
+    	 assertEquals(errorMessage, this.errorMessageHolder.getErrorMessage());
+     
+    }
+
+
+
+   
 }
