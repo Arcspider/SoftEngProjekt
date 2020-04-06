@@ -38,8 +38,8 @@ public class ControllerProject {
         model.addProject(project);
     }
 
-    public void removeProject(String Id) throws OperationNotAllowedException {
-        model.removeProject(Id);
+    public void removeProject(Project project) throws OperationNotAllowedException {
+        model.removeProject(project);
         
     }
 

@@ -44,7 +44,7 @@ public class RemoveProjectTest {
 
     @Then("the project is deleted")
     public void theProjectIsDeleted() throws OperationNotAllowedException {
-        controllerProject.removeProject(project.getId());
+        controllerProject.removeProject(project);
     }
 
     @Then("the project {string} no longer exists")
@@ -60,7 +60,7 @@ public class RemoveProjectTest {
     @Given("the user tries to delete the project")
     public void theUserTriesToDeleteTheProject() {
     	 try {
-    		 controllerProject.removeProject(project.getId());
+    		 controllerProject.removeProject(project);
          } catch (OperationNotAllowedException e) {
              errorMessageHolder.setErrorMessage(e.getMessage());
          }

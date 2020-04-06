@@ -71,12 +71,11 @@ public class Model {
 		}
 	}
 
-	public void removeProject(String Id) throws OperationNotAllowedException {
-		if (!hasID(Id)) {
-			projects.remove(Id);
+	public void removeProject(Project project) throws OperationNotAllowedException {
+		if (hasID(project.getId())) {
+			projects.remove(project);
 		} else {
 			throw new OperationNotAllowedException("This project doesn't exist");
-
 		}
 	}
 }
