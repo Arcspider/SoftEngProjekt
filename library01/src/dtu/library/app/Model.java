@@ -11,10 +11,6 @@ public class Model {
     private Random random;
     private Project newProject;
 
-    public static void main(String[] args) {
-
-    }
-
     public Model(View view) {
         this.view = view;
         projects = new ArrayList<Project>();
@@ -31,10 +27,6 @@ public class Model {
 
     }
 
-    public boolean exists(String ID) {
-        return (hasID(ID));
-    }
-
     public boolean hasID(String ID) {
         for (Project project : projects) {
             if (project.getId().equals(ID)) {
@@ -49,10 +41,8 @@ public class Model {
     }
 
     public Project getProject(String id) {
-        for (int i = 0; i < projects.size(); i++) {
-            Project currentProject = projects.get(i);
+        for (Project currentProject : projects) {
             String currentId = currentProject.getId();
-
             if (currentId.equals(id)) {
                 return currentProject;
             }

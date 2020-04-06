@@ -22,9 +22,10 @@ public class ProjectTest {
     private String ID;
     private List<Project> projects;
 
-    public ProjectTest(View view, ErrorMessageHolder errorMessageHolder) {
+    public ProjectTest(View view, ErrorMessageHolder errorMessageHolder, ControllerProject controllerProject) {
         this.view = view;
         this.errorMessageHolder = errorMessageHolder;
+        this.controllerProject = controllerProject;
     }
 
     @Given("a user creates a project with name {string}")
@@ -34,18 +35,18 @@ public class ProjectTest {
         ID = project.getId();
     }
 
-    @Given("there is no project with the {string} from the project")
-    public void thereIsNoProjectWithTheFromTheProject(String ID) {
+    @Given("there is no project with the ID from the project")
+    public void thereIsNoProjectWithTheIDFromTheProject() {
         assertFalse(controllerProject.exists(ID));
     }
 
     @When("a project is created")
-    public void aProjectIsCreatedWithName(Project project) {
+    public void aProjectIsCreated() {
         controllerProject.addProject(project);
     }
 
-    @Then("the project with the {string} is contained in the list")
-    public void theProjectWithTheIsContainedInTheList(String ID) {
+    @Then("the project with the ID is contained in the list")
+    public void theProjectWithTheIDIsContainedInTheList() {
         assertTrue(controllerProject.exists(ID));
     }
 
