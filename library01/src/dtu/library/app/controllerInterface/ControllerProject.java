@@ -5,6 +5,7 @@ import dtu.library.app.OperationNotAllowedException;
 import dtu.library.app.Project;
 import dtu.library.app.View;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ControllerProject {
@@ -22,9 +23,11 @@ public class ControllerProject {
         return scanner.nextInt();
     }
 
-    public void runCommand(String nextCommand, String name) {
+    public void runCommand(String nextCommand, String name) throws OperationNotAllowedException {
         if (nextCommand.equals("Create Project")) {
-            model.createProject(name);
+        	String id = model.generateID();
+        	Project addedProject = model.createProject(name,id);
+        	model.addProject(addedProject);
         } else if (nextCommand.equals("Get Project")) {
             view.showMessage("Please enter the id of the project");
             String userInput = getInput();
@@ -33,9 +36,21 @@ public class ControllerProject {
             System.out.print("No valido");
         }
     }
+    
+    public Project createProject(String name, String id) {
+    	return model.createProject(name, id);
+    }
+    public String generateID() {
+    	return model.generateID();
+    }
+    public void addProject(Project project) throws OperationNotAllowedException {
+       
+    	model.addProject(project);
+    }
 
-    public void addProject(Project project) {
-        model.addProject(project);
+    public void removeProject(Project project) throws OperationNotAllowedException {
+        model.removeProject(project);
+        
     }
 
     public boolean exists(String ID) {
@@ -45,15 +60,23 @@ public class ControllerProject {
     public Project getProject() {
         return model.getNewProject();
     }
+    
+    public Project getOldProject(String ID) throws OperationNotAllowedException {
+    	return model.getProject(ID);
+    }
 
     public String getInput() {
         return scanner.next();
     }
+	public boolean editProjectDescription(String ID, String description) throws OperationNotAllowedException {
+		return model.editProjectDescription(ID,description);
+	}
+	public ArrayList<Project> getProjects(){
+		return model.getProjects();
+	}
 
-<<<<<<< HEAD
-=======
-    public boolean checkName(String name) throws OperationNotAllowedException {
-           return model.checkName(name);
-    }
->>>>>>> eda409dddba6c89c01e06215796aee06e27aaf8e
+	public boolean editProjectName(String ID, String name) {
+		return model.editProjectName(ID,name);
+		
+	}
 }
