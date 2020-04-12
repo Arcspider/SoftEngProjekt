@@ -1,7 +1,12 @@
 package dtu.library.app;
 
 public class Activity {
-	public static void main(String[] args) {
-
+	private String name;
+	private int startDate;
+	private int endDate;
+	
+	
+	public Activity(String name) {
+		this.name = name;
 	}
 }

@@ -1,13 +1,18 @@
 package dtu.library.app;
 
+import java.util.ArrayList;
+
 public class Project {
 	private String description;
 	private String name;
 	private String id;
+	private ArrayList<Activity> activities; 
+	private Activity newActivity;
 	
 	public Project(String Name, String ID) {
 		this.name = Name;
 		this.id = ID;
+		activities = new ArrayList<Activity>();
 	}
 
 	public Project getProject(){
@@ -24,4 +29,10 @@ public class Project {
     public String getName() {
 		return name;
 	}
+ 
+    public void addActivity(String name) {
+		newActivity = new Activity(name);
+		activities.add(newActivity);
+	}
+    
 }
