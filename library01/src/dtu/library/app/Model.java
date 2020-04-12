@@ -41,10 +41,8 @@ public class Model {
     }
 
     public Project getProject(String id) {
-        for (int i = 0; i < projects.size(); i++) {
-            Project currentProject = projects.get(i);
+        for (Project currentProject : projects) {
             String currentId = currentProject.getId();
-
             if (currentId.equals(id)) {
                 return currentProject;
             }
@@ -62,6 +60,14 @@ public class Model {
     }
 
     public void addProject(Project project) {
-            projects.add(project);
+        projects.add(project);
+    }
+
+    public boolean checkName(String name) throws OperationNotAllowedException {
+        if (!name.equals("")) {
+            return true;
+        } else {
+            throw new OperationNotAllowedException("The project has no name, so it was not created");
+        }
     }
 }

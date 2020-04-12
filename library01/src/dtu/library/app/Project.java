@@ -20,4 +20,8 @@ public class Project {
 	public String toString() {
 		return "This project is named PLACEHOLDER with description PLACEHOLDER and id " + id;
 	}
+
+    public String getName() {
+		return name;
+	}
 }

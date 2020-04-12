@@ -9,8 +9,7 @@ import io.cucumber.java.en.When;
 
 import java.util.List;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class ProjectTest {
 
@@ -35,44 +34,43 @@ public class ProjectTest {
         ID = project.getId();
     }
 
-    @Given("there is no project with the {string} from the project")
-    public void thereIsNoProjectWithTheFromTheProject(String ID) {
+    @Given("there is no project with the ID from the project")
+    public void thereIsNoProjectWithTheIDFromTheProject() {
         assertFalse(controllerProject.exists(ID));
     }
 
     @When("a project is created")
+<<<<<<< HEAD
     public void aProjectIsCreatedWithName() {
+=======
+    public void aProjectIsCreated() {
+>>>>>>> eda409dddba6c89c01e06215796aee06e27aaf8e
         controllerProject.addProject(project);
     }
 
-    @Then("the project with the {string} is contained in the list")
-    public void theProjectWithTheIsContainedInTheList(String ID) {
+    @Then("the project with the ID is contained in the list")
+    public void theProjectWithTheIDIsContainedInTheList() {
         assertTrue(controllerProject.exists(ID));
     }
 
+    @Given("a user creates another project with name {string}")
+    public void aUserCreatesAnotherProjectWithName(String name) {
+        controllerProject.runCommand("Create Project", name);
+        project = controllerProject.getProject();
+    }
 
-//
-//
-//    @Given("a user creates another project with name {string}")
-//    public void aUserCreatesAnotherProjectWithName(String string) {
-//        // Write code here that turns the phrase above into concrete actions
-//        throw new io.cucumber.java.PendingException();
-//    }
-//
-//    @Given("there is a project with the name {string}")
-//    public void thereIsAProjectWithTheName(String string) {
-//        // Write code here that turns the phrase above into concrete actions
-//        throw new io.cucumber.java.PendingException();
-//    }
-//    @Then("the project is not created")
-//    public void theProjectIsNotCreated() {
-//        // Write code here that turns the phrase above into concrete actions
-//        throw new io.cucumber.java.PendingException();
-//    }
-//    @Then("the user receives the error message {string}")
-//    public void theUserReceivesTheErrorMessage(String string) {
-//        // Write code here that turns the phrase above into concrete actions
-//        throw new io.cucumber.java.PendingException();
-//    }
+    @Then("the project is not created")
+    public void theProjectIsNotCreated() {
+        try {
+            assertFalse(controllerProject.checkName(project.getName()));
+        } catch (OperationNotAllowedException e) {
+            errorMessageHolder.setErrorMessage(e.getMessage());
+        }
+    }
+
+    @Then("the user receives an error message {string}")
+    public void theUserReceivesAnErrorMessage(String errorMessage) {
+        assertEquals(errorMessage, this.errorMessageHolder.getErrorMessage());
+    }
 
 }

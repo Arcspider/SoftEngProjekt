@@ -50,4 +50,10 @@ public class ControllerProject {
         return scanner.next();
     }
 
+<<<<<<< HEAD
+=======
+    public boolean checkName(String name) throws OperationNotAllowedException {
+           return model.checkName(name);
+    }
+>>>>>>> eda409dddba6c89c01e06215796aee06e27aaf8e
 }
