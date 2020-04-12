@@ -19,12 +19,10 @@ public class Model {
         random = new Random();
     }
 
-    public void createProject(String name) {
-        String date = dateFormat.format(Calendar.getInstance().getTime());
-        String id = date + "-" + random.nextInt(100);
+    public Project createProject(String name,String id) {
         newProject = new Project(name, id);
-        view.showMessage("Project has been created with ID: " + id);
-
+        view.showMessage("Project " + name  + " has been created with ID: " + id);
+        return newProject;
     }
 
     public boolean hasID(String ID) {
@@ -50,7 +48,12 @@ public class Model {
         }
         return null;
     }
-
+    public String generateID() {
+    	String date = dateFormat.format(Calendar.getInstance().getTime());
+        String id = date + "-" + random.nextInt(100);
+        while(hasID(id)) id = date + "-" + random.nextInt(100); 
+    	return id;
+    }
     public boolean containsProjectWithID(String ID) {
         return !(projects.contains(ID));
     }
@@ -59,8 +62,10 @@ public class Model {
         return !projects.contains(id);
     }
 
-    public void addProject(Project project) {
-        projects.add(project);
+    public void addProject(Project project) throws OperationNotAllowedException {
+    	if(checkName(project.getName())) {    		
+    		projects.add(project);
+    	}
     }
 
     public boolean checkName(String name) throws OperationNotAllowedException {
@@ -70,4 +75,20 @@ public class Model {
             throw new OperationNotAllowedException("The project has no name, so it was not created");
         }
     }
+    public ArrayList<Project> getProjects(){
+    	return projects;
+    }
+    public boolean editProjectDescription(String ID,String newDescription) {
+    	Project projectToBeEdited = getProject(ID);
+    	projectToBeEdited.setDescription(newDescription);
+    	
+    	return true;
+    }
+
+	public boolean editProjectName(String ID, String name) {
+		Project projectToBeEdited = getProject(ID);
+    	projectToBeEdited.setName(name);
+    	
+    	return true;
+	}
 }

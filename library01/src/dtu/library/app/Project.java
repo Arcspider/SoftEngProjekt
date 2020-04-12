@@ -24,4 +24,16 @@ public class Project {
     public String getName() {
 		return name;
 	}
+    public void setDescription(String newDescription) {
+    	description = newDescription;
+    }
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setName(String name2) {
+		name = name2;
+		
+	}
 }
