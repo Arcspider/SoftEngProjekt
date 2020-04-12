@@ -32,7 +32,7 @@ public class RemoveProjectTest {
     }
 
     @Given("the user deletes a project {string}")
-    public void theUserDeletesAProject(String ID) {
+    public void theUserDeletesAProject(String ID) throws OperationNotAllowedException {
         project = new Project("Beta", ID);
         controllerProject.addProject(project);
     }
@@ -68,6 +68,7 @@ public class RemoveProjectTest {
 
     @Then("the error message {string} is shown")
     public void theErrorMessageIsShown(String errorMessage) {
+        System.out.println("Error: " + errorMessage);
     	 assertEquals(errorMessage, this.errorMessageHolder.getErrorMessage());
      
     }
