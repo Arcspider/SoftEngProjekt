@@ -30,7 +30,7 @@ public class Controller {
 //	}
 
 	public Project getProject(){
-		return model.getNewProject();
+		return model.getNewProject(); 
 	}
 
 	public String getInput() {

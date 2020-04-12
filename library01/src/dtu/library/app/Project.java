@@ -30,9 +30,14 @@ public class Project {
 		return name;
 	}
  
-    public void addActivity(String name) {
+    public boolean addActivity(String name) {
 		newActivity = new Activity(name);
 		activities.add(newActivity);
+		return true;
+    }
+
+	public boolean hasActivity(String string) {
+		return activities.contains(string);
 	}
     
 }

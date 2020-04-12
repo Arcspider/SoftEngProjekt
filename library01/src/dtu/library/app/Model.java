@@ -70,4 +70,12 @@ public class Model {
             throw new OperationNotAllowedException("The project has no name, so it was not created");
         }
     }
+
+	public boolean addActivity(Project project, String string) {
+		return project.addActivity(string);
+	}
+
+	public boolean hasActivity(String stringOne, String stringTwo) {
+		return getProject(stringTwo).hasActivity(stringOne);
+	}
 }

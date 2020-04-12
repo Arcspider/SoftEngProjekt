@@ -7,28 +7,40 @@ import dtu.library.app.Project;
 import dtu.library.app.View;
 
 public class ControllerActivity {
-	    private Project project;
 	    private View view;
 	    private Model model;
 	    Scanner scanner;
 
-	    public ControllerActivity(View view, Project project, Model model) {
+	    public ControllerActivity(View view,  Model model) {
 	        this.view = view;
-	        this.project = project;
 	        this.model = model;
 	        scanner = new Scanner(System.in);
 	    }
 
 	    int getCommand() {
 	        return scanner.nextInt();
-	    }
+	    } 
 	    public void runCommand(String nextCommand, String name) {
 	    	if(nextCommand.contains("Add Activity")) {
-	    		project.addActivity(name);
+	    		
 	    	}
 	    }
 
 		public boolean exists(String id) {
 			return model.hasID(id);
+		}
+
+		public void addProject(Project project) {
+			model.addProject(project);
+		}
+
+
+		public boolean addActivity(Project project, String string) {
+			return model.addActivity(project,string);
+			
+		}
+
+		public boolean hasActivity(String stringOne, String stringTwo) {
+			return model.hasActivity(stringOne,stringTwo);
 		}
 }

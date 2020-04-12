@@ -20,29 +20,29 @@ public class AddActivityTest {
 		this.controllerActivity = controllerActivity;
 		this.errorMessageHolder = errorMessageHolder;
 		this.model = model;
-
 	}
 
 	@Given("a project with id {string}")
 	public void aProjectWithId(String string) {
 		project = new Project("tom", string);
+		controllerActivity.addProject(project);
 		String id = project.getId();
-		System.out.println(controllerActivity.exists(id));
 		assertTrue(controllerActivity.exists(id));
 	}
 
-//
-//	@Given("the user adds activity {string}")
-//	public void theUserAddsActivity(String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
-//
-//	@Then("the activity {string} is added to {string}")
-//	public void theActivityIsAddedTo(String string, String string2) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new io.cucumber.java.PendingException();
-//	}
+
+	@Given("the user adds activity {string}")
+	public void theUserAddsActivity(String string) {
+		System.out.println(project.getId());
+		controllerActivity.addActivity(project,string);
+		System.out.println(project.hasActivity(string));
+		assertTrue(controllerActivity.addActivity(project,string)); 
+	}
+
+	@Then("the activity {stringOne} is added to {stringTwo}")
+	public void theActivityIsAddedTo(String stringOne, String stringTwo) {
+	   assertTrue(controllerActivity.hasActivity(stringOne,stringTwo));
+	}
 //
 //	@Given("a project {string}")
 //	public void aProject(String string) {
