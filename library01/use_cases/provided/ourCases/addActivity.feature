@@ -9,6 +9,6 @@ Scenario: add activity to a project.
 
 Scenario: add activity to a project when project has an activity with same name.  
    Given a project "030901" 
-   When the user adds activity "Beta" 
-   And "030901" has a activity "Beta"
-   #Then an error message "030901 already has an activity with the name Beta " is given
+   And the project contains the activity "Beta" 
+   #When the user adds a activity "Beta"
+  #Then an error message "030901 already has an activity with the name Beta " is given
