@@ -68,5 +68,52 @@ public class ProjectTest {
     public void theUserReceivesAnErrorMessage(String errorMessage) {
         assertEquals(errorMessage, this.errorMessageHolder.getErrorMessage());
     }
+    
+    
+    @When("the user chooses the project with id of project Alpha.")
+    public void theUserEditsProjectDescription() throws OperationNotAllowedException {
+  	  // Der dannes et nyt projekt siden projekt dataen ikke overlever hop mellem filer.
+      ID = controllerProject.generateID();
+      project = controllerProject.createProject("ALPHA",ID);
+      controllerProject.addProject(project);
 
+    }
+    @And ("the user enters description {string}")
+    public void theUserEditsProjectName(String newDescription) throws OperationNotAllowedException {
+    	
+    	assertTrue(controllerProject.editProjectDescription(ID, newDescription));
+    }
+    
+    @Then("the projects description is overwritten with {string}")
+    public void theUserhasEditedProjectName(String newDescription) throws OperationNotAllowedException {
+    	assertTrue(project.getDescription().equals(newDescription));
+    }
+    
+    @When("the user chooses a project with id {string}")
+    public void theUserChoosesAProjectWithId(String string) throws OperationNotAllowedException {
+    	 ID = string;
+         project = controllerProject.createProject("ALPHA",ID);
+         controllerProject.addProject(project);
+    	
+    }
+    @When("the user changes the name from {string} to {string}")
+    public void theUserChangesTheNameFromTo(String string, String string2) {
+        controllerProject.editProjectName(project.getId(), string2);
+    }
+    @Then("the projects Name is changed to {string}")
+    public void theProjectsNameIsChangedTo(String name) throws OperationNotAllowedException {
+    	assertTrue(project.getName().equals(name));
+    }
+
+    @When("the user chooses the project with id {string}")
+    public void theUserChoosesTheProjectWithId(String id) throws OperationNotAllowedException {
+        ID = id;
+        project = controllerProject.createProject("ALPHA",ID);
+        controllerProject.addProject(project);
+    }
+
+    @When("the user enters the start and end dates {string} and {string}")
+    public void theUserEntersTheStartAndEndDatesAnd(String startDate, String endDate) {
+        controllerProject.setProjectTime(startDate, endDate);
+    }
 }

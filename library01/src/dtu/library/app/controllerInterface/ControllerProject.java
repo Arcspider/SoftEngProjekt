@@ -58,4 +58,7 @@ public class ControllerProject {
     public boolean checkName(String name) throws OperationNotAllowedException {
            return model.checkName(name);
     }
+    public void setProjectTime(String startDate, String endDate){
+        model.setProjectDates(startDate, endDate);
+    }
 }

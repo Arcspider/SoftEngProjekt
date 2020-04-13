@@ -3,6 +3,7 @@ package dtu.library.app;
 public class Worker {
 	private String name;
 	private String id;
+//	private List<userTime> userTimeList;
 
 	public Worker(String Name, String ID) {
 		this.name = Name;

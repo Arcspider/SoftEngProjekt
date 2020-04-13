@@ -32,14 +32,14 @@ public class RemoveProjectTest {
     }
 
     @Given("the user deletes a project {string}")
-    public void theUserDeletesAProject(String ID) {
-        project = new Project("Beta", ID);
+    public void theUserDeletesAProject(String id) throws OperationNotAllowedException {
+        project = new Project("Beta", id);
         controllerProject.addProject(project);
     }
 
     @Given("the project {string} exists")
-    public void theProjectExists(String ID) {
-        assertTrue(controllerProject.exists(ID));
+    public void theProjectExists(String id) {
+        assertTrue(controllerProject.exists(id));
     }
 
     @Then("the project is deleted")
@@ -48,13 +48,13 @@ public class RemoveProjectTest {
     }
 
     @Then("the project {string} no longer exists")
-    public void theProjectNoLongerExists(String ID) {
-        assertFalse(controllerProject.exists(ID));
+    public void theProjectNoLongerExists(String id) {
+        assertFalse(controllerProject.exists(id));
     }
     @Given("that the project {string} doesn't exist")
-    public void thatTheProjectDoesnTExist(String string) {
-    	  project = new Project("Beta", string);
-    	 assertFalse(controllerProject.exists(string));
+    public void thatTheProjectDoesnTExist(String id) {
+    	  project = new Project("Beta", id);
+    	 assertFalse(controllerProject.exists(id));
     }
 
     @Given("the user tries to delete the project")
@@ -68,7 +68,9 @@ public class RemoveProjectTest {
 
     @Then("the error message {string} is shown")
     public void theErrorMessageIsShown(String errorMessage) {
-    	 assertEquals(errorMessage, this.errorMessageHolder.getErrorMessage());
+        System.out.println("Error: " + errorMessage);
+    	 assertEquals(errorMessage
+                 , this.errorMessageHolder.getErrorMessage());
      
     }
 

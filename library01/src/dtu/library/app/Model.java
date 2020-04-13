@@ -1,6 +1,7 @@
 package dtu.library.app;
 
 import java.text.*;
+import java.time.LocalDate;
 import java.util.*;
 
 public class Model {
@@ -77,5 +78,35 @@ public class Model {
 		} else {
 			throw new OperationNotAllowedException("This project doesn't exist");
 		}
+	}
+	public void setProjectDates(String startDate, String endDate){
+		String[] startWeekArray = startDate.split(" ");
+		String[] endWeekArray = endDate.split(" ");
+		int startWeekInt = Integer.parseInt(startWeekArray[1]);
+		int startYearInt = Integer.parseInt(startWeekArray[3]);
+		int endWeekInt = Integer.parseInt(endWeekArray[1]);
+		int endYearInt = Integer.parseInt(endWeekArray[3]);
+
+		Calendar cldStart = Calendar.getInstance();
+		cldStart.set(Calendar.YEAR, startYearInt);
+		cldStart.set(Calendar.WEEK_OF_YEAR, startWeekInt);
+//		cldStart.set(Calendar.MONTH,0);
+		cldStart.set(Calendar.DAY_OF_WEEK, 2);
+
+		Calendar cldEnd = Calendar.getInstance();
+		cldEnd.set(Calendar.YEAR, endYearInt);
+		cldEnd.set(Calendar.WEEK_OF_YEAR, endWeekInt);
+		cldEnd.set(Calendar.DAY_OF_WEEK, 6);
+
+		Date resultStart = cldStart.getTime();
+		Date resultEnd = cldEnd.getTime();
+		System.out.println("Start date: " + resultStart);
+		System.out.println("Start Month: " + cldStart.get(Calendar.MONTH));
+		System.out.println("Start Day: " + cldStart.get(Calendar.DATE));
+
+		System.out.println("End date: " + resultEnd);
+		System.out.println("End Month: " + cldEnd.get(Calendar.MONTH));
+		System.out.println("End Day: " + cldEnd.get(Calendar.DATE));
+//		LocalDate startDate = LocalDate.of(startYearInt,);
 	}
 }
