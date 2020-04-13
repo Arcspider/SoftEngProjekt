@@ -27,14 +27,14 @@ public class ControllerActivity {
 		return model.hasID(string);
 	}
 
-	public boolean addActivity(String string, Project project) throws OperationNotAllowedException {
-		return model.addActivity(string,project);
-		
-	}
-
-	public boolean hasActivity(String sA, String sP) {
-		return model.hasActivity(sA,sP);
-	}
+//	public boolean addActivity(String string, Project project) throws OperationNotAllowedException {
+//		return model.addActivity(string,project);
+//
+//	}
+//
+//	public boolean hasActivity(String sA, String sP) {
+//		return model.hasActivity(sA,sP);
+//	}
 
 
 }
