@@ -110,24 +110,16 @@ public class Model {
 		Calendar cldStart = Calendar.getInstance();
 		cldStart.set(Calendar.YEAR, startYearInt);
 		cldStart.set(Calendar.WEEK_OF_YEAR, startWeekInt);
-//		cldStart.set(Calendar.MONTH,0);
-		cldStart.set(Calendar.DAY_OF_WEEK, 2);
 
 		Calendar cldEnd = Calendar.getInstance();
 		cldEnd.set(Calendar.YEAR, endYearInt);
 		cldEnd.set(Calendar.WEEK_OF_YEAR, endWeekInt);
 		cldEnd.set(Calendar.DAY_OF_WEEK, 6);
 
-		Date resultStart = cldStart.getTime();
-		Date resultEnd = cldEnd.getTime();
-		System.out.println("Start date: " + resultStart);
-		System.out.println("Start Month: " + cldStart.get(Calendar.MONTH));
-		System.out.println("Start Day: " + cldStart.get(Calendar.DATE));
-
-		System.out.println("End date: " + resultEnd);
-		System.out.println("End Month: " + cldEnd.get(Calendar.MONTH));
-		System.out.println("End Day: " + cldEnd.get(Calendar.DATE));
-//		LocalDate startDate = LocalDate.of(startYearInt,);
+		LocalDate startProjectDate = LocalDate.of(startYearInt,cldStart.get(Calendar.MONTH)+1,cldStart.get(Calendar.DATE));
+		LocalDate endProjectDate = LocalDate.of(endYearInt,cldEnd.get(Calendar.MONTH)+1,cldEnd.get(Calendar.DATE));
+		System.out.println("LocalDate start: " + startProjectDate);
+		System.out.println("LocalDate end: " + endProjectDate);
 
 //	public boolean addActivity(String string, Project project) throws OperationNotAllowedException {
 //		return project.addActivity(string);
