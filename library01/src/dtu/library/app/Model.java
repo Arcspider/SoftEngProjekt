@@ -21,7 +21,6 @@ public class Model {
 
     public Project createProject(String name,String id) {
         newProject = new Project(name, id);
-        view.showMessage("Project " + name  + " has been created with ID: " + id);
         return newProject;
     }
 
@@ -63,8 +62,9 @@ public class Model {
 	}
 
     public void addProject(Project project) throws OperationNotAllowedException {
-    	if(checkName(project.getName())) {    		
+    	if(checkName(project.getName())) {  
     		projects.add(project);
+    		view.showMessage("Project " + project.getName()  + " has been created with ID: " + project.getId());
     	}
     }
 
