@@ -34,7 +34,7 @@ public class AddActivityTest {
 	}
 
 	@Given("the user adds activity {string}")
-	public void theUserAddsActivity(String string) {
+	public void theUserAddsActivity(String string) throws OperationNotAllowedException {
 		assertTrue(controllerActivity.addActivity(string,project));
 	}
 
@@ -45,22 +45,23 @@ public class AddActivityTest {
 	
 	@Given("a project {string}")
 	public void aProject(String string) throws OperationNotAllowedException {
-	    project = new Project("Tommy", string);
+	    project = new Project("Tom", string);
 	    controllerActivity.addProject(project);
 	    assertTrue(controllerActivity.hasProject(string));
 	}
 	@Given("the project contains the activity {string}")
-	public void theProjectContainsTheActivity(String string) {
+	public void theProjectContainsTheActivity(String string) throws OperationNotAllowedException {
 		assertTrue(controllerActivity.addActivity(string,project));
 	}
 
 	@When("the user adds a activity {string}")
 	public void theUserAddsAActivity(String string) {
-
+		try {
+			controllerActivity.addActivity(string,project);
+		} catch (OperationNotAllowedException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
 	}
-
-
-	
 
 	@Then("an error message {string} is given")
 	public void anErrorMessageIsGiven(String errorMessage) {

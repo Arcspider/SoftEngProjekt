@@ -99,7 +99,7 @@ public class Model {
 		}
 	}
 
-	public boolean addActivity(String string, Project project) {
+	public boolean addActivity(String string, Project project) throws OperationNotAllowedException {
 		return project.addActivity(string);
 	}
 

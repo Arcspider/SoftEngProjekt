@@ -27,7 +27,7 @@ public class ControllerActivity {
 		return model.hasID(string);
 	}
 
-	public boolean addActivity(String string, Project project) {
+	public boolean addActivity(String string, Project project) throws OperationNotAllowedException {
 		return model.addActivity(string,project);
 		
 	}

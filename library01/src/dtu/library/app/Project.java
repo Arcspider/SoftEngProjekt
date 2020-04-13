@@ -43,18 +43,16 @@ public class Project {
 
 	}
 
-	public boolean addActivity(String string) {
-		System.out.println("test add " + string );
+	public boolean addActivity(String string) throws OperationNotAllowedException {
 		if (!hasActivity(string)) {
 			activities.add(new Activity(string));
 			System.out.println("Has added activity " + string + " to project " + name);
 			return true;
 		}
-		return false;
+		throw new OperationNotAllowedException("The project already has an activity with the name " + string);
 	}
 
 	public boolean hasActivity(String sA) {
-		System.out.println("test has " + sA);
 		for (Activity currentActivity : activities) {
 			String currentId = currentActivity.getName();
 			if (currentId.equals(sA)) {
