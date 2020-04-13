@@ -56,5 +56,24 @@ public class Project implements datesInterface {
     @Override
     public boolean isOverdue() {
 		return endDate.compareTo(startDate) != 0 && endDate.compareTo(startDate) >= 0;
-    }
+	}
+	
+//	public boolean addActivity(String string) throws OperationNotAllowedException {
+//		if (!hasActivity(string)) {
+//			activities.add(new Activity(string));
+//			System.out.println("Has added activity " + string + " to project " + name);
+//			return true;
+//		}
+//		throw new OperationNotAllowedException("The project already has an activity with the name " + string);
+//	}
+//
+//	public boolean hasActivity(String sA) {
+//		for (Activity currentActivity : activities) {
+//			String currentId = currentActivity.getName();
+//			if (currentId.equals(sA)) {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
 }

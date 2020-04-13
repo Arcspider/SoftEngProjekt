@@ -20,13 +20,11 @@ public class Model {
 		random = new Random();
 	}
 
-	public void createProject(String name) {
-		String date = dateFormat.format(Calendar.getInstance().getTime());
-		String id = date + "-" + random.nextInt(100);
-		newProject = new Project(name, id);
-		view.showMessage("Project has been created with ID: " + id);
-
-	}
+    public Project createProject(String name,String id) {
+        newProject = new Project(name, id);
+        view.showMessage("Project " + name  + " has been created with ID: " + id);
+        return newProject;
+    }
 
 	public boolean hasID(String ID) {
 		for (Project project : projects) {
@@ -48,30 +46,52 @@ public class Model {
 				return currentProject;
 			}
 
-		}
-		return null;
-	}
-
-	public boolean containsProjectWithID(String ID) {
-		return !(projects.contains(ID));
-	}
+        }
+        return null;
+    }
+    public String generateID() {
+    	String date = dateFormat.format(Calendar.getInstance().getTime());
+        String id = date + "-" + random.nextInt(100);
+        while(hasID(id)) id = date + "-" + random.nextInt(100); 
+    	return id;
+    }
+    public boolean containsProjectWithID(String ID) {
+        return !(projects.contains(ID));
+    }
 
 	public boolean canBeCreated(String id) {
 		return !projects.contains(id);
 	}
 
-	public void addProject(Project project) {
-		projects.add(project);
-	}
+    public void addProject(Project project) throws OperationNotAllowedException {
+    	if(checkName(project.getName())) {    		
+    		projects.add(project);
+    	}
+    }
 
-	public boolean checkName(String name) throws OperationNotAllowedException {
-		if (!name.equals("")) {
-			return true;
-		} else {
-			throw new OperationNotAllowedException("The project has no name, so it was not created");
-		}
-	}
+    public boolean checkName(String name) throws OperationNotAllowedException {
+        if (!name.equals("")) {
+            return true;
+        } else {
+            throw new OperationNotAllowedException("The project has no name, so it was not created");
+        }
+    }
+    public ArrayList<Project> getProjects(){
+    	return projects;
+    }
+    public boolean editProjectDescription(String ID,String newDescription) {
+    	Project projectToBeEdited = getProject(ID);
+    	projectToBeEdited.setDescription(newDescription);
+    	
+    	return true;
+    }
 
+	public boolean editProjectName(String ID, String name) {
+		Project projectToBeEdited = getProject(ID);
+    	projectToBeEdited.setName(name);
+    	
+    	return true;
+	}
 	public void removeProject(Project project) throws OperationNotAllowedException {
 		if (hasID(project.getId())) {
 			projects.remove(project);
@@ -79,7 +99,7 @@ public class Model {
 			throw new OperationNotAllowedException("This project doesn't exist");
 		}
 	}
-	public void setProjectDates(String startDate, String endDate){
+	public void setProjectDates(String startDate, String endDate) {
 		String[] startWeekArray = startDate.split(" ");
 		String[] endWeekArray = endDate.split(" ");
 		int startWeekInt = Integer.parseInt(startWeekArray[1]);
@@ -108,5 +128,13 @@ public class Model {
 		System.out.println("End Month: " + cldEnd.get(Calendar.MONTH));
 		System.out.println("End Day: " + cldEnd.get(Calendar.DATE));
 //		LocalDate startDate = LocalDate.of(startYearInt,);
+
+//	public boolean addActivity(String string, Project project) throws OperationNotAllowedException {
+//		return project.addActivity(string);
+//	}
+//
+//	public boolean hasActivity(String sA, String sP) {
+//		return getProject(sP).hasActivity(sA);
+//	}
 	}
 }

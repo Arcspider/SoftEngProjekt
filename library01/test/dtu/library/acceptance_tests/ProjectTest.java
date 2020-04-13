@@ -20,6 +20,7 @@ public class ProjectTest {
     private Project project;
     private String ID;
     private List<Project> projects;
+    
 
     public ProjectTest(View view, ErrorMessageHolder errorMessageHolder, ControllerProject controllerProject) {
         this.view = view;
@@ -28,10 +29,10 @@ public class ProjectTest {
     }
 
     @Given("a user creates a project with name {string}")
-    public void aUserCreatesAProjectWithName(String name) {
-        controllerProject.runCommand("Create Project", name);
-        project = controllerProject.getProject();
-        ID = project.getId();
+    public void aUserCreatesAProjectWithName(String name) throws OperationNotAllowedException {
+        ID = controllerProject.generateID();
+        project = controllerProject.createProject(name,ID);
+        
     }
 
     @Given("there is no project with the ID from the project")
@@ -40,19 +41,21 @@ public class ProjectTest {
     }
 
     @When("a project is created")
-    public void aProjectIsCreated() {
+    public void aProjectIsCreated() throws OperationNotAllowedException {
         controllerProject.addProject(project);
     }
 
     @Then("the project with the ID is contained in the list")
     public void theProjectWithTheIDIsContainedInTheList() {
         assertTrue(controllerProject.exists(ID));
+        
     }
 
     @Given("a user creates another project with name {string}")
-    public void aUserCreatesAnotherProjectWithName(String name) {
-        controllerProject.runCommand("Create Project", name);
-        project = controllerProject.getProject();
+    public void aUserCreatesAnotherProjectWithName(String name) throws OperationNotAllowedException {
+    	  ID = controllerProject.generateID();
+          project = controllerProject.createProject(name,ID);
+          
     }
 
     @Then("the project is not created")
@@ -89,9 +92,9 @@ public class ProjectTest {
     	assertTrue(project.getDescription().equals(newDescription));
     }
     
-    @When("the user chooses a project with id {string}")
-    public void theUserChoosesAProjectWithId(String string) throws OperationNotAllowedException {
-    	 ID = string;
+    @When("the user chooses the project with id {string}")
+    public void theUserChoosesTheProjectWithId(String string) throws OperationNotAllowedException {
+    	 ID = controllerProject.generateID();
          project = controllerProject.createProject("ALPHA",ID);
          controllerProject.addProject(project);
     	
@@ -103,13 +106,6 @@ public class ProjectTest {
     @Then("the projects Name is changed to {string}")
     public void theProjectsNameIsChangedTo(String name) throws OperationNotAllowedException {
     	assertTrue(project.getName().equals(name));
-    }
-
-    @When("the user chooses the project with id {string}")
-    public void theUserChoosesTheProjectWithId(String id) throws OperationNotAllowedException {
-        ID = id;
-        project = controllerProject.createProject("ALPHA",ID);
-        controllerProject.addProject(project);
     }
 
     @When("the user enters the start and end dates {string} and {string}")
