@@ -98,4 +98,12 @@ public class Model {
 			throw new OperationNotAllowedException("This project doesn't exist");
 		}
 	}
+
+	public boolean addActivity(String string, Project project) {
+		return project.addActivity(string);
+	}
+
+	public boolean hasActivity(String sA, String sP) {
+		return getProject(sP).hasActivity(sA);
+	}
 }

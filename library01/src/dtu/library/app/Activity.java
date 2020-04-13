@@ -1,7 +1,11 @@
 package dtu.library.app;
 
 public class Activity {
-	public static void main(String[] args) {
-
+	private String name;
+	public Activity(String name){
+		this.name = name;
+	}
+	public String getName() {
+		return name;
 	}
 }

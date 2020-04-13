@@ -1,12 +1,11 @@
 package dtu.library.app.controllerInterface;
 
-        import dtu.library.app.Model;
-        import dtu.library.app.OperationNotAllowedException;
-        import dtu.library.app.Project;
-        import dtu.library.app.View;
-
-        import java.util.ArrayList;
-        import java.util.Scanner;
+import dtu.library.app.Model;
+import dtu.library.app.OperationNotAllowedException;
+import dtu.library.app.Project;
+import dtu.library.app.View;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ControllerProject {
     private Model model;
@@ -33,7 +32,7 @@ public class ControllerProject {
             String userInput = getInput();
             System.out.println(model.getProject(userInput).toString());
         } else {
-            System.out.print("No valido");
+            System.out.print("No valido"); 
         }
     }
 

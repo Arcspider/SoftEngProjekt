@@ -1,39 +1,66 @@
 package dtu.library.app;
 
+import java.util.ArrayList;
+
 public class Project {
 	private String description;
 	private String name;
 	private String id;
-	
+	private ArrayList<Activity> activities;
+
 	public Project(String Name, String ID) {
 		this.name = Name;
 		this.id = ID;
+		activities = new ArrayList<Activity>();
 	}
 
-	public Project getProject(){
+	public Project getProject() {
 		return this;
 	}
 
 	public String getId() {
 		return this.id;
 	}
+
 	public String toString() {
 		return "This project is named PLACEHOLDER with description PLACEHOLDER and id " + id;
 	}
 
-    public String getName() {
+	public String getName() {
 		return name;
 	}
-    public void setDescription(String newDescription) {
-    	description = newDescription;
-    }
+
+	public void setDescription(String newDescription) {
+		description = newDescription;
+	}
 
 	public String getDescription() {
 		return description;
 	}
 
-	public void setName(String name2) {
-		name = name2;
-		
+	public void setName(String name) {
+		this.name = name;
+
+	}
+
+	public boolean addActivity(String string) {
+		System.out.println("test add " + string );
+		if (!hasActivity(string)) {
+			activities.add(new Activity(string));
+			System.out.println("Has added activity " + string + " to project " + name);
+			return true;
+		}
+		return false;
+	}
+
+	public boolean hasActivity(String sA) {
+		System.out.println("test has " + sA);
+		for (Activity currentActivity : activities) {
+			String currentId = currentActivity.getName();
+			if (currentId.equals(sA)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
