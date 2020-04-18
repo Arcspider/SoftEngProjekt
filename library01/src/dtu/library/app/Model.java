@@ -99,7 +99,7 @@ public class Model {
 			throw new OperationNotAllowedException("This project doesn't exist");
 		}
 	}
-	public void setProjectDates(String startDate, String endDate) {
+	public void setProjectDates(Project project, String startDate, String endDate) {
 		String[] startWeekArray = startDate.split(" ");
 		String[] endWeekArray = endDate.split(" ");
 		int startWeekInt = Integer.parseInt(startWeekArray[1]);
@@ -118,6 +118,10 @@ public class Model {
 
 		LocalDate startProjectDate = LocalDate.of(startYearInt,cldStart.get(Calendar.MONTH)+1,cldStart.get(Calendar.DATE));
 		LocalDate endProjectDate = LocalDate.of(endYearInt,cldEnd.get(Calendar.MONTH)+1,cldEnd.get(Calendar.DATE));
+
+		project.setStartDate(startProjectDate);
+		project.setEndDate(endProjectDate);
+
 		System.out.println("LocalDate start: " + startProjectDate);
 		System.out.println("LocalDate end: " + endProjectDate);
 
@@ -128,5 +132,12 @@ public class Model {
 //	public boolean hasActivity(String sA, String sP) {
 //		return getProject(sP).hasActivity(sA);
 //	}
+	}
+	public LocalDate getProjectStart(Project project) {
+		return project.getStartDate();
+	}
+
+	public LocalDate getProjectEnd(Project project) {
+		return project.getEndDate();
 	}
 }

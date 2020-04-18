@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 
 import java.util.List;
 
@@ -110,6 +111,8 @@ public class ProjectTest {
 
     @When("the user enters the start and end dates {string} and {string}")
     public void theUserEntersTheStartAndEndDatesAnd(String startDate, String endDate) {
-        controllerProject.setProjectTime(startDate, endDate);
+        controllerProject.setProjectTime(project, startDate, endDate);
+        assertEquals(project.getStartDate().toString(),controllerProject.getProjectStart(project).toString());
+        assertEquals(project.getEndDate().toString(),controllerProject.getProjectEnd(project).toString());
     }
 }

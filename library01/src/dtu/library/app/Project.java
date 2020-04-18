@@ -57,7 +57,15 @@ public class Project implements datesInterface {
     public boolean isOverdue() {
 		return endDate.compareTo(startDate) != 0 && endDate.compareTo(startDate) >= 0;
 	}
-	
+
+    public void setStartDate(LocalDate startProjectDate) {
+        startDate = startProjectDate;
+    }
+
+    public void setEndDate(LocalDate endProjectDate) {
+        endDate = endProjectDate;
+    }
+
 //	public boolean addActivity(String string) throws OperationNotAllowedException {
 //		if (!hasActivity(string)) {
 //			activities.add(new Activity(string));
