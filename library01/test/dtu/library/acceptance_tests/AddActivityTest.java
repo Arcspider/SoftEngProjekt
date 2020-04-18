@@ -31,7 +31,7 @@ public class AddActivityTest {
 	    project = new Project("Tom", string);
 	    controllerActivity.addProject(project);
 	    assertTrue(controllerActivity.hasProject(string));
-	}
+	} 
 
 	@Given("the user adds activity {string}")
 	public void theUserAddsActivity(String string) throws OperationNotAllowedException {

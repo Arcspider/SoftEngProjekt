@@ -11,9 +11,9 @@ Feature: Edit project
  Scenario: Change projects description
     When the user chooses the project with id of project Alpha. 
     And the user enters description "Test description"
-    Then the projects description is overwritten with "Test description"
+   Then the projects description is overwritten with "Test description"
     
-#Scenario: Change projects name
- #   When the user chooses the project with id "030901"
-  #  And the user changes the name from "Alpha" to "Gamma"
-   # Then the projects Name is changed to "Gamma"
+Scenario: Change projects name
+    When the user chooses the project with name "Alpha"
+    And the user changes the name to "Gamma"
+   Then the projects Name is changed to "Gamma"

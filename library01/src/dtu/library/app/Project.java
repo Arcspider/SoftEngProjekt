@@ -11,6 +11,7 @@ public class Project {
 	public Project(String Name, String ID) {
 		this.name = Name;
 		this.id = ID;
+		description = "";
 		activities = new ArrayList<Activity>();
 	}
 
@@ -23,7 +24,7 @@ public class Project {
 	}
 
 	public String toString() {
-		return "This project is named" + name + " with description" + description + " and id " + id;
+		return "This project is named " + name + " with description" + description + " and id " + id;
 	}
 
 	public String getName() {

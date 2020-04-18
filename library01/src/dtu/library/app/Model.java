@@ -10,7 +10,7 @@ public class Model {
 	private DateFormat dateFormat;
 	private Random random;
 	private Project newProject;
-	private String stage = "application";
+	private String stage = "Application";
 
 	public Model(View view) {
 		this.view = view;
@@ -50,7 +50,7 @@ public class Model {
 		return null;
 	}
 
-	public String generateID() {
+	public String generateID() { 
 		String date = dateFormat.format(Calendar.getInstance().getTime());
 		String id = date + "-" + random.nextInt(100);
 		while (hasID(id))
@@ -89,10 +89,8 @@ public class Model {
 		return true;
 	}
 
-	public boolean editProjectName(String ID, String name) {
-		Project projectToBeEdited = getProject(ID);
-		projectToBeEdited.setName(name);
-
+	public boolean editProjectName(Project project, String name) {
+		project.setName(name);
 		return true;
 	}
 

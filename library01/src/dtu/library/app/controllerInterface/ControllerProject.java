@@ -32,14 +32,24 @@ public class ControllerProject {
 				model.changeStage("Application");
 				System.out.println("Project does not exist. Commands: Get or Create");
 			} else {
+				hasProject = true;
 				project = model.getProject(id);
-				System.out.println(model.getProject(getCommand()).toString());
+				System.out.println(project.toString());
+			}
+		}else if (hasProject) {
+			System.out.println("project commands");
+			String nextCommand = getCommand();
+			if (nextCommand.equals("Description")) {
+				editProjectDescription(project, getDescription());
+			} else if (nextCommand.equals("Name")) {
+				editProjectName(project, getCommand());
+				System.out.println(project.toString());
 			}
 		}
-		String nextCommand = getCommand();
-		if(nextCommand.equals("Description")) {
-			editProjectDescription(project,scanner.nextLine());
-		}
+	}
+
+	private String getDescription() {
+		return scanner.nextLine();
 	}
 
 	public void removeProject(Project project) throws OperationNotAllowedException {
@@ -55,16 +65,11 @@ public class ControllerProject {
 		return model.getNewProject();
 	}
 
-	public Project getOldProject(String ID) throws OperationNotAllowedException {
-		return model.getProject(ID);
-	}
-
-
 	public boolean checkName(String name) throws OperationNotAllowedException {
 		return model.checkName(name);
 	}
 
-	public boolean editProjectDescription(Project project, String description) throws OperationNotAllowedException {
+	public boolean editProjectDescription(Project project, String description) {
 		return model.editProjectDescription(project, description);
 	}
 
@@ -72,8 +77,8 @@ public class ControllerProject {
 		return model.getProjects();
 	}
 
-	public boolean editProjectName(String ID, String name) {
-		return model.editProjectName(ID, name);
+	public boolean editProjectName(Project project, String name) {
+		return model.editProjectName(project, name);
 
 	}
 }

@@ -27,7 +27,7 @@ public class Controller {
 			    	addProject(newProject);
 			  }
 		}else if (nextCommand.equals("Get")) {
-			model.changeStage("project");
+			model.changeStage("Project");
 		}
 		
 	}

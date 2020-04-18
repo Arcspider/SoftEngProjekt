@@ -13,7 +13,7 @@ public class View {
 		this.model = new Model(this);
 		this.controller = new Controller(this, model);
 		this.controllerProject = new ControllerProject(this,model);
-		startup();
+		//startup();
 	}
 
 	public void showMessage(String message) {
@@ -23,11 +23,11 @@ public class View {
 
 	public void startup() throws OperationNotAllowedException {
 		while (true) {
-			while (model.getStage().equals("application")) {
+			while (model.getStage().equals("Application")) {
 				String nextCommand = controller.getCommand();
 				controller.runCommand(nextCommand);
 			}
-			while (model.getStage().equals("project")) {
+			while (model.getStage().equals("Project")) {
 				controllerProject.runCommand();
 			}
 		}

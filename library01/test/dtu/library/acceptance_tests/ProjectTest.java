@@ -47,7 +47,7 @@ public class ProjectTest {
     public void aUserCreatesAnotherProjectWithName(String name) throws OperationNotAllowedException {
           project = controller.createProject(name);
           
-    }
+    } 
 
     @Then("the project is not created")
     public void theProjectIsNotCreated() {
@@ -82,21 +82,21 @@ public class ProjectTest {
     public void theUserhasEditedProjectName(String newDescription) throws OperationNotAllowedException {
     	assertTrue(project.getDescription().equals(newDescription));
     }
-//    
-//    @When("the user chooses the project with id {string}")
-//    public void theUserChoosesTheProjectWithId(String string) throws OperationNotAllowedException {
-//    	 ID = controllerProject.generateID();
-//         project = controllerProject.createProject("ALPHA",ID);
-//         controllerProject.addProject(project);
-//    	
-//    }
-//    @When("the user changes the name from {string} to {string}")
-//    public void theUserChangesTheNameFromTo(String string, String string2) {
-//        controllerProject.editProjectName(project.getId(), string2);
-//    }
-//    @Then("the projects Name is changed to {string}")
-//    public void theProjectsNameIsChangedTo(String name) throws OperationNotAllowedException {
-//    	assertTrue(project.getName().equals(name));
-//    }
-//
+    
+    @When("the user chooses the project with name {string}")
+    public void theUserChoosesTheProjectWithName(String string) throws OperationNotAllowedException {
+         project = controller.createProject(string);
+         controller.addProject(project);
+    	
+    }
+
+	@When("the user changes the name to {string}")
+	public void theUserChangesTheNameTo(String string) {
+		controllerProject.editProjectName(project, string);
+	}
+    @Then("the projects Name is changed to {string}")
+    public void theProjectsNameIsChangedTo(String name) throws OperationNotAllowedException {
+    	assertTrue(project.getName().equals(name));
+    }
+
 }
