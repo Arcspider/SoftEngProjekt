@@ -23,7 +23,7 @@ public class Project {
 	}
 
 	public String toString() {
-		return "This project is named PLACEHOLDER with description PLACEHOLDER and id " + id;
+		return "This project is named" + name + " with description" + description + " and id " + id;
 	}
 
 	public String getName() {

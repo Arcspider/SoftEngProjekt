@@ -1,9 +1,13 @@
 package dtu.library.app;
+
 import java.util.*;
+
 public class Controller {
 	private Model model;
 	private View view;
+	private Project newProject;
 	Scanner scanner;
+
 	public Controller(View view, Model model) {
 		this.view = view;
 		this.model = model;
@@ -14,26 +18,35 @@ public class Controller {
 		return scanner.next();
 	}
 
-	public void runCommand(String nextCommand) {
-		if(nextCommand.equals("Create Project")) {
-//			model.createProject();
+	public void runCommand(String nextCommand) throws OperationNotAllowedException {
+		if (nextCommand.equals("Create")) {
+			System.out.println("Name the Project: ");
+			String name = getCommand();
+			newProject = createProject(name);
+			  if(checkName(name)) {
+			    	addProject(newProject);
+			  }
+		}else if (nextCommand.equals("Get")) {
+			model.changeStage("project");
 		}
-		if(nextCommand.equals("Get Project")) {
-			view.showMessage("Please enter the id of the project");
-			String userInput = getInput();
-			System.out.println(model.getProject(userInput).toString());
-		}
+		
 	}
 
-//	public boolean exists(){
-//		return model.exists();
-//	}
 
-	public Project getProject(){
-		return model.getNewProject();
+	public Project createProject(String name) throws OperationNotAllowedException {
+		return model.createProject(name);
 	}
 
-	public String getInput() {
-		return scanner.next();
+	public boolean exists(String id) {
+		return model.hasID(id);
 	}
+
+	public boolean checkName(String name) throws OperationNotAllowedException {
+		return model.checkName(name);
+	}
+
+	public void addProject(Project project) throws OperationNotAllowedException {
+		model.addProject(project);	
+	}
+
 }
