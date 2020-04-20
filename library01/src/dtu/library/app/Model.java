@@ -10,6 +10,7 @@ public class Model {
 	private DateFormat dateFormat;
 	private Random random;
 	private Project newProject;
+	private String state;
 
 	public Model(View view) {
 		this.view = view;
@@ -17,6 +18,7 @@ public class Model {
 		this.calendar = new GregorianCalendar();
 		dateFormat = new SimpleDateFormat("MM-yy");
 		random = new Random();
+		state = "App";
 	}
 
     public Project createProject(String name,String id) {
@@ -105,5 +107,9 @@ public class Model {
 
 	public boolean hasActivity(String sA, String sP) {
 		return getProject(sP).hasActivity(sA);
+	}
+	
+	public void setState(String state) {
+		this.state = state;
 	}
 }

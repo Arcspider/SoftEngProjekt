@@ -1,12 +1,12 @@
 package dtu.library.app;
-import java.util.*;
 public class View{
 	private Model model;
 	private Controller controller;
 	public View() {
 		this.model = new Model(this);
 		this.controller = new Controller(this, model);
-//		startup();
+		System.out.println("Bob");
+		startup();
 	}
 	
 	

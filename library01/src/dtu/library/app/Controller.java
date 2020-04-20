@@ -17,6 +17,7 @@ public class Controller {
 	public void runCommand(String nextCommand) {
 		if(nextCommand.equals("Create Project")) {
 //			model.createProject();
+			model.setState("Project");
 		}
 		if(nextCommand.equals("Get Project")) {
 			view.showMessage("Please enter the id of the project");
