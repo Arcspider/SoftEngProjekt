@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 
 import java.util.List;
 
@@ -14,7 +15,9 @@ import static org.junit.Assert.*;
 public class ProjectTest {
 
     private View view;
+    private Controller controller;
     private ControllerProject controllerProject;
+    
     private ErrorMessageHolder errorMessageHolder;
 
     private Project project;
@@ -22,46 +25,35 @@ public class ProjectTest {
     private List<Project> projects;
     
 
-    public ProjectTest(View view, ErrorMessageHolder errorMessageHolder, ControllerProject controllerProject) {
+    public ProjectTest(View view, ErrorMessageHolder errorMessageHolder, Controller controller,ControllerProject controllerProject) {
         this.view = view;
         this.errorMessageHolder = errorMessageHolder;
+        this.controller = controller;
         this.controllerProject = controllerProject;
     }
 
     @Given("a user creates a project with name {string}")
     public void aUserCreatesAProjectWithName(String name) throws OperationNotAllowedException {
-        ID = controllerProject.generateID();
-        project = controllerProject.createProject(name,ID);
-        
+        project = controller.createProject(name);
+        controller.addProject(project);
     }
-
-    @Given("there is no project with the ID from the project")
-    public void thereIsNoProjectWithTheIDFromTheProject() {
-        assertFalse(controllerProject.exists(ID));
-    }
-
-    @When("a project is created")
-    public void aProjectIsCreated() throws OperationNotAllowedException {
-        controllerProject.addProject(project);
-    }
-
+    
     @Then("the project with the ID is contained in the list")
-    public void theProjectWithTheIDIsContainedInTheList() {
-        assertTrue(controllerProject.exists(ID));
+    public void theProjectWithTheIDIsContainedInTheList() throws OperationNotAllowedException {
+        assertTrue(controller.exists(project.getId()));
         
     }
 
     @Given("a user creates another project with name {string}")
     public void aUserCreatesAnotherProjectWithName(String name) throws OperationNotAllowedException {
-    	  ID = controllerProject.generateID();
-          project = controllerProject.createProject(name,ID);
+          project = controller.createProject(name);
           
-    }
+    } 
 
     @Then("the project is not created")
     public void theProjectIsNotCreated() {
         try {
-            assertFalse(controllerProject.checkName(project.getName()));
+            assertFalse(controller.checkName(project.getName()));
         } catch (OperationNotAllowedException e) {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }
@@ -73,39 +65,47 @@ public class ProjectTest {
     }
     
     
-    @When("the user chooses the project with id of project Alpha.")
-    public void theUserEditsProjectDescription() throws OperationNotAllowedException {
+    @When("the user chooses the project with id of project {string}.")
+    public void theUserEditsProjectDescription(String name) throws OperationNotAllowedException {
   	  // Der dannes et nyt projekt siden projekt dataen ikke overlever hop mellem filer.
-      ID = controllerProject.generateID();
-      project = controllerProject.createProject("ALPHA",ID);
-      controllerProject.addProject(project);
+      project = controller.createProject(name);
+      controller.addProject(project);
 
     }
+    
     @And ("the user enters description {string}")
     public void theUserEditsProjectName(String newDescription) throws OperationNotAllowedException {
     	
-    	assertTrue(controllerProject.editProjectDescription(ID, newDescription));
+    	assertTrue(controllerProject.editProjectDescription(project, newDescription));
     }
     
     @Then("the projects description is overwritten with {string}")
     public void theUserhasEditedProjectName(String newDescription) throws OperationNotAllowedException {
-    	assertTrue(project.getDescription().equals(newDescription));
+        assertEquals(project.getDescription(), newDescription);
     }
     
-    @When("the user chooses the project with id {string}")
-    public void theUserChoosesTheProjectWithId(String string) throws OperationNotAllowedException {
-    	 ID = controllerProject.generateID();
-         project = controllerProject.createProject("ALPHA",ID);
-         controllerProject.addProject(project);
+    @When("the user chooses the project {string} with the id {string}")
+    public void theUserChoosesTheProjectWithTheId(String name, String id) throws OperationNotAllowedException {
+         project = controller.createProject(name);
+         project.setId(id);
+         controller.addProject(project);
     	
     }
-    @When("the user changes the name from {string} to {string}")
-    public void theUserChangesTheNameFromTo(String string, String string2) {
-        controllerProject.editProjectName(project.getId(), string2);
-    }
+
+	@When("the user changes the name to {string}")
+	public void theUserChangesTheNameTo(String string) {
+		controllerProject.editProjectName(project, string);
+	}
+
     @Then("the projects Name is changed to {string}")
     public void theProjectsNameIsChangedTo(String name) throws OperationNotAllowedException {
-    	assertTrue(project.getName().equals(name));
+        assertEquals(project.getName(), name);
     }
 
+    @When("the user enters the start and end dates {string} and {string}")
+    public void theUserEntersTheStartAndEndDatesAnd(String startDate, String endDate) {
+        controllerProject.setProjectTime(project, startDate, endDate);
+        assertEquals(project.getStartDate().toString(),controllerProject.getProjectStart(project).toString());
+        assertEquals(project.getEndDate().toString(),controllerProject.getProjectEnd(project).toString());
+    }
 }

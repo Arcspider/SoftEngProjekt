@@ -7,10 +7,14 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="208" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -60,6 +64,10 @@
       <updated>1585580617896</updated>
       <workItem from="1585580623763" duration="872000" />
       <workItem from="1586164964238" duration="12780000" />
+      <workItem from="1586775691244" duration="10011000" />
+      <workItem from="1587035884601" duration="143000" />
+      <workItem from="1587211706390" duration="2189000" />
+      <workItem from="1587383666424" duration="1430000" />
     </task>
     <servers />
   </component>
@@ -75,6 +83,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="92" y="92" width="1736" height="866" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1586179647576" />
+    <state x="765" y="227" key="#com.intellij.ide.util.MemberChooser" timestamp="1587036019242">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="765" y="227" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1587036019242" />
     <state x="689" y="307" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1585580706963">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -83,29 +95,40 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="503" y="440" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1586173563022" />
-    <state x="740" y="278" key="FileChooserDialogImpl" timestamp="1585580640453">
+    <state x="740" y="278" key="FileChooserDialogImpl" timestamp="1587036025537">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="740" y="278" key="FileChooserDialogImpl/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1585580640453" />
-    <state width="1875" height="170" key="GridCell.Tab.0.bottom" timestamp="1586699414405">
+    <state x="740" y="278" key="FileChooserDialogImpl/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1587036025537" />
+    <state width="1875" height="174" key="GridCell.Tab.0.bottom" timestamp="1587385042023">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1875" height="170" key="GridCell.Tab.0.bottom/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1586699414405" />
-    <state width="1875" height="170" key="GridCell.Tab.0.center" timestamp="1586699414405">
+    <state width="1875" height="174" key="GridCell.Tab.0.bottom/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1587385042023" />
+    <state width="1875" height="174" key="GridCell.Tab.0.center" timestamp="1587385042023">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1875" height="170" key="GridCell.Tab.0.center/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1586699414405" />
-    <state width="1875" height="170" key="GridCell.Tab.0.left" timestamp="1586699414405">
+    <state width="1875" height="174" key="GridCell.Tab.0.center/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1587385042023" />
+    <state width="1875" height="174" key="GridCell.Tab.0.left" timestamp="1587385042022">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1875" height="170" key="GridCell.Tab.0.left/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1586699414405" />
-    <state width="1875" height="170" key="GridCell.Tab.0.right" timestamp="1586699414405">
+    <state width="1875" height="174" key="GridCell.Tab.0.left/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1587385042022" />
+    <state width="1875" height="174" key="GridCell.Tab.0.right" timestamp="1587385042023">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1875" height="170" key="GridCell.Tab.0.right/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1586699414405" />
+    <state width="1875" height="174" key="GridCell.Tab.0.right/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1587385042023" />
+    <state x="681" y="254" width="585" height="540" key="StructurePopup" timestamp="1586787294431">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="681" y="254" width="585" height="540" key="StructurePopup/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1586787294431" />
+    <state x="552" y="256" key="Vcs.Push.Dialog.v2" timestamp="1586783491241">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="552" y="256" key="Vcs.Push.Dialog.v2/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1586783491241" />
     <state x="712" y="443" key="org.jetbrains.plugins.cucumber.inspections.ui.CreateStepDefinitionFileDialog" timestamp="1586175265561">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="712" y="443" key="org.jetbrains.plugins.cucumber.inspections.ui.CreateStepDefinitionFileDialog/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1586175265561" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/library01$AcceptanceTest.ic" NAME="AcceptanceTest Coverage Results" MODIFIED="1586788568262" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
