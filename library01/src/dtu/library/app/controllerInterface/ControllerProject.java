@@ -14,11 +14,13 @@ public class ControllerProject {
 	private View view;
 
 	Scanner scanner;
+	Scanner descriptionHandler;
 
 	public ControllerProject(View view, Model model) {
 		this.view = view;
 		this.model = model;
 		scanner = new Scanner(System.in);
+		descriptionHandler = new Scanner(System.in);
 	}
 
 	public String getCommand() {
@@ -31,22 +33,31 @@ public class ControllerProject {
 			String id = getCommand();
 			if (!exists(id)) {
 				changeStage("Application");
-				System.out.println("Project does not exist. Commands: Get or Create");
+				System.out.println("Project does not exist. Commands: Create, Get");
 			} else {
 				setHasProject(true);
 				setThisProject(id);
 				System.out.println(getThisProject().toString());
+				System.out.println();
+				System.out.println("Current available commands: Name, Description, Activity, Remove");
+				System.out.println("Name: Change the name of the project");
+				System.out.println("Description: Change the description of the project");
+				System.out.println("Remove: Remove this project. WARNING: Once removed, the project is permanently inaccessible");
 			}
 		}else if (getHasProject()) {
-			System.out.println("project commands is Description, Name or Remove");
 			String nextCommand = getCommand();
 			if (nextCommand.equals("Description")) {
+				System.out.println("Please enter a desired description");
 				editProjectDescription(getThisProject(), getDescription());
+				
 			}else if (nextCommand.equals("Name")) {
+				System.out.println("Please enter the new name");
 				editProjectName(getThisProject(), getCommand());
+				
 			}else if(nextCommand.equals("Remove")) {
 				removeProject(getThisProject());
 				setHasProject(false);
+				System.out.println("The project has been removed. Available commands: Create, Get");
 				model.changeStage("Application");
 			}else if (nextCommand.equals("Add")) {
 				addActivity(getThisProject(), getCommand());
@@ -85,7 +96,7 @@ public class ControllerProject {
 	}
 
 	private String getDescription() {
-		return scanner.nextLine();
+		return descriptionHandler.nextLine();
 	}
 
 	public void removeProject(Project project) throws OperationNotAllowedException {
@@ -109,14 +120,18 @@ public class ControllerProject {
         return model.getProjects();
     }
 
+
     public void setProjectTime(Project project, String startDate, String endDate){
-        model.setProjectDates(project, startDate, endDate);
-    }
-    public LocalDate getProjectStart(Project project){
-        return model.getProjectStart(project);
-    }
-    public LocalDate getProjectEnd(Project project){
-        return model.getProjectEnd(project);
-    }
-    
+		model.setProjectDates(project, startDate, endDate);
+	}
+	public LocalDate getProjectStart(Project project){
+		return model.getProjectStart(project);
+	}
+	public LocalDate getProjectEnd(Project project){
+		return model.getProjectEnd(project);
+	}
+
+	public boolean validDate(String someDate) {
+		return model.verifyDateFormat(someDate);
+	}
 }
