@@ -146,8 +146,9 @@ public class Model {
 		int weekInt = Integer.parseInt(stringDate[1]);
 		int yearInt = Integer.parseInt(stringDate[3]);
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+		int difference = yearInt-currentYear;
 		//Årstallene man arbejder indenfor er 50 år
-		if(yearInt+50 >= currentYear || yearInt-50 <= currentYear  ) {
+		if(difference >=-50 && difference <= 50  ) {
 			if(weekInt > 0 && weekInt <= 52) {
 						return true;
 			}
