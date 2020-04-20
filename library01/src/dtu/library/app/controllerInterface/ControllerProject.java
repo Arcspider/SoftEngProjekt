@@ -102,14 +102,18 @@ public class ControllerProject {
         return model.getProjects();
     }
 
+
     public void setProjectTime(Project project, String startDate, String endDate){
-        model.setProjectDates(project, startDate, endDate);
-    }
-    public LocalDate getProjectStart(Project project){
-        return model.getProjectStart(project);
-    }
-    public LocalDate getProjectEnd(Project project){
-        return model.getProjectEnd(project);
-    }
-    
+		model.setProjectDates(project, startDate, endDate);
+	}
+	public LocalDate getProjectStart(Project project){
+		return model.getProjectStart(project);
+	}
+	public LocalDate getProjectEnd(Project project){
+		return model.getProjectEnd(project);
+	}
+
+	public boolean validDate(String someDate) {
+		return model.verifyDateFormat(someDate);
+	}
 }
