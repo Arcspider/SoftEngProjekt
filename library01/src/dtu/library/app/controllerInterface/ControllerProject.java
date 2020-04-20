@@ -111,5 +111,9 @@ public class ControllerProject {
     public LocalDate getProjectEnd(Project project){
         return model.getProjectEnd(project);
     }
-    
+
+	public boolean validDate(String someDate) {
+		return model.verifyDateFormat(someDate);
+	}
+
 }
