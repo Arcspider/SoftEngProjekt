@@ -1,5 +1,6 @@
 package dtu.library.acceptance_tests;
 
+import dtu.library.app.Controller;
 import dtu.library.app.OperationNotAllowedException;
 import dtu.library.app.Project;
 import dtu.library.app.View;
@@ -18,28 +19,31 @@ import static org.junit.Assert.assertTrue;
 public class RemoveProjectTest {
 
     private View view;
+    private Controller controller;
     private ControllerProject controllerProject;
+    
     private ErrorMessageHolder errorMessageHolder;
 
     private Project project;
     private String ID;
     private List<Project> projects;
 
-    public RemoveProjectTest(View view, ErrorMessageHolder errorMessageHolder, ControllerProject controllerProject) {
+    public RemoveProjectTest(View view, ErrorMessageHolder errorMessageHolder,Controller controller, ControllerProject controllerProject) {
         this.view = view;
         this.errorMessageHolder = errorMessageHolder;
         this.controllerProject = controllerProject;
+        this.controller = controller;
     }
 
     @Given("the user deletes a project {string}")
-    public void theUserDeletesAProject(String ID) throws OperationNotAllowedException {
-        project = new Project("Beta", ID);
-        controllerProject.addProject(project);
+    public void theUserDeletesAProject(String name) throws OperationNotAllowedException {
+        project = controller.createProject(name);
+        controller.addProject(project);
     }
 
     @Given("the project {string} exists")
-    public void theProjectExists(String ID) {
-        assertTrue(controllerProject.exists(ID));
+    public void theProjectExists(String name) {
+        assertTrue(controllerProject.exists(project.getId()));
     }
 
     @Then("the project is deleted")
@@ -48,13 +52,13 @@ public class RemoveProjectTest {
     }
 
     @Then("the project {string} no longer exists")
-    public void theProjectNoLongerExists(String ID) {
-        assertFalse(controllerProject.exists(ID));
+    public void theProjectNoLongerExists(String id) {
+        assertFalse(controllerProject.exists(id));
     }
     @Given("that the project {string} doesn't exist")
-    public void thatTheProjectDoesnTExist(String string) {
-    	  project = new Project("Beta", string);
-    	 assertFalse(controllerProject.exists(string));
+    public void thatTheProjectDoesnTExist(String id) {
+    	  project = new Project("Beta", id);
+    	 assertFalse(controllerProject.exists(id));
     }
 
     @Given("the user tries to delete the project")
@@ -69,7 +73,8 @@ public class RemoveProjectTest {
     @Then("the error message {string} is shown")
     public void theErrorMessageIsShown(String errorMessage) {
         System.out.println("Error: " + errorMessage);
-    	 assertEquals(errorMessage, this.errorMessageHolder.getErrorMessage());
+    	 assertEquals(errorMessage
+                 , this.errorMessageHolder.getErrorMessage());
      
     }
 

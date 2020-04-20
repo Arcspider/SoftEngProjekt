@@ -1,7 +1,7 @@
 package dtu.library.app;
 
 import java.text.*;
-import java.time.LocalDate;
+import java.time.*;
 import java.util.*;
 
 public class Model {
@@ -11,6 +11,9 @@ public class Model {
 	private DateFormat dateFormat;
 	private Random random;
 	private Project newProject;
+	private Project thisProject;
+	private boolean hasProject;
+	private String stage;
 
 	public Model(View view) {
 		this.view = view;
@@ -18,12 +21,9 @@ public class Model {
 		this.calendar = new GregorianCalendar();
 		dateFormat = new SimpleDateFormat("MM-yy");
 		random = new Random();
+		stage = "Application";
+		hasProject = false;
 	}
-
-    public Project createProject(String name,String id) {
-        newProject = new Project(name, id);
-        return newProject;
-    }
 
 	public boolean hasID(String ID) {
 		for (Project project : projects) {
@@ -34,9 +34,7 @@ public class Model {
 		return false;
 	}
 
-	public Project getNewProject() {
-		return newProject.getProject();
-	}
+
 
 	public Project getProject(String id) {
 		for (Project currentProject : projects) {
@@ -45,53 +43,54 @@ public class Model {
 				return currentProject;
 			}
 
-        }
-        return null;
-    }
-    public String generateID() {
-    	String date = dateFormat.format(Calendar.getInstance().getTime());
-        String id = date + "-" + random.nextInt(100);
-        while(hasID(id)) id = date + "-" + random.nextInt(100); 
-    	return id;
-    }
-    public boolean containsProjectWithID(String ID) {
-        return !(projects.contains(ID));
-    }
+		}
+		return null;
+	}
+
+	public String generateID() {
+		String date = dateFormat.format(Calendar.getInstance().getTime());
+		String id = date + "-" + random.nextInt(100);
+		while (hasID(id))
+			id = date + "-" + random.nextInt(100);
+		return id;
+	}
+
+	public boolean containsProjectWithID(String ID) {
+		return !(projects.contains(ID));
+	}
 
 	public boolean canBeCreated(String id) {
 		return !projects.contains(id);
 	}
 
-    public void addProject(Project project) throws OperationNotAllowedException {
-    	if(checkName(project.getName())) {  
-    		projects.add(project);
-    		view.showMessage("Project " + project.getName()  + " has been created with ID: " + project.getId());
-    	}
-    }
-
-    public boolean checkName(String name) throws OperationNotAllowedException {
-        if (!name.equals("")) {
-            return true;
-        } else {
-            throw new OperationNotAllowedException("The project has no name, so it was not created");
-        }
-    }
-    public ArrayList<Project> getProjects(){
-    	return projects;
-    }
-    public boolean editProjectDescription(String ID,String newDescription) {
-    	Project projectToBeEdited = getProject(ID);
-    	projectToBeEdited.setDescription(newDescription);
-    	
-    	return true;
-    }
-
-	public boolean editProjectName(String ID, String name) {
-		Project projectToBeEdited = getProject(ID);
-    	projectToBeEdited.setName(name);
-    	
-    	return true;
+	public void addProject(Project project) throws OperationNotAllowedException {
+		if (checkName(project.getName())) {
+			projects.add(project);
+		}
 	}
+
+	public boolean checkName(String name) throws OperationNotAllowedException {
+		if (!name.equals("")) {
+			return true;
+		} else {
+			throw new OperationNotAllowedException("The project has no name, so it was not created");
+		}
+	}
+
+	public ArrayList<Project> getProjects() {
+		return projects;
+	}
+
+	public boolean editProjectDescription(Project project, String newDescription) {
+		project.setDescription(newDescription);
+		return true;
+	}
+
+	public boolean editProjectName(Project project, String name) {
+		project.setName(name);
+		return true;
+	}
+
 	public void removeProject(Project project) throws OperationNotAllowedException {
 		if (hasID(project.getId())) {
 			projects.remove(project);
@@ -99,16 +98,15 @@ public class Model {
 			throw new OperationNotAllowedException("This project doesn't exist");
 		}
 	}
-
 	public void setProjectDates(Project project, String startDate, String endDate) {
 		if(verifyDateFormat(startDate) && verifyDateFormat(endDate)) {
-			
+
 			LocalDate startProjectDate = stringToDate(startDate);
 			LocalDate endProjectDate = stringToDate(endDate);
-			if(endProjectDate.isAfter(startProjectDate)) {			
+			if(endProjectDate.isAfter(startProjectDate)) {
 				project.setStartDate(startProjectDate);
 				project.setEndDate(endProjectDate);
-				
+
 				System.out.println("LocalDate start: " + startProjectDate);
 				System.out.println("LocalDate end: " + endProjectDate);
 			} else {
@@ -118,7 +116,7 @@ public class Model {
 			System.out.println("The date format was invalid.");
 		}
 	}
-	
+
 	public LocalDate stringToDate(String toBeConverted) {
 		String[] stringDate = toBeConverted.split(" ");
 		int weekInt = Integer.parseInt(stringDate[1]);
@@ -129,31 +127,22 @@ public class Model {
 		cldStart.set(Calendar.WEEK_OF_YEAR, weekInt);
 		LocalDate finalDate = LocalDate.of(yearInt,cldStart.get(Calendar.MONTH)+1,cldStart.get(Calendar.DATE));
 		return finalDate;
-		
+
 	}
 
-
-//	public boolean addActivity(String string, Project project) throws OperationNotAllowedException {
-//		return project.addActivity(string);
-//	}
-//
-//	public boolean hasActivity(String sA, String sP) {
-//		return getProject(sP).hasActivity(sA);
-//	}
-	//Kan ikke verificere for forskellige mdr. Eksempelvis tror den at alle måneder har 31 dage
 	public boolean verifyDateFormat(String dateToVerify) {
 		String[] stringDate = dateToVerify.split(" ");
 		int weekInt = Integer.parseInt(stringDate[1]);
 		int yearInt = Integer.parseInt(stringDate[3]);
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 		int difference = yearInt-currentYear;
-		//Årstallene man arbejder indenfor er 50 år
+		//ï¿½rstallene man arbejder indenfor er 50 ï¿½r
 		if(difference >=-50 && difference <= 50  ) {
 			if(weekInt > 0 && weekInt <= 52) {
-						return true;
+				return true;
 			}
 		}
-		
+
 		return false;
 	}
 
@@ -165,4 +154,39 @@ public class Model {
 		return project.getEndDate();
 	}
 
+	public Project createProject(String name) throws OperationNotAllowedException {
+		String id = generateID();
+		newProject = new Project(name, id);
+	    view.showMessage("Project " + name  + " has been created with ID: " + id);
+
+	    return newProject;
+	}
+
+	public void changeStage(String stage) {
+		this.stage = stage;
+	}
+
+	public String getStage() {
+		return stage;
+	}
+
+	public void setHasProject(boolean is) {
+		hasProject = is;
+	}
+
+	public boolean getHasProject() {
+		return hasProject;
+	}
+
+	public void setThisProject(String id) {
+		thisProject = getProject(id);
+	}
+
+	public Project getThisProject() {
+		return thisProject;
+	}
+
+	public void setState(String state) {
+		this.stage = state;
+	}
 }
