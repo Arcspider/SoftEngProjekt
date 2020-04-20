@@ -4,24 +4,18 @@ import java.util.ArrayList;
 import dtu.library.app.timeInterface.datesInterface;
 import java.time.LocalDate;
 
-public class Project {
-	private String description;
-	private String name;
-	private String id;
-	private ArrayList<Activity> activities;
-
-	public Project(String Name, String ID) {
-		this.name = Name;
-		this.id = ID;
-		description = "";
-		activities = new ArrayList<Activity>();
-	}
-
-
 public class Project implements datesInterface {
     private String description, name, id;
     private LocalDate startDate, endDate;
+    private ArrayList<Activity> activities;
     boolean isOverdue;
+
+    public Project(String name, String id) {
+        this.name = name;
+        this.id = id;
+        description = "";
+        activities = new ArrayList<Activity>();
+    }
 
 	public String toString() {
 		return "This project is named " + name + " with description" + description + " and id " + id;
@@ -33,10 +27,6 @@ public class Project implements datesInterface {
 
     public String getId() {
         return this.id;
-    }
-
-    public String toString() {
-        return "This project is named PLACEHOLDER with description PLACEHOLDER and id " + id;
     }
 
     public String getName() {
@@ -51,9 +41,12 @@ public class Project implements datesInterface {
         return description;
     }
 
-    public void setName(String name2) {
-        name = name2;
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public void setId(String id){
+        this.id = id;
     }
 
     @Override

@@ -65,10 +65,10 @@ public class ProjectTest {
     }
     
     
-    @When("the user chooses the project with id of project Alpha.")
-    public void theUserEditsProjectDescription() throws OperationNotAllowedException {
+    @When("the user chooses the project with id of project {string}.")
+    public void theUserEditsProjectDescription(String name) throws OperationNotAllowedException {
   	  // Der dannes et nyt projekt siden projekt dataen ikke overlever hop mellem filer.
-      project = controller.createProject("ALPHA");
+      project = controller.createProject(name);
       controller.addProject(project);
 
     }
@@ -81,12 +81,13 @@ public class ProjectTest {
     
     @Then("the projects description is overwritten with {string}")
     public void theUserhasEditedProjectName(String newDescription) throws OperationNotAllowedException {
-    	assertTrue(project.getDescription().equals(newDescription));
+        assertEquals(project.getDescription(), newDescription);
     }
     
-    @When("the user chooses the project with name {string}")
-    public void theUserChoosesTheProjectWithName(String string) throws OperationNotAllowedException {
-         project = controller.createProject(string);
+    @When("the user chooses the project {string} with the id {string}")
+    public void theUserChoosesTheProjectWithTheId(String name, String id) throws OperationNotAllowedException {
+         project = controller.createProject(name);
+         project.setId(id);
          controller.addProject(project);
     	
     }
@@ -95,9 +96,10 @@ public class ProjectTest {
 	public void theUserChangesTheNameTo(String string) {
 		controllerProject.editProjectName(project, string);
 	}
+
     @Then("the projects Name is changed to {string}")
     public void theProjectsNameIsChangedTo(String name) throws OperationNotAllowedException {
-    	assertTrue(project.getName().equals(name));
+        assertEquals(project.getName(), name);
     }
 
     @When("the user enters the start and end dates {string} and {string}")

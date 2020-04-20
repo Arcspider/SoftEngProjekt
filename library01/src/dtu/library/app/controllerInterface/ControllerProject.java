@@ -102,10 +102,6 @@ public class ControllerProject {
         return model.getProjects();
     }
 
-    public boolean editProjectName(String ID, String name) {
-        return model.editProjectName(ID,name);
-
-    }
     public void setProjectTime(Project project, String startDate, String endDate){
         model.setProjectDates(project, startDate, endDate);
     }
