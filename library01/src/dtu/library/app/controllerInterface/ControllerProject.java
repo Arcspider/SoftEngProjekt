@@ -5,6 +5,7 @@ import dtu.library.app.OperationNotAllowedException;
 import dtu.library.app.Project;
 import dtu.library.app.View;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -84,4 +85,19 @@ public class ControllerProject {
 		return model.editProjectName(ID,name);
 		
 	}
+    
+    public void setProjectTime(Project project, String startDate, String endDate){
+        model.setProjectDates(project, startDate, endDate);
+    }
+    public LocalDate getProjectStart(Project project){
+        return model.getProjectStart(project);
+    }
+    public LocalDate getProjectEnd(Project project){
+        return model.getProjectEnd(project);
+    }
+
+	public boolean validDate(String someDate) {
+		return model.verifyDateFormat(someDate);
+	}
+
 }

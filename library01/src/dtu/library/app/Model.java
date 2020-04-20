@@ -1,6 +1,7 @@
 package dtu.library.app;
 
 import java.text.*;
+import java.time.LocalDate;
 import java.util.*;
 
 public class Model {
@@ -98,4 +99,69 @@ public class Model {
 			throw new OperationNotAllowedException("This project doesn't exist");
 		}
 	}
+
+	public void setProjectDates(Project project, String startDate, String endDate) {
+		if(verifyDateFormat(startDate) && verifyDateFormat(endDate)) {
+			
+			LocalDate startProjectDate = stringToDate(startDate);
+			LocalDate endProjectDate = stringToDate(endDate);
+			if(endProjectDate.isAfter(startProjectDate)) {			
+				project.setStartDate(startProjectDate);
+				project.setEndDate(endProjectDate);
+				
+				System.out.println("LocalDate start: " + startProjectDate);
+				System.out.println("LocalDate end: " + endProjectDate);
+			} else {
+				System.out.println("The indicated start of the project is before the indicated end.");
+			}
+		}else {
+			System.out.println("The date format was invalid.");
+		}
+	}
+	
+	public LocalDate stringToDate(String toBeConverted) {
+		String[] stringDate = toBeConverted.split(" ");
+		int weekInt = Integer.parseInt(stringDate[1]);
+		int yearInt = Integer.parseInt(stringDate[3]);
+
+		Calendar cldStart = Calendar.getInstance();
+		cldStart.set(Calendar.YEAR, yearInt);
+		cldStart.set(Calendar.WEEK_OF_YEAR, weekInt);
+		LocalDate finalDate = LocalDate.of(yearInt,cldStart.get(Calendar.MONTH)+1,cldStart.get(Calendar.DATE));
+		return finalDate;
+		
+	}
+
+
+//	public boolean addActivity(String string, Project project) throws OperationNotAllowedException {
+//		return project.addActivity(string);
+//	}
+//
+//	public boolean hasActivity(String sA, String sP) {
+//		return getProject(sP).hasActivity(sA);
+//	}
+	//Kan ikke verificere for forskellige mdr. Eksempelvis tror den at alle måneder har 31 dage
+	public boolean verifyDateFormat(String dateToVerify) {
+		String[] stringDate = dateToVerify.split(" ");
+		int weekInt = Integer.parseInt(stringDate[1]);
+		int yearInt = Integer.parseInt(stringDate[3]);
+		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+		//Årstallene man arbejder indenfor er 50 år
+		if(yearInt+50 >= currentYear || yearInt-50 <= currentYear  ) {
+			if(weekInt > 0 && weekInt <= 52) {
+						return true;
+			}
+		}
+		
+		return false;
+	}
+
+	public LocalDate getProjectStart(Project project) {
+		return project.getStartDate();
+	}
+
+	public LocalDate getProjectEnd(Project project) {
+		return project.getEndDate();
+	}
+
 }

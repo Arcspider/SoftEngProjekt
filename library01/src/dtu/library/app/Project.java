@@ -1,9 +1,13 @@
 package dtu.library.app;
 
+import java.time.LocalDate;
+
 public class Project {
 	private String description;
 	private String name;
 	private String id;
+	private LocalDate endDate;
+	private LocalDate startDate;
 	
 	public Project(String Name, String ID) {
 		this.name = Name;
@@ -35,5 +39,21 @@ public class Project {
 	public void setName(String name2) {
 		name = name2;
 		
+	}
+
+	public LocalDate getEndDate() {
+		 return endDate;
+	}
+
+	public LocalDate getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(LocalDate startProjectDate) {
+		startDate = startProjectDate;
+	}
+
+	public void setEndDate(LocalDate endProjectDate) {
+		endDate = endProjectDate;
 	}
 }
