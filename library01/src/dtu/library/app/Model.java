@@ -1,6 +1,7 @@
 package dtu.library.app;
 
 import java.text.*;
+import java.time.LocalDate;
 import java.util.*;
 
 public class Model {
@@ -97,13 +98,46 @@ public class Model {
 			throw new OperationNotAllowedException("This project doesn't exist");
 		}
 	}
+	public void setProjectDates(Project project, String startDate, String endDate) {
+		String[] startWeekArray = startDate.split(" ");
+		String[] endWeekArray = endDate.split(" ");
+		int startWeekInt = Integer.parseInt(startWeekArray[1]);
+		int startYearInt = Integer.parseInt(startWeekArray[3]);
+		int endWeekInt = Integer.parseInt(endWeekArray[1]);
+		int endYearInt = Integer.parseInt(endWeekArray[3]);
 
-	public boolean addActivity(String string, Project project) throws OperationNotAllowedException {
-		return project.addActivity(string);
+		Calendar cldStart = Calendar.getInstance();
+		cldStart.set(Calendar.YEAR, startYearInt);
+		cldStart.set(Calendar.WEEK_OF_YEAR, startWeekInt);
+
+		Calendar cldEnd = Calendar.getInstance();
+		cldEnd.set(Calendar.YEAR, endYearInt);
+		cldEnd.set(Calendar.WEEK_OF_YEAR, endWeekInt);
+		cldEnd.set(Calendar.DAY_OF_WEEK, 6);
+
+		LocalDate startProjectDate = LocalDate.of(startYearInt,cldStart.get(Calendar.MONTH)+1,cldStart.get(Calendar.DATE));
+		LocalDate endProjectDate = LocalDate.of(endYearInt,cldEnd.get(Calendar.MONTH)+1,cldEnd.get(Calendar.DATE));
+
+		project.setStartDate(startProjectDate);
+		project.setEndDate(endProjectDate);
+
+		System.out.println("LocalDate start: " + startProjectDate);
+		System.out.println("LocalDate end: " + endProjectDate);
+
+//	public boolean addActivity(String string, Project project) throws OperationNotAllowedException {
+//		return project.addActivity(string);
+//	}
+//
+//	public boolean hasActivity(String sA, String sP) {
+//		return getProject(sP).hasActivity(sA);
+//	}
+	}
+	public LocalDate getProjectStart(Project project) {
+		return project.getStartDate();
 	}
 
-	public boolean hasActivity(String sA, String sP) {
-		return getProject(sP).hasActivity(sA);
+	public LocalDate getProjectEnd(Project project) {
+		return project.getEndDate();
 	}
 
 	public Project createProject(String name) throws OperationNotAllowedException {

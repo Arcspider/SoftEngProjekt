@@ -4,6 +4,8 @@ import dtu.library.app.Model;
 import dtu.library.app.OperationNotAllowedException;
 import dtu.library.app.Project;
 import dtu.library.app.View;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -95,5 +97,23 @@ public class ControllerProject {
 	public boolean editProjectName(Project project, String name) {
 		return model.editProjectName(project, name);
 
-	}
+    }
+    public ArrayList<Project> getProjects(){
+        return model.getProjects();
+    }
+
+    public boolean editProjectName(String ID, String name) {
+        return model.editProjectName(ID,name);
+
+    }
+    public void setProjectTime(Project project, String startDate, String endDate){
+        model.setProjectDates(project, startDate, endDate);
+    }
+    public LocalDate getProjectStart(Project project){
+        return model.getProjectStart(project);
+    }
+    public LocalDate getProjectEnd(Project project){
+        return model.getProjectEnd(project);
+    }
+    
 }

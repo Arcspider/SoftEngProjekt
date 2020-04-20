@@ -52,13 +52,13 @@ public class RemoveProjectTest {
     }
 
     @Then("the project {string} no longer exists")
-    public void theProjectNoLongerExists(String ID) {
-        assertFalse(controllerProject.exists(ID));
+    public void theProjectNoLongerExists(String id) {
+        assertFalse(controllerProject.exists(id));
     }
     @Given("that the project {string} doesn't exist")
-    public void thatTheProjectDoesnTExist(String string) {
-    	  project = new Project("Beta", string);
-    	 assertFalse(controllerProject.exists(string));
+    public void thatTheProjectDoesnTExist(String id) {
+    	  project = new Project("Beta", id);
+    	 assertFalse(controllerProject.exists(id));
     }
 
     @Given("the user tries to delete the project")
@@ -73,7 +73,8 @@ public class RemoveProjectTest {
     @Then("the error message {string} is shown")
     public void theErrorMessageIsShown(String errorMessage) {
         System.out.println("Error: " + errorMessage);
-    	 assertEquals(errorMessage, this.errorMessageHolder.getErrorMessage());
+    	 assertEquals(errorMessage
+                 , this.errorMessageHolder.getErrorMessage());
      
     }
 
