@@ -104,6 +104,11 @@ public class ProjectTest {
 
     @When("the user enters the start and end dates {string} and {string}")
     public void theUserEntersTheStartAndEndDatesAnd(String startDate, String endDate) {
+        assertTrue((controllerProject.validDate(startDate) && controllerProject.validDate(endDate)));
+    }
+
+    @Then("the projects start and end dates are changed to {string} and {string}")
+    public void theProjectsStartAndEndDatesAreChangedToAnd(String startDate, String endDate) {
         controllerProject.setProjectTime(project, startDate, endDate);
         assertEquals(project.getStartDate().toString(),controllerProject.getProjectStart(project).toString());
         assertEquals(project.getEndDate().toString(),controllerProject.getProjectEnd(project).toString());
