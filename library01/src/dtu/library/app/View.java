@@ -21,6 +21,6 @@ public class View{
 			controller.runCommand(nextCommand);
 		}
 	}
-
+//
 
 }
