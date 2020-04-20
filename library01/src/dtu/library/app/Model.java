@@ -10,7 +10,9 @@ public class Model {
 	private DateFormat dateFormat;
 	private Random random;
 	private Project newProject;
-	private String stage = "Application";
+	private Project thisProject;
+	private boolean hasProject;
+	private String stage;
 
 	public Model(View view) {
 		this.view = view;
@@ -18,13 +20,9 @@ public class Model {
 		this.calendar = new GregorianCalendar();
 		dateFormat = new SimpleDateFormat("MM-yy");
 		random = new Random();
+		stage = "Application";
+		hasProject = false;
 	}
-
-//    public Project createProject(String name,String id) {
-//        newProject = new Project(name, id);
-//        view.showMessage("Project " + name  + " has been created with ID: " + id);
-//        return newProject;
-//    }
 
 	public boolean hasID(String ID) {
 		for (Project project : projects) {
@@ -35,9 +33,7 @@ public class Model {
 		return false;
 	}
 
-	public Project getNewProject() {
-		return newProject.getProject();
-	}
+
 
 	public Project getProject(String id) {
 		for (Project currentProject : projects) {
@@ -46,7 +42,7 @@ public class Model {
 				return currentProject;
 			}
 
-		}
+		} 
 		return null;
 	}
 
@@ -124,5 +120,21 @@ public class Model {
 
 	public String getStage() {
 		return stage;
+	}
+
+	public void setHasProject(boolean is) {
+		hasProject = is;
+	}
+
+	public boolean getHasProject() {
+		return hasProject;
+	}
+
+	public void setThisProject(String id) {
+		thisProject = getProject(id);
+	}
+
+	public Project getThisProject() {
+		return thisProject;
 	}
 }

@@ -21,16 +21,18 @@ public class RemoveProjectTest {
     private View view;
     private Controller controller;
     private ControllerProject controllerProject;
+    
     private ErrorMessageHolder errorMessageHolder;
 
     private Project project;
     private String ID;
     private List<Project> projects;
 
-    public RemoveProjectTest(View view, ErrorMessageHolder errorMessageHolder, ControllerProject controllerProject) {
+    public RemoveProjectTest(View view, ErrorMessageHolder errorMessageHolder,Controller controller, ControllerProject controllerProject) {
         this.view = view;
         this.errorMessageHolder = errorMessageHolder;
         this.controllerProject = controllerProject;
+        this.controller = controller;
     }
 
     @Given("the user deletes a project {string}")
@@ -40,7 +42,7 @@ public class RemoveProjectTest {
     }
 
     @Given("the project {string} exists")
-    public void theProjectExists(String ID) {
+    public void theProjectExists(String name) {
         assertTrue(controllerProject.exists(project.getId()));
     }
 

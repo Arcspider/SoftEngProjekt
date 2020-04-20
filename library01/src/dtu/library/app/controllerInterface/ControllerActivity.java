@@ -8,33 +8,37 @@ import dtu.library.app.Project;
 import dtu.library.app.View;
 
 public class ControllerActivity {
-	 private Model model;
-	 private View view;
-	 Scanner scanner;
-	 
-	 public ControllerActivity(View view, Model model){
-		 this.view = view;
-	     this.model = model;
-	     scanner = new Scanner(System.in);
-	 }
+	private Model model;
+	private View view;
+	Scanner scanner;
+
+	public ControllerActivity(View view, Model model) {
+		this.view = view;
+		this.model = model;
+		scanner = new Scanner(System.in);
+	}
+
+	public void runCommand() {
+		
+
+	}
 
 	public void addProject(Project project) throws OperationNotAllowedException {
 		model.addProject(project);
 	}
 
 	public boolean hasProject(String string) {
-		
+
 		return model.hasID(string);
 	}
 
 	public boolean addActivity(String string, Project project) throws OperationNotAllowedException {
-		return model.addActivity(string,project);
-		
+		return model.addActivity(string, project);
+
 	}
 
 	public boolean hasActivity(String sA, String sP) {
-		return model.hasActivity(sA,sP);
+		return model.hasActivity(sA, sP);
 	}
-
 
 }

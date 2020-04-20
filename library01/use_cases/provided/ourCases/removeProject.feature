@@ -8,7 +8,7 @@ Feature: Remove project
     Then the project is deleted
     And the project "030901" no longer exists
 
- # Scenario: The user deletes a project that doesn't exist
-  #	Given that the project "030901" doesn't exist
-   # And the user tries to delete the project
-   # Then the error message "This project doesn't exist" is shown
+ Scenario: The user deletes a project that doesn't exist
+  	Given that the project "030901" doesn't exist
+    And the user tries to delete the project
+    Then the error message "This project doesn't exist" is shown
