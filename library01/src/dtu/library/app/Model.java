@@ -173,6 +173,6 @@ public class Model {
 	}
 	
 	public void setState(String state) {
-		this.state = state;
+		this.stage = state;
 	}
 }
