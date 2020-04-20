@@ -83,11 +83,13 @@ public class Model {
 
 	public boolean editProjectDescription(Project project, String newDescription) {
 		project.setDescription(newDescription);
+		System.out.println(project.toString());
 		return true;
 	}
 
 	public boolean editProjectName(Project project, String name) {
 		project.setName(name);
+		System.out.println(project.toString());
 		return true;
 	}
 
@@ -173,6 +175,6 @@ public class Model {
 	}
 	
 	public void setState(String state) {
-		this.state = state;
+		this.stage = state;
 	}
 }

@@ -13,12 +13,12 @@ public class Project implements datesInterface {
     public Project(String name, String id) {
         this.name = name;
         this.id = id;
-        description = "";
+        description = "not yet written";
         activities = new ArrayList<Activity>();
     }
 
 	public String toString() {
-		return "This project is named " + name + " with description" + description + " and id " + id;
+		return "This project is named " + name + " with the description \"" + description + "\" and id " + id;
 	}
 
     public Project getProject() {

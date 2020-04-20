@@ -16,7 +16,10 @@ public class View {
 		this.controller = new Controller(this, model);
 		this.controllerProject = new ControllerProject(this,model);
 		this.controllerActivity = new ControllerActivity(this,model);
-//		startup();
+		System.out.println("Current available commands: Create, Get");
+		System.out.println("Create: Creates new project");
+		System.out.println("Get: Access existing project");
+		//startup();
 	}
 
 	public void showMessage(String message) {
