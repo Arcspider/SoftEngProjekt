@@ -1,5 +1,7 @@
 package dtu.library.app;
 
+import java.util.ArrayList;
+import dtu.library.app.timeInterface.datesInterface;
 import java.time.LocalDate;
 
 public class Project implements datesInterface {
@@ -48,11 +50,27 @@ public class Project implements datesInterface {
     }
 
     @Override
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    @Override
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    @Override
     public boolean isOverdue() {
 		return endDate.compareTo(startDate) != 0 && endDate.compareTo(startDate) >= 0;
 	}
 
-    
+    public void setStartDate(LocalDate startProjectDate) {
+        startDate = startProjectDate;
+    }
+
+    public void setEndDate(LocalDate endProjectDate) {
+        endDate = endProjectDate;
+    }
 
 //	public boolean addActivity(String string) throws OperationNotAllowedException {
 //		if (!hasActivity(string)) {
@@ -72,19 +90,4 @@ public class Project implements datesInterface {
 //		}
 //		return false;
 //	}
-	public LocalDate getEndDate() {
-		 return endDate;
-	}
-
-	public LocalDate getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(LocalDate startProjectDate) {
-		startDate = startProjectDate;
-	}
-
-	public void setEndDate(LocalDate endProjectDate) {
-		endDate = endProjectDate;
-	}
 }
