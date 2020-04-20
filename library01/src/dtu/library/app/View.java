@@ -16,15 +16,12 @@ public class View {
 		this.controller = new Controller(this, model);
 		this.controllerProject = new ControllerProject(this,model);
 		this.controllerActivity = new ControllerActivity(this,model);
-		System.out.println("Current available commands: Create, Get");
-		System.out.println("Create: Creates new project");
-		System.out.println("Get: Access existing project");
-		//startup();
+		showApplicationIntroduction();
+		startup();
 	}
 
 	public void showMessage(String message) {
 		System.out.println(message);
-		System.out.println();
 	}
 
 	public void startup() throws OperationNotAllowedException {
@@ -40,5 +37,22 @@ public class View {
 				controllerActivity.runCommand();
 			}
 		}
+	}
+	
+	private void showApplicationIntroduction() {
+		System.out.println("Current available commands: Create, Get");
+		System.out.println("Create: Creates new project");
+		System.out.println("Get: Access existing project");
+	}
+
+	public void showProjectIntroduction(Project project) {
+		System.out.println(project.toString());
+		System.out.println();
+		System.out.println("Current available commands: Name, Description, Remove, Add, Edit");
+		System.out.println("Name: Change the name of this project");
+		System.out.println("Description: Change the description of this project");
+		System.out.println("Remove: Remove this project. WARNING: Once removed, this project is permanently inaccessible");
+		System.out.println("Add: Adds an activity to this project");
+		System.out.println("Edit: Access and edit a specific activity in this project");
 	}
 }
