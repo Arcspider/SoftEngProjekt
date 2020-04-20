@@ -12,7 +12,9 @@ public class Model {
 	private Random random;
 	private Project newProject;
 	private Project thisProject;
+	private Activity thisActivity;
 	private boolean hasProject;
+	private boolean hasActivity;
 	private String stage;
 
 	public Model(View view) {
@@ -23,6 +25,7 @@ public class Model {
 		random = new Random();
 		stage = "Application";
 		hasProject = false;
+		hasActivity = false;
 	}
 
 	public boolean hasID(String ID) {
@@ -34,8 +37,6 @@ public class Model {
 		return false;
 	}
 
-
-
 	public Project getProject(String id) {
 		for (Project currentProject : projects) {
 			String currentId = currentProject.getId();
@@ -43,11 +44,11 @@ public class Model {
 				return currentProject;
 			}
 
-		} 
+		}
 		return null;
 	}
 
-	public String generateID() { 
+	public String generateID() {
 		String date = dateFormat.format(Calendar.getInstance().getTime());
 		String id = date + "-" + random.nextInt(100);
 		while (hasID(id))
@@ -98,6 +99,7 @@ public class Model {
 			throw new OperationNotAllowedException("This project doesn't exist");
 		}
 	}
+
 	public void setProjectDates(Project project, String startDate, String endDate) {
 		String[] startWeekArray = startDate.split(" ");
 		String[] endWeekArray = endDate.split(" ");
@@ -115,23 +117,25 @@ public class Model {
 		cldEnd.set(Calendar.WEEK_OF_YEAR, endWeekInt);
 		cldEnd.set(Calendar.DAY_OF_WEEK, 6);
 
-		LocalDate startProjectDate = LocalDate.of(startYearInt,cldStart.get(Calendar.MONTH)+1,cldStart.get(Calendar.DATE));
-		LocalDate endProjectDate = LocalDate.of(endYearInt,cldEnd.get(Calendar.MONTH)+1,cldEnd.get(Calendar.DATE));
+		LocalDate startProjectDate = LocalDate.of(startYearInt, cldStart.get(Calendar.MONTH) + 1,
+				cldStart.get(Calendar.DATE));
+		LocalDate endProjectDate = LocalDate.of(endYearInt, cldEnd.get(Calendar.MONTH) + 1, cldEnd.get(Calendar.DATE));
 
 		project.setStartDate(startProjectDate);
 		project.setEndDate(endProjectDate);
 
 		System.out.println("LocalDate start: " + startProjectDate);
 		System.out.println("LocalDate end: " + endProjectDate);
-
-//	public boolean addActivity(String string, Project project) throws OperationNotAllowedException {
-//		return project.addActivity(string);
-//	}
-//
-//	public boolean hasActivity(String sA, String sP) {
-//		return getProject(sP).hasActivity(sA);
-//	}
 	}
+
+	public boolean addActivity(String string, Project project) throws OperationNotAllowedException {
+		return project.addActivity(string);
+	}
+
+	public boolean hasActivity(Project project, String sA) {
+		return project.hasActivity(sA);
+	}
+
 	public LocalDate getProjectStart(Project project) {
 		return project.getStartDate();
 	}
@@ -143,13 +147,13 @@ public class Model {
 	public Project createProject(String name) throws OperationNotAllowedException {
 		String id = generateID();
 		newProject = new Project(name, id);
-	    view.showMessage("Project " + name  + " has been created with ID: " + id);
-	  
-	    return newProject;
+		view.showMessage("Project " + name + " has been created with ID: " + id);
+
+		return newProject;
 	}
 
 	public void changeStage(String stage) {
-		this.stage = stage; 
+		this.stage = stage;
 	}
 
 	public String getStage() {
@@ -170,5 +174,30 @@ public class Model {
 
 	public Project getThisProject() {
 		return thisProject;
+	}
+
+	public boolean addActivity(Project project, String name) throws OperationNotAllowedException {
+		return project.addActivity(name);
+	}
+
+	public boolean getHasActiviy() {
+		return hasActivity;
+	}
+
+	public boolean activityExists(Project project, String name) {
+		return project.hasActivity(name);
+	}
+
+	public void setHasActivity(boolean b) {
+		hasActivity = b;
+
+	}
+
+	public Activity getActivity(Project project, String name) {
+		return project.getActivity(name);
+	}
+
+	public void setThisActivity(Activity activity) {
+		thisActivity = activity;
 	}
 }

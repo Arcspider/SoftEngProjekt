@@ -72,22 +72,32 @@ public class Project implements datesInterface {
         endDate = endProjectDate;
     }
 
-//	public boolean addActivity(String string) throws OperationNotAllowedException {
-//		if (!hasActivity(string)) {
-//			activities.add(new Activity(string));
-//			System.out.println("Has added activity " + string + " to project " + name);
-//			return true;
-//		}
-//		throw new OperationNotAllowedException("The project already has an activity with the name " + string);
-//	}
-//
-//	public boolean hasActivity(String sA) {
-//		for (Activity currentActivity : activities) {
-//			String currentId = currentActivity.getName();
-//			if (currentId.equals(sA)) {
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
+	public boolean addActivity(String name) throws OperationNotAllowedException {
+		if (!hasActivity(name)) {
+			activities.add(new Activity(name));
+			System.out.println("Has added activity " + name + " to project " + name);
+			return true;
+		}
+		throw new OperationNotAllowedException("The project already has an activity with the name " + name);
+	}
+
+	public boolean hasActivity(String name) {
+		for (Activity currentActivity : activities) {
+			String currentId = currentActivity.getName();
+			if (currentId.equals(name)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public Activity getActivity(String name2) {
+		for (Activity currentActivity : activities) {
+			String currentId = currentActivity.getName();
+			if (currentId.equals(name)) {
+				return currentActivity;
+			}
+		}
+		return null;
+	}
 }

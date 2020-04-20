@@ -58,7 +58,6 @@ public class ProjectTest {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }
     }
-
     @Then("the user receives an error message {string}")
     public void theUserReceivesAnErrorMessage(String errorMessage) {
         assertEquals(errorMessage, this.errorMessageHolder.getErrorMessage());

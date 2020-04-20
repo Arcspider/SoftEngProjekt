@@ -48,10 +48,17 @@ public class ControllerProject {
 				removeProject(getThisProject());
 				setHasProject(false);
 				model.changeStage("Application");
-			}else if(nextCommand.equals("Activity")) {
+			}else if (nextCommand.equals("Add")) {
+				addActivity(getThisProject(), getCommand());
+			}else if(nextCommand.equals("Edit")) {
 				changeStage("Activity");
 			}
 		}
+	}
+
+	private void addActivity(Project project, String name) throws OperationNotAllowedException {
+		model.addActivity(project,name);	
+		
 	}
 
 	private boolean getHasProject() {
