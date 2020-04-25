@@ -33,36 +33,34 @@ public class ControllerProject {
 			String id = getCommand();
 			if (!exists(id)) {
 				changeStage("Application");
-				System.out.println("Project does not exist. Commands: Create, Get");
+				view.showMessage("Project does not exist. Commands: Create, Get");
 			} else {
 				setHasProject(true);
 				setThisProject(id);
-				System.out.println(getThisProject().toString());
-				System.out.println();
-				System.out.println("Current available commands: Name, Description, Activity, Remove");
-				System.out.println("Name: Change the name of the project");
-				System.out.println("Description: Change the description of the project");
-				System.out.println("Remove: Remove this project. WARNING: Once removed, the project is permanently inaccessible");
+				view.showProjectIntroduction(getThisProject());
 			}
 		}else if (getHasProject()) {
 			String nextCommand = getCommand();
 			if (nextCommand.equals("Description")) {
-				System.out.println("Please enter a desired description");
+				view.showMessage("Please enter a desired description");
 				editProjectDescription(getThisProject(), getDescription());
 				
 			}else if (nextCommand.equals("Name")) {
-				System.out.println("Please enter the new name");
+				view.showMessage("Please enter the new name");
 				editProjectName(getThisProject(), getCommand());
 				
 			}else if(nextCommand.equals("Remove")) {
 				removeProject(getThisProject());
 				setHasProject(false);
-				System.out.println("The project has been removed. Available commands: Create, Get");
+				view.showMessage("The project has been removed. Available commands: Create, Get");
 				model.changeStage("Application");
 			}else if (nextCommand.equals("Add")) {
+				view.showMessage("Please enter a name for the activity");
 				addActivity(getThisProject(), getCommand());
+				
 			}else if(nextCommand.equals("Edit")) {
 				changeStage("Activity");
+			
 			}
 		}
 	}

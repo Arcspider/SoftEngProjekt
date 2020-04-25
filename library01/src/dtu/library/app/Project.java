@@ -18,7 +18,7 @@ public class Project implements datesInterface {
     }
 
 	public String toString() {
-		return "This project is named " + name + " with the description \"" + description + "\" and id " + id;
+		return "This project is named \"" + name + "\" with the description \"" + description + "\" and id: \"" + id + "\"";
 	}
 
     public Project getProject() {
@@ -75,7 +75,7 @@ public class Project implements datesInterface {
 	public boolean addActivity(String name) throws OperationNotAllowedException {
 		if (!hasActivity(name)) {
 			activities.add(new Activity(name));
-			System.out.println("Has added activity " + name + " to project " + name);
+			System.out.println("Added activity " + name + " to project " + this.name);
 			return true;
 		}
 		throw new OperationNotAllowedException("The project already has an activity with the name " + name);
