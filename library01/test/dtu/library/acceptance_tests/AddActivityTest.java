@@ -22,6 +22,7 @@ public class AddActivityTest {
     private ControllerProject controllerProject;
     private ControllerActivity controllerActivity;
     private ErrorMessageHolder errorMessageHolder;
+    private String name;
 
     private Project project;
     Activity newActivity;
@@ -66,8 +67,12 @@ public class AddActivityTest {
 
 	@When("the user adds a activity {string}")
 	public void theUserAddsAActivity(String string) {
+		name = string;
+	}
+	@Then("an error message {string} is given")
+	public void anErrorMessageIsGiven(String string) {
 		try {
-			controllerActivity.addActivity(string,project);
+			controllerActivity.addActivity(name,project);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
