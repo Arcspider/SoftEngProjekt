@@ -212,7 +212,7 @@ public class Model {
 
 	public void setThisActivity(Activity activity) {
 		thisActivity = activity;
-	
+	}
 	public void setState(String state) {
 		this.stage = state;
 	}

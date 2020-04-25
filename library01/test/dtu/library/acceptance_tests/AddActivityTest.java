@@ -72,5 +72,10 @@ public class AddActivityTest {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
 	}
+	@Then("an error message {string} is given")
+	public void anErrorMessageIsGiven(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
 
 }
