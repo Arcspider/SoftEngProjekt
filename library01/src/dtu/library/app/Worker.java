@@ -1,9 +1,12 @@
 package dtu.library.app;
 
+import java.util.List;
+
 public class Worker {
 	private String name;
 	private String id;
 //	private List<userTime> userTimeList;
+	private List<Activity> activities;
 
 	public Worker(String Name, String ID) {
 		this.name = Name;

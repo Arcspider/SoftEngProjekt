@@ -3,20 +3,28 @@ Feature: Assign workers to activity
   Actors: User
 
 #  Scenario: Assigning a worker to an activity
-#    When the user chooses the worker "HAH"
-#    And the user chooses the activity "Optimering"
-#    And the user allocates "55" hours
-#    Then the worker "HAH" is assigned the activity "Optimering" for "55" hours.
+#    Given that a worker with the name "Jens Jensen" exists
+#    And that the activity "Optimering" exists
+#    When the user chooses the worker
+#    And the user chooses the activity
+#    And the user allocates 10 hours
+#    Then the worker is assigned the activity for the amount of hours.
 
 #  Scenario: Assigning a worker to an activity which is already assigned.
-#    When the user chooses the worker "HAH"
-#    And the user chooses the activity "Optimering"
-#    Given "HAH" is already assigned "Optimering"
-#    Then an error message is shown
+#    Given that a worker with the name "Jens Jensen" exists
+#    And that the activity "Optimering" exists
+#    And that the worker is assigned to the activity
+#    When the user chooses the worker
+#    And the user chooses the activity
+#    And the user allocates 10 hours
+#    Then the worker is not assigned the activity
+#    And the user receives an error message "This worker is already assigned to the activity"
 #
-#  Scenario: Assigning a worker who doesn't have enough time
-#    When the user chooses the worker "HAH"
-#    And the user chooses the activity "Optimering"
+#  Scenario: Assigning a worker who has too much time
+#    Given that a worker with the name "Jens Jensen" exists
+#    And that the activity "Optimering" exists
+#    When the user chooses the worker
+#    And the user chooses the activity
 #    And the user allocates "55" hours
-#    Given the worker doesn't have "55" remaining hours
-#    Then an error message is shown
+#    Then the worker doesn't get assigned to the activity
+#    And the user receives an error message "This worker has too many hours allocated"
