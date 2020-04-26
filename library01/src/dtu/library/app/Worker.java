@@ -1,12 +1,14 @@
 package dtu.library.app;
 
 public class Worker {
-	private String name;
+	private String firstname;
+	private String lastname;
 	private String id;
 //	private List<userTime> userTimeList;
 
-	public Worker(String Name, String ID) {
-		this.name = Name;
+	public Worker(String firstname, String lastname , String ID) {
+		this.firstname = firstname;
+		this.lastname = lastname;
 		this.id = ID;
 	}
 
@@ -20,9 +22,9 @@ public class Worker {
 	public String toString() {
 		return "This WORKERS ID is " + id;
 	}
-
-	public String getName() {
-		return name;
-	}
+	
+//	public String getName() {
+//		return name;
+//	}
 
 }

@@ -7,11 +7,13 @@ import java.util.*;
 public class Model {
 	private View view;
 	private ArrayList<Project> projects;
+	private ArrayList<Worker> workers;
 	private Calendar calendar;
 	private DateFormat dateFormat;
 	private Random random;
 	private Project newProject;
 	private Project thisProject;
+	private Worker worker;
 	private Activity thisActivity;
 	private boolean hasProject;
 	private boolean hasActivity;
@@ -20,6 +22,7 @@ public class Model {
 	public Model(View view) {
 		this.view = view;
 		projects = new ArrayList<Project>();
+		workers = new  ArrayList<Worker>();
 		this.calendar = new GregorianCalendar();
 		dateFormat = new SimpleDateFormat("MM-yy");
 		random = new Random();
@@ -48,7 +51,7 @@ public class Model {
 		return null;
 	}
 
-	public String generateID() {
+	public String projectGenerateID() {
 		String date = dateFormat.format(Calendar.getInstance().getTime());
 		String id = date + "-" + random.nextInt(100);
 		while (hasID(id))
@@ -174,7 +177,7 @@ public class Model {
 	}
 
 	public Project createProject(String name) throws OperationNotAllowedException {
-		String id = generateID();
+		String id = projectGenerateID();
 		newProject = new Project(name, id);
 		view.showMessage("Project " + name + " has been created with ID: " + id);
 
@@ -232,6 +235,27 @@ public class Model {
 
 	public void setState(String state) {
 		this.stage = state;
+	}
+
+	public void createWorker(String firstname, String lastname ) {
+		String id = workerGenerateID(firstname, lastname);
+		worker = new Worker(firstname ,lastname, id);
+	}
+
+	private String workerGenerateID(String firstname, String lastname) {
+		String id = ""+firstname.charAt(0)  + lastname.charAt(0) + random.nextInt(100);
+		while (workeHasID(id))
+			id = ""+firstname.charAt(0)  + lastname.charAt(0) + random.nextInt(100);
+		return id;
+	}
+
+	private boolean workeHasID(String id) {
+		for (Worker worker : workers) {
+			if (worker.getId().equals(id)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

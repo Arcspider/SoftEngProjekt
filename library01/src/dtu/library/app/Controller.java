@@ -28,6 +28,8 @@ public class Controller {
 			  }
 		}else if (nextCommand.equals("Get")) {
 			model.changeStage("Project");
+		}else if (nextCommand.equals("Worker")) {
+			model.changeStage("Worker");
 		}
 		
 	}
