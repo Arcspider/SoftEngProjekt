@@ -122,7 +122,7 @@ public class Model {
 	}
 	public void setProjectStart(Project project, String startDate) {
 		if(verifyDateFormat(startDate)) {
-			LocalDate startProjectDate = stringToDate(startDate);		
+			LocalDate startProjectDate = stringToDate(startDate);
 			project.setStartDate(startProjectDate);
 			System.out.println("LocalDate start: " + startProjectDate);
 		}
@@ -134,16 +134,16 @@ public class Model {
 			if(startProjectDate == null) {
 				project.setEndDate(endProjectDate);
 				System.out.println("LocalDate end: " + endProjectDate);
-				
+
 			}else if(endProjectDate.isAfter(startProjectDate)){
 				project.setEndDate(endProjectDate);
 				System.out.println("LocalDate end: " + endProjectDate);
-				
+
 			}else {
 				System.out.println("Date wasn't set, as it was invalid.");
 			}
-				
-			
+
+
 		}
 	}
 
@@ -240,8 +240,12 @@ public class Model {
 	public void setThisActivity(Activity activity) {
 		thisActivity = activity;
 	}
-	
+
 	public void setState(String state) {
 		this.stage = state;
+	}
+
+	public boolean addWorker(Activity activity, String name, String id) throws OperationNotAllowedException {
+		return activity.addWorker(name, id);
 	}
 }

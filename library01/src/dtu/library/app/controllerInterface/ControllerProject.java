@@ -44,11 +44,11 @@ public class ControllerProject {
 			if (nextCommand.equals("Description")) {
 				view.showMessage("Please enter a desired description");
 				editProjectDescription(getThisProject(), getDescription());
-				
+
 			}else if (nextCommand.equals("Name")) {
 				view.showMessage("Please enter the new name");
 				editProjectName(getThisProject(), getCommand());
-				
+
 			}else if(nextCommand.equals("Remove")) {
 				removeProject(getThisProject());
 				setHasProject(false);
@@ -57,17 +57,17 @@ public class ControllerProject {
 			}else if (nextCommand.equals("Add")) {
 				view.showMessage("Please enter a name for the activity");
 				addActivity(getThisProject(), getCommand());
-				
+
 			}else if(nextCommand.equals("Edit")) {
 				changeStage("Activity");
-			
+
 			}
 		}
 	}
 
 	private void addActivity(Project project, String name) throws OperationNotAllowedException {
-		model.addActivity(project,name);	
-		
+		model.addActivity(project,name);
+
 	}
 
 	private boolean getHasProject() {
@@ -80,17 +80,17 @@ public class ControllerProject {
 
 	private void setThisProject(String id) {
 		model.setThisProject(id);
-		
+
 	}
 
 	private void setHasProject(boolean is) {
 		model.setHasProject(is);
-		
+
 	}
 
 	private void changeStage(String stage) {
 		model.changeStage(stage);
-		
+
 	}
 
 	private String getDescription() {

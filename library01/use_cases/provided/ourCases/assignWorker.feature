@@ -7,7 +7,7 @@ Feature: Assign workers to activity
 #    And the user chooses the activity "Optimering"
 #    And the user allocates "55" hours
 #    Then the worker "HAH" is assigned the activity "Optimering" for "55" hours.
-#
+
 #  Scenario: Assigning a worker to an activity which is already assigned.
 #    When the user chooses the worker "HAH"
 #    And the user chooses the activity "Optimering"

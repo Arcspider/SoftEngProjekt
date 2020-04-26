@@ -41,7 +41,7 @@ public class AddActivityTest {
 		project = controller.createProject("tom");
 		project.setId(string);
 	    controller.addProject(project);
-	
+
 	}
 
 	@Given("the user adds activity {string}")

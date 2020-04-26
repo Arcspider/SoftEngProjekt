@@ -17,13 +17,13 @@ public class ProjectTest {
     private View view;
     private Controller controller;
     private ControllerProject controllerProject;
-    
+
     private ErrorMessageHolder errorMessageHolder;
 
     private Project project;
     private String ID;
     private List<Project> projects;
-    
+
 
     public ProjectTest(View view, ErrorMessageHolder errorMessageHolder, Controller controller,ControllerProject controllerProject) {
         this.view = view;
@@ -37,18 +37,18 @@ public class ProjectTest {
         project = controller.createProject(name);
         controller.addProject(project);
     }
-    
+
     @Then("the project with the ID is contained in the list")
     public void theProjectWithTheIDIsContainedInTheList() throws OperationNotAllowedException {
         assertTrue(controller.exists(project.getId()));
-        
+
     }
 
     @Given("a user creates another project with name {string}")
     public void aUserCreatesAnotherProjectWithName(String name) throws OperationNotAllowedException {
           project = controller.createProject(name);
-          
-    } 
+
+    }
 
     @Then("the project is not created")
     public void theProjectIsNotCreated() {
@@ -62,8 +62,8 @@ public class ProjectTest {
     public void theUserReceivesAnErrorMessage(String errorMessage) {
         assertEquals(errorMessage, this.errorMessageHolder.getErrorMessage());
     }
-    
-    
+
+
     @When("the user chooses the project with id of project {string}.")
     public void theUserEditsProjectDescription(String name) throws OperationNotAllowedException {
   	  // Der dannes et nyt projekt siden projekt dataen ikke overlever hop mellem filer.
@@ -71,24 +71,24 @@ public class ProjectTest {
       controller.addProject(project);
 
     }
-    
+
     @And ("the user enters description {string}")
     public void theUserEditsProjectName(String newDescription) throws OperationNotAllowedException {
-    	
+
     	assertTrue(controllerProject.editProjectDescription(project, newDescription));
     }
-    
+
     @Then("the projects description is overwritten with {string}")
     public void theUserhasEditedProjectName(String newDescription) throws OperationNotAllowedException {
         assertEquals(project.getDescription(), newDescription);
     }
-    
+
     @When("the user chooses the project {string} with the id {string}")
     public void theUserChoosesTheProjectWithTheId(String name, String id) throws OperationNotAllowedException {
          project = controller.createProject(name);
          project.setId(id);
          controller.addProject(project);
-    	
+
     }
 
 	@When("the user changes the name to {string}")
