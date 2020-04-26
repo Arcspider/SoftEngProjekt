@@ -116,6 +116,32 @@ public class Model {
 			System.out.println("The date format was invalid.");
 		}
 	}
+	public void setProjectStart(Project project, String startDate) {
+		if(verifyDateFormat(startDate)) {
+			LocalDate startProjectDate = stringToDate(startDate);		
+			project.setStartDate(startProjectDate);
+			System.out.println("LocalDate start: " + startProjectDate);
+		}
+	}
+	public void setProjectEnd(Project project, String endDate) {
+		if(verifyDateFormat(endDate)) {
+			LocalDate startProjectDate = project.getStartDate();
+			LocalDate endProjectDate = stringToDate(endDate);
+			if(startProjectDate == null) {
+				project.setEndDate(endProjectDate);
+				System.out.println("LocalDate end: " + endProjectDate);
+				
+			}else if(endProjectDate.isAfter(startProjectDate)){
+				project.setEndDate(endProjectDate);
+				System.out.println("LocalDate end: " + endProjectDate);
+				
+			}else {
+				System.out.println("Date wasn't set, as it was invalid.");
+			}
+				
+			
+		}
+	}
 
 	public LocalDate stringToDate(String toBeConverted) {
 		String[] stringDate = toBeConverted.split(" ");
