@@ -33,7 +33,7 @@ public class View {
 			while (model.getStage().equals("Project")) {
 				controllerProject.runCommand();
 			}
-			while(model.getStage().equals("Activity")) {	
+			while(model.getStage().equals("Activity")) {
 				controllerActivity.runCommand();
 			}
 		}

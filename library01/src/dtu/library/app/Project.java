@@ -13,7 +13,9 @@ public class Project implements datesInterface {
     public Project(String name, String id) {
         this.name = name;
         this.id = id;
-        description = "not yet written";
+        this.startDate = null;
+        this.endDate = null;
+        description = "";
         activities = new ArrayList<Activity>();
     }
 
@@ -63,11 +65,11 @@ public class Project implements datesInterface {
     public boolean isOverdue() {
 		return endDate.compareTo(startDate) != 0 && endDate.compareTo(startDate) >= 0;
 	}
-
+    @Override
     public void setStartDate(LocalDate startProjectDate) {
         startDate = startProjectDate;
     }
-
+    @Override
     public void setEndDate(LocalDate endProjectDate) {
         endDate = endProjectDate;
     }

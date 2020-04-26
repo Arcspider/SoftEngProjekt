@@ -120,6 +120,32 @@ public class Model {
 			System.out.println("The date format was invalid.");
 		}
 	}
+	public void setProjectStart(Project project, String startDate) {
+		if(verifyDateFormat(startDate)) {
+			LocalDate startProjectDate = stringToDate(startDate);		
+			project.setStartDate(startProjectDate);
+			System.out.println("LocalDate start: " + startProjectDate);
+		}
+	}
+	public void setProjectEnd(Project project, String endDate) {
+		if(verifyDateFormat(endDate)) {
+			LocalDate startProjectDate = project.getStartDate();
+			LocalDate endProjectDate = stringToDate(endDate);
+			if(startProjectDate == null) {
+				project.setEndDate(endProjectDate);
+				System.out.println("LocalDate end: " + endProjectDate);
+				
+			}else if(endProjectDate.isAfter(startProjectDate)){
+				project.setEndDate(endProjectDate);
+				System.out.println("LocalDate end: " + endProjectDate);
+				
+			}else {
+				System.out.println("Date wasn't set, as it was invalid.");
+			}
+				
+			
+		}
+	}
 
 	public LocalDate stringToDate(String toBeConverted) {
 		String[] stringDate = toBeConverted.split(" ");
@@ -139,8 +165,9 @@ public class Model {
 		int weekInt = Integer.parseInt(stringDate[1]);
 		int yearInt = Integer.parseInt(stringDate[3]);
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-		//Årstallene man arbejder indenfor er 50 år
-		if(yearInt+50 >= currentYear || yearInt-50 <= currentYear  ) {
+		int difference = yearInt-currentYear;
+		//�rstallene man arbejder indenfor er 50 �r
+		if(difference >=-50 && difference <= 50  ) {
 			if(weekInt > 0 && weekInt <= 52) {
 				return true;
 			}
@@ -160,9 +187,9 @@ public class Model {
 	public Project createProject(String name) throws OperationNotAllowedException {
 		String id = generateID();
 		newProject = new Project(name, id);
-		view.showMessage("Project " + name + " has been created with ID: " + id);
+	    view.showMessage("Project " + name  + " has been created with ID: " + id);
 
-		return newProject;
+	    return newProject;
 	}
 
 	public void changeStage(String stage) {

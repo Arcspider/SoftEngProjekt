@@ -108,7 +108,8 @@ public class ProjectTest {
 
     @Then("the projects start and end dates are changed to {string} and {string}")
     public void theProjectsStartAndEndDatesAreChangedToAnd(String startDate, String endDate) {
-        controllerProject.setProjectTime(project, startDate, endDate);
+    	controllerProject.setProjectStart(project, startDate);
+    	controllerProject.setProjectEnd(project, endDate);
         assertEquals(project.getStartDate().toString(),controllerProject.getProjectStart(project).toString());
         assertEquals(project.getEndDate().toString(),controllerProject.getProjectEnd(project).toString());
     }

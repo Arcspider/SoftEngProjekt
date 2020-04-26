@@ -7,4 +7,6 @@ public interface datesInterface {
     public LocalDate getStartDate();
     public LocalDate getEndDate();
     public boolean isOverdue();
+    public void setStartDate(LocalDate startDate);
+    public void setEndDate(LocalDate endDate);
 }

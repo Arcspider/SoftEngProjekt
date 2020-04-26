@@ -132,4 +132,12 @@ public class ControllerProject {
 	public boolean validDate(String someDate) {
 		return model.verifyDateFormat(someDate);
 	}
+
+	public void setProjectStart(Project project, String startDate) {
+		model.setProjectStart(project, startDate);
+	}
+
+	public void setProjectEnd(Project project, String endDate) {
+		model.setProjectEnd(project, endDate);
+	}
 }
