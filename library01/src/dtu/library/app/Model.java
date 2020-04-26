@@ -102,49 +102,38 @@ public class Model {
 		}
 	}
 
-	public void setProjectDates(Project project, String startDate, String endDate) {
-		if(verifyDateFormat(startDate) && verifyDateFormat(endDate)) {
-
-			LocalDate startProjectDate = stringToDate(startDate);
-			LocalDate endProjectDate = stringToDate(endDate);
-			if(endProjectDate.isAfter(startProjectDate)) {
-				project.setStartDate(startProjectDate);
-				project.setEndDate(endProjectDate);
-
-				System.out.println("LocalDate start: " + startProjectDate);
-				System.out.println("LocalDate end: " + endProjectDate);
-			} else {
-				System.out.println("The indicated start of the project is before the indicated end.");
-			}
-		}else {
-			System.out.println("The date format was invalid.");
-		}
-	}
 	public void setProjectStart(Project project, String startDate) {
-		if(verifyDateFormat(startDate)) {
-			LocalDate startProjectDate = stringToDate(startDate);		
+		if (verifyDateFormat(startDate)) {
+			LocalDate startProjectDate = stringToDate(startDate);
 			project.setStartDate(startProjectDate);
 			System.out.println("LocalDate start: " + startProjectDate);
 		}
 	}
+
 	public void setProjectEnd(Project project, String endDate) {
-		if(verifyDateFormat(endDate)) {
+		if (verifyDateFormat(endDate)) {
 			LocalDate startProjectDate = project.getStartDate();
 			LocalDate endProjectDate = stringToDate(endDate);
-			if(startProjectDate == null) {
+			if (startProjectDate == null) {
 				project.setEndDate(endProjectDate);
 				System.out.println("LocalDate end: " + endProjectDate);
-				
-			}else if(endProjectDate.isAfter(startProjectDate)){
+
+			} else if (endProjectDate.isAfter(startProjectDate)) {
 				project.setEndDate(endProjectDate);
 				System.out.println("LocalDate end: " + endProjectDate);
-				
-			}else {
+
+			} else {
 				System.out.println("Date wasn't set, as it was invalid.");
 			}
-				
+
+		}
+	}
+
+	public void setActivityStart(Project project, String startDate) {
+		if (verifyDateFormat(startDate)) {
 			
 		}
+
 	}
 
 	public LocalDate stringToDate(String toBeConverted) {
@@ -155,7 +144,7 @@ public class Model {
 		Calendar cldStart = Calendar.getInstance();
 		cldStart.set(Calendar.YEAR, yearInt);
 		cldStart.set(Calendar.WEEK_OF_YEAR, weekInt);
-		LocalDate finalDate = LocalDate.of(yearInt,cldStart.get(Calendar.MONTH)+1,cldStart.get(Calendar.DATE));
+		LocalDate finalDate = LocalDate.of(yearInt, cldStart.get(Calendar.MONTH) + 1, cldStart.get(Calendar.DATE));
 		return finalDate;
 
 	}
@@ -165,10 +154,10 @@ public class Model {
 		int weekInt = Integer.parseInt(stringDate[1]);
 		int yearInt = Integer.parseInt(stringDate[3]);
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-		int difference = yearInt-currentYear;
-		//�rstallene man arbejder indenfor er 50 �r
-		if(difference >=-50 && difference <= 50  ) {
-			if(weekInt > 0 && weekInt <= 52) {
+		int difference = yearInt - currentYear;
+		// �rstallene man arbejder indenfor er 50 �r
+		if (difference >= -50 && difference <= 50) {
+			if (weekInt > 0 && weekInt <= 52) {
 				return true;
 			}
 		}
@@ -187,9 +176,9 @@ public class Model {
 	public Project createProject(String name) throws OperationNotAllowedException {
 		String id = generateID();
 		newProject = new Project(name, id);
-	    view.showMessage("Project " + name  + " has been created with ID: " + id);
+		view.showMessage("Project " + name + " has been created with ID: " + id);
 
-	    return newProject;
+		return newProject;
 	}
 
 	public void changeStage(String stage) {
@@ -240,8 +229,9 @@ public class Model {
 	public void setThisActivity(Activity activity) {
 		thisActivity = activity;
 	}
-	
+
 	public void setState(String state) {
 		this.stage = state;
 	}
+
 }
