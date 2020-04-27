@@ -26,9 +26,9 @@ public class Controller {
 			  if(checkName(name)) {
 			    	addProject(newProject);
 			  }
-		}else if (nextCommand.equals("Get")) {
+		} else if (nextCommand.equals("Get")) {
 			model.changeStage("Project");
-		}else if (nextCommand.equals("Worker")) {
+		} else if (nextCommand.equals("Worker")) {
 			model.changeStage("Worker");
 		}
 		

@@ -37,7 +37,7 @@ public class ControllerProject {
 			} else {
 				setHasProject(true);
 				setThisProject(id);
-				view.showProjectIntroduction(getThisProject());
+				view.showAvailableCommands(model.getStage());
 			}
 		}else if (getHasProject()) {
 			String nextCommand = getCommand();
@@ -60,7 +60,11 @@ public class ControllerProject {
 				
 			}else if(nextCommand.equals("Edit")) {
 				changeStage("Activity");
-			
+				
+			}else if(nextCommand.equals("Back")) {
+				changeStage("Application");
+				setHasProject(false);
+				view.showAvailableCommands(model.getStage());
 			}
 		}
 	}
