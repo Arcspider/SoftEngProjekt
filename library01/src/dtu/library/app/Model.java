@@ -24,6 +24,7 @@ public class Model {
 		dateFormat = new SimpleDateFormat("MM-yy");
 		random = new Random();
 		stage = "Application";
+		//TODO ændre variabel navnene til noget fornuftigt, så det ikke er i konflikt med om et project har en aktivitet osv.
 		hasProject = false;
 		hasActivity = false;
 	}
@@ -114,14 +115,9 @@ public class Model {
 		if (verifyDateFormat(endDate)) {
 			LocalDate startProjectDate = project.getStartDate();
 			LocalDate endProjectDate = stringToDate(endDate);
-			if (startProjectDate == null) {
+			if (startProjectDate == null || endProjectDate.isAfter(startProjectDate)) {
 				project.setEndDate(endProjectDate);
 				System.out.println("LocalDate end: " + endProjectDate);
-
-			} else if (endProjectDate.isAfter(startProjectDate)) {
-				project.setEndDate(endProjectDate);
-				System.out.println("LocalDate end: " + endProjectDate);
-
 			} else {
 				System.out.println("Date wasn't set, as it was invalid.");
 			}
@@ -129,112 +125,132 @@ public class Model {
 		}
 	}
 
-	public void setActivityStart(Project project, String startDate) {
+	public void setActivityStart(Project project, String startDate,String activityName) {
+		Activity currentActivity = project.getActivity(activityName);
+		System.out.println("This is the current activity " + currentActivity);
+		LocalDate startActivityDate = project.getStartDate();
+		LocalDate endActivityDate = project.getEndDate();
 		if (verifyDateFormat(startDate)) {
-
+			if(endActivityDate == null || startActivityDate.isBefore(endActivityDate)) {				
+				LocalDate newStart = stringToDate(startDate);
+				project.setActivityStartDate(currentActivity,newStart);
+			}else System.out.println("Date wasn't set, as it was invalid."); 
 		}
-
 	}
-
-	public LocalDate stringToDate(String toBeConverted) {
-		String[] stringDate = toBeConverted.split(" ");
-		int weekInt = Integer.parseInt(stringDate[1]);
-		int yearInt = Integer.parseInt(stringDate[3]);
-
-		Calendar cldStart = Calendar.getInstance();
-		cldStart.set(Calendar.YEAR, yearInt);
-		cldStart.set(Calendar.WEEK_OF_YEAR, weekInt);
-		LocalDate finalDate = LocalDate.of(yearInt, cldStart.get(Calendar.MONTH) + 1, cldStart.get(Calendar.DATE));
-		return finalDate;
-
-	}
-
-	public boolean verifyDateFormat(String dateToVerify) {
-		String[] stringDate = dateToVerify.split(" ");
-		int weekInt = Integer.parseInt(stringDate[1]);
-		int yearInt = Integer.parseInt(stringDate[3]);
-		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-		int difference = yearInt - currentYear;
-		// ï¿½rstallene man arbejder indenfor er 50 ï¿½r
-		if (difference >= -50 && difference <= 50) {
-			if (weekInt > 0 && weekInt <= 52) {
-				return true;
-			}
+	public void setActivityEnd(Project project, String endDate, String activityName) {
+		Activity currentActivity = project.getActivity(activityName);
+		LocalDate startActivityDate = project.getStartDate();
+		LocalDate endActivityDate = project.getEndDate();
+		if (verifyDateFormat(endDate)) {
+			if(endActivityDate == null || startActivityDate.isBefore(endActivityDate)) {				
+				LocalDate newEnd = stringToDate(endDate);
+				project.setActivityEndDate(currentActivity,newEnd);
+			}else System.out.println("Date wasn't set, as it was invalid."); 
 		}
-
-		return false;
 	}
 
-	public LocalDate getProjectStart(Project project) {
-		return project.getStartDate();
+
+public LocalDate stringToDate(String toBeConverted) {
+	String[] stringDate = toBeConverted.split(" ");
+	int weekInt = Integer.parseInt(stringDate[1]);
+	int yearInt = Integer.parseInt(stringDate[3]);
+
+	Calendar cldStart = Calendar.getInstance();
+	cldStart.set(Calendar.YEAR, yearInt);
+	cldStart.set(Calendar.WEEK_OF_YEAR, weekInt);
+	LocalDate finalDate = LocalDate.of(yearInt, cldStart.get(Calendar.MONTH) + 1, cldStart.get(Calendar.DATE));
+	return finalDate;
+
+}
+
+public boolean verifyDateFormat(String dateToVerify) {
+	String[] stringDate = dateToVerify.split(" ");
+	int weekInt = Integer.parseInt(stringDate[1]);
+	int yearInt = Integer.parseInt(stringDate[3]);
+	int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+	int difference = yearInt - currentYear;
+	// ï¿½rstallene man arbejder indenfor er 50 ï¿½r
+	if (difference >= -50 && difference <= 50) {
+		if (weekInt > 0 && weekInt <= 52) {
+			return true;
+		}
 	}
 
-	public LocalDate getProjectEnd(Project project) {
-		return project.getEndDate();
-	}
+	return false;
+}
 
-	public Project createProject(String name) throws OperationNotAllowedException {
-		String id = generateID();
-		newProject = new Project(name, id);
-		view.showMessage("Project " + name + " has been created with ID: " + id);
+public LocalDate getProjectStart(Project project) {
+	return project.getStartDate();
+}
 
-		return newProject;
-	}
+public LocalDate getProjectEnd(Project project) {
+	return project.getEndDate();
+}
 
-	public void changeStage(String stage) {
-		this.stage = stage;
-	}
+public Project createProject(String name) throws OperationNotAllowedException {
+	String id = generateID();
+	newProject = new Project(name, id);
+	view.showMessage("Project " + name + " has been created with ID: " + id);
 
-	public String getStage() {
-		return stage;
-	}
+	return newProject;
+}
 
-	public void setHasProject(boolean is) {
-		hasProject = is;
-	}
+public void changeStage(String stage) {
+	this.stage = stage;
+}
 
-	public boolean getHasProject() {
-		return hasProject;
-	}
+public String getStage() {
+	return stage;
+}
 
-	public void setThisProject(String id) {
-		thisProject = getProject(id);
-	}
+public void setHasProject(boolean is) {
+	hasProject = is;
+}
 
-	public Project getThisProject() {
-		return thisProject;
-	}
+public boolean getHasProject() {
+	return hasProject;
+}
 
-	public boolean addActivity(Project project, String name) throws OperationNotAllowedException {
-		return project.addActivity(name);
-	}
+public void setThisProject(String id) {
+	thisProject = getProject(id);
+}
 
-	public boolean getHasActiviy() {
-		return hasActivity;
-	}
+public Project getThisProject() {
+	return thisProject;
+}
 
-	public boolean activityExists(Project project, String name) {
-		return project.hasActivity(name);
-	}
+public boolean addActivity(Project project, String name) throws OperationNotAllowedException {
+	return project.addActivity(name);
+}
 
-	public void setHasActivity(boolean b) {
-		hasActivity = b;
+public boolean hasActiviy() {
+	return hasActivity;
+}
 
-	}
+public boolean activityExists(Project project, String name) {
+	return project.hasActivity(name);
+}
 
-	public Activity getActivity(Project project, String name) {
-		return project.getActivity(name);
-	}
+public void setHasActivity(boolean b) {
+	hasActivity = b;
 
-	public void setThisActivity(Activity activity) {
-		thisActivity = activity;
-	}
+}
 
-	public void setState(String state) {
-		this.stage = state;
-	}
+public Activity getActivity(Project project, String name) {
+	return project.getActivity(name);
+}
 
-	public boolean addWorker(Activity activity, String name, String id) throws OperationNotAllowedException {
-		return activity.addWorker(name, id);
-	}
+public void setThisActivity(Activity activity) {
+	thisActivity = activity;
+}
+
+public void setState(String state) {
+	this.stage = state;
+}
+
+public boolean addWorker(Activity activity, String name, String id) throws OperationNotAllowedException {
+	return activity.addWorker(name, id);
+}
+
+
 }

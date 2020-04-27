@@ -20,7 +20,7 @@ public class ControllerActivity {
 	}
 
 	public void runCommand() throws OperationNotAllowedException {
-		if(! getHasActivity()) {
+		if(! hasActivity()) {
 			String name = getCommand();
 			if(!activityExists(getThisProject(),name)) {
 				changeStage("Project");
@@ -57,8 +57,8 @@ public class ControllerActivity {
 		return model.activityExists(project, name);
 	}
 
-	private boolean getHasActivity() {
-		return model.getHasActiviy();
+	private boolean hasActivity() {
+		return model.hasActiviy();
 	}
 
 	private String getCommand() {
@@ -75,5 +75,18 @@ public class ControllerActivity {
 
 	public boolean addActivity(String string, Project project) throws OperationNotAllowedException {
 		 return model.addActivity(project, string);
+	}
+
+	public boolean validDate(String startDate) {
+		return model.verifyDateFormat(startDate);
+	}
+
+	public void setActivityStart(Project project, String activity, String startDate) {
+		model.setActivityStart(project,startDate, activity);
+	}
+
+	public void setActivityEnd(Project project, String activity, String endDate) {
+		 model.setActivityEnd(project,endDate,activity);
+		
 	}
 }

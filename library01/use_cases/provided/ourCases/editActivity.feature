@@ -2,10 +2,10 @@ Feature: edit activity
     Description: A user edits an activity in a project
     Actor: User
 
-#Scenario: The user edits an activity
-#    Given a project with id "030901" has and activity "Beta"
- #   When the user inputs start date 04/04 and end date 08/05
- #   Then set the start and end date for the activity 
+Scenario: The user edits an activity
+    Given a project with id "030901" has and activity "Beta"
+    When the user inputs start date "week 40 year 2020" and end date "week 42 year 2020"
+    Then set the start to "week 40 year 2020" and end date to "week 42 year 2020" for the activity "PROJEKT MED STORT SÅ JEG ER NEM AT FINDE" 
     
 #Scenario: End date is before start date
 #    Given a project with id "030901" has and activity "Beta"

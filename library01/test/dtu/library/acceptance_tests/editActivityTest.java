@@ -38,19 +38,28 @@ public class editActivityTest {
 	}
 	@Given("a project with id {string} has and activity {string}")
 	public void aProjectWithIdHasAndActivity(String id, String name) throws OperationNotAllowedException {
-	    project = controller.createProject(name);
+	    project = controller.createProject("TESTNAME");
 	    project.setId(id);
 	    controller.addProject(project);
 	    controllerActivity.addActivity(name, project);
-	}
-	@Given("project was start date {string} and end date {string}")
-	public void projectWasStartDateAndEndDate(String startDate, String endDate) {
-		controllerProject.setProjectStart(project, startDate);
-    	controllerProject.setProjectEnd(project, endDate);
-
+	    assertTrue(project.hasActivity(name));
 	}
 	@When("the user inputs start date {string} and end date {string}")
-	public void theUserInputsStartDateAndEndDate(String startDate, String string2) {
-
+	public void theUserInputsStartDateAndEndDate(String startDate, String endDate) {
+		assertTrue((controllerActivity.validDate(startDate) && controllerActivity.validDate(endDate)));
 	}
+	
+	@Then("set the start to {string} and end date to {string} for the activity {string}")
+	public void setTheStartToAndEndDateToForTheActivity(String startDate, String endDate, String activity) throws OperationNotAllowedException {
+		project = controller.createProject("TESTNAME");
+	    project.setId("030303");
+	    controller.addProject(project);
+	    controllerActivity.addActivity(activity, project);
+	    
+	    
+		controllerActivity.setActivityStart(project,activity, startDate);
+		controllerActivity.setActivityEnd(project,activity, endDate);
+	}
+
+
 }

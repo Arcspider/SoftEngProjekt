@@ -107,7 +107,7 @@ public class ProjectTest {
     }
 
     @Then("the projects start and end dates are changed to {string} and {string}")
-    public void theProjectsStartAndEndDatesAreChangedToAnd(String startDate, String endDate) {
+    public void theProjectsStartAndEndDatesAreChangedToAnd(String startDate, String endDate) throws OperationNotAllowedException {
     	controllerProject.setProjectStart(project, startDate);
     	controllerProject.setProjectEnd(project, endDate);
         assertEquals(project.getStartDate().toString(),controllerProject.getProjectStart(project).toString());
