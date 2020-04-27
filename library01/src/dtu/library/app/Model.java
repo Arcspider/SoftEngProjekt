@@ -124,12 +124,11 @@ public class Model {
 			} else {
 				System.out.println("Date wasn't set, as it was invalid.");
 			}
-
+ 
 		}
 	}
-
-	public void setActivityStart(Project project, String startDate,String activityName) throws OperationNotAllowedException {
-		Activity currentActivity = project.getActivity(activityName);
+ 
+	public void setActivityStart(Project project,Activity currentActivity, String startDate) throws OperationNotAllowedException {
 		System.out.println("This is the current activity " + currentActivity);
 		LocalDate startActivityDate = project.getStartDate();
 		LocalDate endActivityDate = project.getEndDate();
@@ -140,8 +139,7 @@ public class Model {
 			}else throw new OperationNotAllowedException("End date is before start date");
 		}
 	}
-	public void setActivityEnd(Project project, String endDate, String activityName) throws OperationNotAllowedException {
-		Activity currentActivity = project.getActivity(activityName);
+	public void setActivityEnd(Project project,Activity currentActivity, String endDate) throws OperationNotAllowedException {
 		LocalDate startActivityDate = project.getStartDate();
 		LocalDate endActivityDate = project.getEndDate();
 		if (verifyDateFormat(endDate)) {

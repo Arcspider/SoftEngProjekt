@@ -33,29 +33,29 @@ public class editActivityTest {
 	}
 	@Given("a project with id {string} has and activity {string}")
 	public void aProjectWithIdHasAndActivity(String id, String name) throws OperationNotAllowedException {
-		project = controller.createProject("TESTNAME");
-		project.setId(id);
-		controller.addProject(project);
-		controllerActivity.addActivity(name, project);
+		project = model.createProject("TESTNAME"); 
+		project.setId(id); 
+		model.addProject(project);
+		model.addActivity(project, name);
 		assertTrue(project.hasActivity(name));
 	}
 	@When("the user inputs start date {string} and end date {string}")
 	public void theUserInputsStartDateAndEndDate(String startDate, String endDate) {
 		this.startDate = startDate;
 		this.endDate = endDate;
-		assertTrue((controllerActivity.validDate(startDate) && controllerActivity.validDate(endDate)));
+		assertTrue((model.verifyDateFormat(startDate) && model.verifyDateFormat(endDate)));
 	}
 
 	@Then("set the start to {string} and end date to {string} for the activity {string}")
 	public void setTheStartToAndEndDateToForTheActivity(String startDate, String endDate, String activity) throws OperationNotAllowedException {
-		project = controller.createProject("TESTNAME");
+		project = model.createProject("TESTNAME");
 		project.setId("030303");
-		controller.addProject(project);
-		controllerActivity.addActivity(activity, project);
+		model.addProject(project);
+		model.addActivity(project, activity);
+		currentActivity = model.getActivity(project, activity);
 
-
-		controllerActivity.setActivityStart(project,activity, startDate);
-		controllerActivity.setActivityEnd(project,activity, endDate);
+		model.setActivityStart(project,currentActivity, startDate);
+		model.setActivityEnd(project,currentActivity, endDate);
 		currentActivity = model.getActivity(project, activity);
 		assertEquals(model.stringToDate(startDate), currentActivity.getStartDate());
 		assertEquals(model.stringToDate(endDate), currentActivity.getEndDate());
@@ -64,15 +64,15 @@ public class editActivityTest {
 	}
 	@Then("an error message {string} is given for the activity")
 	public void anErrorMessageIsGivenForTheActivity(String string) throws OperationNotAllowedException {
-		project = controller.createProject("TESTNAME");
+		project = model.createProject("TESTNAME");
 		project.setId("030303");
-		controller.addProject(project);
-		controllerActivity.addActivity("testActivity", project);
+		model.addProject(project);
+		model.addActivity(project, "testActivity");
 		currentActivity = model.getActivity(project, "testActivity");
 
 		try {
-			model.setActivityStart(project, startDate, "testActivity");
-			model.setActivityEnd(project, endDate, "testActivity");
+			model.setActivityStart(project, currentActivity,startDate);
+			model.setActivityEnd(project,currentActivity ,endDate);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 			assertEquals(errorMessageHolder.getErrorMessage(), string);
