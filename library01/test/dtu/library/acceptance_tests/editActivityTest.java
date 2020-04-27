@@ -33,9 +33,9 @@ public class editActivityTest {
 	}
 	@Given("a project with id {string} has and activity {string}")
 	public void aProjectWithIdHasAndActivity(String id, String name) throws OperationNotAllowedException {
-		project = controller.createProject("TESTNAME");
+		project = model.createProject("TESTNAME");
 		project.setId(id);
-		controller.addProject(project);
+		model.addProject(project);
 		model.addActivity(project, name);
 		assertTrue(project.hasActivity(name));
 	}
@@ -54,8 +54,8 @@ public class editActivityTest {
 		model.addActivity(project, activity);
 
 
-		model.setActivityStart(project,startDate, activity);
-		model.setActivityEnd(project,endDate, activity);
+		model.setActivityStart(project,model.getActivity(project, activity), startDate);
+		model.setActivityEnd(project,model.getActivity(project, activity), endDate);
 		currentActivity = model.getActivity(project, activity);
 		assertEquals(model.stringToDate(startDate), currentActivity.getStartDate());
 		assertEquals(model.stringToDate(endDate), currentActivity.getEndDate());
