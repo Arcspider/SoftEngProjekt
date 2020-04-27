@@ -249,9 +249,9 @@ public void setState(String state) {
 	this.stage = state;
 }
 
-public boolean addWorker(Activity activity, String name, String id) throws OperationNotAllowedException {
-	return activity.addWorker(name, id);
-}
+//public boolean addWorker(Activity activity, String name, String id) throws OperationNotAllowedException {
+//	return activity.addWorker(name, id);
+//}
 
 
 	public Worker createWorker(String firstname, String lastname ) {
