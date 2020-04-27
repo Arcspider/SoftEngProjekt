@@ -25,5 +25,5 @@ Feature: Assign workers to activity
 #    When the user chooses the worker
 #    And the user chooses the activity
 #    And the user allocates "55" hours
-#    Then the worker doesn't get assigned to the activity
-#    And the user receives an error message "This worker has too many hours allocated"
+#    Given the worker doesn't have "55" remaining hours
+#    Then an error message is shown

@@ -15,7 +15,7 @@ public class Project implements datesInterface {
         this.id = id;
         this.startDate = null;
         this.endDate = null;
-        description = "";
+        description = "Description yet to be written";
         activities = new ArrayList<Activity>();
     }
 
@@ -74,32 +74,40 @@ public class Project implements datesInterface {
         endDate = endProjectDate;
     }
 
-	public boolean addActivity(String name) throws OperationNotAllowedException {
-		if (!hasActivity(name)) {
-			activities.add(new Activity(name));
-			System.out.println("Added activity " + name + " to project " + this.name);
+	public boolean addActivity(String activityName) throws OperationNotAllowedException {
+		if (!hasActivity(activityName)) {
+			activities.add(new Activity(activityName));
+			System.out.println("Added activity " + activityName+ " to project " + this.name);
 			return true;
 		}
 		throw new OperationNotAllowedException("The project already has an activity with the name " + name);
 	}
 
-	public boolean hasActivity(String name) {
+	public boolean hasActivity(String activityName) {
 		for (Activity currentActivity : activities) {
 			String currentId = currentActivity.getName();
-			if (currentId.equals(name)) {
+			if (currentId.equals(activityName)) {
 				return true;
 			} 
 		}
 		return false;
 	}
 
-	public Activity getActivity(String name2) {
+	public Activity getActivity(String activityName) {
 		for (Activity currentActivity : activities) {
-			String currentId = currentActivity.getName();
-			if (currentId.equals(name)) {
+			String currentName = currentActivity.getName();
+			if (currentName.equals(activityName)) {
 				return currentActivity;
 			}
 		}
 		return null;
+	}
+
+	public void setActivityStartDate(Activity currentActivity, LocalDate startDate) {
+		currentActivity.setStartDate(startDate);
+	}
+
+	public void setActivityEndDate(Activity currentActivity, LocalDate newEnd) {
+		currentActivity.setEndDate(newEnd);
 	}
 }
