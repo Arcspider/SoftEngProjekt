@@ -81,11 +81,11 @@ public class ControllerActivity {
 		return model.verifyDateFormat(startDate);
 	}
 
-	public void setActivityStart(Project project, String activity, String startDate) {
+	public void setActivityStart(Project project, String activity, String startDate) throws OperationNotAllowedException {
 		model.setActivityStart(project,startDate, activity);
 	}
 
-	public void setActivityEnd(Project project, String activity, String endDate) {
+	public void setActivityEnd(Project project, String activity, String endDate) throws OperationNotAllowedException {
 		 model.setActivityEnd(project,endDate,activity);
 		
 	}

@@ -128,7 +128,7 @@ public class Model {
 		}
 	}
 
-	public void setActivityStart(Project project, String startDate,String activityName) {
+	public void setActivityStart(Project project, String startDate,String activityName) throws OperationNotAllowedException {
 		Activity currentActivity = project.getActivity(activityName);
 		System.out.println("This is the current activity " + currentActivity);
 		LocalDate startActivityDate = project.getStartDate();
@@ -137,10 +137,10 @@ public class Model {
 			if(endActivityDate == null || startActivityDate.isBefore(endActivityDate)) {
 				LocalDate newStart = stringToDate(startDate);
 				project.setActivityStartDate(currentActivity,newStart);
-			}else System.out.println("Date wasn't set, as it was invalid.");
+			}else throw new OperationNotAllowedException("End date is before start date");
 		}
 	}
-	public void setActivityEnd(Project project, String endDate, String activityName) {
+	public void setActivityEnd(Project project, String endDate, String activityName) throws OperationNotAllowedException {
 		Activity currentActivity = project.getActivity(activityName);
 		LocalDate startActivityDate = project.getStartDate();
 		LocalDate endActivityDate = project.getEndDate();
@@ -148,7 +148,7 @@ public class Model {
 			if(endActivityDate == null || startActivityDate.isBefore(endActivityDate)) {
 				LocalDate newEnd = stringToDate(endDate);
 				project.setActivityEndDate(currentActivity,newEnd);
-			}else System.out.println("Date wasn't set, as it was invalid.");
+			}else throw new OperationNotAllowedException("Start date is after end date");
 		}
 	}
 
@@ -191,7 +191,7 @@ public LocalDate getProjectEnd(Project project) {
 }
 
 public Project createProject(String name) throws OperationNotAllowedException {
-	String id = generateID();
+	String id = projectGenerateID();
 	newProject = new Project(name, id);
 	view.showMessage("Project " + name + " has been created with ID: " + id);
 

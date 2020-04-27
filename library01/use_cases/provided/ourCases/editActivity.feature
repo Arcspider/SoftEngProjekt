@@ -5,9 +5,9 @@ Feature: edit activity
 Scenario: The user edits an activity
     Given a project with id "030901" has and activity "Beta"
     When the user inputs start date "week 40 year 2020" and end date "week 42 year 2020"
-    Then set the start to "week 40 year 2020" and end date to "week 42 year 2020" for the activity "PROJEKT MED STORT SÅ JEG ER NEM AT FINDE" 
+    Then set the start to "week 40 year 2020" and end date to "week 42 year 2020" for the activity "Beta" 
     
-#Scenario: End date is before start date
-#    Given a project with id "030901" has and activity "Beta"
-#   When the user inputs start date 04/04 and end date 04/03
-#    Then an error message "End date is before start date" is given 
+Scenario: End date is before start date
+    Given a project with id "030901" has and activity "Beta"
+   When the user inputs start date "week 42 year 2020" and end date "week 40 year 2020"
+    Then an error message "End date is before start date" is given for the activity 
