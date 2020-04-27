@@ -52,11 +52,10 @@ public class editActivityTest {
 		project.setId("030303");
 		model.addProject(project);
 		model.addActivity(project, activity);
-
-
-		model.setActivityStart(project,model.getActivity(project, activity), startDate);
-		model.setActivityEnd(project,model.getActivity(project, activity), endDate);
 		currentActivity = model.getActivity(project, activity);
+
+		model.setActivityStart(project,currentActivity, startDate);
+		model.setActivityEnd(project,currentActivity, endDate);
 		assertEquals(model.stringToDate(startDate), currentActivity.getStartDate());
 		assertEquals(model.stringToDate(endDate), currentActivity.getEndDate());
 
@@ -99,7 +98,7 @@ public class editActivityTest {
 	@Then("the activitys name is changed to {string}")
 	public void theActivitysNameIsChangedTo(String newActivityName) {
 		try{
-			model.changeActivityName(project,currentActivity.getName(),newActivityName);
+			model.changeActivityName(project,currentActivity,newActivityName);
 			assertEquals(currentActivity.getName(), newActivityName);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
@@ -114,7 +113,7 @@ public class editActivityTest {
 	@Then("the activitys description is changed to {string}")
 	public void theActivitysDescriptionIsChangedTo(String newDescription) {
 		try{
-			model.changeActivityDescription(project,currentActivity.getName(),newDescription);
+			model.changeActivityDescription(project,currentActivity,newDescription);
 			assertEquals(currentActivity.getDescription(), newDescription);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());

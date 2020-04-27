@@ -33,17 +33,15 @@ public class ControllerActivity {
 			}
 		}else{
 			String nextCommand = getCommand();
-			if(nextCommand.equals("Time")) {
+			if (nextCommand.equals("Time")) {
 				System.out.println("time");
 				nextCommand = getCommand();
-				if(nextCommand.equals("Start")) {System.out.println("test 1");
-					setActivityStart(getThisProject(),getThisActivity(),timeHanlder.nextLine());
-					
-				}else if(nextCommand.equals("End")) {
-					setActivityEnd(getThisProject(),getThisActivity(),timeHanlder.nextLine());
-					System.out.println("test 2");
+				if (nextCommand.equals("Start")) {
+					setActivityStart(getThisProject(), getThisActivity(), timeHanlder.nextLine());
+
+				} else if (nextCommand.equals("End")) {
+					setActivityEnd(getThisProject(), getThisActivity(), timeHanlder.nextLine());
 				}
-				
 			}
 		}
 	}

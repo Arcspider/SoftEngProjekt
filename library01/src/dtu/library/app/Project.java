@@ -20,8 +20,8 @@ public class Project implements datesInterface {
     }
 
 	public String toString() {
-		//return "This project is named \"" + name + "\" with the description \"" + description + "\" and id: \"" + id + "\"";
-		return "nemed " + name + " StartTime " + startDate + " EndTime " + endDate; 
+		return "This project is named \"" + name + "\" with the description \"" + description + "\" and id: \"" + id + "\"";
+		
 	}
 
     public Project getProject() {
@@ -112,22 +112,12 @@ public class Project implements datesInterface {
 		currentActivity.setEndDate(newEnd);
 	}
 
-	public void changeActivityName(String activity, String newActivityName) throws OperationNotAllowedException {
-		if(hasActivity(activity)) {
-			Activity currentActivity = getActivity(activity);
-			currentActivity.setName(newActivityName);
-		}else {
-			throw new OperationNotAllowedException("Illegal name");
-		}
+	public void changeActivityName(Activity activity, String newActivityName) {
+		activity.setName(newActivityName);
 		
 	}
 
-	public void changeActivityDescription(String activity, String newDescription) throws OperationNotAllowedException {
-		if(hasActivity(activity)) {
-			Activity currentActivity = getActivity(activity);
-			currentActivity.setDescription(newDescription);
-		}else throw new OperationNotAllowedException("Illegal description");
-		
-		
+	public void changeActivityDescription(Activity activity, String newDescription) {
+		activity.setDescription(newDescription);
 	}
 }

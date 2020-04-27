@@ -291,7 +291,7 @@ public class Model {
 		return thisActivity;
 	}
 
-	public void changeActivityName(Project project, String activity, String newActivityName) throws OperationNotAllowedException {
+	public void changeActivityName(Project project, Activity activity, String newActivityName) throws OperationNotAllowedException {
 		if(verifyLegalActivityName(project, newActivityName)) {
 			project.changeActivityName(activity,newActivityName);
 		}else {
@@ -305,7 +305,7 @@ public class Model {
 
 	}
 
-	public void changeActivityDescription(Project project, String activity, String newDescription) throws OperationNotAllowedException {
+	public void changeActivityDescription(Project project, Activity activity, String newDescription) throws OperationNotAllowedException {
 		if(legalDescription(newDescription)) {
 			project.changeActivityDescription(activity, newDescription);
 		}
