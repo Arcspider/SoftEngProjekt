@@ -45,26 +45,26 @@ public class editActivityTest {
 		project = controller.createProject("TESTNAME");
 		project.setId(id);
 		controller.addProject(project);
-		controllerActivity.addActivity(name, project);
+		model.addActivity(project, name);
 		assertTrue(project.hasActivity(name));
 	}
 	@When("the user inputs start date {string} and end date {string}")
 	public void theUserInputsStartDateAndEndDate(String startDate, String endDate) {
 		this.startDate = startDate;
 		this.endDate = endDate;
-		assertTrue((controllerActivity.validDate(startDate) && controllerActivity.validDate(endDate)));
+		assertTrue((model.verifyDateFormat(startDate) && model.verifyDateFormat(endDate)));
 	}
 
 	@Then("set the start to {string} and end date to {string} for the activity {string}")
 	public void setTheStartToAndEndDateToForTheActivity(String startDate, String endDate, String activity) throws OperationNotAllowedException {
-		project = controller.createProject("TESTNAME");
+		project = model.createProject("TESTNAME");
 		project.setId("030303");
-		controller.addProject(project);
-		controllerActivity.addActivity(activity, project);
+		model.addProject(project);
+		model.addActivity(project, activity);
 
 
-		controllerActivity.setActivityStart(project,activity, startDate);
-		controllerActivity.setActivityEnd(project,activity, endDate);
+		model.setActivityStart(project,startDate, activity);
+		model.setActivityEnd(project,endDate, activity);
 		currentActivity = model.getActivity(project, activity);
 		assertEquals(model.stringToDate(startDate), currentActivity.getStartDate());
 		assertEquals(model.stringToDate(endDate), currentActivity.getEndDate());
@@ -73,10 +73,10 @@ public class editActivityTest {
 	}
 	@Then("an error message {string} is given for the activity")
 	public void anErrorMessageIsGivenForTheActivity(String string) throws OperationNotAllowedException {
-		project = controller.createProject("TESTNAME");
+		project = model.createProject("TESTNAME");
 		project.setId("030303");
-		controller.addProject(project);
-		controllerActivity.addActivity("testActivity", project);
+		model.addProject(project);
+		model.addActivity(project, "testActivity");
 		currentActivity = model.getActivity(project, "testActivity");
 
 		try {
@@ -86,7 +86,48 @@ public class editActivityTest {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 			assertEquals(errorMessageHolder.getErrorMessage(), string);
 		}
-
+	}
+	
+	@When("the user chooses the activity {string}")
+	public void theUserChoosesTheActivity(String activityName) throws OperationNotAllowedException {
+		project = model.createProject("TESTNAME");
+		project.setId("030303");
+		model.addProject(project);
+		model.addActivity(project, activityName);
+		currentActivity = model.getActivity(project, activityName);
+		
+		assertEquals(currentActivity.getName(), activityName);
+	}
+	
+	@When("the user changes the activity name to {string}")
+	public void theUserChangesTheActivityNameTo(String activityName) {
+		assertTrue(model.verifyLegalActivityName(project,activityName));
+		
+	}
+	
+	@Then("the activitys name is changed to {string}")
+	public void theActivitysNameIsChangedTo(String newActivityName) {
+		try{
+			model.changeActivityName(project,currentActivity.getName(),newActivityName);
+			assertEquals(currentActivity.getName(), newActivityName);
+		} catch (OperationNotAllowedException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+	
+	@When("the user changes the activity description to {string}")
+	public void theUserChangesTheActivityDescriptionTo(String description) {
+		assertTrue(model.legalDescription(description));
+	}
+	
+	@Then("the activitys description is changed to {string}")
+	public void theActivitysDescriptionIsChangedTo(String newDescription) {
+		try{
+			model.changeActivityDescription(project,currentActivity.getName(),newDescription);
+			assertEquals(currentActivity.getDescription(), newDescription);
+		} catch (OperationNotAllowedException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
 	}
 }
 

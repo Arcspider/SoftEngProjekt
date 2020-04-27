@@ -153,107 +153,107 @@ public class Model {
 	}
 
 
-public LocalDate stringToDate(String toBeConverted) {
-	String[] stringDate = toBeConverted.split(" ");
-	int weekInt = Integer.parseInt(stringDate[1]);
-	int yearInt = Integer.parseInt(stringDate[3]);
+	public LocalDate stringToDate(String toBeConverted) {
+		String[] stringDate = toBeConverted.split(" ");
+		int weekInt = Integer.parseInt(stringDate[1]);
+		int yearInt = Integer.parseInt(stringDate[3]);
 
-	Calendar cldStart = Calendar.getInstance();
-	cldStart.set(Calendar.YEAR, yearInt);
-	cldStart.set(Calendar.WEEK_OF_YEAR, weekInt);
-	LocalDate finalDate = LocalDate.of(yearInt, cldStart.get(Calendar.MONTH) + 1, cldStart.get(Calendar.DATE));
-	return finalDate;
+		Calendar cldStart = Calendar.getInstance();
+		cldStart.set(Calendar.YEAR, yearInt);
+		cldStart.set(Calendar.WEEK_OF_YEAR, weekInt);
+		LocalDate finalDate = LocalDate.of(yearInt, cldStart.get(Calendar.MONTH) + 1, cldStart.get(Calendar.DATE));
+		return finalDate;
 
-}
-
-public boolean verifyDateFormat(String dateToVerify) {
-	String[] stringDate = dateToVerify.split(" ");
-	int weekInt = Integer.parseInt(stringDate[1]);
-	int yearInt = Integer.parseInt(stringDate[3]);
-	int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-	int difference = yearInt - currentYear;
-	// �rstallene man arbejder indenfor er 50 �r
-	if (difference >= -50 && difference <= 50) {
-		if (weekInt > 0 && weekInt <= 52) {
-			return true;
-		}
 	}
 
-	return false;
-}
+	public boolean verifyDateFormat(String dateToVerify) {
+		String[] stringDate = dateToVerify.split(" ");
+		int weekInt = Integer.parseInt(stringDate[1]);
+		int yearInt = Integer.parseInt(stringDate[3]);
+		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+		int difference = yearInt - currentYear;
+		// �rstallene man arbejder indenfor er 50 �r
+		if (difference >= -50 && difference <= 50) {
+			if (weekInt > 0 && weekInt <= 52) {
+				return true;
+			}
+		}
 
-public LocalDate getProjectStart(Project project) {
-	return project.getStartDate();
-}
+		return false;
+	}
 
-public LocalDate getProjectEnd(Project project) {
-	return project.getEndDate();
-}
+	public LocalDate getProjectStart(Project project) {
+		return project.getStartDate();
+	}
 
-public Project createProject(String name) throws OperationNotAllowedException {
-	String id = projectGenerateID();
-	newProject = new Project(name, id);
-	view.showMessage("Project " + name + " has been created with ID: " + id);
+	public LocalDate getProjectEnd(Project project) {
+		return project.getEndDate();
+	}
 
-	return newProject;
-}
+	public Project createProject(String name) throws OperationNotAllowedException {
+		String id = projectGenerateID();
+		newProject = new Project(name, id);
+		view.showMessage("Project " + name + " has been created with ID: " + id);
 
-public void changeStage(String stage) {
-	this.stage = stage;
-}
+		return newProject;
+	}
 
-public String getStage() {
-	return stage;
-}
+	public void changeStage(String stage) {
+		this.stage = stage;
+	}
 
-public void setHasProject(boolean is) {
-	hasProject = is;
-}
+	public String getStage() {
+		return stage;
+	}
 
-public boolean getHasProject() {
-	return hasProject;
-}
+	public void setHasProject(boolean is) {
+		hasProject = is;
+	}
 
-public void setThisProject(String id) {
-	thisProject = getProject(id);
-}
+	public boolean getHasProject() {
+		return hasProject;
+	}
 
-public Project getThisProject() {
-	return thisProject;
-}
+	public void setThisProject(String id) {
+		thisProject = getProject(id);
+	}
 
-public boolean addActivity(Project project, String name) throws OperationNotAllowedException {
-	return project.addActivity(name);
-}
+	public Project getThisProject() {
+		return thisProject;
+	}
 
-public boolean hasActiviy() {
-	return hasActivity;
-}
+	public boolean addActivity(Project project, String name) throws OperationNotAllowedException {
+		return project.addActivity(name);
+	}
 
-public boolean activityExists(Project project, String name) {
-	return project.hasActivity(name);
-}
+	public boolean hasActiviy() {
+		return hasActivity;
+	}
 
-public void setHasActivity(boolean b) {
-	hasActivity = b;
+	public boolean activityExists(Project project, String name) {
+		return project.hasActivity(name);
+	}
 
-}
+	public void setHasActivity(boolean b) {
+		hasActivity = b;
 
-public Activity getActivity(Project project, String name) {
-	return project.getActivity(name);
-}
+	}
 
-public void setThisActivity(Activity activity) {
-	thisActivity = activity;
-}
+	public Activity getActivity(Project project, String name) {
+		return project.getActivity(name);
+	}
 
-public void setState(String state) {
-	this.stage = state;
-}
+	public void setThisActivity(Activity activity) {
+		thisActivity = activity;
+	}
 
-public boolean addWorker(Activity activity, String name, String id) throws OperationNotAllowedException {
-	return activity.addWorker(name, id);
-}
+	public void setState(String state) {
+		this.stage = state;
+	}
+
+	public boolean addWorker(Activity activity, String name, String id) throws OperationNotAllowedException {
+		return activity.addWorker(name, id);
+	}
 
 
 	public void createWorker(String firstname, String lastname ) {
@@ -277,7 +277,32 @@ public boolean addWorker(Activity activity, String name, String id) throws Opera
 		return false;
 	}
 
-//	public boolean addWorker(Activity activity, String name, String id) throws OperationNotAllowedException {
-//		return activity.addWorker(name, id);
-//	}
+	public boolean verifyLegalActivityName(Project project,String activityName) {
+		if(activityName == null || project.hasActivity(activityName) ) return false;
+		else return true;
+	}
+
+	public void changeActivityName(Project project, String activity, String newActivityName) throws OperationNotAllowedException {
+		if(verifyLegalActivityName(project, newActivityName)) {
+			project.changeActivityName(activity,newActivityName);
+		}else {
+			throw new OperationNotAllowedException("Illegal name");
+		}
+	}
+
+	public boolean legalDescription(String description) {
+		if(description == "" || description == null)return false;
+		else return true;
+
+	}
+
+	public void changeActivityDescription(Project project, String activity, String newDescription) throws OperationNotAllowedException {
+		if(legalDescription(newDescription)) {
+			project.changeActivityDescription(activity, newDescription);
+		}
+	}
+
+	//	public boolean addWorker(Activity activity, String name, String id) throws OperationNotAllowedException {
+	//		return activity.addWorker(name, id);
+	//	}
 }
