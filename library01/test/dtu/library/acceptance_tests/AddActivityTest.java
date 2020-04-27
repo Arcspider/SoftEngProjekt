@@ -16,53 +16,44 @@ import io.cucumber.java.en.*;
 
 public class AddActivityTest {
 
-    private View view;
     private Model model;
-    private Controller controller;
-    private ControllerProject controllerProject;
-    private ControllerActivity controllerActivity;
     private ErrorMessageHolder errorMessageHolder;
     private String name;
 
     private Project project;
     Activity newActivity;
 
-    public AddActivityTest(View view,Model model,ErrorMessageHolder errorMessageHolder,Controller controller,ControllerProject controllerProject,ControllerActivity controllerActivity){
-    	this.view = view;
+    public AddActivityTest(View view,Model model,ErrorMessageHolder errorMessageHolder){
     	this.model = model;
     	this.errorMessageHolder  = errorMessageHolder;
-    	this.controller = controller;
-    	this.controllerProject = controllerProject;
-    	this.controllerActivity = controllerActivity;
     }
 
 	@Given("a project with id {string}")
 	public void aProjectWithId(String string) throws OperationNotAllowedException {
-		project = controller.createProject("tom");
+		project = model.createProject("tom"); 
 		project.setId(string);
-	    controller.addProject(project);
-
+	    model.addProject(project);
 	}
 
 	@Given("the user adds activity {string}")
 	public void theUserAddsActivity(String string) throws OperationNotAllowedException {
-		assertTrue(controllerActivity.addActivity(string,project));
+		assertTrue(model.addActivity(project,string));
 	}
 
 	@Then("the activity {string} is added to {string}")
 	public void theActivityIsAddedTo(String sA, String sP) {
-	  assertTrue(controllerActivity.activityExists(model.getProject(sP),sA));
+	  assertTrue(model.activityExists(model.getProject(sP),sA));
 	}
 
 	@Given("a project {string}")
 	public void aProject(String string) throws OperationNotAllowedException {
-		project = controller.createProject("tom");
+		project = model.createProject("tom");
 		project.setId(string);
-	    controller.addProject(project);
+	    model.addProject(project);
 	}
 	@Given("the project contains the activity {string}")
 	public void theProjectContainsTheActivity(String string) throws OperationNotAllowedException {
-		assertTrue(controllerActivity.addActivity(string,project));
+		assertTrue(model.addActivity(project,string));
 	}
 
 	@When("the user adds a activity {string}")
@@ -72,7 +63,7 @@ public class AddActivityTest {
 	@Then("an error message {string} is given")
 	public void anErrorMessageIsGiven(String string) {
 		try {
-			controllerActivity.addActivity(name,project);
+			model.addActivity(project,name);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}

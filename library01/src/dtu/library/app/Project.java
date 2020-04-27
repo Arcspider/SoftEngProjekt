@@ -88,7 +88,7 @@ public class Project implements datesInterface {
 			String currentId = currentActivity.getName();
 			if (currentId.equals(activityName)) {
 				return true;
-			}
+			} 
 		}
 		return false;
 	}

@@ -14,10 +14,10 @@ import static org.junit.Assert.*;
 
 public class ProjectTest {
 
-    private View view;
-    private Controller controller;
-    private ControllerProject controllerProject;
-
+    private Model model;
+ 
+    
+    
     private ErrorMessageHolder errorMessageHolder;
 
     private Project project;
@@ -25,35 +25,32 @@ public class ProjectTest {
     private List<Project> projects;
 
 
-    public ProjectTest(View view, ErrorMessageHolder errorMessageHolder, Controller controller,ControllerProject controllerProject) {
-        this.view = view;
+    public ProjectTest(View view, ErrorMessageHolder errorMessageHolder,Model model) {
+        this.model = model;
         this.errorMessageHolder = errorMessageHolder;
-        this.controller = controller;
-        this.controllerProject = controllerProject;
     }
 
     @Given("a user creates a project with name {string}")
     public void aUserCreatesAProjectWithName(String name) throws OperationNotAllowedException {
-        project = controller.createProject(name);
-        controller.addProject(project);
+        project = model.createProject(name);
+        model.addProject(project);
     }
 
     @Then("the project with the ID is contained in the list")
     public void theProjectWithTheIDIsContainedInTheList() throws OperationNotAllowedException {
-        assertTrue(controller.exists(project.getId()));
-
+        assertTrue(model.hasID(project.getId()));
+        
     }
 
     @Given("a user creates another project with name {string}")
     public void aUserCreatesAnotherProjectWithName(String name) throws OperationNotAllowedException {
-          project = controller.createProject(name);
-
-    }
+          project = model.createProject(name);    
+    } 
 
     @Then("the project is not created")
     public void theProjectIsNotCreated() {
         try {
-            assertFalse(controller.checkName(project.getName()));
+            assertFalse(model.checkName(project.getName()));
         } catch (OperationNotAllowedException e) {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }
@@ -67,15 +64,14 @@ public class ProjectTest {
     @When("the user chooses the project with id of project {string}.")
     public void theUserEditsProjectDescription(String name) throws OperationNotAllowedException {
   	  // Der dannes et nyt projekt siden projekt dataen ikke overlever hop mellem filer.
-      project = controller.createProject(name);
-      controller.addProject(project);
+      project = model.createProject(name);
+      model.addProject(project);
 
     }
 
     @And ("the user enters description {string}")
     public void theUserEditsProjectName(String newDescription) throws OperationNotAllowedException {
-
-    	assertTrue(controllerProject.editProjectDescription(project, newDescription));
+    	assertTrue(model.editProjectDescription(project, newDescription));
     }
 
     @Then("the projects description is overwritten with {string}")
@@ -85,15 +81,15 @@ public class ProjectTest {
 
     @When("the user chooses the project {string} with the id {string}")
     public void theUserChoosesTheProjectWithTheId(String name, String id) throws OperationNotAllowedException {
-         project = controller.createProject(name);
-         project.setId(id);
-         controller.addProject(project);
-
+         project = model.createProject(name);
+         project.setId(id); 
+         model.addProject(project);
+    	
     }
 
 	@When("the user changes the name to {string}")
 	public void theUserChangesTheNameTo(String string) {
-		controllerProject.editProjectName(project, string);
+		model.editProjectName(project, string);
 	}
 
     @Then("the projects Name is changed to {string}")
@@ -102,15 +98,15 @@ public class ProjectTest {
     }
 
     @When("the user enters the start and end dates {string} and {string}")
-    public void theUserEntersTheStartAndEndDatesAnd(String startDate, String endDate) {
-        assertTrue((controllerProject.validDate(startDate) && controllerProject.validDate(endDate)));
+    public void theUserEntersTheStartAndEndDatesAnd(String startDate, String endDate) { 
+        assertTrue((model.verifyDateFormat(startDate) && model.verifyDateFormat(endDate)));
     }
 
     @Then("the projects start and end dates are changed to {string} and {string}")
-    public void theProjectsStartAndEndDatesAreChangedToAnd(String startDate, String endDate) throws OperationNotAllowedException {
-    	controllerProject.setProjectStart(project, startDate);
-    	controllerProject.setProjectEnd(project, endDate);
-        assertEquals(project.getStartDate().toString(),controllerProject.getProjectStart(project).toString());
-        assertEquals(project.getEndDate().toString(),controllerProject.getProjectEnd(project).toString());
+    public void theProjectsStartAndEndDatesAreChangedToAnd(String startDate, String endDate) {
+    	model.setProjectStart(project, startDate);
+    	model.setProjectEnd(project, endDate);
+        assertEquals(project.getStartDate().toString(),model.getProjectStart(project).toString());
+        assertEquals(project.getEndDate().toString(),model.getProjectEnd(project).toString());
     }
 }

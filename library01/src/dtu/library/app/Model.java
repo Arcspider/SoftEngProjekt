@@ -128,8 +128,7 @@ public class Model {
 		}
 	}
 
-	public void setActivityStart(Project project, String startDate,String activityName) throws OperationNotAllowedException {
-		Activity currentActivity = project.getActivity(activityName);
+	public void setActivityStart(Project project,Activity currentActivity, String startDate) throws OperationNotAllowedException {
 		System.out.println("This is the current activity " + currentActivity);
 		LocalDate startActivityDate = project.getStartDate();
 		LocalDate endActivityDate = project.getEndDate();
@@ -140,8 +139,7 @@ public class Model {
 			}else throw new OperationNotAllowedException("End date is before start date");
 		}
 	}
-	public void setActivityEnd(Project project, String endDate, String activityName) throws OperationNotAllowedException {
-		Activity currentActivity = project.getActivity(activityName);
+	public void setActivityEnd(Project project,Activity currentActivity, String endDate) throws OperationNotAllowedException {
 		LocalDate startActivityDate = project.getStartDate();
 		LocalDate endActivityDate = project.getEndDate();
 		if (verifyDateFormat(endDate)) {
@@ -251,14 +249,21 @@ public class Model {
 		this.stage = state;
 	}
 
-	public boolean addWorker(Activity activity, String name, String id) throws OperationNotAllowedException {
-		return activity.addWorker(name, id);
-	}
+//public boolean addWorker(Activity activity, String name, String id) throws OperationNotAllowedException {
+//	return activity.addWorker(name, id);
+//}
 
 
-	public void createWorker(String firstname, String lastname ) {
+	public Worker createWorker(String firstname, String lastname ) {
 		String id = workerGenerateID(firstname, lastname);
 		worker = new Worker(firstname ,lastname, id);
+		addWorker(worker);
+		return worker;
+	}
+
+	private void addWorker(Worker worker) {
+		workers.add(worker);
+
 	}
 
 	private String workerGenerateID(String firstname, String lastname) {
@@ -268,7 +273,7 @@ public class Model {
 		return id;
 	}
 
-	private boolean workeHasID(String id) {
+	public boolean workeHasID(String id) {
 		for (Worker worker : workers) {
 			if (worker.getId().equals(id)) {
 				return true;

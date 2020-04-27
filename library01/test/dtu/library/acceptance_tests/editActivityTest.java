@@ -18,11 +18,7 @@ import io.cucumber.java.en.*;
 
 public class editActivityTest {
 
-	private View view;
 	private Model model;
-	private Controller controller;
-	private ControllerProject controllerProject;
-	private ControllerActivity controllerActivity;
 	private ErrorMessageHolder errorMessageHolder;
 	private String name;
 
@@ -31,14 +27,9 @@ public class editActivityTest {
 	private String startDate,endDate;
 	Activity newActivity;
 
-	public editActivityTest(View view, Model model, ErrorMessageHolder errorMessageHolder, Controller controller,
-			ControllerProject controllerProject, ControllerActivity controllerActivity) {
-		this.view = view;
+	public editActivityTest(View view, Model model, ErrorMessageHolder errorMessageHolder) {
 		this.model = model;
 		this.errorMessageHolder = errorMessageHolder;
-		this.controller = controller;
-		this.controllerProject = controllerProject;
-		this.controllerActivity = controllerActivity;
 	}
 	@Given("a project with id {string} has and activity {string}")
 	public void aProjectWithIdHasAndActivity(String id, String name) throws OperationNotAllowedException {
@@ -80,14 +71,14 @@ public class editActivityTest {
 		currentActivity = model.getActivity(project, "testActivity");
 
 		try {
-			model.setActivityStart(project, startDate, "testActivity");
-			model.setActivityEnd(project, endDate, "testActivity");
+			model.setActivityStart(project, currentActivity,startDate);
+			model.setActivityEnd(project,currentActivity ,endDate);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 			assertEquals(errorMessageHolder.getErrorMessage(), string);
 		}
 	}
-	
+
 	@When("the user chooses the activity {string}")
 	public void theUserChoosesTheActivity(String activityName) throws OperationNotAllowedException {
 		project = model.createProject("TESTNAME");
@@ -95,16 +86,16 @@ public class editActivityTest {
 		model.addProject(project);
 		model.addActivity(project, activityName);
 		currentActivity = model.getActivity(project, activityName);
-		
+
 		assertEquals(currentActivity.getName(), activityName);
 	}
-	
+
 	@When("the user changes the activity name to {string}")
 	public void theUserChangesTheActivityNameTo(String activityName) {
 		assertTrue(model.verifyLegalActivityName(project,activityName));
-		
+
 	}
-	
+
 	@Then("the activitys name is changed to {string}")
 	public void theActivitysNameIsChangedTo(String newActivityName) {
 		try{
@@ -114,12 +105,12 @@ public class editActivityTest {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
 	}
-	
+
 	@When("the user changes the activity description to {string}")
 	public void theUserChangesTheActivityDescriptionTo(String description) {
 		assertTrue(model.legalDescription(description));
 	}
-	
+
 	@Then("the activitys description is changed to {string}")
 	public void theActivitysDescriptionIsChangedTo(String newDescription) {
 		try{
@@ -130,7 +121,3 @@ public class editActivityTest {
 		}
 	}
 }
-
-
-
-

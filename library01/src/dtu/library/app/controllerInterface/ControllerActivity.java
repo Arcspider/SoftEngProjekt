@@ -36,7 +36,7 @@ public class ControllerActivity {
 		
 	}
 
-	private Activity getActivity(Project project, String name) {
+	public Activity getActivity(Project project, String name) {
 		return model.getActivity(project,name);
 	}
 
@@ -81,12 +81,12 @@ public class ControllerActivity {
 		return model.verifyDateFormat(startDate);
 	}
 
-	public void setActivityStart(Project project, String activity, String startDate) throws OperationNotAllowedException {
-		model.setActivityStart(project,startDate, activity);
+	public void setActivityStart(Project project, Activity activity, String startDate) throws OperationNotAllowedException {
+		model.setActivityStart(project,activity, startDate);
 	}
 
-	public void setActivityEnd(Project project, String activity, String endDate) throws OperationNotAllowedException {
-		 model.setActivityEnd(project,endDate,activity);
+	public void setActivityEnd(Project project, Activity activity, String endDate) throws OperationNotAllowedException {
+		 model.setActivityEnd(project,activity,endDate);
 		
 	}
 }

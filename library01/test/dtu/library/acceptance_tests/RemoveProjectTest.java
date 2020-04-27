@@ -1,6 +1,7 @@
 package dtu.library.acceptance_tests;
 
 import dtu.library.app.Controller;
+import dtu.library.app.Model;
 import dtu.library.app.OperationNotAllowedException;
 import dtu.library.app.Project;
 import dtu.library.app.View;
@@ -19,8 +20,7 @@ import static org.junit.Assert.assertTrue;
 public class RemoveProjectTest {
 
     private View view;
-    private Controller controller;
-    private ControllerProject controllerProject;
+    private Model model;
     
     private ErrorMessageHolder errorMessageHolder;
 
@@ -28,43 +28,43 @@ public class RemoveProjectTest {
     private String ID;
     private List<Project> projects;
 
-    public RemoveProjectTest(View view, ErrorMessageHolder errorMessageHolder,Controller controller, ControllerProject controllerProject) {
+    public RemoveProjectTest(View view,Model model, ErrorMessageHolder errorMessageHolder) {
         this.view = view;
+        this.model = model;
         this.errorMessageHolder = errorMessageHolder;
-        this.controllerProject = controllerProject;
-        this.controller = controller;
+        
     }
 
     @Given("the user deletes a project {string}")
     public void theUserDeletesAProject(String name) throws OperationNotAllowedException {
-        project = controller.createProject(name);
-        controller.addProject(project);
+        project = model.createProject(name);
+        model.addProject(project);
     }
 
     @Given("the project {string} exists")
     public void theProjectExists(String name) {
-        assertTrue(controllerProject.exists(project.getId()));
+        assertTrue(model.hasID(project.getId()));
     }
 
     @Then("the project is deleted")
     public void theProjectIsDeleted() throws OperationNotAllowedException {
-        controllerProject.removeProject(project);
+        model.removeProject(project);
     }
 
     @Then("the project {string} no longer exists")
     public void theProjectNoLongerExists(String id) {
-        assertFalse(controllerProject.exists(id));
+        assertFalse(model.hasID(id));
     }
     @Given("that the project {string} doesn't exist")
     public void thatTheProjectDoesnTExist(String id) {
     	  project = new Project("Beta", id);
-    	 assertFalse(controllerProject.exists(id));
+    	 assertFalse(model.hasID(id));
     }
 
     @Given("the user tries to delete the project")
     public void theUserTriesToDeleteTheProject() {
     	 try {
-    		 controllerProject.removeProject(project);
+    		 model.removeProject(project);
          } catch (OperationNotAllowedException e) {
              errorMessageHolder.setErrorMessage(e.getMessage());
          }
