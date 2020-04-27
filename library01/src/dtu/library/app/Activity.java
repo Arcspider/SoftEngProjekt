@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import dtu.library.app.timeInterface.datesInterface;
 
 public class Activity implements datesInterface{
-	private String name;
+	private String name, description;
 	private ArrayList<Worker> workers;
 	LocalDate startDate, endDate;
 
@@ -58,5 +58,14 @@ public class Activity implements datesInterface{
 	@Override
 	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
+	}
+	public void setName(String newActivityName) {
+		this.name = newActivityName;
+	}
+	public void setDescription(String newDescription) {
+		this.description = newDescription;
+	}
+	public String getDescription() {
+		return this.description;
 	}
 }

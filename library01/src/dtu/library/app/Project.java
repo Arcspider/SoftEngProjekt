@@ -111,4 +111,23 @@ public class Project implements datesInterface {
 	public void setActivityEndDate(Activity currentActivity, LocalDate newEnd) {
 		currentActivity.setEndDate(newEnd);
 	}
+
+	public void changeActivityName(String activity, String newActivityName) throws OperationNotAllowedException {
+		if(hasActivity(activity)) {
+			Activity currentActivity = getActivity(activity);
+			currentActivity.setName(newActivityName);
+		}else {
+			throw new OperationNotAllowedException("Illegal name");
+		}
+		
+	}
+
+	public void changeActivityDescription(String activity, String newDescription) throws OperationNotAllowedException {
+		if(hasActivity(activity)) {
+			Activity currentActivity = getActivity(activity);
+			currentActivity.setDescription(newDescription);
+		}else throw new OperationNotAllowedException("Illegal description");
+		
+		
+	}
 }
