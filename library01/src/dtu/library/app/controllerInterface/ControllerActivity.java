@@ -12,11 +12,13 @@ public class ControllerActivity {
 	private Model model;
 	private View view;
 	Scanner scanner;
+	Scanner timeHanlder;
 
 	public ControllerActivity(View view, Model model) {
 		this.view = view;
 		this.model = model;
 		scanner = new Scanner(System.in);
+		timeHanlder = new Scanner(System.in);
 	}
 
 	public void runCommand() throws OperationNotAllowedException {
@@ -29,23 +31,40 @@ public class ControllerActivity {
 				setHasActivity(true);
 				setThisActivity(getActivity(getThisProject(), name));
 			}
+		}else{
+			String nextCommand = getCommand();
+			if(nextCommand.equals("Time")) {
+				System.out.println("time");
+				nextCommand = getCommand();
+				if(nextCommand.equals("Start")) {System.out.println("test 1");
+					setActivityStart(getThisProject(),getThisActivity(),timeHanlder.nextLine());
+					
+				}else if(nextCommand.equals("End")) {
+					setActivityEnd(getThisProject(),getThisActivity(),timeHanlder.nextLine());
+					System.out.println("test 2");
+				}
+				
+			}
 		}
 	}
+	private Activity getThisActivity() {
+		return model.getThisActivity();
+	}
+
 	private void setThisActivity(Activity activity) {
 		model.setThisActivity(activity);
 		
 	}
 
-	public Activity getActivity(Project project, String name) {
+	private Activity getActivity(Project project, String name) {
 		return model.getActivity(project,name);
 	}
 
 	private void setHasActivity(boolean b) {
 		model.setHasActivity(b);
-		
 	}
 
-	public void changeStage(String stage) {
+	private void changeStage(String stage) {
 		model.changeStage(stage);
 	}
 
@@ -53,7 +72,7 @@ public class ControllerActivity {
 		return model.getThisProject();
 	}
 
-	public boolean activityExists(Project project, String name) {
+	private boolean activityExists(Project project, String name) {
 		return model.activityExists(project, name);
 	}
 

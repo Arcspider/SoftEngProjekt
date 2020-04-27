@@ -20,7 +20,8 @@ public class Project implements datesInterface {
     }
 
 	public String toString() {
-		return "This project is named \"" + name + "\" with the description \"" + description + "\" and id: \"" + id + "\"";
+		//return "This project is named \"" + name + "\" with the description \"" + description + "\" and id: \"" + id + "\"";
+		return "nemed " + name + " StartTime " + startDate + " EndTime " + endDate; 
 	}
 
     public Project getProject() {

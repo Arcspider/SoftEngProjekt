@@ -37,9 +37,10 @@ public class ControllerProject {
 			} else {
 				setHasProject(true);
 				setThisProject(id);
-				view.showAvailableCommands(model.getStage());
+				
 			}
-		}else if (getHasProject()) {
+		}else {
+			view.showAvailableCommands(model.getStage());
 			String nextCommand = getCommand();
 			if (nextCommand.equals("Description")) {
 				view.showMessage("Please enter a desired description");
@@ -61,6 +62,16 @@ public class ControllerProject {
 			}else if(nextCommand.equals("Edit")) {
 				changeStage("Activity");
 
+			}else if (nextCommand.equals("Time")) {
+				nextCommand = getCommand();
+				if(nextCommand.equals("Start")) {
+					setProjectStart(getThisProject(),descriptionHandler.nextLine());
+					System.out.println(getThisProject().toString());
+				}else if (nextCommand.equals("End")) {
+					setProjectEnd(getThisProject(),descriptionHandler.nextLine());
+					System.out.println(getThisProject().toString());
+				}
+				
 			}
 		}
 	}

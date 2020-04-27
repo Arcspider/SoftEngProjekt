@@ -286,5 +286,9 @@ public void setState(String state) {
 		return project.hasActivity(name);
 	}
 
+	public Activity getThisActivity() {
+		return thisActivity;
+	}
+
 
 }
