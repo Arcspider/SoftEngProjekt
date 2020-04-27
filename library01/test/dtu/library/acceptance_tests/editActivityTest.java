@@ -16,37 +16,28 @@ import io.cucumber.java.en.*;
 
 public class editActivityTest {
 
-	private View view;
 	private Model model;
-	private Controller controller;
-	private ControllerProject controllerProject;
-	private ControllerActivity controllerActivity;
 	private ErrorMessageHolder errorMessageHolder;
 	private String name;
 
 	private Project project;
 	Activity newActivity;
 
-	public editActivityTest(View view, Model model, ErrorMessageHolder errorMessageHolder, Controller controller,
-			ControllerProject controllerProject, ControllerActivity controllerActivity) {
-		this.view = view;
+	public editActivityTest(View view, Model model, ErrorMessageHolder errorMessageHolder) {
 		this.model = model;
-		this.errorMessageHolder = errorMessageHolder;
-		this.controller = controller;
-		this.controllerProject = controllerProject;
-		this.controllerActivity = controllerActivity;
+		this.errorMessageHolder = errorMessageHolder; 
 	}
 	@Given("a project with id {string} has and activity {string}")
 	public void aProjectWithIdHasAndActivity(String id, String name) throws OperationNotAllowedException {
-	    project = controller.createProject(name);
+	    project = model.createProject(name);
 	    project.setId(id);
-	    controller.addProject(project);
-	    controllerActivity.addActivity(name, project);
+	    model.addProject(project);
+	    model.addActivity(project, name);
 	}
 	@Given("project was start date {string} and end date {string}")
 	public void projectWasStartDateAndEndDate(String startDate, String endDate) {
-		controllerProject.setProjectStart(project, startDate);
-    	controllerProject.setProjectEnd(project, endDate);
+		model.setProjectStart(project, startDate);
+    	model.setProjectEnd(project, endDate);
 
 	}
 	@When("the user inputs start date {string} and end date {string}")

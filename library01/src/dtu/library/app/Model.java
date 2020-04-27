@@ -94,7 +94,7 @@ public class Model {
 	public boolean editProjectName(Project project, String name) {
 		project.setName(name);
 		System.out.println(project.toString());
-		return true;
+		return true; 
 	}
 
 	public void removeProject(Project project) throws OperationNotAllowedException {
@@ -237,9 +237,16 @@ public class Model {
 		this.stage = state;
 	}
 
-	public void createWorker(String firstname, String lastname ) {
+	public Worker createWorker(String firstname, String lastname ) {
 		String id = workerGenerateID(firstname, lastname);
 		worker = new Worker(firstname ,lastname, id);
+		addWorker(worker);
+		return worker;
+	}
+
+	private void addWorker(Worker worker) {
+		workers.add(worker);
+		
 	}
 
 	private String workerGenerateID(String firstname, String lastname) {
@@ -249,7 +256,7 @@ public class Model {
 		return id;
 	}
 
-	private boolean workeHasID(String id) {
+	public boolean workeHasID(String id) {
 		for (Worker worker : workers) {
 			if (worker.getId().equals(id)) {
 				return true;
@@ -258,7 +265,9 @@ public class Model {
 		return false;
 	}
 
-	public boolean addWorker(Activity activity, String name, String id) throws OperationNotAllowedException {
-		return activity.addWorker(name, id);
+	public boolean hasActivity(Project project, String name) {
+		return project.hasActivity(name);
 	}
+
+
 }

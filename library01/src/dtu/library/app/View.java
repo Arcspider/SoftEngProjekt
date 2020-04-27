@@ -17,7 +17,7 @@ public class View {
 		this.controllerProject = new ControllerProject(this,model);
 		this.controllerActivity = new ControllerActivity(this,model);
 		showApplicationIntroduction();
-		// startup();
+		 // startup();
 	}
 
 	public void showMessage(String message) {

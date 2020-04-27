@@ -28,7 +28,7 @@ public class Controller {
 			  }
 		}else if (nextCommand.equals("Get")) {
 			model.changeStage("Project");
-		}else if (nextCommand.equals("Worker")) {
+		}else if (nextCommand.equals("Worker")) { 
 			model.changeStage("Worker");
 		}
 		
@@ -39,7 +39,7 @@ public class Controller {
 		return model.createProject(name);
 	}
 
-	public boolean exists(String id) {
+	public boolean hasID(String id) {
 		return model.hasID(id);
 	}
 

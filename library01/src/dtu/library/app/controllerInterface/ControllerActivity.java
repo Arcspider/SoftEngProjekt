@@ -36,7 +36,7 @@ public class ControllerActivity {
 		
 	}
 
-	private Activity getActivity(Project project, String name) {
+	public Activity getActivity(Project project, String name) {
 		return model.getActivity(project,name);
 	}
 

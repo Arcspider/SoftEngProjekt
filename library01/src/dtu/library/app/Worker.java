@@ -25,9 +25,5 @@ public class Worker {
 	public String toString() {
 		return "This WORKERS ID is " + id;
 	}
-	
-//	public String getName() {
-//		return name;
-//	}
 
 }
