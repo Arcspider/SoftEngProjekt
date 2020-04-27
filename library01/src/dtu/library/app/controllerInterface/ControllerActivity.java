@@ -24,7 +24,7 @@ public class ControllerActivity {
 			String name = getCommand();
 			if(!activityExists(getThisProject(),name)) {
 				changeStage("Project");
-				view.showMessage("This project " + getThisProject().getId()+" does hav activity " + name );
+				view.showMessage("This project " + getThisProject().getId()+" has the activity " + name );
 			}else {
 				setHasActivity(true);
 				setThisActivity(getActivity(getThisProject(), name));

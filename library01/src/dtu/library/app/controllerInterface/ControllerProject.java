@@ -37,7 +37,7 @@ public class ControllerProject {
 			} else {
 				setHasProject(true);
 				setThisProject(id);
-				view.showProjectIntroduction(getThisProject());
+				view.showAvailableCommands(model.getStage());
 			}
 		}else if (getHasProject()) {
 			String nextCommand = getCommand();

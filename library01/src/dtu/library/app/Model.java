@@ -7,11 +7,13 @@ import java.util.*;
 public class Model {
 	private View view;
 	private ArrayList<Project> projects;
+	private ArrayList<Worker> workers;
 	private Calendar calendar;
 	private DateFormat dateFormat;
 	private Random random;
 	private Project newProject;
 	private Project thisProject;
+	private Worker worker;
 	private Activity thisActivity;
 	private boolean hasProject;
 	private boolean hasActivity;
@@ -20,11 +22,12 @@ public class Model {
 	public Model(View view) {
 		this.view = view;
 		projects = new ArrayList<Project>();
+		workers = new  ArrayList<Worker>();
 		this.calendar = new GregorianCalendar();
 		dateFormat = new SimpleDateFormat("MM-yy");
 		random = new Random();
 		stage = "Application";
-		//TODO ændre variabel navnene til noget fornuftigt, så det ikke er i konflikt med om et project har en aktivitet osv.
+		//TODO ï¿½ndre variabel navnene til noget fornuftigt, sï¿½ det ikke er i konflikt med om et project har en aktivitet osv.
 		hasProject = false;
 		hasActivity = false;
 	}
@@ -49,7 +52,7 @@ public class Model {
 		return null;
 	}
 
-	public String generateID() {
+	public String projectGenerateID() {
 		String date = dateFormat.format(Calendar.getInstance().getTime());
 		String id = date + "-" + random.nextInt(100);
 		while (hasID(id))
@@ -131,10 +134,10 @@ public class Model {
 		LocalDate startActivityDate = project.getStartDate();
 		LocalDate endActivityDate = project.getEndDate();
 		if (verifyDateFormat(startDate)) {
-			if(endActivityDate == null || startActivityDate.isBefore(endActivityDate)) {				
+			if(endActivityDate == null || startActivityDate.isBefore(endActivityDate)) {
 				LocalDate newStart = stringToDate(startDate);
 				project.setActivityStartDate(currentActivity,newStart);
-			}else System.out.println("Date wasn't set, as it was invalid."); 
+			}else System.out.println("Date wasn't set, as it was invalid.");
 		}
 	}
 	public void setActivityEnd(Project project, String endDate, String activityName) {
@@ -142,10 +145,10 @@ public class Model {
 		LocalDate startActivityDate = project.getStartDate();
 		LocalDate endActivityDate = project.getEndDate();
 		if (verifyDateFormat(endDate)) {
-			if(endActivityDate == null || startActivityDate.isBefore(endActivityDate)) {				
+			if(endActivityDate == null || startActivityDate.isBefore(endActivityDate)) {
 				LocalDate newEnd = stringToDate(endDate);
 				project.setActivityEndDate(currentActivity,newEnd);
-			}else System.out.println("Date wasn't set, as it was invalid."); 
+			}else System.out.println("Date wasn't set, as it was invalid.");
 		}
 	}
 
@@ -253,4 +256,28 @@ public boolean addWorker(Activity activity, String name, String id) throws Opera
 }
 
 
+	public void createWorker(String firstname, String lastname ) {
+		String id = workerGenerateID(firstname, lastname);
+		worker = new Worker(firstname ,lastname, id);
+	}
+
+	private String workerGenerateID(String firstname, String lastname) {
+		String id = ""+firstname.charAt(0)  + lastname.charAt(0) + random.nextInt(100);
+		while (workeHasID(id))
+			id = ""+firstname.charAt(0)  + lastname.charAt(0) + random.nextInt(100);
+		return id;
+	}
+
+	private boolean workeHasID(String id) {
+		for (Worker worker : workers) {
+			if (worker.getId().equals(id)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+//	public boolean addWorker(Activity activity, String name, String id) throws OperationNotAllowedException {
+//		return activity.addWorker(name, id);
+//	}
 }

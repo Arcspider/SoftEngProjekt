@@ -9,7 +9,7 @@ public class Activity implements datesInterface{
 	private String name;
 	private ArrayList<Worker> workers;
 	LocalDate startDate, endDate;
-	
+
 	public Activity(String name){
 		this.name = name;
 		workers = new ArrayList<>();

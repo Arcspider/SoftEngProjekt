@@ -15,7 +15,7 @@ public class Project implements datesInterface {
         this.id = id;
         this.startDate = null;
         this.endDate = null;
-        description = "";
+        description = "Description yet to be written";
         activities = new ArrayList<Activity>();
     }
 
