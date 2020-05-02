@@ -67,10 +67,12 @@ public class Project implements datesInterface {
 	}
     @Override
     public void setStartDate(LocalDate startProjectDate) {
-        startDate = startProjectDate;
+    	System.out.println("STARTDATE WAS SET TO " + startProjectDate);
+    	startDate = startProjectDate;
     }
     @Override
     public void setEndDate(LocalDate endProjectDate) {
+    	System.out.println("ENDDATE WAS SET TO " + endProjectDate);
         endDate = endProjectDate;
     }
 

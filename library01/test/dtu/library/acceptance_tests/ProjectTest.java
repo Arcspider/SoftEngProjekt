@@ -109,9 +109,17 @@ public class ProjectTest {
 
     @Then("the projects start and end dates are changed to {string} and {string}")
     public void theProjectsStartAndEndDatesAreChangedToAnd(String startDate, String endDate) {
+<<<<<<< Updated upstream
     	controllerProject.setProjectStart(project, startDate);
     	controllerProject.setProjectEnd(project, endDate);
         assertEquals(project.getStartDate().toString(),controllerProject.getProjectStart(project).toString());
         assertEquals(project.getEndDate().toString(),controllerProject.getProjectEnd(project).toString());
+=======
+    	model.setProjectStart(project, startDate);
+    	model.setProjectEnd(project, endDate);
+
+        assertEquals(project.getStartDate().toString(),model.getProjectStart(project).toString());
+        assertEquals(project.getEndDate().toString(),model.getProjectEnd(project).toString());
+>>>>>>> Stashed changes
     }
 }

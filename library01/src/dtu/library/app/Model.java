@@ -50,6 +50,7 @@ public class Model {
 	public String generateID() {
 		String date = dateFormat.format(Calendar.getInstance().getTime());
 		String id = date + "-" + random.nextInt(100);
+		//I tilfælde af at ID'et allerede eksisterer, så fortsæt med at generer et ID indtil den når et som ikke er lavet før.
 		while (hasID(id))
 			id = date + "-" + random.nextInt(100);
 		return id;
@@ -117,6 +118,7 @@ public class Model {
 		}
 	}
 	public void setProjectStart(Project project, String startDate) {
+<<<<<<< Updated upstream
 		if(verifyDateFormat(startDate)) {
 			LocalDate startProjectDate = stringToDate(startDate);	
 			LocalDate endProjectDate = project.getEndDate();
@@ -124,6 +126,18 @@ public class Model {
 				project.setStartDate(startProjectDate);
 				System.out.println("LocalDate start: " + startProjectDate);				
 			}else System.out.println("Date wasn't set, as it was invalid.");
+=======
+		if (verifyDateFormat(startDate)) {
+			LocalDate startProjectDate = stringToDate(startDate);
+			LocalDate endProjectDate = project.getEndDate();
+			if (endProjectDate == null || endProjectDate.isAfter(startProjectDate)) {
+				project.setStartDate(startProjectDate);
+				System.out.println("LocalDate end: " + endProjectDate);
+			} else {
+				System.out.println("Date wasn't set, as it was invalid.");
+			}
+
+>>>>>>> Stashed changes
 		}
 	}
 	public void setProjectEnd(Project project, String endDate) {
@@ -136,8 +150,14 @@ public class Model {
 			}else {
 				System.out.println("Date wasn't set, as it was invalid.");
 			}
+<<<<<<< Updated upstream
 				
 			
+=======
+
+		}else {
+			System.out.println("Date wasn't set, as it was invalid.");
+>>>>>>> Stashed changes
 		}
 	}
 
@@ -155,6 +175,7 @@ public class Model {
 	}
 
 	public boolean verifyDateFormat(String dateToVerify) {
+<<<<<<< Updated upstream
 		String[] stringDate = dateToVerify.split(" ");
 		int weekInt = Integer.parseInt(stringDate[1]);
 		int yearInt = Integer.parseInt(stringDate[3]);
@@ -164,6 +185,21 @@ public class Model {
 		if(difference >=-50 && difference <= 50  ) {
 			if(weekInt > 0 && weekInt <= 52) {
 				return true;
+=======
+
+		String[] stringDate = dateToVerify.split("-");
+		if(stringDate.length == 2 && stringIsNumeric(stringDate[0]) && stringIsNumeric(stringDate[1])) {
+
+			int weekInt = Integer.parseInt(stringDate[0]);
+			int yearInt = Integer.parseInt(stringDate[1]);
+			int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+			int difference = yearInt - currentYear;
+			// aarstallene man arbejder indenfor er 50 aar
+			if (difference >= -50 && difference <= 50) {
+				if (weekInt > 0 && weekInt <= 52) {
+					return true;
+				}
+>>>>>>> Stashed changes
 			}
 		}
 

@@ -20,7 +20,11 @@ public class View {
 //		startup();
 =======
 		showApplicationIntroduction();
+<<<<<<< Updated upstream
 		//startup();
+>>>>>>> Stashed changes
+=======
+//		startup();
 >>>>>>> Stashed changes
 	}
 
