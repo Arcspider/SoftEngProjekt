@@ -30,9 +30,6 @@ public class Worker {
 		return this.firstname + " " + this.firstname + "'s new ID is \"" + id + "\"";
 	}
 
-	public void setID(String id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return this.firstname + " " + this.lastname;

@@ -256,7 +256,7 @@ public class Model {
 
 	public Worker createWorker(String firstname, String lastname ) {
 		String id = workerGenerateID(firstname, lastname);
-		worker = new Worker(firstname ,lastname, id);
+		worker = new Worker(firstname ,lastname, id, this);
 		addWorker(worker);
 		return worker;
 	}
