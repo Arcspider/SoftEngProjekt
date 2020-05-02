@@ -249,14 +249,9 @@ public class Model {
 		this.stage = state;
 	}
 
-//public boolean addWorker(Activity activity, String name, String id) throws OperationNotAllowedException {
-//	return activity.addWorker(name, id);
-//}
-
-
 	public Worker createWorker(String firstname, String lastname ) {
 		String id = workerGenerateID(firstname, lastname);
-		worker = new Worker(firstname ,lastname, id);
+		worker = new Worker(firstname ,lastname, id, this);
 		addWorker(worker);
 		return worker;
 	}
