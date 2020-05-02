@@ -38,7 +38,7 @@ public class ControllerProject {
 			} else {
 				setHasProject(true);
 				setThisProject(id);
-				
+				view.showMessage(getThisProject().toString());
 			}
 		}else {
 			view.showAvailableCommands(model.getStage());
@@ -61,21 +61,23 @@ public class ControllerProject {
 				addActivity(getThisProject(), getCommand());
 
 			}else if(nextCommand.equals("Edit")) {
+				view.showMessage("Please enter the name of the activity you want to edit");
 				changeStage("Activity");
 
 			}else if (nextCommand.equals("Time")) {
 				view.showMessage("Type \"Start\" to change the start date of the project");
 				view.showMessage("Type \"End\" to change the end date of the project");
+				view.showMessage("The date format is \"ww-yyyy\" where ww is week and yyyy is the year");
 				
 				nextCommand = getCommand();
 				if(nextCommand.equals("Start")) {
-					view.showMessage("Write the new start date in the format: ");
+					view.showMessage("Write the new start date in the format: ww-yyyy");
 					setProjectStart(getThisProject(),descriptionHandler.nextLine());
-					System.out.println(getThisProject().toString());
+					
 				}else if (nextCommand.equals("End")) {
-					view.showMessage("Write the new end date in the format: ");
+					view.showMessage("Write the new end date in the format: ww-yyyy");
 					setProjectEnd(getThisProject(),descriptionHandler.nextLine());
-					System.out.println(getThisProject().toString());
+
 				}
 				
 				

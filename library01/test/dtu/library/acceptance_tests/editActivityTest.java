@@ -7,11 +7,11 @@ import static org.junit.Assert.assertTrue;
 import java.time.LocalDate;
 
 import dtu.library.app.Activity;
-import dtu.library.app.Controller;
 import dtu.library.app.Model;
 import dtu.library.app.OperationNotAllowedException;
 import dtu.library.app.Project;
 import dtu.library.app.View;
+import dtu.library.app.controllerInterface.Controller;
 import dtu.library.app.controllerInterface.ControllerActivity;
 import dtu.library.app.controllerInterface.ControllerProject;
 import io.cucumber.java.en.*;

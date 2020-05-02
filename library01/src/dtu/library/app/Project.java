@@ -27,6 +27,14 @@ public class Project implements datesInterface {
 		return "This project is named \"" + name + "\" with the description \"" + description + "\" and id: \"" + id + "\"";
 		
 	}
+	
+	public String startDateDescription() {
+		return "This project starts at " + startDate;
+	}
+	
+	public String endDateDescription() {
+		return "This project ends at " + endDate;
+	}
 
     public Project getProject() {
         return this;

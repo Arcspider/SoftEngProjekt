@@ -2,6 +2,7 @@ package dtu.library.app;
 
 import java.util.*;
 
+import dtu.library.app.controllerInterface.Controller;
 import dtu.library.app.controllerInterface.ControllerActivity;
 import dtu.library.app.controllerInterface.ControllerProject;
 import dtu.library.app.controllerInterface.ControllerWorker;
@@ -32,7 +33,7 @@ public class View {
 		} else if(stage.equals("Project")) {
 			showProjectIntroduction(model.getThisProject());
 		} else if(stage.equals("Activity")) {
-			
+			showActivityIntroduction();
 		} else if(stage.equals("Worker")) {
 			showWorkerIntroduction();
 		}
@@ -65,8 +66,7 @@ public class View {
 		System.out.println("Exit: Close the program");
 	}
 
-	public void showProjectIntroduction(Project project) {
-		System.out.println(project.toString());
+	private void showProjectIntroduction(Project project) {
 		System.out.println();
 		System.out.println("Current available commands: Name, Description, Remove, Add, Edit, Back");
 		System.out.println("Name: Change the name of this project");
@@ -80,7 +80,14 @@ public class View {
 	}
 	
 	private void showWorkerIntroduction() {
-		System.out.println("Current available commands: Create");
+		System.out.println("Current available commands: Create, Back");
 		System.out.println("Create: Add a new employee to the database");
+		System.out.println("Back: Exit the employee creation state");
+	}
+	
+	private void showActivityIntroduction() {
+		System.out.println("Current available commands: Time, Back");
+		System.out.println("Time: Change the start and end dates of the activity");
+		System.out.println("Back: Exit the employee creation state");
 	}
 }

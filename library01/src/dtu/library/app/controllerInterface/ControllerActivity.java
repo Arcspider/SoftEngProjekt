@@ -12,13 +12,13 @@ public class ControllerActivity {
 	private Model model;
 	private View view;
 	Scanner scanner;
-	Scanner timeHanlder;
+	Scanner timeHandler;
 
 	public ControllerActivity(View view, Model model) {
 		this.view = view;
 		this.model = model;
 		scanner = new Scanner(System.in);
-		timeHanlder = new Scanner(System.in);
+		timeHandler = new Scanner(System.in);
 	}
 
 	public void runCommand() throws OperationNotAllowedException {
@@ -30,6 +30,7 @@ public class ControllerActivity {
 			}else {
 				setHasActivity(true);
 				setThisActivity(getActivity(getThisProject(), name));
+				view.showAvailableCommands(model.getStage());
 			}
 		}else{
 			String nextCommand = getCommand();
@@ -37,11 +38,16 @@ public class ControllerActivity {
 				System.out.println("time");
 				nextCommand = getCommand();
 				if (nextCommand.equals("Start")) {
-					setActivityStart(getThisProject(), getThisActivity(), timeHanlder.nextLine());
+					setActivityStart(getThisProject(), getThisActivity(), timeHandler.nextLine());
 
 				} else if (nextCommand.equals("End")) {
-					setActivityEnd(getThisProject(), getThisActivity(), timeHanlder.nextLine());
+					setActivityEnd(getThisProject(), getThisActivity(), timeHandler.nextLine());
 				}
+			}
+			if(nextCommand.equals("Back")) {
+				changeStage("Project");
+				setHasActivity(false);
+				view.showAvailableCommands(model.getStage());
 			}
 		}
 	}

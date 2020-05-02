@@ -1,6 +1,11 @@
-package dtu.library.app;
+package dtu.library.app.controllerInterface;
 
 import java.util.*;
+
+import dtu.library.app.Model;
+import dtu.library.app.OperationNotAllowedException;
+import dtu.library.app.Project;
+import dtu.library.app.View;
 
 public class Controller {
 	private Model model;
@@ -14,7 +19,7 @@ public class Controller {
 		scanner = new Scanner(System.in);
 	}
 
-	String getCommand() {
+	public String getCommand() {
 		return scanner.next();
 	}
 
