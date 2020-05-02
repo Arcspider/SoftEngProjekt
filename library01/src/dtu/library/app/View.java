@@ -8,6 +8,10 @@ import dtu.library.app.controllerInterface.ControllerWorker;
 
 public class View {
 	private Model model;
+	private ModelAplication modelAplication;
+	private ModelProject modelProject;
+	private ModelActivity modelActivity;
+	private ModelWorker modelWorker;
 	private Controller controller;
 	private ControllerProject controllerProject;
 	private ControllerActivity controllerActivity;
@@ -15,46 +19,52 @@ public class View {
 
 	public View() throws OperationNotAllowedException {
 		this.model = new Model(this);
-		this.controller = new Controller(this, model);
-		this.controllerProject = new ControllerProject(this,model);
-		this.controllerActivity = new ControllerActivity(this,model);
+		this.modelAplication = new ModelAplication(this);
+		this.modelProject = new ModelProject(this);
+		this.modelActivity = new ModelActivity(this);
+		this.controller = new Controller(this, model, modelAplication, modelProject);
+		this.controllerProject = new ControllerProject(this, model, modelAplication, modelProject, modelActivity,modelWorker);
+		this.controllerActivity = new ControllerActivity(this, model, modelAplication, modelProject, modelActivity);
 		showApplicationIntroduction();
-		startup();
+		// startup();
 	}
 
 	public void showMessage(String message) {
 		System.out.println(message);
 	}
-	
+
 	public void showAvailableCommands(String stage) {
-		if(stage.equals("Application")) {
-		showApplicationIntroduction();
-		} else if(stage.equals("Project")) {
-			showProjectIntroduction(model.getThisProject());
-		} else if(stage.equals("Activity")) {
-			
-		} else if(stage.equals("Worker")) {
+		if (stage.equals("Application")) {
+			showApplicationIntroduction();
+		} else if (stage.equals("Project")) {
+			showProjectIntroduction(modelProject.getThisProject());
+		} else if (stage.equals("Activity")) {
+
+		} else if (stage.equals("Worker")) {
 			showWorkerIntroduction();
 		}
 	}
 
-
 	public void startup() throws OperationNotAllowedException {
 		while (true) {
-			while (model.getStage().equals("Application")) {
+			while (getStage().equals("Application")) {
 				String nextCommand = controller.getCommand();
 				controller.runCommand(nextCommand);
 			}
-			while (model.getStage().equals("Project")) {
+			while (getStage().equals("Project")) {
 				controllerProject.runCommand();
 			}
-			while(model.getStage().equals("Activity")) {
+			while (getStage().equals("Activity")) {
 				controllerActivity.runCommand();
 			}
-			while(model.getStage().equals("Worker")) {
+			while (getStage().equals("Worker")) {
 				controllerWorker.runCommand();
 			}
 		}
+	}
+
+	private String getStage() {
+		return modelAplication.getStage();
 	}
 
 	private void showApplicationIntroduction() {
@@ -72,13 +82,14 @@ public class View {
 		System.out.println("Name: Change the name of this project");
 		System.out.println("Description: Change the description of this project");
 		System.out.println("Time: Change the start and end dates of the project");
-		System.out.println("Remove: Remove this project. WARNING: Once removed, this project is permanently inaccessible");
+		System.out.println(
+				"Remove: Remove this project. WARNING: Once removed, this project is permanently inaccessible");
 		System.out.println("Add: Adds an activity to this project");
 		System.out.println("Edit: Access and edit a specific activity in this project");
 		System.out.println("Leader: Assign a leader to this project");
 		System.out.println("Back: Exit this project");
 	}
-	
+
 	private void showWorkerIntroduction() {
 		System.out.println("Current available commands: Create");
 		System.out.println("Create: Add a new employee to the database");

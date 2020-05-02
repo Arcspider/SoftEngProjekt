@@ -15,9 +15,8 @@ import static org.junit.Assert.*;
 public class ProjectTest {
 
     private Model model;
- 
-    
-    
+    private ModelProject modelProject;
+   
     private ErrorMessageHolder errorMessageHolder;
 
     private Project project;
@@ -25,32 +24,33 @@ public class ProjectTest {
     private List<Project> projects;
 
 
-    public ProjectTest(View view, ErrorMessageHolder errorMessageHolder,Model model) {
+    public ProjectTest(View view, ErrorMessageHolder errorMessageHolder,Model model, ModelProject modelProject) {
         this.model = model;
+        this.modelProject = modelProject;
         this.errorMessageHolder = errorMessageHolder;
     }
 
     @Given("a user creates a project with name {string}")
     public void aUserCreatesAProjectWithName(String name) throws OperationNotAllowedException {
-        project = model.createProject(name);
-        model.addProject(project);
+        project = modelProject.createProject(name);
+        modelProject.addProject(project);
     }
 
     @Then("the project with the ID is contained in the list")
     public void theProjectWithTheIDIsContainedInTheList() throws OperationNotAllowedException {
-        assertTrue(model.hasID(project.getId()));
+        assertTrue(modelProject.hasID(project.getId()));
         
     }
 
     @Given("a user creates another project with name {string}")
     public void aUserCreatesAnotherProjectWithName(String name) throws OperationNotAllowedException {
-          project = model.createProject(name);    
+          project = modelProject.createProject(name);    
     } 
 
     @Then("the project is not created")
     public void theProjectIsNotCreated() {
         try {
-            assertFalse(model.checkName(project.getName()));
+            assertFalse(modelProject.checkName(project.getName()));
         } catch (OperationNotAllowedException e) {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }
@@ -64,14 +64,14 @@ public class ProjectTest {
     @When("the user chooses the project with id of project {string}.")
     public void theUserEditsProjectDescription(String name) throws OperationNotAllowedException {
   	  // Der dannes et nyt projekt siden projekt dataen ikke overlever hop mellem filer.
-      project = model.createProject(name);
-      model.addProject(project);
+      project = modelProject.createProject(name);
+      modelProject.addProject(project);
 
     }
 
     @And ("the user enters description {string}")
     public void theUserEditsProjectName(String newDescription) throws OperationNotAllowedException {
-    	assertTrue(model.editProjectDescription(project, newDescription));
+    	assertTrue(modelProject.editProjectDescription(project, newDescription));
     }
 
     @Then("the projects description is overwritten with {string}")
@@ -81,15 +81,15 @@ public class ProjectTest {
 
     @When("the user chooses the project {string} with the id {string}")
     public void theUserChoosesTheProjectWithTheId(String name, String id) throws OperationNotAllowedException {
-         project = model.createProject(name);
+         project = modelProject.createProject(name);
          project.setId(id); 
-         model.addProject(project);
+         modelProject.addProject(project);
     	
     }
 
 	@When("the user changes the name to {string}")
 	public void theUserChangesTheNameTo(String string) {
-		model.editProjectName(project, string);
+		modelProject.editProjectName(project, string);
 	}
 
     @Then("the projects Name is changed to {string}")
@@ -99,14 +99,14 @@ public class ProjectTest {
 
     @When("the user enters the start and end dates {string} and {string}")
     public void theUserEntersTheStartAndEndDatesAnd(String startDate, String endDate) { 
-        assertTrue((model.verifyDateFormat(startDate) && model.verifyDateFormat(endDate)));
+        assertTrue((modelProject.verifyDateFormat(startDate) && modelProject.verifyDateFormat(endDate)));
     }
 
     @Then("the projects start and end dates are changed to {string} and {string}")
     public void theProjectsStartAndEndDatesAreChangedToAnd(String startDate, String endDate) {
-    	model.setProjectStart(project, startDate);
-    	model.setProjectEnd(project, endDate);
-        assertEquals(project.getStartDate().toString(),model.getProjectStart(project).toString());
-        assertEquals(project.getEndDate().toString(),model.getProjectEnd(project).toString());
+    	modelProject.setProjectStart(project, startDate);
+    	modelProject.setProjectEnd(project, endDate);
+        assertEquals(project.getStartDate().toString(),modelProject.getProjectStart(project).toString());
+        assertEquals(project.getEndDate().toString(),modelProject.getProjectEnd(project).toString());
     }
 }
