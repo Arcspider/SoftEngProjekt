@@ -237,19 +237,21 @@ public class Model {
 		this.stage = state;
 	}
 
-	public void createWorker(String firstname, String lastname ) {
+	public Worker createWorker(String firstname, String lastname ) {
 		String id = workerGenerateID(firstname, lastname);
-		worker = new Worker(firstname ,lastname, id);
+		worker = new Worker(firstname ,lastname, id, this);
+		workers.add(worker);
+		return worker;
 	}
 
 	private String workerGenerateID(String firstname, String lastname) {
 		String id = ""+firstname.charAt(0)  + lastname.charAt(0) + random.nextInt(100);
-		while (workeHasID(id))
+		while (workerHasID(id))
 			id = ""+firstname.charAt(0)  + lastname.charAt(0) + random.nextInt(100);
 		return id;
 	}
 
-	private boolean workeHasID(String id) {
+	public boolean workerHasID(String id) {
 		for (Worker worker : workers) {
 			if (worker.getId().equals(id)) {
 				return true;
@@ -257,6 +259,16 @@ public class Model {
 		}
 		return false;
 	}
+	
+	public Worker getWorker(String id) {
+		for (Worker worker : workers) {
+			if (worker.getId().equals(id)) {
+				return worker;
+			}
+		}
+		return null;
+	}
+	
 
 //	public boolean addWorker(Activity activity, String name, String id) throws OperationNotAllowedException {
 //		return activity.addWorker(name, id);

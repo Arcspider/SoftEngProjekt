@@ -28,8 +28,13 @@ public class Controller {
 			  }
 		} else if (nextCommand.equals("Get")) {
 			model.changeStage("Project");
+			
+		} else if (nextCommand.equals("Exit")) {
+			System.exit(0);
+			
 		} else if (nextCommand.equals("Worker")) {
 			model.changeStage("Worker");
+			view.showAvailableCommands(model.getStage());
 		}
 		
 	}
