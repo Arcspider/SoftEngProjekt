@@ -8,13 +8,13 @@ public class View{
 		this.controller = new Controller(this, model);
 //		startup();
 	}
-	
-	
+
+
 	public void showMessage(String message) {
 		System.out.println(message);
 		System.out.println();
 	}
-	
+
 	public void startup() {
 		while(true) {
 			String nextCommand = controller.getCommand();

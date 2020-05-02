@@ -51,7 +51,7 @@ public class Model {
     public String generateID() {
     	String date = dateFormat.format(Calendar.getInstance().getTime());
         String id = date + "-" + random.nextInt(100);
-        while(hasID(id)) id = date + "-" + random.nextInt(100); 
+        while(hasID(id)) id = date + "-" + random.nextInt(100);
     	return id;
     }
     public boolean containsProjectWithID(String ID) {
@@ -63,7 +63,7 @@ public class Model {
     }
 
     public void addProject(Project project) throws OperationNotAllowedException {
-    	if(checkName(project.getName())) {    		
+    	if(checkName(project.getName())) {
     		projects.add(project);
     	}
     }
@@ -81,14 +81,14 @@ public class Model {
     public boolean editProjectDescription(String ID,String newDescription) {
     	Project projectToBeEdited = getProject(ID);
     	projectToBeEdited.setDescription(newDescription);
-    	
+
     	return true;
     }
 
 	public boolean editProjectName(String ID, String name) {
 		Project projectToBeEdited = getProject(ID);
     	projectToBeEdited.setName(name);
-    	
+
     	return true;
 	}
 }
