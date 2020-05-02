@@ -1,29 +1,10 @@
-Feature: Assign workers to activity
-  Description: A user assigns a worker to an activity, for a certain amount of time.
-  Actors: User
+Feature: assign Worker
+  Description: The user assign a worker to a activity.
+  Actor: User
 
- Scenario: Assigning a worker to an activity
-    Given that a worker with the name "Jens Jensen" exists
-    And that the activity "Optimering" exists
-   When the user chooses the worker and the user chooses the activity
- #   And the user allocates "10" hours to week "3"
-#    Then the worker is assigned the activity for the amount of hours.
+  Scenario: The user assign a worker to a activity.
+    Given a project with  id "05-20-63"
+	And has the activity "Beta"
+ 	And the worker with id "HH20" exists'
+   Then the user assign the worker to the activity
 
-#  Scenario: Assigning a worker to an activity which is already assigned.
-#    Given that a worker with the name "Jens Jensen" exists
-#    And that the activity "Optimering" exists
-#    And that the worker is assigned to the activity
-#    When the user chooses the worker
-#    And the user chooses the activity
-#    And the user allocates 10 hours
-#    Then the worker is not assigned the activity
-#    And the user receives an error message "This worker is already assigned to the activity"
-#
-#  Scenario: Assigning a worker who has too much time
-#    Given that a worker with the name "Jens Jensen" exists
-#    And that the activity "Optimering" exists
-#    When the user chooses the worker
-#    And the user chooses the activity
-#    And the user allocates "55" hours
-#    Given the worker doesn't have "55" remaining hours
-#    Then an error message is shown

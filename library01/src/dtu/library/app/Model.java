@@ -261,7 +261,7 @@ public class Model {
 		return worker;
 	}
 
-	private void addWorker(Worker worker) {
+	public void addWorker(Worker worker) {
 		workers.add(worker);
 
 	}
@@ -311,7 +311,11 @@ public class Model {
 		}
 	}
 
-	//	public boolean addWorker(Activity activity, String name, String id) throws OperationNotAllowedException {
-	//		return activity.addWorker(name, id);
-	//	}
+	public boolean assignWorker(Activity activity, Worker worker) {
+		activity.assignWorker(worker);
+		worker.assignWorker(activity);
+		return true;
+	}
+
+
 }

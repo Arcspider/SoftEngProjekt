@@ -27,28 +27,33 @@ public class AssignWorkerTest {
 	private Project project;
 	private Activity activity;
 	private Worker worker;
-	private String ID;
-	private List<Project> projects;
+
 
 	public AssignWorkerTest(View view, Model model, ErrorMessageHolder errorMessageHolder) {
 		this.model = model;
 		this.errorMessageHolder = errorMessageHolder;
 	}
-
-	@Given("that a worker with the name {string} exists")
-	public void thatAWorkerWithTheNameExists(String string) {
-		String[] name = string.split(" ");
-		worker = model.createWorker(name[0], name[1]);
+	@Given("a project with  id {string}")
+	public void aProjectWithId(String projectID) throws OperationNotAllowedException {
+		project = model.createProject("Tom");
+		project.setId(projectID);
+		model.addProject(project);
 	}
-	@Given("that the activity {string} exists")
-	public void thatTheActivityExists(String string) throws OperationNotAllowedException {
-	    project = model.createProject("tom");
-	    assertTrue(model.addActivity(project, string));
-	    activity = model.getActivity(project,string);
+	
+	@Given("has the activity {string}")
+	public void hasTheActivity(String activityName) throws OperationNotAllowedException {
+		 assertTrue(model.addActivity(project, activityName));
+		 activity = model.getActivity(project, activityName);
 	}
-
-	@When("the user chooses the worker and the user chooses the activity")
-	public void theUserChoosesTheWorkerAndTheUserChoosesTheActivity() {
-		assertTrue(model.workeHasID(worker.getId()));
+	
+	@Given("the worker with id {string} exists'")
+	public void theWorkerWithIdExists(String workerID) {
+	    worker = model.createWorker("Tom", "Bob");
+	    worker.setID(workerID);
+	    model.addWorker(worker);
+	}
+	@Then("the user assign the worker to the activity")
+	public void theUserAssignTheWorkerToTheActivity() {
+		assertTrue(model.assignWorker(activity,worker));
 	}
 }

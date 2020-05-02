@@ -1,5 +1,6 @@
 package dtu.library.app;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Worker {
@@ -7,12 +8,13 @@ public class Worker {
 	private String lastname;
 	private String id;
 //	private List<userTime> userTimeList;
-	private List<Activity> activities;
+	private ArrayList<Activity> activities;
 
-	public Worker(String firstname, String lastname , String ID) {
+	public Worker(String firstname, String lastname , String id) {
 		this.firstname = firstname;
 		this.lastname = lastname;
-		this.id = ID;
+		this.id = id;
+		activities = new ArrayList<Activity>(); 
 	}
 
 	public Worker getWorker(){
@@ -24,6 +26,16 @@ public class Worker {
 	}
 	public String toString() {
 		return "This WORKERS ID is " + id;
+	}
+
+	public void setID(String id) {
+		this.id = id;
+		
+	}
+
+	public void assignWorker(Activity activity) {
+		activities.add(activity);
+		
 	}
 
 }
