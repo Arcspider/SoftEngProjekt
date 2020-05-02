@@ -60,13 +60,7 @@ public class Model {
 		return id;
 	}
 
-	public boolean containsProjectWithID(String ID) {
-		return !(projects.contains(ID));
-	}
 
-	public boolean canBeCreated(String id) {
-		return !projects.contains(id);
-	}
 
 	public void addProject(Project project) throws OperationNotAllowedException {
 		if (checkName(project.getName())) {
@@ -152,9 +146,9 @@ public class Model {
 
 
 	public LocalDate stringToDate(String toBeConverted) {
-		String[] stringDate = toBeConverted.split(" ");
-		int weekInt = Integer.parseInt(stringDate[1]);
-		int yearInt = Integer.parseInt(stringDate[3]);
+		String[] stringDate = toBeConverted.split("-");
+		int weekInt = Integer.parseInt(stringDate[0]);
+		int yearInt = Integer.parseInt(stringDate[1]);
 
 		Calendar cldStart = Calendar.getInstance();
 		cldStart.set(Calendar.YEAR, yearInt);
@@ -165,15 +159,19 @@ public class Model {
 	}
 
 	public boolean verifyDateFormat(String dateToVerify) {
-		String[] stringDate = dateToVerify.split(" ");
-		int weekInt = Integer.parseInt(stringDate[1]);
-		int yearInt = Integer.parseInt(stringDate[3]);
-		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-		int difference = yearInt - currentYear;
-		// �rstallene man arbejder indenfor er 50 �r
-		if (difference >= -50 && difference <= 50) {
-			if (weekInt > 0 && weekInt <= 52) {
-				return true;
+
+		String[] stringDate = dateToVerify.split("-");
+		if(stringDate.length == 2 && stringIsNumeric(stringDate[0]) && stringIsNumeric(stringDate[1])) {
+
+			int weekInt = Integer.parseInt(stringDate[0]);
+			int yearInt = Integer.parseInt(stringDate[1]);
+			int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+			int difference = yearInt - currentYear;
+			// �rstallene man arbejder indenfor er 50 �r
+			if (difference >= -50 && difference <= 50) {
+				if (weekInt > 0 && weekInt <= 52) {
+					return true;
+				}
 			}
 		}
 
@@ -249,9 +247,9 @@ public class Model {
 		this.stage = state;
 	}
 
-//public boolean addWorker(Activity activity, String name, String id) throws OperationNotAllowedException {
-//	return activity.addWorker(name, id);
-//}
+	//public boolean addWorker(Activity activity, String name, String id) throws OperationNotAllowedException {
+	//	return activity.addWorker(name, id);
+	//}
 
 
 	public Worker createWorker(String firstname, String lastname ) {
@@ -281,7 +279,7 @@ public class Model {
 		}
 		return false;
 	}
-	
+
 	public Worker getWorker(String id) {
 		for (Worker worker : workers) {
 			if (worker.getId().equals(id)) {
@@ -290,7 +288,7 @@ public class Model {
 		}
 		return null;
 	}
-	
+
 
 	public boolean verifyLegalActivityName(Project project,String activityName) {
 		if(activityName == null || project.hasActivity(activityName) ) return false;
@@ -324,6 +322,14 @@ public class Model {
 	public boolean assignWorker(Activity activity, Worker worker) {
 		activity.assignWorker(worker);
 		worker.assignWorker(activity);
+		return true;
+	}
+	public boolean stringIsNumeric(String test) {
+		try {
+			int pls = Integer.parseInt(test);
+		} catch(NumberFormatException e){
+			return false;
+		}
 		return true;
 	}
 

@@ -4,9 +4,9 @@ Feature: Edit project
     
 Scenario: User edits a projects dates
     When the user chooses the project "Alpha" with the id "030901"
-    And the user enters the start and end dates "week 40 year 2020" and "week 42 year 2020"
+    And the user enters the start and end dates "40-2020" and "42-2020"
 #    And the dates are in the project period
-    Then the projects start and end dates are changed to "week 40 year 2024" and "week 42 year 2024"
+    Then the projects start and end dates are changed to "40-2024" and "42-2024"
     
  Scenario: Change projects description
     When the user chooses the project with id of project "Alpha".
