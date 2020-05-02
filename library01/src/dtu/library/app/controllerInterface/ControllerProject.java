@@ -64,11 +64,16 @@ public class ControllerProject {
 				changeStage("Activity");
 
 			}else if (nextCommand.equals("Time")) {
+				view.showMessage("Type \"Start\" to change the start date of the project");
+				view.showMessage("Type \"End\" to change the end date of the project");
+				
 				nextCommand = getCommand();
 				if(nextCommand.equals("Start")) {
+					view.showMessage("Write the new start date in the format: ");
 					setProjectStart(getThisProject(),descriptionHandler.nextLine());
 					System.out.println(getThisProject().toString());
 				}else if (nextCommand.equals("End")) {
+					view.showMessage("Write the new end date in the format: ");
 					setProjectEnd(getThisProject(),descriptionHandler.nextLine());
 					System.out.println(getThisProject().toString());
 				}
