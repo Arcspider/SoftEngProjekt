@@ -30,8 +30,16 @@ public class ControllerWorker {
 		}
 	}
 
+	public Worker createWorker(String fristname, String lastname) {
+		return model.createWorker(fristname, lastname);
+	}
+
 	private String getCommand() {
 		return scanner.next();
+	}
+
+	public boolean workerHasID(String id) {
+		return model.workerHasID(id);
 	}
 
 }

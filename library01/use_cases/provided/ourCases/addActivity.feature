@@ -12,3 +12,6 @@ Scenario: add activity to a project when project has an activity with same name.
    And the project contains the activity "Beta"
    When the user adds a activity "Beta"
    Then an error message "The project already has an activity with the name Beta" is given
+#   And the project contains the activity "Beta"
+#   When the user adds a activity "Beta"
+#   Then an error message "The project already has an activity with the name Beta" is given

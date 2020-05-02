@@ -25,6 +25,7 @@ public class Project implements datesInterface {
 
 	public String toString() {
 		return "This project is named \"" + name + "\" with the description \"" + description + "\" and id: \"" + id + "\"";
+		
 	}
 
     public Project getProject() {
@@ -78,29 +79,29 @@ public class Project implements datesInterface {
         endDate = endProjectDate;
     }
 
-	public boolean addActivity(String name) throws OperationNotAllowedException {
-		if (!hasActivity(name)) {
-			activities.add(new Activity(name));
-			System.out.println("Added activity " + name + " to project " + this.name);
+	public boolean addActivity(String activityName) throws OperationNotAllowedException {
+		if (!hasActivity(activityName)) {
+			activities.add(new Activity(activityName));
+			System.out.println("Added activity " + activityName+ " to project " + this.name);
 			return true;
 		}
 		throw new OperationNotAllowedException("The project already has an activity with the name " + name);
 	}
 
-	public boolean hasActivity(String name) {
+	public boolean hasActivity(String activityName) {
 		for (Activity currentActivity : activities) {
 			String currentId = currentActivity.getName();
-			if (currentId.equals(name)) {
+			if (currentId.equals(activityName)) {
 				return true;
-			}
+			} 
 		}
 		return false;
 	}
 
-	public Activity getActivity(String name2) {
+	public Activity getActivity(String activityName) {
 		for (Activity currentActivity : activities) {
-			String currentId = currentActivity.getName();
-			if (currentId.equals(name)) {
+			String currentName = currentActivity.getName();
+			if (currentName.equals(activityName)) {
 				return currentActivity;
 			}
 		}
@@ -130,4 +131,21 @@ public class Project implements datesInterface {
 		}
 	}
 	
+
+	public void setActivityStartDate(Activity currentActivity, LocalDate startDate) {
+		currentActivity.setStartDate(startDate);
+	}
+
+	public void setActivityEndDate(Activity currentActivity, LocalDate newEnd) {
+		currentActivity.setEndDate(newEnd);
+	}
+
+	public void changeActivityName(Activity activity, String newActivityName) {
+		activity.setName(newActivityName);
+		
+	}
+
+	public void changeActivityDescription(Activity activity, String newDescription) {
+		activity.setDescription(newDescription);
+	}
 }

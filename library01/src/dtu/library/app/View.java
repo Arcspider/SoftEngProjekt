@@ -56,7 +56,7 @@ public class View {
 			}
 		}
 	}
-	
+
 	private void showApplicationIntroduction() {
 		System.out.println("Current available commands: Create, Get, Worker, Exit");
 		System.out.println("Create: Creates new project");

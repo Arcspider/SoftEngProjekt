@@ -38,18 +38,19 @@ public class ControllerProject {
 			} else {
 				setHasProject(true);
 				setThisProject(id);
-				view.showAvailableCommands(model.getStage());
+				
 			}
-		}else if (getHasProject()) {
+		}else {
+			view.showAvailableCommands(model.getStage());
 			String nextCommand = getCommand();
 			if (nextCommand.equals("Description")) {
 				view.showMessage("Please enter a desired description");
 				editProjectDescription(getThisProject(), getDescription());
-				
+
 			}else if (nextCommand.equals("Name")) {
 				view.showMessage("Please enter the new name");
 				editProjectName(getThisProject(), getCommand());
-				
+
 			}else if(nextCommand.equals("Remove")) {
 				removeProject(getThisProject());
 				setHasProject(false);
@@ -58,9 +59,19 @@ public class ControllerProject {
 			}else if (nextCommand.equals("Add")) {
 				view.showMessage("Please enter a name for the activity");
 				addActivity(getThisProject(), getCommand());
-				
+
 			}else if(nextCommand.equals("Edit")) {
 				changeStage("Activity");
+
+			}else if (nextCommand.equals("Time")) {
+				nextCommand = getCommand();
+				if(nextCommand.equals("Start")) {
+					setProjectStart(getThisProject(),descriptionHandler.nextLine());
+					System.out.println(getThisProject().toString());
+				}else if (nextCommand.equals("End")) {
+					setProjectEnd(getThisProject(),descriptionHandler.nextLine());
+					System.out.println(getThisProject().toString());
+				}
 				
 				
 			}else if(nextCommand.equals("Leader")) {
@@ -80,8 +91,8 @@ public class ControllerProject {
 	}
 
 	private void addActivity(Project project, String name) throws OperationNotAllowedException {
-		model.addActivity(project,name);	
-		
+		model.addActivity(project,name);
+
 	}
 
 	private boolean getHasProject() {
@@ -94,17 +105,17 @@ public class ControllerProject {
 
 	private void setThisProject(String id) {
 		model.setThisProject(id);
-		
+
 	}
 
 	private void setHasProject(boolean is) {
 		model.setHasProject(is);
-		
+
 	}
 
 	private void changeStage(String stage) {
 		model.changeStage(stage);
-		
+
 	}
 
 	private String getDescription() {

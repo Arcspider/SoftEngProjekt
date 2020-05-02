@@ -27,6 +27,7 @@ public class Model {
 		dateFormat = new SimpleDateFormat("MM-yy");
 		random = new Random();
 		stage = "Application";
+		//TODO �ndre variabel navnene til noget fornuftigt, s� det ikke er i konflikt med om et project har en aktivitet osv.
 		hasProject = false;
 		hasActivity = false;
 	}
@@ -106,7 +107,7 @@ public class Model {
 	}
 
 	public void setProjectStart(Project project, String startDate) {
-		if (verifyDateFormat(startDate)) {
+		if(verifyDateFormat(startDate)) {
 			LocalDate startProjectDate = stringToDate(startDate);
 			project.setStartDate(startProjectDate);
 			System.out.println("LocalDate start: " + startProjectDate);
@@ -117,14 +118,9 @@ public class Model {
 		if (verifyDateFormat(endDate)) {
 			LocalDate startProjectDate = project.getStartDate();
 			LocalDate endProjectDate = stringToDate(endDate);
-			if (startProjectDate == null) {
+			if (startProjectDate == null || endProjectDate.isAfter(startProjectDate)) {
 				project.setEndDate(endProjectDate);
 				System.out.println("LocalDate end: " + endProjectDate);
-
-			} else if (endProjectDate.isAfter(startProjectDate)) {
-				project.setEndDate(endProjectDate);
-				System.out.println("LocalDate end: " + endProjectDate);
-
 			} else {
 				System.out.println("Date wasn't set, as it was invalid.");
 			}
@@ -132,12 +128,28 @@ public class Model {
 		}
 	}
 
-	public void setActivityStart(Project project, String startDate) {
+	public void setActivityStart(Project project,Activity currentActivity, String startDate) throws OperationNotAllowedException {
+		System.out.println("This is the current activity " + currentActivity);
+		LocalDate startActivityDate = project.getStartDate();
+		LocalDate endActivityDate = project.getEndDate();
 		if (verifyDateFormat(startDate)) {
-			
+			if(endActivityDate == null || startActivityDate.isBefore(endActivityDate)) {
+				LocalDate newStart = stringToDate(startDate);
+				project.setActivityStartDate(currentActivity,newStart);
+			}else throw new OperationNotAllowedException("End date is before start date");
 		}
-
 	}
+	public void setActivityEnd(Project project,Activity currentActivity, String endDate) throws OperationNotAllowedException {
+		LocalDate startActivityDate = project.getStartDate();
+		LocalDate endActivityDate = project.getEndDate();
+		if (verifyDateFormat(endDate)) {
+			if(endActivityDate == null || startActivityDate.isBefore(endActivityDate)) {
+				LocalDate newEnd = stringToDate(endDate);
+				project.setActivityEndDate(currentActivity,newEnd);
+			}else throw new OperationNotAllowedException("Start date is after end date");
+		}
+	}
+
 
 	public LocalDate stringToDate(String toBeConverted) {
 		String[] stringDate = toBeConverted.split(" ");
@@ -212,7 +224,7 @@ public class Model {
 		return project.addActivity(name);
 	}
 
-	public boolean getHasActiviy() {
+	public boolean hasActiviy() {
 		return hasActivity;
 	}
 
@@ -237,11 +249,21 @@ public class Model {
 		this.stage = state;
 	}
 
+//public boolean addWorker(Activity activity, String name, String id) throws OperationNotAllowedException {
+//	return activity.addWorker(name, id);
+//}
+
+
 	public Worker createWorker(String firstname, String lastname ) {
 		String id = workerGenerateID(firstname, lastname);
-		worker = new Worker(firstname ,lastname, id, this);
-		workers.add(worker);
+		worker = new Worker(firstname ,lastname, id);
+		addWorker(worker);
 		return worker;
+	}
+
+	private void addWorker(Worker worker) {
+		workers.add(worker);
+
 	}
 
 	private String workerGenerateID(String firstname, String lastname) {
@@ -270,7 +292,36 @@ public class Model {
 	}
 	
 
-//	public boolean addWorker(Activity activity, String name, String id) throws OperationNotAllowedException {
-//		return activity.addWorker(name, id);
-//	}
+	public boolean verifyLegalActivityName(Project project,String activityName) {
+		if(activityName == null || project.hasActivity(activityName) ) return false;
+		else return true;
+	}
+
+	public Activity getThisActivity() {
+		return thisActivity;
+	}
+
+	public void changeActivityName(Project project, Activity activity, String newActivityName) throws OperationNotAllowedException {
+		if(verifyLegalActivityName(project, newActivityName)) {
+			project.changeActivityName(activity,newActivityName);
+		}else {
+			throw new OperationNotAllowedException("Illegal name");
+		}
+	}
+
+	public boolean legalDescription(String description) {
+		if(description == "" || description == null)return false;
+		else return true;
+
+	}
+
+	public void changeActivityDescription(Project project, Activity activity, String newDescription) throws OperationNotAllowedException {
+		if(legalDescription(newDescription)) {
+			project.changeActivityDescription(activity, newDescription);
+		}
+	}
+
+	//	public boolean addWorker(Activity activity, String name, String id) throws OperationNotAllowedException {
+	//		return activity.addWorker(name, id);
+	//	}
 }

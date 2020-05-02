@@ -44,7 +44,7 @@ public class Controller {
 		return model.createProject(name);
 	}
 
-	public boolean exists(String id) {
+	public boolean hasID(String id) {
 		return model.hasID(id);
 	}
 
