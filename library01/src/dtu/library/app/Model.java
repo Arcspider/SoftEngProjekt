@@ -101,10 +101,16 @@ public class Model {
 	}
 
 	public void setProjectStart(Project project, String startDate) {
-		if(verifyDateFormat(startDate)) {
+		if (verifyDateFormat(startDate)) {
 			LocalDate startProjectDate = stringToDate(startDate);
-			project.setStartDate(startProjectDate);
-			System.out.println("LocalDate start: " + startProjectDate);
+			LocalDate endProjectDate = project.getEndDate();
+			if (endProjectDate == null || endProjectDate.isAfter(startProjectDate)) {
+				project.setStartDate(startProjectDate);
+				System.out.println("LocalDate end: " + startProjectDate);
+			} else {
+				System.out.println("Date wasn't set, as it was invalid.");
+			}
+
 		}
 	}
 
