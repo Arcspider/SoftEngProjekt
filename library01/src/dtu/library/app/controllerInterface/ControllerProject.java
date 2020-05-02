@@ -4,6 +4,7 @@ import dtu.library.app.Model;
 import dtu.library.app.OperationNotAllowedException;
 import dtu.library.app.Project;
 import dtu.library.app.View;
+import dtu.library.app.Worker;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -72,8 +73,21 @@ public class ControllerProject {
 					System.out.println(getThisProject().toString());
 				}
 				
+				
+			}else if(nextCommand.equals("Leader")) {
+				view.showMessage("Please enter the id of worker you want to lead this project");
+				getThisProject().setLeader(getWorker(getCommand()));
+				
+			}else if(nextCommand.equals("Back")) {
+				changeStage("Application");
+				setHasProject(false);
+				view.showAvailableCommands(model.getStage());
 			}
 		}
+	}
+
+	private Worker getWorker(String id) {
+		return model.getWorker(id);
 	}
 
 	private void addActivity(Project project, String name) throws OperationNotAllowedException {

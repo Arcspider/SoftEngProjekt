@@ -8,6 +8,8 @@ public class Project implements datesInterface {
     private String description, name, id;
     private LocalDate startDate, endDate;
     private ArrayList<Activity> activities;
+    private ArrayList<Worker> workers;
+    private Worker leader;
     boolean isOverdue;
 
     public Project(String name, String id) {
@@ -15,8 +17,10 @@ public class Project implements datesInterface {
         this.id = id;
         this.startDate = null;
         this.endDate = null;
+        leader = null;
         description = "Description yet to be written";
         activities = new ArrayList<Activity>();
+        workers = new ArrayList<Worker>();
     }
 
 	public String toString() {
@@ -103,6 +107,30 @@ public class Project implements datesInterface {
 		}
 		return null;
 	}
+	
+	public boolean hasLeader() {
+		if(leader != null) {
+			return true;
+		}
+		return false;
+	}
+	
+	public Worker getLeader() {
+		return this.leader;
+	}
+
+	public boolean setLeader(Worker worker) throws OperationNotAllowedException {
+		if(!hasLeader() && worker.exists()) {
+			leader = worker;
+			System.out.println(leader.getName() + " is now a Leader for the project " + this.name);
+			return true;
+		} else if(hasLeader() && getLeader().equals(worker)){
+			throw new OperationNotAllowedException("This worker is already leader for the project");
+		} else {
+			throw new OperationNotAllowedException("This project already has a leader");		
+		}
+	}
+	
 
 	public void setActivityStartDate(Activity currentActivity, LocalDate startDate) {
 		currentActivity.setStartDate(startDate);

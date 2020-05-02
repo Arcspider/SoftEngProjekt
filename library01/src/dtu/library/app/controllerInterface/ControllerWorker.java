@@ -14,17 +14,18 @@ public class ControllerWorker {
 	Scanner scanner;
 
 	public ControllerWorker(View view, Model model) {
-			this.view = view;
-			this.model = model;
-			scanner = new Scanner(System.in);
-		}
+		this.view = view;
+		this.model = model;
+		scanner = new Scanner(System.in);
+	}
 
 	public void runCommand() throws OperationNotAllowedException {
 		String nextCommand = getCommand();
 		if (nextCommand.equals("Create")) {
+			view.showMessage("Please enter the new employee's first name and last name");
 			String fristname = getCommand();
 			String lastname = getCommand();
-			createWorker(fristname, lastname);
+			model.createWorker(fristname, lastname).toString();
 
 		}
 	}
@@ -37,8 +38,8 @@ public class ControllerWorker {
 		return scanner.next();
 	}
 
-	public boolean workehasID(String id) {
-		return model.workeHasID(id);
+	public boolean workerHasID(String id) {
+		return model.workerHasID(id);
 	}
 
 }
