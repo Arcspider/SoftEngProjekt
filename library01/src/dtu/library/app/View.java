@@ -16,7 +16,12 @@ public class View {
 		this.controller = new Controller(this, model);
 		this.controllerProject = new ControllerProject(this,model);
 		this.controllerActivity = new ControllerActivity(this,model);
+<<<<<<< Updated upstream
 //		startup();
+=======
+		showApplicationIntroduction();
+		//startup();
+>>>>>>> Stashed changes
 	}
 
 	public void showMessage(String message) {
