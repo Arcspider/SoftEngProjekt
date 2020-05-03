@@ -25,10 +25,10 @@ public class ControllerProject {
 	Scanner scanner;
 	Scanner descriptionHandler;
 
-	public ControllerProject(View view, ModelAplication modelAplication, ModelProject modelProject,
+	public ControllerProject(View view, ModelApplication modelApplication, ModelProject modelProject,
 			ModelActivity modelActivity, ModelWorker modelWorker) {
 		this.view = view;
-		this.modelApplication = modelAplication;
+		this.modelApplication = modelApplication;
 		this.modelProject = modelProject;
 		this.modelActivity = modelActivity;
 		this.modelWorker = modelWorker;

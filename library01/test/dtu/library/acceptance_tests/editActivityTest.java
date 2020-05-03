@@ -35,7 +35,7 @@ public class editActivityTest {
 		this.model = model;
 		this.modelProject = modelProject;
 		this.modelActivity = modelActivity;
-		this.errorMessageHolder = errorMessageHolder;
+		this.errorMessageHolder = errorMessageHolder; 
 	}
 	@Given("a project with id {string} has and activity {string}")
 	public void aProjectWithIdHasAndActivity(String id, String name) throws OperationNotAllowedException {

@@ -8,7 +8,7 @@ import dtu.library.app.controllerInterface.ControllerWorker;
 
 public class View {
 
-	private ModelApplication modelAplication;
+	private ModelApplication modelApplication;
 	private ModelProject modelProject;
 	private ModelActivity modelActivity;
 	private ModelWorker modelWorker;
@@ -18,15 +18,15 @@ public class View {
 	private ControllerWorker controllerWorker;
 
 	public View() throws OperationNotAllowedException {
-		this.modelAplication = new ModelAplication(this);
+		this.modelApplication = new ModelApplication(this);
 		this.modelWorker = new ModelWorker();
 		this.modelProject = new ModelProject(this);
 		this.modelActivity = new ModelActivity(this);
 		
-		this.controller = new ControllerApplication(this, modelAplication, modelProject);
-		this.controllerProject = new ControllerProject(this, modelAplication, modelProject, modelActivity,modelWorker);
-		this.controllerActivity = new ControllerActivity(this, modelAplication, modelProject, modelActivity);
-		this.controllerWorker = new ControllerWorker(this,modelWorker);
+		this.controller = new ControllerApplication(this, modelApplication, modelProject);
+		this.controllerProject = new ControllerProject(this, modelApplication, modelProject, modelActivity,modelWorker);
+		this.controllerActivity = new ControllerActivity(this, modelApplication, modelProject, modelActivity);
+		this.controllerWorker = new ControllerWorker(this,modelWorker, modelApplication);
 		showApplicationIntroduction();
 		// startup();
 	}
@@ -67,7 +67,7 @@ public class View {
 	}
 
 	private String getStage() {
-		return modelAplication.getStage();
+		return modelApplication.getStage();
 	}
 
 	private void showApplicationIntroduction() {
