@@ -16,19 +16,13 @@ import dtu.library.app.View;
 
 public class ControllerActivity {
 	private Model model;
-<<<<<<< Updated upstream
-=======
 	private ModelApplication modelAplication;
 	private ModelProject modelProject;
 	private ModelActivity modelActivity;
->>>>>>> Stashed changes
 	private View view;
 	Scanner scanner;
 	Scanner timeHandler;
 
-<<<<<<< Updated upstream
-	public ControllerActivity(View view, Model model) {
-=======
 	public ControllerActivity(View view, Model model,ModelApplication modelAplication, ModelProject modelProject, ModelActivity modelActivity) {
 >>>>>>> Stashed changes
 		this.view = view;
