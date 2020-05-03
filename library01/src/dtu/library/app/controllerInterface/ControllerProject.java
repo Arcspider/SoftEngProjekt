@@ -8,6 +8,7 @@ import dtu.library.app.OperationNotAllowedException;
 import dtu.library.app.Project;
 import dtu.library.app.View;
 //import dtu.library.app.Worker;
+import dtu.library.app.Worker;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,18 +19,19 @@ public class ControllerProject {
 	private ModelApplication modelApplication;
 	private ModelProject modelProject;
 	private ModelActivity modelActivity;
-//	private ModelWorker modelWorker;
+	private ModelWorker modelWorker;
 	private View view;
 
 	Scanner scanner;
 	Scanner descriptionHandler;
 
-	public ControllerProject(View view,ModelApplication modelAplication, ModelProject modelProject, ModelActivity modelActivity, ModelWorker modelWorker) {
+	public ControllerProject(View view, ModelAplication modelAplication, ModelProject modelProject,
+			ModelActivity modelActivity, ModelWorker modelWorker) {
 		this.view = view;
 		this.modelApplication = modelAplication;
 		this.modelProject = modelProject;
 		this.modelActivity = modelActivity;
-//		this.modelWorker = modelWorker;
+		this.modelWorker = modelWorker;
 		scanner = new Scanner(System.in);
 		descriptionHandler = new Scanner(System.in);
 	}
@@ -59,11 +61,11 @@ public class ControllerProject {
 				view.showMessage("Please enter a desired description");
 				editProjectDescription(getThisProject(), getDescription());
 
-			}else if (nextCommand.equals("Name")) {
+			} else if (nextCommand.equals("Name")) {
 				view.showMessage("Please enter the new name");
 				editProjectName(getThisProject(), getCommand());
 
-			}else if(nextCommand.equals("Remove")) {
+			} else if (nextCommand.equals("Remove")) {
 				removeProject(getThisProject());
 				setHasProject(false);
 				view.showMessage("The project has been removed.");
@@ -73,7 +75,7 @@ public class ControllerProject {
 				view.showMessage("Please enter a name for the activity");
 				addActivity(getThisProject(), getCommand());
 
-			}else if(nextCommand.equals("Edit")) {
+			} else if (nextCommand.equals("Edit")) {
 				changeStage("Activity");
 				view.showMessage("Please enter the name of the activity that should be edited");
 
@@ -90,13 +92,14 @@ public class ControllerProject {
 					view.showMessage("Write the new end date in the format: ww-yyyy");
 					setProjectEnd(getThisProject(),descriptionHandler.nextLine());
 				}
-				
-				
-			}else if(nextCommand.equals("Leader")) {
+
+			} else if (nextCommand.equals("Leader")) {
 				view.showMessage("Please enter the id of worker you want to lead this project");
-				//getThisProject().setLeader(getWorker(getCommand()));
-				
-			}else if(nextCommand.equals("Back")) {
+				nextCommand = getCommand();
+				if (modelWorker.workerHasID(nextCommand)) {
+					modelProject.setLeader(getThisProject(), getWorker(nextCommand));
+				}
+			} else if (nextCommand.equals("Back")) {
 				changeStage("Application");
 				setHasProject(false);
 				view.showAvailableCommands(modelApplication.getStage());
@@ -104,12 +107,12 @@ public class ControllerProject {
 		}
 	}
 
-//	private Worker getWorker(String id) {
-//		return modelWorker.getWorker(id);
-//	}
+	private Worker getWorker(String id) {
+		return modelWorker.getWorker(id);
+	}
 
 	private void addActivity(Project project, String name) throws OperationNotAllowedException {
-		modelActivity.addActivity(project,name);
+		modelActivity.addActivity(project, name);
 
 	}
 
@@ -156,15 +159,17 @@ public class ControllerProject {
 	public boolean editProjectName(Project project, String name) {
 		return modelProject.editProjectName(project, name);
 
-    }
-    public ArrayList<Project> getProjects(){
-        return modelProject.getProjects();
-    }
+	}
 
-	public LocalDate getProjectStart(Project project){
+	public ArrayList<Project> getProjects() {
+		return modelProject.getProjects();
+	}
+
+	public LocalDate getProjectStart(Project project) {
 		return modelProject.getProjectStart(project);
 	}
-	public LocalDate getProjectEnd(Project project){
+
+	public LocalDate getProjectEnd(Project project) {
 		return modelProject.getProjectEnd(project);
 	}
 

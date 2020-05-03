@@ -37,13 +37,6 @@ public class Worker {
 	public String getLastName() {
 		return this.lastname;
 	}
-	
-//	public boolean exists() {
-//		if(model.workerHasID(this.getId())) {
-//			return true;
-//		}
-//		return false;
-//	}
 
 	public void setID(String id) {
 		this.id = id;

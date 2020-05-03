@@ -18,13 +18,15 @@ public class View {
 	private ControllerWorker controllerWorker;
 
 	public View() throws OperationNotAllowedException {
-		this.modelAplication = new ModelApplication(this);
+		this.modelAplication = new ModelAplication(this);
+		this.modelWorker = new ModelWorker();
 		this.modelProject = new ModelProject(this);
 		this.modelActivity = new ModelActivity(this);
-		this.modelWorker = new ModelWorker();
+		
 		this.controller = new ControllerApplication(this, modelAplication, modelProject);
 		this.controllerProject = new ControllerProject(this, modelAplication, modelProject, modelActivity,modelWorker);
 		this.controllerActivity = new ControllerActivity(this, modelAplication, modelProject, modelActivity);
+		this.controllerWorker = new ControllerWorker(this,modelWorker);
 		showApplicationIntroduction();
 		startup();
 	}
