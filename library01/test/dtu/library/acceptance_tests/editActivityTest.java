@@ -14,6 +14,7 @@ import dtu.library.app.OperationNotAllowedException;
 import dtu.library.app.Project;
 import dtu.library.app.View;
 import dtu.library.app.controllerInterface.ControllerActivity;
+import dtu.library.app.controllerInterface.ControllerApplication;
 import dtu.library.app.controllerInterface.ControllerProject;
 import io.cucumber.java.en.*;
 

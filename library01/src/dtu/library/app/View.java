@@ -1,8 +1,7 @@
 package dtu.library.app;
 
-import java.util.*;
-
 import dtu.library.app.controllerInterface.ControllerActivity;
+import dtu.library.app.controllerInterface.ControllerApplication;
 import dtu.library.app.controllerInterface.ControllerProject;
 import dtu.library.app.controllerInterface.ControllerWorker;
 

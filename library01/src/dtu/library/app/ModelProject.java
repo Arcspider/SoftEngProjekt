@@ -188,6 +188,7 @@ public class ModelProject {
 	public boolean setLeader(Project project, Worker worker) throws OperationNotAllowedException {
 		if (!project.hasLeader()) {
 			project.setLeader(worker);
+			view.showMessage(worker.getId() + " is now the leader for this project");
 			return true;
 		} else if (project.hasLeader() && project.getLeader().equals(worker)) {
 			throw new OperationNotAllowedException("This worker is already leader for the project");	
