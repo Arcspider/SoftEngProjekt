@@ -186,4 +186,15 @@ public class ModelProject {
 	public Project getThisProject() {
 		return thisProject;
 	}
+
+	public boolean setLeader(Project project, Worker worker) throws OperationNotAllowedException {
+		if (!project.hasLeader()) {
+			project.setLeader(worker);
+			return true;
+		} else if (project.hasLeader() && project.getLeader().equals(worker)) {
+			throw new OperationNotAllowedException("This worker is already leader for the project");	
+		}else {
+			throw new OperationNotAllowedException("This project already has a leader");
+		}
+	}
 }

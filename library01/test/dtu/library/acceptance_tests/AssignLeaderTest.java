@@ -21,13 +21,13 @@ public class AssignLeaderTest {
 
     private Project project;
 
-    public AssignLeaderTest(ModelProject  modelProject, ModelWorker modelWorker,ErrorMessageHolder errorMessageHolder) {
-    	this.model = model;
+    public AssignLeaderTest(ModelProject  modelProject, ModelWorker modelWorker,ErrorMessageHolder errorMessageHolder) throws OperationNotAllowedException {
+    	this.modelProject = modelProject;
+    	this.modelWorker = modelWorker;
     	this.errorMessageHolder = errorMessageHolder;
-    	project = new Project("Tom", "coolID");
-    	
-    	worker = new Worker("Bob", "Gnarly", "420");
-    	
+    	project = modelProject.createProject("Tom");
+    	modelProject.addProject(project);
+    	worker = modelWorker.createWorker("Bob", "Gnarty");
     }
     
     @Given("that a project with id {string} does not have a leader")
@@ -38,63 +38,64 @@ public class AssignLeaderTest {
     
     @When("the user adds the worker with id {string} as leader")
     public void theUserAddsTheWorkerWithIdAsLeader(String string) throws OperationNotAllowedException {
-    	worker = model.createWorker(worker.getFirstName(), worker.getLastName());
     	worker.setID(string);
-        assertTrue(project.setLeader(worker));
+    	assertTrue(modelWorker.workerHasID(string));
+        assertTrue(modelProject.setLeader(project,worker));
     }
-//
-//    @Then("the worker with id {string} as leader for project {string}")
-//    public void theWorkerWithIdAsLeaderForProject(String string, String string2) {
-//    	assertEquals(worker, project.getLeader());
-//    }
-//    
-//    @Given("that a worker with id {string} is a leader for project {string}")
-//    public void thatAWorkerWithIdIsALeaderForProject(String string, String string2) throws OperationNotAllowedException {
-//    	worker = model.createWorker(worker.getFirstName(), worker.getLastName());
-//    	worker.setID(string);
-//    	project.setId(string2);
-//    	project.setLeader(worker);
-//    	assertEquals(worker, project.getLeader());
-//    }
-//
-//    @When("the user adds the worker with id {string} as leader to the project")
-//    public void theUserAddsTheWorkerWithIdAsLeaderToTheProject(String string) {
-//    	try {
-//    	assertFalse(project.setLeader(worker));
-//        } catch (OperationNotAllowedException e) {
-//            errorMessageHolder.setErrorMessage(e.getMessage());
-//        }
-//    }
-//    
-//    @Then("an error message {string} is written")
-//    public void anErrorMessageIsWritten(String string) {
-//    	assertEquals(string, this.errorMessageHolder.getErrorMessage());
-//    }
-//    
-//    @Given("that a worker with id {string} is leader for project {string}")
-//    public void thatAWorkerWithIdIsLeaderForProject(String string, String string2) throws OperationNotAllowedException {
-//    	Worker Mike = new Worker("Mike", "Hunt", string, model);
-//    	Mike = model.createWorker(Mike.getFirstName(), Mike.getLastName());
-//    	Mike.setID(string);
-//    	project = new Project("Pro", string2);
-//    	assertTrue(project.setLeader(Mike));
-//    	
-//    }
-//
-//    
-//    @When("the user adds the worker with id {string} as a leader for the project")
-//    public void theUserAddsTheWorkerWithIdAsALeaderForTheProject(String string) {
-//    	worker.setID(string);
-//    	try {
-//    	assertFalse(project.setLeader(worker));
-//        } catch (OperationNotAllowedException e) {
-//            errorMessageHolder.setErrorMessage(e.getMessage());
-//        }
-//    }
-//
-//    @Then("an error message {string} is witten")
-//    public void anErrorMessageIsWitten(String string) {
-//    	assertEquals(string, this.errorMessageHolder.getErrorMessage());
-//    }
-//	
+
+    @Then("the worker with id {string} as leader for project {string}")
+    public void theWorkerWithIdAsLeaderForProject(String string, String string2) {
+    	assertEquals(worker, project.getLeader());
+    }
+    
+    @Given("that a worker with id {string} is a leader for project {string}")
+    public void thatAWorkerWithIdIsALeaderForProject(String workerID, String projectID) throws OperationNotAllowedException {
+    	worker = modelWorker.createWorker(worker.getFirstName(), worker.getLastName());
+    	worker.setID(workerID);
+    	project.setId(projectID);
+    	assertTrue(modelProject.setLeader(project, worker));
+    	assertEquals(worker, project.getLeader());
+    }
+
+    @When("the user adds the worker with id {string} as leader to the project")
+    public void theUserAddsTheWorkerWithIdAsLeaderToTheProject(String string) {
+    	try {
+    	assertFalse(modelProject.setLeader(project, worker));
+        } catch (OperationNotAllowedException e) {
+            errorMessageHolder.setErrorMessage(e.getMessage());
+        }
+    }
+    
+    @Then("an error message {string} is written")
+    public void anErrorMessageIsWritten(String string) {
+    	assertEquals(string, this.errorMessageHolder.getErrorMessage());
+    }
+    
+    @Given("that a worker with id {string} is leader for project {string}")
+    public void thatAWorkerWithIdIsLeaderForProject(String workerID, String projectID) throws OperationNotAllowedException {
+    	worker = modelWorker.createWorker("Mike", "Hunt");
+    	worker.setID(workerID);
+    	project = modelProject.createProject("Pro");
+    	project.setId(projectID);
+    	modelProject.addProject(project);
+    	assertTrue(modelProject.setLeader(project, worker));    	
+    }
+
+    
+    @When("the user adds the worker with id {string} as a leader for the project")
+    public void theUserAddsTheWorkerWithIdAsALeaderForTheProject(String string) {
+    	worker = modelWorker.createWorker("Tom", "Bob");
+    	worker.setID(string);
+    	try {
+    	assertFalse(modelProject.setLeader(project, worker));
+        } catch (OperationNotAllowedException e) {
+            errorMessageHolder.setErrorMessage(e.getMessage());
+        }
+    }
+
+    @Then("an error message {string} is witten")
+    public void anErrorMessageIsWitten(String string) {
+    	assertEquals(string, this.errorMessageHolder.getErrorMessage());
+    }
+	
 }

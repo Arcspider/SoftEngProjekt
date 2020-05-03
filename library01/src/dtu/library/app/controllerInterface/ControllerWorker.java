@@ -25,8 +25,7 @@ public class ControllerWorker {
 			view.showMessage("Please enter the new employee's first name and last name");
 			String fristname = getCommand();
 			String lastname = getCommand();
-			modelWorker.createWorker(fristname, lastname).toString();
-
+			createWorker(fristname, lastname);
 		}
 	}
 
