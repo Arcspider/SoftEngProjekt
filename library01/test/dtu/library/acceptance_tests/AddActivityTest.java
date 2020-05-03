@@ -9,28 +9,32 @@ import dtu.library.app.ControllerApplication;
 import dtu.library.app.Model;
 import dtu.library.app.ModelActivity;
 import dtu.library.app.ModelProject;
+import dtu.library.app.ModelWorker;
 import dtu.library.app.OperationNotAllowedException;
 import dtu.library.app.Project;
 import dtu.library.app.View;
+import dtu.library.app.Worker;
 import dtu.library.app.controllerInterface.ControllerActivity;
 import dtu.library.app.controllerInterface.ControllerProject;
 import io.cucumber.java.en.*;
 
 public class AddActivityTest {
 
-    private Model model;
     private ModelProject modelProject;
     private ModelActivity modelActivity;
+    private ModelWorker modelWorker;
     private ErrorMessageHolder errorMessageHolder;
     private String name;
 
     private Project project;
+    private Worker worker;
+    
     Activity newActivity;
 
-    public AddActivityTest(View view,Model model,ModelProject modelProject, ModelActivity modelActivity, ErrorMessageHolder errorMessageHolder){
-    	this.model = model;
+    public AddActivityTest(View view,ModelProject modelProject, ModelActivity modelActivity, ModelWorker modelWorker,ErrorMessageHolder errorMessageHolder){
     	this.modelProject = modelProject;
     	this.modelActivity = modelActivity;
+    	this.modelWorker = modelWorker;
     	this.errorMessageHolder  = errorMessageHolder;
     }
 
@@ -39,7 +43,14 @@ public class AddActivityTest {
 		project = modelProject.createProject("tom"); 
 		project.setId(string);
 	    modelProject.addProject(project);
+	    worker = modelWorker.createWorker("Bob", "tom");
+	    modelProject.setLeader(project, worker);
 	}
+	@Given("the project has a leader")
+	public void theProjectHasALeader() {
+		assertTrue(modelProject.hasLeader(project));
+	}
+
 
 	@Given("the user adds activity {string}")
 	public void theUserAddsActivity(String string) throws OperationNotAllowedException {

@@ -197,4 +197,8 @@ public class ModelProject {
 			throw new OperationNotAllowedException("This project already has a leader");
 		}
 	}
+
+	public boolean hasLeader(Project project) {
+		return project.hasLeader();
+	}
 }
