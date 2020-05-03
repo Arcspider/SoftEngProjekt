@@ -28,7 +28,7 @@ public class ModelActivity {
 			if (endActivityDate == null || startActivityDate.isBefore(endActivityDate)) {
 				LocalDate newStart = stringToDate(startDate);
 				project.setActivityStartDate(currentActivity, newStart);
-				System.out.println(thisActivity.toString());
+				System.out.println(currentActivity.toString());
 			} else
 				throw new OperationNotAllowedException("End date is before start date");
 		}
@@ -55,7 +55,7 @@ public class ModelActivity {
 			if (endActivityDate == null || startActivityDate.isBefore(endActivityDate)) {
 				LocalDate newEnd = stringToDate(endDate);
 				project.setActivityEndDate(currentActivity, newEnd);
-				System.out.println(thisActivity.toString());
+				System.out.println(currentActivity.toString());
 			} else
 				throw new OperationNotAllowedException("Start date is after end date");
 		}
