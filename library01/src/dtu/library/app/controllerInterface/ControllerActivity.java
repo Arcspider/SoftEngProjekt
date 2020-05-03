@@ -57,7 +57,7 @@ public class ControllerActivity {
 				}
 			} else if(nextCommand.equals("Back")) {
 				setHasActivity(false);
-				changeStage("Project");
+				changeStage("Project"); 
 			}
 		}
 	}

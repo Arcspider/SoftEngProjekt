@@ -28,9 +28,8 @@ public class ControllerWorker {
 			String fristname = getCommand();
 			String lastname = getCommand();
 			modelWorker.createWorker(fristname, lastname).toString();
-
 		}else if(nextCommand.equals("Back")) {
-			modelApplication.changeStage("Application");
+			modelApplication.changeStage("Application"); 
 			view.showAvailableCommands(modelApplication.getStage());
 		}
 	}

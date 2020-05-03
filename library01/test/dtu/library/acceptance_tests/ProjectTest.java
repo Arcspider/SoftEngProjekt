@@ -1,6 +1,9 @@
 package dtu.library.acceptance_tests;
 
-import dtu.library.app.*;
+
+import dtu.library.app.ModelProject;
+import dtu.library.app.OperationNotAllowedException;
+import dtu.library.app.Project;
 import dtu.library.app.controllerInterface.ControllerProject;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -14,7 +17,7 @@ import static org.junit.Assert.*;
 
 public class ProjectTest {
 
-    private Model model;
+
     private ModelProject modelProject;
    
     private ErrorMessageHolder errorMessageHolder;
@@ -24,8 +27,8 @@ public class ProjectTest {
     private List<Project> projects;
 
 
-    public ProjectTest(View view, ErrorMessageHolder errorMessageHolder,Model model, ModelProject modelProject) {
-        this.model = model;
+    public ProjectTest(ErrorMessageHolder errorMessageHolder, ModelProject modelProject) {
+   
         this.modelProject = modelProject;
         this.errorMessageHolder = errorMessageHolder;
     }

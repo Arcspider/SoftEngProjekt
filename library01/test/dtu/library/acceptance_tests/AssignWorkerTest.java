@@ -2,7 +2,6 @@ package dtu.library.acceptance_tests;
 
 import dtu.library.app.Activity;
 import dtu.library.app.ControllerApplication;
-import dtu.library.app.Model;
 import dtu.library.app.ModelActivity;
 import dtu.library.app.ModelProject;
 import dtu.library.app.ModelWorker;
@@ -24,7 +23,7 @@ import java.util.List;
 
 public class AssignWorkerTest {
 
-	private Model model; 
+ 
 	private ModelProject modelProject;
 	private ModelActivity modelActivity;
 	private ModelWorker modelWorker;
@@ -35,8 +34,8 @@ public class AssignWorkerTest {
 	private Worker worker;
 
 
-	public AssignWorkerTest(View view, Model model,ModelProject modelProject,ModelActivity modelActivity,ModelWorker modelWorker, ErrorMessageHolder errorMessageHolder) {
-		this.model = model;
+	public AssignWorkerTest(View view,ModelProject modelProject,ModelActivity modelActivity,ModelWorker modelWorker, ErrorMessageHolder errorMessageHolder) {
+		
 		this.modelProject = modelProject;
 		this.modelActivity = modelActivity;
 		this.modelWorker = modelWorker;
