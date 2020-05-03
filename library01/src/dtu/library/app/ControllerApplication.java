@@ -3,13 +3,13 @@ package dtu.library.app;
 import java.util.*;
 
 public class ControllerApplication {
-	private ModelAplication modelAplication;
+	private ModelApplication modelAplication;
 	private ModelProject modelProject;
 	private View view;
 	private Project newProject;
 	Scanner scanner;
 
-	public ControllerApplication(View view, ModelAplication modelAplication, ModelProject modelProject ) {
+	public ControllerApplication(View view, ModelApplication modelAplication, ModelProject modelProject ) {
 		this.view = view;
 		
 		this.modelAplication = modelAplication;

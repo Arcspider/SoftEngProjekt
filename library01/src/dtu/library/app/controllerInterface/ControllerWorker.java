@@ -2,7 +2,7 @@ package dtu.library.app.controllerInterface;
 
 import java.util.Scanner;
 
-
+import dtu.library.app.ModelApplication;
 import dtu.library.app.ModelWorker;
 import dtu.library.app.OperationNotAllowedException;
 import dtu.library.app.View;
@@ -10,13 +10,15 @@ import dtu.library.app.Worker;
 
 public class ControllerWorker {
 	private ModelWorker modelWorker;
+	private ModelApplication modelApplication;	
 	private View view;
 	Scanner scanner;
 
-	public ControllerWorker(View view,ModelWorker modelWorker) {
+	public ControllerWorker(View view, ModelWorker modelWorker, ModelApplication modelApplication) {
 		this.view = view;
 		this.modelWorker = modelWorker;
 		scanner = new Scanner(System.in);
+		this.modelApplication = modelApplication;
 	}
 
 	public void runCommand() throws OperationNotAllowedException {
@@ -25,7 +27,11 @@ public class ControllerWorker {
 			view.showMessage("Please enter the new employee's first name and last name");
 			String fristname = getCommand();
 			String lastname = getCommand();
-			createWorker(fristname, lastname);
+			modelWorker.createWorker(fristname, lastname).toString();
+
+		}else if(nextCommand.equals("Back")) {
+			modelApplication.changeStage("Application");
+			view.showAvailableCommands(modelApplication.getStage());
 		}
 	}
 

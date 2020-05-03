@@ -4,23 +4,23 @@ import java.util.Scanner;
 
 import dtu.library.app.Activity;
 import dtu.library.app.ModelActivity;
-import dtu.library.app.ModelAplication;
+import dtu.library.app.ModelApplication;
 import dtu.library.app.ModelProject;
 import dtu.library.app.OperationNotAllowedException;
 import dtu.library.app.Project;
 import dtu.library.app.View;
 
 public class ControllerActivity {
-	private ModelAplication modelAplication;
+	private ModelApplication modelApplication;
 	private ModelProject modelProject;
 	private ModelActivity modelActivity;
 	private View view;
 	Scanner scanner;
 	Scanner timeHanlder;
 
-	public ControllerActivity(View view,ModelAplication modelAplication, ModelProject modelProject, ModelActivity modelActivity) {
+	public ControllerActivity(View view,ModelApplication modelApplication, ModelProject modelProject, ModelActivity modelActivity) {
 		this.view = view;
-		this.modelAplication = modelAplication;
+		this.modelApplication = modelApplication;
 		this.modelProject = modelProject;
 		this.modelActivity = modelActivity;
 		scanner = new Scanner(System.in);
@@ -28,26 +28,36 @@ public class ControllerActivity {
 	}
 
 	public void runCommand() throws OperationNotAllowedException {
-		if(! hasActivity()) {
+		if(!hasActivity()) {
 			String name = getCommand();
 			if(!activityExists(getThisProject(),name)) {
 				changeStage("Project");
-				view.showMessage("This project " + getThisProject().getId()+" has the activity " + name );
+				view.showMessage("This project " + getThisProject().getId()+" does not have the activity " + name );
 			}else {
 				setHasActivity(true);
 				setThisActivity(getActivity(getThisProject(), name));
+				getThisActivity().toString();
 			}
 		}else{
+			view.showAvailableCommands(modelApplication.getStage());
 			String nextCommand = getCommand();
 			if (nextCommand.equals("Time")) {
-				System.out.println("time");
+				view.showMessage("Type \"Start\" to change the start date of the project");
+				view.showMessage("Type \"End\" to change the end date of the project");
+				view.showMessage("The date format is \"ww-yyyy\" where ww is week and yyyy is year");
+				
 				nextCommand = getCommand();
 				if (nextCommand.equals("Start")) {
+					view.showMessage("Write the new start date in the format: ww-yyyy");
 					setActivityStart(getThisProject(), getThisActivity(), timeHanlder.nextLine());
 
 				} else if (nextCommand.equals("End")) {
+					view.showMessage("Write the new end date in the format: ww-yyyy");
 					setActivityEnd(getThisProject(), getThisActivity(), timeHanlder.nextLine());
 				}
+			} else if(nextCommand.equals("Back")) {
+				setHasActivity(false);
+				changeStage("Project");
 			}
 		}
 	}
@@ -69,7 +79,7 @@ public class ControllerActivity {
 	}
 
 	private void changeStage(String stage) {
-		modelAplication.changeStage(stage);
+		modelApplication.changeStage(stage);
 	}
 
 	private Project getThisProject() {

@@ -1,10 +1,10 @@
 package dtu.library.app;
 
-public class ModelAplication {
+public class ModelApplication {
 	private String stage;
 	private View view;
 	
-	public ModelAplication(View view) {
+	public ModelApplication(View view) {
 		this.view = view;
 		stage = "Application";
 	}
