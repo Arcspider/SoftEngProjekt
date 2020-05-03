@@ -1,6 +1,10 @@
 package dtu.library.app.controllerInterface;
 
 import dtu.library.app.Model;
+import dtu.library.app.ModelActivity;
+import dtu.library.app.ModelAplication;
+import dtu.library.app.ModelProject;
+import dtu.library.app.ModelWorker;
 import dtu.library.app.OperationNotAllowedException;
 import dtu.library.app.Project;
 import dtu.library.app.View;
@@ -12,14 +16,22 @@ import java.util.Scanner;
 
 public class ControllerProject {
 	private Model model;
+	private ModelAplication modelAplication;
+	private ModelProject modelProject;
+	private ModelActivity modelActivity;
+	private ModelWorker modelWorker;
 	private View view;
 
 	Scanner scanner;
 	Scanner descriptionHandler;
 
-	public ControllerProject(View view, Model model) {
+	public ControllerProject(View view, Model model,ModelAplication modelAplication, ModelProject modelProject, ModelActivity modelActivity, ModelWorker modelworker) {
 		this.view = view;
 		this.model = model;
+		this.modelAplication = modelAplication;
+		this.modelProject = modelProject;
+		this.modelActivity = modelActivity;
+		this.modelWorker = modelWorker;
 		scanner = new Scanner(System.in);
 		descriptionHandler = new Scanner(System.in);
 	}
@@ -41,7 +53,7 @@ public class ControllerProject {
 				
 			}
 		}else {
-			view.showAvailableCommands(model.getStage());
+			view.showAvailableCommands(modelAplication.getStage());
 			String nextCommand = getCommand();
 			if (nextCommand.equals("Description")) {
 				view.showMessage("Please enter a desired description");
@@ -55,7 +67,7 @@ public class ControllerProject {
 				removeProject(getThisProject());
 				setHasProject(false);
 				view.showMessage("The project has been removed. Available commands: Create, Get");
-				model.changeStage("Application");
+				modelAplication.changeStage("Application");
 			}else if (nextCommand.equals("Add")) {
 				view.showMessage("Please enter a name for the activity");
 				addActivity(getThisProject(), getCommand());
@@ -81,45 +93,45 @@ public class ControllerProject {
 				
 			}else if(nextCommand.equals("Leader")) {
 				view.showMessage("Please enter the id of worker you want to lead this project");
-				getThisProject().setLeader(getWorker(getCommand()));
+				//getThisProject().setLeader(getWorker(getCommand()));
 				
 			}else if(nextCommand.equals("Back")) {
 				changeStage("Application");
 				setHasProject(false);
-				view.showAvailableCommands(model.getStage());
+				view.showAvailableCommands(modelAplication.getStage());
 			}
 		}
 	}
 
 	private Worker getWorker(String id) {
-		return model.getWorker(id);
+		return modelWorker.getWorker(id);
 	}
 
 	private void addActivity(Project project, String name) throws OperationNotAllowedException {
-		model.addActivity(project,name);
+		modelActivity.addActivity(project,name);
 
 	}
 
 	private boolean getHasProject() {
-		return model.getHasProject();
+		return modelProject.getHasProject();
 	}
 
 	private Project getThisProject() {
-		return model.getThisProject();
+		return modelProject.getThisProject();
 	}
 
 	private void setThisProject(String id) {
-		model.setThisProject(id);
+		modelProject.setThisProject(id);
 
 	}
 
 	private void setHasProject(boolean is) {
-		model.setHasProject(is);
+		modelProject.setHasProject(is);
 
 	}
 
 	private void changeStage(String stage) {
-		model.changeStage(stage);
+		modelAplication.changeStage(stage);
 
 	}
 
@@ -128,42 +140,42 @@ public class ControllerProject {
 	}
 
 	public void removeProject(Project project) throws OperationNotAllowedException {
-		model.removeProject(project);
+		modelProject.removeProject(project);
 
 	}
 
 	public boolean exists(String ID) {
-		return model.hasID(ID);
+		return modelProject.hasID(ID);
 	}
 
 	public boolean editProjectDescription(Project project, String description) {
-		return model.editProjectDescription(project, description);
+		return modelProject.editProjectDescription(project, description);
 	}
 
 	public boolean editProjectName(Project project, String name) {
-		return model.editProjectName(project, name);
+		return modelProject.editProjectName(project, name);
 
     }
     public ArrayList<Project> getProjects(){
-        return model.getProjects();
+        return modelProject.getProjects();
     }
 
 	public LocalDate getProjectStart(Project project){
-		return model.getProjectStart(project);
+		return modelProject.getProjectStart(project);
 	}
 	public LocalDate getProjectEnd(Project project){
-		return model.getProjectEnd(project);
+		return modelProject.getProjectEnd(project);
 	}
 
 	public boolean validDate(String someDate) {
-		return model.verifyDateFormat(someDate);
+		return modelProject.verifyDateFormat(someDate);
 	}
 
 	public void setProjectStart(Project project, String startDate) {
-		model.setProjectStart(project, startDate);
+		modelProject.setProjectStart(project, startDate);
 	}
 
 	public void setProjectEnd(Project project, String endDate) {
-		model.setProjectEnd(project, endDate);
+		modelProject.setProjectEnd(project, endDate);
 	}
 }

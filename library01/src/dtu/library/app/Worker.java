@@ -11,11 +11,10 @@ public class Worker {
 //	private List<userTime> userTimeList;
 	private ArrayList<Activity> activities;
 	
-	public Worker(String firstname, String lastname , String ID, Model model) {
+	public Worker(String firstname, String lastname , String ID) {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.id = ID;
-		this.model = model;	
 		activities = new ArrayList<Activity>(); 
 	}
 
@@ -41,12 +40,12 @@ public class Worker {
 		return this.lastname;
 	}
 	
-	public boolean exists() {
-		if(model.workerHasID(this.getId())) {
-			return true;
-		}
-		return false;
-	}
+//	public boolean exists() {
+//		if(model.workerHasID(this.getId())) {
+//			return true;
+//		}
+//		return false;
+//	}
 
 	public void setID(String id) {
 		this.id = id;

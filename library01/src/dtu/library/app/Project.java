@@ -118,18 +118,18 @@ public class Project implements datesInterface {
 	public Worker getLeader() {
 		return this.leader;
 	}
-
-	public boolean setLeader(Worker worker) throws OperationNotAllowedException {
-		if(!hasLeader() && worker.exists()) {
-			leader = worker;
-			System.out.println(leader.getName() + " is now a Leader for the project " + this.name);
-			return true;
-		} else if(hasLeader() && getLeader().equals(worker)){
-			throw new OperationNotAllowedException("This worker is already leader for the project");
-		} else {
-			throw new OperationNotAllowedException("This project already has a leader");		
-		}
-	}
+//
+//	public boolean setLeader(Worker worker) throws OperationNotAllowedException {
+//		if(!hasLeader() && worker.exists()) {
+//			leader = worker;
+//			System.out.println(leader.getName() + " is now a Leader for the project " + this.name);
+//			return true;
+//		} else if(hasLeader() && getLeader().equals(worker)){
+//			throw new OperationNotAllowedException("This worker is already leader for the project");
+//		} else {
+//			throw new OperationNotAllowedException("This project already has a leader");		
+//		}
+//	}
 	
 
 	public void setActivityStartDate(Activity currentActivity, LocalDate startDate) {

@@ -4,13 +4,17 @@ import java.util.*;
 
 public class Controller {
 	private Model model;
+	private ModelAplication modelAplication;
+	private ModelProject modelProject;
 	private View view;
 	private Project newProject;
 	Scanner scanner;
 
-	public Controller(View view, Model model) {
+	public Controller(View view, Model model, ModelAplication modelAplication, ModelProject modelProject ) {
 		this.view = view;
 		this.model = model;
+		this.modelAplication = modelAplication;
+		this.modelProject = modelProject;
 		scanner = new Scanner(System.in);
 	}
 
@@ -27,33 +31,33 @@ public class Controller {
 			    	addProject(newProject);
 			  }
 		} else if (nextCommand.equals("Get")) {
-			model.changeStage("Project");
+			modelAplication.changeStage("Project");
 			
 		} else if (nextCommand.equals("Exit")) {
 			System.exit(0);
 			
 		} else if (nextCommand.equals("Worker")) {
-			model.changeStage("Worker");
-			view.showAvailableCommands(model.getStage());
+			modelAplication.changeStage("Worker");
+			view.showAvailableCommands(modelAplication.getStage());
 		}
 		
 	}
 
 
 	public Project createProject(String name) throws OperationNotAllowedException {
-		return model.createProject(name);
+		return modelProject.createProject(name);
 	}
 
 	public boolean hasID(String id) {
-		return model.hasID(id);
+		return modelProject.hasID(id);
 	}
 
 	public boolean checkName(String name) throws OperationNotAllowedException {
-		return model.checkName(name);
+		return modelProject.checkName(name);
 	}
 
 	public void addProject(Project project) throws OperationNotAllowedException {
-		model.addProject(project);	
+		modelProject.addProject(project);	
 	}
 
 }
