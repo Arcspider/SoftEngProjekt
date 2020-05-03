@@ -1,11 +1,13 @@
-Feature: Assign Worker
+Feature: Allocate Time
   Description: The user allocates time they have spent working on an activity.
   Actor: User
 
-#  Scenario: The user allocates time to a specified activity.
-#    Given a project with  id "05-20-63"
-#	And has the activity "Beta"
-# Then the 
+  Scenario: The user allocates time to a specified activity.
+    Given a project with  id "05-20-63" exists
+	And the activity "Beta" exists in the project
+    And the user with id "MIOX" is assigned to the activity 
+    Then the user logs "5" hours on day "20-05-2020"
+    Then the time "MIOX;20-05-2020;5" can be found in the activity 
 #
 #  Scenario: The user allocates time to an activity they are not assigned to.
 #    Given the user with id "HAH" is not assigned to activity "Beta"

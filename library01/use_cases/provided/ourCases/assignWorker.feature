@@ -6,5 +6,5 @@ Feature: assign Worker
     Given a project with  id "05-20-63"
 	And has the activity "Beta"
  	And the worker with id "HH20" exists'
-   Then the user assign the worker to the activity
+    Then the user assign the worker to the activity
 

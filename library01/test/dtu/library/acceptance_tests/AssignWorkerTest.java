@@ -50,6 +50,7 @@ public class AssignWorkerTest {
 	}
 	@Then("the user assign the worker to the activity")
 	public void theUserAssignTheWorkerToTheActivity() {
-		assertTrue(modelWorker.assignWorker(activity,worker));
+		modelWorker.assignWorker(activity,worker);
+		assertTrue(activity.hasWorker(worker));
 	}
 }
