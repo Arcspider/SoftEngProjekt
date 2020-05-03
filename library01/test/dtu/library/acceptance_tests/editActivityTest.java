@@ -125,4 +125,14 @@ public class editActivityTest {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
 	}
+	@When("the user changes its budgetted time to {string}")
+	public void theUserChangesItsBudgettedTimeTo(String budgettedHours) {
+		
+		assertTrue(modelActivity.stringIsInteger(budgettedHours));
+	}
+	@Then("the activity's budgetted time is set to {string}")
+	public void theActivitySBudgettedTimeIsSetTo(String budgettedHours) {
+		modelActivity.setBudgettedHours(currentActivity,budgettedHours);
+		//assertEquals(currentActivity.getBudgettedHours(), Integer.parseInt(budgettedHours));
+	}
 }

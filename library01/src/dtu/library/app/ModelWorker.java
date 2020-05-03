@@ -25,9 +25,8 @@ public class ModelWorker {
 	}
 
 	private String workerGenerateID(String firstname, String lastname) {
-		String id = "" + firstname.charAt(0) + lastname.charAt(0) + random.nextInt(100);
-		while (workerHasID(id))
-			id = "" + firstname.charAt(0) + lastname.charAt(0) + random.nextInt(100);
+		String id = "" + Character.toUpperCase(firstname.charAt(0)) + Character.toUpperCase(firstname.charAt(1)) + Character.toUpperCase(lastname.charAt(0)) +
+				Character.toUpperCase(lastname.charAt(1));
 		return id;
 	}
 

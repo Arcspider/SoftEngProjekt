@@ -63,7 +63,7 @@ public class ModelActivity {
 	public boolean verifyDateFormat(String dateToVerify) {
 
 		String[] stringDate = dateToVerify.split("-");
-		if (stringDate.length == 2 && stringIsNumeric(stringDate[0]) && stringIsNumeric(stringDate[1])) {
+		if (stringDate.length == 2 && stringIsInteger(stringDate[0]) && stringIsInteger(stringDate[1])) {
 
 			int weekInt = Integer.parseInt(stringDate[0]);
 			int yearInt = Integer.parseInt(stringDate[1]);
@@ -76,18 +76,26 @@ public class ModelActivity {
 				}
 			}
 		}
-
 		return false;
 	}
 
-	public boolean stringIsNumeric(String test) {
+	public boolean stringIsInteger(String test) {
 		try {
-			int pls = Integer.parseInt(test);
+			int canIBeConverted = Integer.parseInt(test);
 		} catch (NumberFormatException e) {
 			return false;
 		}
 		return true;
 	}
+	public boolean stringIsDouble(String test) {
+		try {
+			double canIBeConverted = Double.parseDouble(test);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return true;
+	}
+	
 
 	public void changeActivityDescription(Project project, Activity activity, String newDescription)
 			throws OperationNotAllowedException {
@@ -147,6 +155,52 @@ public class ModelActivity {
 
 	public boolean addActivity(Project project, String name) throws OperationNotAllowedException {
 		return project.addActivity(name);
+	}
+
+	public void setBudgettedHours(Activity currentActivity, String budgettedHours) {
+		currentActivity.setBudgettedHours(budgettedHours);
+	}
+
+	public boolean verifyFormatddmmyyyy(String day) {
+		String[] stringDate = day.split("-");
+		if (stringDate.length == 3 && stringIsInteger(stringDate[0]) && stringIsInteger(stringDate[1]) && stringIsInteger(stringDate[2])) {
+			int monthInt = Integer.parseInt(stringDate[1]);
+			int yearInt = Integer.parseInt(stringDate[2]);
+			int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+			int difference = yearInt - currentYear;
+			// ï¿½rstallene man arbejder indenfor er 50 ï¿½r
+			if (difference >= -50 && difference <= 50 && monthInt <=12 && monthInt>0) {
+					System.out.println("legal dato ");
+					return true;
+			}
+		}
+		System.out.println("Illegal dato weewoo");
+		return false;
+	}
+	public boolean verifyLegalShift(Activity activity,String shiftFormat) {
+		String[] arrayFormat = shiftFormat.split("-");
+		if(activity.hasWorkerId(arrayFormat[0]) && verifyFormatddmmyyyy(arrayFormat[1]) && allowedHours(arrayFormat[2])) {
+			return true;
+		}else return true;
+	}
+	
+	
+	public void addShift(Activity activity, String fullDateFormat) {
+		if(verifyLegalShift(activity,fullDateFormat)) {
+			activity.addShift(fullDateFormat);
+		}else view.showMessage("shift wasn't added, as something was illegal ");
+	}
+
+	public boolean allowedHours(String hours) {
+		if(stringIsDouble(hours)) {
+			Double doubleHours = Double.parseDouble(hours);
+			//Skal være enten heltal eller halv times intervaller.
+				return (doubleHours <=16 && doubleHours >=0 && doubleHours % 0.5 ==0);				
+		}
+		return false;
+	}
+	public boolean getShifty(Activity activity, String shift) {
+		return activity.hasShiftByIdAndDate(shift);
 	}
 
 }
