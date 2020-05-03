@@ -1,6 +1,13 @@
 package dtu.library.app.controllerInterface;
 
 import dtu.library.app.Model;
+<<<<<<< Updated upstream
+=======
+import dtu.library.app.ModelActivity;
+import dtu.library.app.ModelApplication;
+import dtu.library.app.ModelProject;
+import dtu.library.app.ModelWorker;
+>>>>>>> Stashed changes
 import dtu.library.app.OperationNotAllowedException;
 import dtu.library.app.Project;
 import dtu.library.app.View;
@@ -12,12 +19,23 @@ import java.util.Scanner;
 
 public class ControllerProject {
 	private Model model;
+<<<<<<< Updated upstream
+=======
+	private ModelApplication modelAplication;
+	private ModelProject modelProject;
+	private ModelActivity modelActivity;
+	private ModelWorker modelWorker;
+>>>>>>> Stashed changes
 	private View view;
 
 	Scanner scanner;
 	Scanner descriptionHandler;
 
+<<<<<<< Updated upstream
 	public ControllerProject(View view, Model model) {
+=======
+	public ControllerProject(View view, Model model,ModelApplication modelAplication, ModelProject modelProject, ModelActivity modelActivity, ModelWorker modelworker) {
+>>>>>>> Stashed changes
 		this.view = view;
 		this.model = model;
 		scanner = new Scanner(System.in);

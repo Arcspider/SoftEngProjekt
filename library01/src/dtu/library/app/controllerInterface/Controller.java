@@ -9,11 +9,20 @@ import dtu.library.app.View;
 
 public class Controller {
 	private Model model;
+<<<<<<< Updated upstream:library01/src/dtu/library/app/controllerInterface/Controller.java
+=======
+	private ModelApplication modelAplication;
+	private ModelProject modelProject;
+>>>>>>> Stashed changes:library01/src/dtu/library/app/Controller.java
 	private View view;
 	private Project newProject;
 	Scanner scanner;
 
+<<<<<<< Updated upstream:library01/src/dtu/library/app/controllerInterface/Controller.java
 	public Controller(View view, Model model) {
+=======
+	public Controller(View view, Model model, ModelApplication modelAplication, ModelProject modelProject ) {
+>>>>>>> Stashed changes:library01/src/dtu/library/app/Controller.java
 		this.view = view;
 		this.model = model;
 		scanner = new Scanner(System.in);

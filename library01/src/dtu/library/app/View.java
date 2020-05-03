@@ -9,6 +9,13 @@ import dtu.library.app.controllerInterface.ControllerWorker;
 
 public class View {
 	private Model model;
+<<<<<<< Updated upstream
+=======
+	private ModelApplication modelAplication;
+	private ModelProject modelProject;
+	private ModelActivity modelActivity;
+	private ModelWorker modelWorker;
+>>>>>>> Stashed changes
 	private Controller controller;
 	private ControllerProject controllerProject;
 	private ControllerActivity controllerActivity;
@@ -16,9 +23,18 @@ public class View {
 
 	public View() throws OperationNotAllowedException {
 		this.model = new Model(this);
+<<<<<<< Updated upstream
 		this.controller = new Controller(this, model);
 		this.controllerProject = new ControllerProject(this,model);
 		this.controllerActivity = new ControllerActivity(this,model);
+=======
+		this.modelAplication = new ModelApplication(this);
+		this.modelProject = new ModelProject(this);
+		this.modelActivity = new ModelActivity(this);
+		this.controller = new Controller(this, model, modelAplication, modelProject);
+		this.controllerProject = new ControllerProject(this, model, modelAplication, modelProject, modelActivity,modelWorker);
+		this.controllerActivity = new ControllerActivity(this, model, modelAplication, modelProject, modelActivity);
+>>>>>>> Stashed changes
 		showApplicationIntroduction();
 		startup();
 	}

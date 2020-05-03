@@ -4,17 +4,33 @@ import java.util.Scanner;
 
 import dtu.library.app.Activity;
 import dtu.library.app.Model;
+<<<<<<< Updated upstream
+=======
+import dtu.library.app.ModelActivity;
+import dtu.library.app.ModelApplication;
+import dtu.library.app.ModelProject;
+>>>>>>> Stashed changes
 import dtu.library.app.OperationNotAllowedException;
 import dtu.library.app.Project;
 import dtu.library.app.View;
 
 public class ControllerActivity {
 	private Model model;
+<<<<<<< Updated upstream
+=======
+	private ModelApplication modelAplication;
+	private ModelProject modelProject;
+	private ModelActivity modelActivity;
+>>>>>>> Stashed changes
 	private View view;
 	Scanner scanner;
 	Scanner timeHandler;
 
+<<<<<<< Updated upstream
 	public ControllerActivity(View view, Model model) {
+=======
+	public ControllerActivity(View view, Model model,ModelApplication modelAplication, ModelProject modelProject, ModelActivity modelActivity) {
+>>>>>>> Stashed changes
 		this.view = view;
 		this.model = model;
 		scanner = new Scanner(System.in);
