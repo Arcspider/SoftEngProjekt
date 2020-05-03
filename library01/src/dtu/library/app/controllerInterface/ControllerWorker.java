@@ -24,10 +24,11 @@ public class ControllerWorker {
 	public void runCommand() throws OperationNotAllowedException {
 		String nextCommand = getCommand();
 		if (nextCommand.equals("Create")) {
-			view.showMessage("Please enter the new employee's first name and last name");
+			view.showMessage("Please enter the new employee's first name");
 			String fristname = getCommand();
+			view.showMessage("Please enter the new employee's last name");
 			String lastname = getCommand();
-			modelWorker.createWorker(fristname, lastname).toString();
+			view.showMessage(modelWorker.createWorker(fristname, lastname).toString());
 
 		}else if(nextCommand.equals("Back")) {
 			modelApplication.changeStage("Application");
