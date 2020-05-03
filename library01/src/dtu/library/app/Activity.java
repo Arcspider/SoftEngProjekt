@@ -19,6 +19,10 @@ public class Activity implements datesInterface{
 	public String getName() {
 		return name;
 	}
+	
+	public String toString() {
+		return "This activity is named " + name + ", starts at " + startDate + " and ends at " + endDate;
+	}
 
 	@Override
 	public LocalDate getStartDate() {

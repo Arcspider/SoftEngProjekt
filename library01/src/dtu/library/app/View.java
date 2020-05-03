@@ -8,7 +8,7 @@ import dtu.library.app.controllerInterface.ControllerWorker;
 
 public class View {
 
-	private ModelAplication modelAplication;
+	private ModelApplication modelAplication;
 	private ModelProject modelProject;
 	private ModelActivity modelActivity;
 	private ModelWorker modelWorker;
@@ -18,7 +18,7 @@ public class View {
 	private ControllerWorker controllerWorker;
 
 	public View() throws OperationNotAllowedException {
-		this.modelAplication = new ModelAplication(this);
+		this.modelAplication = new ModelApplication(this);
 		this.modelProject = new ModelProject(this);
 		this.modelActivity = new ModelActivity(this);
 		this.modelWorker = new ModelWorker();
@@ -26,7 +26,7 @@ public class View {
 		this.controllerProject = new ControllerProject(this, modelAplication, modelProject, modelActivity,modelWorker);
 		this.controllerActivity = new ControllerActivity(this, modelAplication, modelProject, modelActivity);
 		showApplicationIntroduction();
-		 //startup();
+		startup();
 	}
 
 	public void showMessage(String message) {
@@ -39,11 +39,12 @@ public class View {
 		} else if (stage.equals("Project")) {
 			showProjectIntroduction(modelProject.getThisProject());
 		} else if (stage.equals("Activity")) {
-
+			showActivityIntroduction();
 		} else if (stage.equals("Worker")) {
 			showWorkerIntroduction();
 		}
 	}
+
 
 	public void startup() throws OperationNotAllowedException {
 		while (true) {
@@ -76,9 +77,8 @@ public class View {
 	}
 
 	public void showProjectIntroduction(Project project) {
-		System.out.println(project.toString());
 		System.out.println();
-		System.out.println("Current available commands: Name, Description, Remove, Add, Edit, Back");
+		System.out.println("Current available commands: Name, Description, Time, Remove, Add, Edit, Back");
 		System.out.println("Name: Change the name of this project");
 		System.out.println("Description: Change the description of this project");
 		System.out.println("Time: Change the start and end dates of the project");
@@ -89,9 +89,16 @@ public class View {
 		System.out.println("Leader: Assign a leader to this project");
 		System.out.println("Back: Exit this project");
 	}
+	
+	private void showActivityIntroduction() {
+		System.out.println("Current available commands: Time, Back");
+		System.out.println("Time: Change the start and end dates of the activity");
+		System.out.println("Back: Exit back to the project");
+	}
 
 	private void showWorkerIntroduction() {
-		System.out.println("Current available commands: Create");
+		System.out.println("Current available commands: Create, Back");
 		System.out.println("Create: Add a new employee to the database");
+		System.out.println("Back: Exit back to the main application");
 	}
 }

@@ -97,7 +97,7 @@ public class ModelProject {
 		if (verifyDateFormat(startDate)) {
 			LocalDate startProjectDate = stringToDate(startDate);
 			project.setStartDate(startProjectDate);
-			System.out.println("LocalDate start: " + startProjectDate);
+			System.out.println("The project starts: " + startProjectDate);
 		}
 	}
 
@@ -107,7 +107,7 @@ public class ModelProject {
 			LocalDate endProjectDate = stringToDate(endDate);
 			if (startProjectDate == null || endProjectDate.isAfter(startProjectDate)) {
 				project.setEndDate(endProjectDate);
-				System.out.println("LocalDate end: " + endProjectDate);
+				System.out.println("The project ends: " + endProjectDate);
 			} else {
 				System.out.println("Date wasn't set, as it was invalid.");
 			}
