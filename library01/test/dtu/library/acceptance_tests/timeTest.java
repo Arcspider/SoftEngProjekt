@@ -1,6 +1,9 @@
 package dtu.library.acceptance_tests;
 
 import dtu.library.app.Model;
+import dtu.library.app.ModelActivity;
+import dtu.library.app.ModelProject;
+import dtu.library.app.ModelWorker;
 import dtu.library.app.OperationNotAllowedException;
 import dtu.library.app.Project;
 import dtu.library.app.View;
@@ -22,25 +25,30 @@ public class timeTest {
     private String ID;
     private List<Project> projects;
 	private Model model;
-	
-	public timeTest(View view,Model model,ErrorMessageHolder errorMessageHolder){
+	private ModelProject modelProject;
+	private ModelActivity modelActivity;
+	private ModelWorker modelWorker;
+	public timeTest(View view,Model model,ModelProject modelProject,ModelActivity modelActivity, ModelWorker modelWorker, ErrorMessageHolder errorMessageHolder){
     	this.model = model;
+    	this.modelProject = modelProject;
+    	this.modelActivity = modelActivity;
+    	this.modelWorker = modelWorker;
     	this.errorMessageHolder  = errorMessageHolder;
     }
 
     @Given("a project with  id {string} exists")
     public void aProjectWithIdExists(String projectId) throws OperationNotAllowedException {
-    	project = model.createProject("testName");
+    	project = modelProject.createProject("testName");
     	project.setId(projectId);
-        model.addProject(project);
+        modelProject.addProject(project);
         
-        assertTrue(model.hasID(projectId));
+        assertTrue(modelProject.hasID(projectId));
     }
     @Given("the activity {string} exists in the project")
     public void theActivityExistsInTheProject(String activityName) throws OperationNotAllowedException {
-    	model.addActivity(project,activityName);
+    	modelActivity.addActivity(project,activityName);
     	
-    	assertTrue(model.activityExists(project, activityName));
+    	assertTrue(modelActivity.activityExists(project, activityName));
     }
     @Given("the user with id {string} is assigned to the activity")
     public void theUserWithIdIsAssignedToTheActivity(String string) {
