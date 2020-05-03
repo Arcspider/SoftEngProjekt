@@ -7,7 +7,7 @@ import static org.junit.Assert.assertTrue;
 import java.time.LocalDate;
 
 import dtu.library.app.Activity;
-import dtu.library.app.Controller;
+import dtu.library.app.ControllerApplication;
 import dtu.library.app.Model;
 import dtu.library.app.ModelActivity;
 import dtu.library.app.ModelProject;

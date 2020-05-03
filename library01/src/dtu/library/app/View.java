@@ -7,26 +7,26 @@ import dtu.library.app.controllerInterface.ControllerProject;
 import dtu.library.app.controllerInterface.ControllerWorker;
 
 public class View {
-	private Model model;
+
 	private ModelAplication modelAplication;
 	private ModelProject modelProject;
 	private ModelActivity modelActivity;
 	private ModelWorker modelWorker;
-	private Controller controller;
+	private ControllerApplication controller;
 	private ControllerProject controllerProject;
 	private ControllerActivity controllerActivity;
 	private ControllerWorker controllerWorker;
 
 	public View() throws OperationNotAllowedException {
-		this.model = new Model(this);
 		this.modelAplication = new ModelAplication(this);
 		this.modelProject = new ModelProject(this);
 		this.modelActivity = new ModelActivity(this);
-		this.controller = new Controller(this, model, modelAplication, modelProject);
-		this.controllerProject = new ControllerProject(this, model, modelAplication, modelProject, modelActivity,modelWorker);
-		this.controllerActivity = new ControllerActivity(this, model, modelAplication, modelProject, modelActivity);
+		this.modelWorker = new ModelWorker();
+		this.controller = new ControllerApplication(this, modelAplication, modelProject);
+		this.controllerProject = new ControllerProject(this, modelAplication, modelProject, modelActivity,modelWorker);
+		this.controllerActivity = new ControllerActivity(this, modelAplication, modelProject, modelActivity);
 		showApplicationIntroduction();
-		// startup();
+		 //startup();
 	}
 
 	public void showMessage(String message) {

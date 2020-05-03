@@ -3,7 +3,6 @@ package dtu.library.app.controllerInterface;
 import java.util.Scanner;
 
 import dtu.library.app.Activity;
-import dtu.library.app.Model;
 import dtu.library.app.ModelActivity;
 import dtu.library.app.ModelAplication;
 import dtu.library.app.ModelProject;
@@ -12,7 +11,6 @@ import dtu.library.app.Project;
 import dtu.library.app.View;
 
 public class ControllerActivity {
-	private Model model;
 	private ModelAplication modelAplication;
 	private ModelProject modelProject;
 	private ModelActivity modelActivity;
@@ -20,9 +18,8 @@ public class ControllerActivity {
 	Scanner scanner;
 	Scanner timeHanlder;
 
-	public ControllerActivity(View view, Model model,ModelAplication modelAplication, ModelProject modelProject, ModelActivity modelActivity) {
+	public ControllerActivity(View view,ModelAplication modelAplication, ModelProject modelProject, ModelActivity modelActivity) {
 		this.view = view;
-		this.model = model;
 		this.modelAplication = modelAplication;
 		this.modelProject = modelProject;
 		this.modelActivity = modelActivity;

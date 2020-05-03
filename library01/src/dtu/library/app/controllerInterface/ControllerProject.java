@@ -1,6 +1,5 @@
 package dtu.library.app.controllerInterface;
 
-import dtu.library.app.Model;
 import dtu.library.app.ModelActivity;
 import dtu.library.app.ModelAplication;
 import dtu.library.app.ModelProject;
@@ -8,30 +7,29 @@ import dtu.library.app.ModelWorker;
 import dtu.library.app.OperationNotAllowedException;
 import dtu.library.app.Project;
 import dtu.library.app.View;
-import dtu.library.app.Worker;
+//import dtu.library.app.Worker;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ControllerProject {
-	private Model model;
+
 	private ModelAplication modelAplication;
 	private ModelProject modelProject;
 	private ModelActivity modelActivity;
-	private ModelWorker modelWorker;
+//	private ModelWorker modelWorker;
 	private View view;
 
 	Scanner scanner;
 	Scanner descriptionHandler;
 
-	public ControllerProject(View view, Model model,ModelAplication modelAplication, ModelProject modelProject, ModelActivity modelActivity, ModelWorker modelworker) {
+	public ControllerProject(View view,ModelAplication modelAplication, ModelProject modelProject, ModelActivity modelActivity, ModelWorker modelWorker) {
 		this.view = view;
-		this.model = model;
 		this.modelAplication = modelAplication;
 		this.modelProject = modelProject;
 		this.modelActivity = modelActivity;
-		this.modelWorker = modelWorker;
+//		this.modelWorker = modelWorker;
 		scanner = new Scanner(System.in);
 		descriptionHandler = new Scanner(System.in);
 	}
@@ -103,9 +101,9 @@ public class ControllerProject {
 		}
 	}
 
-	private Worker getWorker(String id) {
-		return modelWorker.getWorker(id);
-	}
+//	private Worker getWorker(String id) {
+//		return modelWorker.getWorker(id);
+//	}
 
 	private void addActivity(Project project, String name) throws OperationNotAllowedException {
 		modelActivity.addActivity(project,name);

@@ -1,43 +1,47 @@
 package dtu.library.acceptance_tests;
-//
-//import static org.junit.Assert.assertEquals;
-//import static org.junit.Assert.assertFalse;
-//import static org.junit.Assert.assertTrue;
-//
-//import dtu.library.app.Model;
-//import dtu.library.app.OperationNotAllowedException;
-//import dtu.library.app.Project;
-//import dtu.library.app.Worker;
-//import io.cucumber.java.en.*;
-//
-//public class AssignLeaderTest {
-//
-//    private Model model;
-//    private ErrorMessageHolder errorMessageHolder;
-//    private Worker worker;
-//
-//    private Project project;
-//
-//    public AssignLeaderTest(Model model, ErrorMessageHolder errorMessageHolder) {
-//    	this.model = model;
-//    	this.errorMessageHolder = errorMessageHolder;
-//    	project = new Project("Tom", "coolID");
-//    	worker = new Worker("Bob", "Gnarly", "420", model);
-//    	
-//    }
-//    
-//    @Given("that a project with id {string} does not have a leader")
-//    public void thatAProjectWithIdDoesNotHaveALeader(String string) {
-//    	project.setId(string);
-//        assertFalse(project.hasLeader());
-//    }
-//    
-//    @When("the user adds the worker with id {string} as leader")
-//    public void theUserAddsTheWorkerWithIdAsLeader(String string) throws OperationNotAllowedException {
-//    	worker = model.createWorker(worker.getFirstName(), worker.getLastName());
-//    	worker.setID(string);
-//        assertTrue(project.setLeader(worker));
-//    }
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import dtu.library.app.Model;
+import dtu.library.app.ModelProject;
+import dtu.library.app.ModelWorker;
+import dtu.library.app.OperationNotAllowedException;
+import dtu.library.app.Project;
+import dtu.library.app.Worker;
+import io.cucumber.java.en.*;
+
+public class AssignLeaderTest {
+
+    private ModelProject modelProject;
+    private ModelWorker modelWorker;
+    private ErrorMessageHolder errorMessageHolder;
+    private Worker worker;
+
+    private Project project;
+
+    public AssignLeaderTest(ModelProject  modelProject, ModelWorker modelWorker,ErrorMessageHolder errorMessageHolder) {
+    	this.model = model;
+    	this.errorMessageHolder = errorMessageHolder;
+    	project = new Project("Tom", "coolID");
+    	
+    	worker = new Worker("Bob", "Gnarly", "420");
+    	
+    }
+    
+    @Given("that a project with id {string} does not have a leader")
+    public void thatAProjectWithIdDoesNotHaveALeader(String string) {
+    	project.setId(string);
+        assertFalse(project.hasLeader());
+    }
+    
+    @When("the user adds the worker with id {string} as leader")
+    public void theUserAddsTheWorkerWithIdAsLeader(String string) throws OperationNotAllowedException {
+    	worker = model.createWorker(worker.getFirstName(), worker.getLastName());
+    	worker.setID(string);
+        assertTrue(project.setLeader(worker));
+    }
 //
 //    @Then("the worker with id {string} as leader for project {string}")
 //    public void theWorkerWithIdAsLeaderForProject(String string, String string2) {
@@ -93,4 +97,4 @@ package dtu.library.acceptance_tests;
 //    	assertEquals(string, this.errorMessageHolder.getErrorMessage());
 //    }
 //	
-//}
+}

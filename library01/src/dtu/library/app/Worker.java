@@ -1,14 +1,12 @@
 package dtu.library.app;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class Worker {
 	private String firstname;
 	private String lastname;
 	private String id;
-	private Model model;
-//	private List<userTime> userTimeList;
 	private ArrayList<Activity> activities;
 	
 	public Worker(String firstname, String lastname , String ID) {

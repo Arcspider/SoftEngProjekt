@@ -3,14 +3,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class ModelWorker {
-	private View view;
 	private ArrayList<Worker> workers;
 	private Random random;
 
 	private Worker worker;
 
-	public ModelWorker(View view) {
-		this.view = view;
+	public ModelWorker() {
+	
 
 		workers = new ArrayList<Worker>();
 
@@ -27,7 +26,7 @@ public class ModelWorker {
 	private String workerGenerateID(String firstname, String lastname) {
 		String id = "" + firstname.charAt(0) + lastname.charAt(0) + random.nextInt(100);
 		while (workerHasID(id))
-			id = "" + firstname.charAt(0) + lastname.charAt(0) + random.nextInt(100);
+			id = "" + firstname.charAt(0) + firstname.charAt(1) + lastname.charAt(0) + lastname.charAt(1) ;
 		return id;
 	}
 

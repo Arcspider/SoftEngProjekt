@@ -1,7 +1,7 @@
 package dtu.library.acceptance_tests;
 
 import dtu.library.app.Activity;
-import dtu.library.app.Controller;
+import dtu.library.app.ControllerApplication;
 import dtu.library.app.Model;
 import dtu.library.app.ModelActivity;
 import dtu.library.app.ModelProject;

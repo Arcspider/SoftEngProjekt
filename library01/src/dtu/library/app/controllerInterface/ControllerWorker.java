@@ -2,23 +2,20 @@ package dtu.library.app.controllerInterface;
 
 import java.util.Scanner;
 
-import dtu.library.app.Model;
+
 import dtu.library.app.ModelWorker;
 import dtu.library.app.OperationNotAllowedException;
 import dtu.library.app.View;
 import dtu.library.app.Worker;
 
 public class ControllerWorker {
-	private Model model;
 	private ModelWorker modelWorker;
 	private View view;
-	private Worker worker;
 	Scanner scanner;
 
-	public ControllerWorker(View view, Model model,ModelWorker modelWorker) {
+	public ControllerWorker(View view,ModelWorker modelWorker) {
 		this.view = view;
-		this.model = model;
-		this.modelWorker =modelWorker;
+		this.modelWorker = modelWorker;
 		scanner = new Scanner(System.in);
 	}
 

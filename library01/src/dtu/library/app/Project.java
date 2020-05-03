@@ -8,7 +8,6 @@ public class Project implements datesInterface {
     private String description, name, id;
     private LocalDate startDate, endDate;
     private ArrayList<Activity> activities;
-    private ArrayList<Worker> workers;
     private Worker leader;
     boolean isOverdue;
 
@@ -20,7 +19,6 @@ public class Project implements datesInterface {
         leader = null;
         description = "Description yet to be written";
         activities = new ArrayList<Activity>();
-        workers = new ArrayList<Worker>();
     }
 
 	public String toString() {

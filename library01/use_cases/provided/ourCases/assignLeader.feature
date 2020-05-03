@@ -2,9 +2,9 @@ Feature: Assign Leader
     Description: Assign a leader to a project
     Actors: User
 
-#Scenario: Assigning a worker as leader for a project
-#	Given that a project with id "030901" does not have a leader
-#	When the user adds the worker with id "testID" as leader
+Scenario: Assigning a worker as leader for a project
+	Given that a project with id "030901" does not have a leader
+	When the user adds the worker with id "testID" as leader
 #	Then the worker with id "testID" as leader for project "030901"
 
 #Scenario: Assigning a worker as leader for a project they already are leader of

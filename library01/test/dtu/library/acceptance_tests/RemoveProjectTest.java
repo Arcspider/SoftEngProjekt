@@ -1,6 +1,6 @@
 package dtu.library.acceptance_tests;
 
-import dtu.library.app.Controller;
+import dtu.library.app.ControllerApplication;
 import dtu.library.app.Model;
 import dtu.library.app.ModelProject;
 import dtu.library.app.OperationNotAllowedException;
