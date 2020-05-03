@@ -23,15 +23,15 @@ package dtu.library.acceptance_tests;
 //    	this.errorMessageHolder = errorMessageHolder;
 //    	project = new Project("Tom", "coolID");
 //    	worker = new Worker("Bob", "Gnarly", "420", model);
-//    	
+//
 //    }
-//    
+//
 //    @Given("that a project with id {string} does not have a leader")
 //    public void thatAProjectWithIdDoesNotHaveALeader(String string) {
 //    	project.setId(string);
 //        assertFalse(project.hasLeader());
 //    }
-//    
+//
 //    @When("the user adds the worker with id {string} as leader")
 //    public void theUserAddsTheWorkerWithIdAsLeader(String string) throws OperationNotAllowedException {
 //    	worker = model.createWorker(worker.getFirstName(), worker.getLastName());
@@ -43,7 +43,7 @@ package dtu.library.acceptance_tests;
 //    public void theWorkerWithIdAsLeaderForProject(String string, String string2) {
 //    	assertEquals(worker, project.getLeader());
 //    }
-//    
+//
 //    @Given("that a worker with id {string} is a leader for project {string}")
 //    public void thatAWorkerWithIdIsALeaderForProject(String string, String string2) throws OperationNotAllowedException {
 //    	worker = model.createWorker(worker.getFirstName(), worker.getLastName());
@@ -61,12 +61,12 @@ package dtu.library.acceptance_tests;
 //            errorMessageHolder.setErrorMessage(e.getMessage());
 //        }
 //    }
-//    
+//
 //    @Then("an error message {string} is written")
 //    public void anErrorMessageIsWritten(String string) {
 //    	assertEquals(string, this.errorMessageHolder.getErrorMessage());
 //    }
-//    
+//
 //    @Given("that a worker with id {string} is leader for project {string}")
 //    public void thatAWorkerWithIdIsLeaderForProject(String string, String string2) throws OperationNotAllowedException {
 //    	Worker Mike = new Worker("Mike", "Hunt", string, model);
@@ -74,10 +74,10 @@ package dtu.library.acceptance_tests;
 //    	Mike.setID(string);
 //    	project = new Project("Pro", string2);
 //    	assertTrue(project.setLeader(Mike));
-//    	
+//
 //    }
 //
-//    
+//
 //    @When("the user adds the worker with id {string} as a leader for the project")
 //    public void theUserAddsTheWorkerWithIdAsALeaderForTheProject(String string) {
 //    	worker.setID(string);
@@ -92,5 +92,5 @@ package dtu.library.acceptance_tests;
 //    public void anErrorMessageIsWitten(String string) {
 //    	assertEquals(string, this.errorMessageHolder.getErrorMessage());
 //    }
-//	
+//
 //}
