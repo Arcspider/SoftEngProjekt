@@ -29,5 +29,17 @@ public class Shift {
 		return date;
 	}
 
+	public void addTime(double parseDouble) {
+		time += parseDouble;
+	}
+
+	public Double getHours() {
+		return time;
+	}
+
+	public void setTime(double d) {
+		time = d;
+	}
+
 
 }
