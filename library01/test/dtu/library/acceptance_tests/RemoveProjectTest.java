@@ -4,13 +4,13 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import projectManagerObjects.ModelProject;
 import projectManagerObjects.OperationNotAllowedException;
 import projectManagerObjects.Project;
 import projectManagerObjects.View;
 
 import java.util.List;
 
+import applicationManagerInterface.projectManager;
 import controllerInterface.ControllerApplication;
 import controllerInterface.ControllerProject;
 
@@ -22,7 +22,7 @@ public class RemoveProjectTest {
 
     private View view;
  
-    private	ModelProject modelProject;
+    private	projectManager modelProject;
 
     private ErrorMessageHolder errorMessageHolder;
 
@@ -30,7 +30,7 @@ public class RemoveProjectTest {
     private String ID;
     private List<Project> projects;
 
-    public RemoveProjectTest(View view,ModelProject modelProject, ErrorMessageHolder errorMessageHolder) {
+    public RemoveProjectTest(View view,projectManager modelProject, ErrorMessageHolder errorMessageHolder) {
         this.view = view;
     
         this.modelProject = modelProject;

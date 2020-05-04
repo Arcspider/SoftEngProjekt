@@ -1,4 +1,4 @@
-package projectManagerObjects;
+package applicationManagerInterface;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -8,14 +8,19 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class ModelActivity {
+import projectManagerObjects.Activity;
+import projectManagerObjects.OperationNotAllowedException;
+import projectManagerObjects.Project;
+import projectManagerObjects.View;
+
+public class activityManager {
 	private View view;
 	private Activity thisActivity;
 	private Calendar calendar;
 	private DateFormat dateFormat;
 	private boolean hasActivity;
 
-	public ModelActivity(View view) {
+	public activityManager(View view) {
 		this.view = view;
 		hasActivity = false;
 		this.calendar = new GregorianCalendar();

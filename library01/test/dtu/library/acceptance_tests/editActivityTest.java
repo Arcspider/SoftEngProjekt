@@ -6,13 +6,13 @@ import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
 
+import applicationManagerInterface.activityManager;
+import applicationManagerInterface.projectManager;
 import controllerInterface.ControllerActivity;
 import controllerInterface.ControllerApplication;
 import controllerInterface.ControllerProject;
 import io.cucumber.java.en.*;
 import projectManagerObjects.Activity;
-import projectManagerObjects.ModelActivity;
-import projectManagerObjects.ModelProject;
 import projectManagerObjects.OperationNotAllowedException;
 import projectManagerObjects.Project;
 import projectManagerObjects.View;
@@ -20,8 +20,8 @@ import projectManagerObjects.View;
 public class editActivityTest {
 
 	
-	private ModelProject modelProject;
-	private ModelActivity modelActivity;
+	private projectManager modelProject;
+	private activityManager modelActivity;
 	private ErrorMessageHolder errorMessageHolder;
 	private String name;
 
@@ -30,7 +30,7 @@ public class editActivityTest {
 	private String startDate,endDate;
 	Activity newActivity;
 
-	public editActivityTest(View view,ModelProject modelProject, ModelActivity modelActivity ,ErrorMessageHolder errorMessageHolder) {
+	public editActivityTest(View view,projectManager modelProject, activityManager modelActivity ,ErrorMessageHolder errorMessageHolder) {
 		
 		this.modelProject = modelProject;
 		this.modelActivity = modelActivity;

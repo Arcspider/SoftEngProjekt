@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import projectManagerObjects.ModelActivity;
-import projectManagerObjects.ModelApplication;
-import projectManagerObjects.ModelProject;
-import projectManagerObjects.ModelWorker;
+import applicationManagerInterface.activityManager;
+import applicationManagerInterface.applicationManager;
+import applicationManagerInterface.projectManager;
+import applicationManagerInterface.workerManager;
 import projectManagerObjects.OperationNotAllowedException;
 import projectManagerObjects.Project;
 import projectManagerObjects.View;
@@ -15,17 +15,17 @@ import projectManagerObjects.Worker;
 
 public class ControllerProject {
 
-	private ModelApplication modelApplication;
-	private ModelProject modelProject;
-	private ModelActivity modelActivity;
-	private ModelWorker modelWorker;
+	private applicationManager modelApplication;
+	private projectManager modelProject;
+	private activityManager modelActivity;
+	private workerManager modelWorker;
 	private View view;
 
 	Scanner scanner;
 	Scanner descriptionHandler;
 
-	public ControllerProject(View view, ModelApplication modelApplication, ModelProject modelProject,
-			ModelActivity modelActivity, ModelWorker modelWorker) {
+	public ControllerProject(View view, applicationManager modelApplication, projectManager modelProject,
+			activityManager modelActivity, workerManager modelWorker) {
 		this.view = view;
 		this.modelApplication = modelApplication;
 		this.modelProject = modelProject;

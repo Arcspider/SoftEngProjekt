@@ -2,26 +2,26 @@ package controllerInterface;
 
 import java.util.Scanner;
 
+import applicationManagerInterface.activityManager;
+import applicationManagerInterface.applicationManager;
+import applicationManagerInterface.projectManager;
+import applicationManagerInterface.workerManager;
 import projectManagerObjects.Activity;
-import projectManagerObjects.ModelActivity;
-import projectManagerObjects.ModelApplication;
-import projectManagerObjects.ModelProject;
-import projectManagerObjects.ModelWorker;
 import projectManagerObjects.OperationNotAllowedException;
 import projectManagerObjects.Project;
 import projectManagerObjects.View;
 
 public class ControllerActivity {
-	private ModelApplication modelApplication;
-	private ModelProject modelProject;
-	private ModelActivity modelActivity;
-	private ModelWorker modelWorker;
+	private applicationManager modelApplication;
+	private projectManager modelProject;
+	private activityManager modelActivity;
+	private workerManager modelWorker;
 	private View view;
 	Scanner scanner;
 	Scanner timeHanlder;
 
-	public ControllerActivity(View view, ModelApplication modelApplication, ModelProject modelProject,
-			ModelActivity modelActivity, ModelWorker modelWorker) {
+	public ControllerActivity(View view, applicationManager modelApplication, projectManager modelProject,
+			activityManager modelActivity, workerManager modelWorker) {
 		this.view = view;
 		this.modelApplication = modelApplication;
 		this.modelProject = modelProject;
@@ -46,58 +46,58 @@ public class ControllerActivity {
 			view.showAvailableCommands(modelApplication.getStage());
 			String nextCommand = getCommand();
 			switch (nextCommand) {
-				case "Date":
-					view.showMessage("Type \"Start\" to change the start date of the project");
-					view.showMessage("Type \"End\" to change the end date of the project");
-					view.showMessage("Type \"Budget\"to add to budgetted hours");
-					view.showMessage("The date format is \"ww-yyyy\" where ww is week and yyyy is year");
-					view.showMessage("The hours must be added in increments of 0.5");
-					nextCommand = getCommand();
-					switch (nextCommand) {
-						case "Start":
-							view.showMessage("Write the new start date in the format: ww-yyyy");
-							setActivityStart(getThisProject(), getThisActivity(), timeHanlder.nextLine());
+			case "Date":
+				view.showMessage("Type \"Start\" to change the start date of the project");
+				view.showMessage("Type \"End\" to change the end date of the project");
+				view.showMessage("Type \"Budget\"to add to budgetted hours");
+				view.showMessage("The date format is \"ww-yyyy\" where ww is week and yyyy is year");
+				view.showMessage("The hours must be added in increments of 0.5");
+				nextCommand = getCommand();
+				switch (nextCommand) {
+				case "Start":
+					view.showMessage("Write the new start date in the format: ww-yyyy");
+					setActivityStart(getThisProject(), getThisActivity(), timeHanlder.nextLine());
 
-							break;
-						case "End":
-							view.showMessage("Write the new end date in the format: ww-yyyy");
-							setActivityEnd(getThisProject(), getThisActivity(), timeHanlder.nextLine());
-							break;
-						case "Budget":
-							view.showMessage("Please input the additional budgetted hours in increments of 0.5");
+					break;
+				case "End":
+					view.showMessage("Write the new end date in the format: ww-yyyy");
+					setActivityEnd(getThisProject(), getThisActivity(), timeHanlder.nextLine());
+					break;
+				case "Budget":
+					view.showMessage("Please input the additional budgetted hours in increments of 0.5");
 
-							break;
-						
-					}
 					break;
-					case "Back":
-							setHasActivity(false);
-							changeStage("Project");
 
-							break;
-				case "Assign":
-					view.showMessage("Please enter the ID of the employee you want to assign to this activity");
-					nextCommand = getCommand();
-					if (modelWorker.workerHasID(nextCommand)) {
-						getThisActivity().assignWorker(modelWorker.getWorker(nextCommand));
-					}
-					break;
-				case "Time":
-					view.showMessage("Please supply the following information");
-					view.showMessage("WorkerID: ");
-					String workerID = getCommand();
-					view.showMessage("Date (in the format: dd-mm-yyyy): ");
-					String date = getCommand();
-					view.showMessage("Time: ");
-					String time = getCommand();
-					modelActivity.addShift(getThisActivity(), workerID, date, time);
-					break;
-				case "List":
-					getThisActivity().listWorkers();
-					break;
-				case "Check":
-					getThisActivity().getBudgettedHours();
-					break;
+				}
+				break;
+			case "Back":
+				setHasActivity(false);
+				changeStage("Project");
+
+				break;
+			case "Assign":
+				view.showMessage("Please enter the ID of the employee you want to assign to this activity");
+				nextCommand = getCommand();
+				if (modelWorker.workerHasID(nextCommand)) {
+					getThisActivity().assignWorker(modelWorker.getWorker(nextCommand));
+				}
+				break;
+			case "Time":
+				view.showMessage("Please supply the following information");
+				view.showMessage("WorkerID: ");
+				String workerID = getCommand();
+				view.showMessage("Date (in the format: dd-mm-yyyy): ");
+				String date = getCommand();
+				view.showMessage("Time: ");
+				String time = getCommand();
+				modelActivity.addShift(getThisActivity(), workerID, date, time);
+				break;
+			case "List":
+				getThisActivity().listWorkers();
+				break;
+			case "Check":
+				getThisActivity().getBudgettedHours();
+				break;
 			}
 		}
 	}

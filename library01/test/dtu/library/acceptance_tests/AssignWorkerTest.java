@@ -3,9 +3,6 @@ package dtu.library.acceptance_tests;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import projectManagerObjects.Activity;
-import projectManagerObjects.ModelActivity;
-import projectManagerObjects.ModelProject;
-import projectManagerObjects.ModelWorker;
 import projectManagerObjects.OperationNotAllowedException;
 import projectManagerObjects.Project;
 import projectManagerObjects.View;
@@ -13,18 +10,22 @@ import projectManagerObjects.Worker;
 
 import static org.junit.Assert.assertTrue;
 
+import applicationManagerInterface.activityManager;
+import applicationManagerInterface.projectManager;
+import applicationManagerInterface.workerManager;
+
 public class AssignWorkerTest {
 
 
-	private ModelProject modelProject;
-	private ModelActivity modelActivity;
-	private ModelWorker modelWorker;
+	private projectManager modelProject;
+	private activityManager modelActivity;
+	private workerManager modelWorker;
 	private Project project;
 	private Activity activity;
 	private Worker worker;
 
 
-	public AssignWorkerTest(View view,ModelProject modelProject,ModelActivity modelActivity,ModelWorker modelWorker, ErrorMessageHolder errorMessageHolder) {
+	public AssignWorkerTest(View view,projectManager modelProject,activityManager modelActivity,workerManager modelWorker, ErrorMessageHolder errorMessageHolder) {
 		
 		this.modelProject = modelProject;
 		this.modelActivity = modelActivity;

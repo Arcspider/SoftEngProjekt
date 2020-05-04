@@ -1,10 +1,12 @@
-package projectManagerObjects;
+package applicationManagerInterface;
 
-public class ModelApplication {
+import projectManagerObjects.View;
+
+public class applicationManager {
 	private String stage;
 	private View view;
 	
-	public ModelApplication(View view) {
+	public applicationManager(View view) {
 		this.view = view;
 		stage = "Application";
 	}

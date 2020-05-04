@@ -5,12 +5,12 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import projectManagerObjects.ModelProject;
 import projectManagerObjects.OperationNotAllowedException;
 import projectManagerObjects.Project;
 
 import org.junit.Assert;
 
+import applicationManagerInterface.projectManager;
 import controllerInterface.ControllerProject;
 
 import java.util.List;
@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 public class ProjectTest {
 
 
-    private ModelProject modelProject;
+    private projectManager modelProject;
 
     private ErrorMessageHolder errorMessageHolder;
 
@@ -29,7 +29,7 @@ public class ProjectTest {
     private List<Project> projects;
 
 
-    public ProjectTest(ErrorMessageHolder errorMessageHolder, ModelProject modelProject) {
+    public ProjectTest(ErrorMessageHolder errorMessageHolder, projectManager modelProject) {
    
         this.modelProject = modelProject;
         this.errorMessageHolder = errorMessageHolder;

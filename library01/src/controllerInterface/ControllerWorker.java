@@ -2,19 +2,19 @@ package controllerInterface;
 
 import java.util.Scanner;
 
-import projectManagerObjects.ModelApplication;
-import projectManagerObjects.ModelWorker;
+import applicationManagerInterface.applicationManager;
+import applicationManagerInterface.workerManager;
 import projectManagerObjects.OperationNotAllowedException;
 import projectManagerObjects.View;
 import projectManagerObjects.Worker;
 
 public class ControllerWorker {
-	private ModelWorker modelWorker;
-	private ModelApplication modelApplication;	
+	private workerManager modelWorker;
+	private applicationManager modelApplication;	
 	private View view;
 	Scanner scanner;
 
-	public ControllerWorker(View view, ModelWorker modelWorker, ModelApplication modelApplication) {
+	public ControllerWorker(View view, workerManager modelWorker, applicationManager modelApplication) {
 		this.view = view;
 		this.modelWorker = modelWorker;
 		scanner = new Scanner(System.in);

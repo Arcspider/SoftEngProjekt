@@ -2,20 +2,20 @@ package controllerInterface;
 
 import java.util.*;
 
-import projectManagerObjects.ModelApplication;
-import projectManagerObjects.ModelProject;
+import applicationManagerInterface.applicationManager;
+import applicationManagerInterface.projectManager;
 import projectManagerObjects.OperationNotAllowedException;
 import projectManagerObjects.Project;
 import projectManagerObjects.View;
 
 public class ControllerApplication {
-	private ModelApplication modelApplication;
-	private ModelProject modelProject;
+	private applicationManager modelApplication;
+	private projectManager modelProject;
 	private View view;
 	private Project newProject;
 	Scanner scanner;
 
-	public ControllerApplication(View view, ModelApplication modelApplication, ModelProject modelProject ) {
+	public ControllerApplication(View view, applicationManager modelApplication, projectManager modelProject ) {
 		this.view = view;
 		
 		this.modelApplication = modelApplication;

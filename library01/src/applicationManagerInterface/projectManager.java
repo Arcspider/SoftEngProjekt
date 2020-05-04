@@ -1,4 +1,4 @@
-package projectManagerObjects;
+package applicationManagerInterface;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -8,7 +8,12 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Random;
 
-public class ModelProject {
+import projectManagerObjects.OperationNotAllowedException;
+import projectManagerObjects.Project;
+import projectManagerObjects.View;
+import projectManagerObjects.Worker;
+
+public class projectManager {
 	private View view;
 	private ArrayList<Project> projects;
 	private Project newProject;
@@ -16,7 +21,7 @@ public class ModelProject {
 	private boolean hasProject;
 	private Random random;
 	private DateFormat dateFormat;
-	public ModelProject(View view) {
+	public projectManager(View view) {
 		this.view = view;
 		projects = new ArrayList<Project>();
 		random = new Random();

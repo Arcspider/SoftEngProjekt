@@ -1,15 +1,18 @@
-package projectManagerObjects;
+package applicationManagerInterface;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ModelWorker {
+import projectManagerObjects.Activity;
+import projectManagerObjects.Worker;
+
+public class workerManager {
     private ArrayList<Worker> workers;
     private Random random;
 
     private Worker worker;
 
-    public ModelWorker() {
+    public workerManager() {
 
 
         workers = new ArrayList<Worker>();

@@ -5,13 +5,13 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import applicationManagerInterface.activityManager;
+import applicationManagerInterface.projectManager;
+import applicationManagerInterface.workerManager;
 import controllerInterface.ControllerProject;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import projectManagerObjects.Activity;
-import projectManagerObjects.ModelActivity;
-import projectManagerObjects.ModelProject;
-import projectManagerObjects.ModelWorker;
 import projectManagerObjects.OperationNotAllowedException;
 import projectManagerObjects.Project;
 import projectManagerObjects.View;
@@ -28,10 +28,10 @@ public class timeTest {
     private String ID;
     private List<Project> projects;
 
-	private ModelProject modelProject;
-	private ModelActivity modelActivity;
-	private ModelWorker modelWorker;
-	public timeTest(View view,ModelProject modelProject,ModelActivity modelActivity, ModelWorker modelWorker, ErrorMessageHolder errorMessageHolder){
+	private projectManager modelProject;
+	private activityManager modelActivity;
+	private workerManager modelWorker;
+	public timeTest(View view,projectManager modelProject,activityManager modelActivity, workerManager modelWorker, ErrorMessageHolder errorMessageHolder){
 
     	this.modelProject = modelProject;
     	this.modelActivity = modelActivity;

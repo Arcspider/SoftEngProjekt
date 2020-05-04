@@ -4,13 +4,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import applicationManagerInterface.activityManager;
+import applicationManagerInterface.projectManager;
+import applicationManagerInterface.workerManager;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import projectManagerObjects.Activity;
-import projectManagerObjects.ModelActivity;
-import projectManagerObjects.ModelProject;
-import projectManagerObjects.ModelWorker;
 import projectManagerObjects.OperationNotAllowedException;
 import projectManagerObjects.Project;
 import projectManagerObjects.View;
@@ -18,9 +18,9 @@ import projectManagerObjects.Worker;
 
 public class ListAssignedWorkersTest {
 	
-	private ModelProject modelProject;
-	private ModelActivity modelActivity;
-	private ModelWorker modelWorker;
+	private projectManager modelProject;
+	private activityManager modelActivity;
+	private workerManager modelWorker;
 	private ErrorMessageHolder errorMessageHolder;
 	private Worker Bob;
 	private Worker Alice;
@@ -28,7 +28,7 @@ public class ListAssignedWorkersTest {
 	private Activity activity;
 	private String name;
 	
-	public ListAssignedWorkersTest(ModelProject modelProject, ModelActivity modelActivity,  ModelWorker modelWorker ,ErrorMessageHolder errorMessageHolder) {
+	public ListAssignedWorkersTest(projectManager modelProject, activityManager modelActivity,  workerManager modelWorker ,ErrorMessageHolder errorMessageHolder) {
 		this.modelProject = modelProject;
 		this.modelActivity = modelActivity;
 		this.modelWorker = modelWorker;
