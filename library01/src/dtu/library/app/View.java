@@ -27,7 +27,7 @@ public class View {
 		this.controllerActivity = new ControllerActivity(this, modelApplication, modelProject, modelActivity, modelWorker);
 		this.controllerWorker = new ControllerWorker(this,modelWorker, modelApplication);
 		showApplicationIntroduction();
-		//startup();
+		startup();
 	}
 
 	public void showMessage(String message) {

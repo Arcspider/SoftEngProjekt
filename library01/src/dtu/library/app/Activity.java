@@ -20,6 +20,7 @@ public class Activity implements datesInterface{
 		endDate = null;
 		this.shifts = new ArrayList<String>();
 		budgettedHoursLeft = 0.0;
+		budgettedHoursTotal = 0.0;
 	}
 	public String getName() {
 		return name;
