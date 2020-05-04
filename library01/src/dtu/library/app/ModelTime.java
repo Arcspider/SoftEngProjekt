@@ -1,20 +1,28 @@
 package dtu.library.app;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Random;
 
-public class Shift {
-	private String workerID;
-	private LocalDate data;
-	private float time;
+public class ModelTime {
 
-	public Shift(String workerID, String data, float time) {
-		this.workerID = workerID;
-		this.data = stringToDate(data);
-		this.time = time;
+	private ArrayList<Project> projects;
+	private Project newProject;
+	private Project thisProject;
+	private boolean hasProject;
+	private Random random;
+	private DateFormat dateFormat;
+	public ModelTime() {
+		projects = new ArrayList<Project>();
+		random = new Random();
+		hasProject = false;
+		new GregorianCalendar();
+		dateFormat = new SimpleDateFormat("MM-yy");
 	}
-
 	public LocalDate stringToDate(String toBeConverted) {
 		String[] stringDate = toBeConverted.split("-");
 		int dInt = Integer.parseInt(stringDate[0]);
@@ -30,6 +38,5 @@ public class Shift {
 				cld.get(Calendar.DAY_OF_MONTH));
 		return finalDate;
 	}
-
 
 }

@@ -1,5 +1,6 @@
 package dtu.library.app;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -8,9 +9,10 @@ public class ModelWorker {
     private Random random;
 
     private Worker worker;
+	private ModelTime modelTime;
 
     public ModelWorker() {
-
+    	this.modelTime = new ModelTime();
 
         workers = new ArrayList<Worker>();
 
@@ -57,5 +59,22 @@ public class ModelWorker {
         activity.assignWorker(worker);
         worker.assignWorker(activity);
     }
+
+	public void assignAbsence(String userId, String absenceType, String startAbsence, String endAbsence) {
+		Worker currentWorker = getWorker(userId);
+		LocalDate startDate = modelTime.stringToDate(startAbsence);
+		LocalDate endDate = modelTime.stringToDate(endAbsence);
+		ArrayList<Activity> workersAssignedActivities = currentWorker.getActivities(); 
+		for(Activity currentActivity : workersAssignedActivities ) {
+			ArrayList<Shift> activityShifts = currentActivity.getShifts();
+			for(Shift currentShift : activityShifts) {
+				LocalDate shiftDate = currentShift.getDate();
+				if(startDate.isBefore(shiftDate) && endDate.isAfter(shiftDate)) {
+					currentShift.setTime(0.0);
+				}
+			}
+			currentActivity.updateTimeLeft();
+		}
+	}
 
 }

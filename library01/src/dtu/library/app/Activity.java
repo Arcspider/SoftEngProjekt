@@ -8,7 +8,7 @@ import dtu.library.app.timeInterface.datesInterface;
 public class Activity implements datesInterface{
 	private String name, description;
 	private ArrayList<Worker> workers;
-	private ArrayList<String> shifts;
+	private ArrayList<Shift> shifts;
 	LocalDate startDate, endDate;
 	private Double budgettedHoursTotal;
 	private Double budgettedHoursLeft;
@@ -18,13 +18,14 @@ public class Activity implements datesInterface{
 		workers = new ArrayList<>();
 		startDate = null;
 		endDate = null;
-		this.shifts = new ArrayList<String>();
+		this.shifts = new ArrayList<Shift>();
+		budgettedHoursTotal = 0.0;
 		budgettedHoursLeft = 0.0;
 	}
 	public String getName() {
 		return name;
 	}
-	
+
 	public String toString() {
 		return "This activity is named " + name + ", starts at " + startDate + " and ends at " + endDate;
 	}
@@ -62,18 +63,18 @@ public class Activity implements datesInterface{
 		workers.add(worker);
 		System.out.println("Employee " + worker.getId() + " has been assigned");
 	}
-	
+
 	public boolean hasWorker(Worker worker) {
 		return workers.contains(worker);
 	}
-	
+
 	public boolean hasAnyWorkers() {
 		if(workers.size() > 0) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	public String listWorkers() {
 		if(hasAnyWorkers()) {
 			int noOfWorkers = 0;
@@ -86,7 +87,7 @@ public class Activity implements datesInterface{
 			return "There are no workers assigned";
 		}
 	}
-	
+
 	public boolean hasWorkerId(String id) {
 		for(Worker worker : workers) {
 			if(worker.getId().equals(id)) return true;
@@ -94,47 +95,81 @@ public class Activity implements datesInterface{
 		return false;
 	}
 	public void setBudgettedHours(String budgettedHours) {
-		double tempDouble = Double.parseDouble(budgettedHours);
-		if(tempDouble > budgettedHoursLeft) {
-			this.budgettedHoursTotal = tempDouble;
-		}else System.out.println("You can't reduce the budgetted hours below what is already assigned to the project.");
-		
+		this.budgettedHoursTotal = Double.parseDouble(budgettedHours);
+
 	}
 	public Double getBudgettedHours() {
 		return budgettedHoursTotal;
 	}
 
-	public void addShift(String fullDateFormat) {
-		String[] separated = fullDateFormat.split(";");
-		
-		Double hours = Double.parseDouble(separated[2]);
-		budgettedHoursLeft -= hours;
-		shifts.add(fullDateFormat);		
+	public void addShift(String workerID, String stringDate, String time ) {
+		boolean newShift = true;
+		LocalDate date = stringToDate(stringDate);
+		for(int i = 0; i <shifts.size(); i++) {
+			if(shifts.get(i).getWorkerID().equals(workerID) && shifts.get(i).getDate().equals(date)) {
+				shifts.get(i).addTime(Double.parseDouble(time));
+				newShift = false;
+				break;
+			}
+		}
+		if(newShift) {
+			shift = new Shift(workerID,date,Double.parseDouble(time));
+			shifts.add(shift);
+		}
+		updateTimeLeft();
 	}
-	
-	public int findShiftByIdAndDate(String shift) {
-		String[] shiftSplit = shift.split(";");
-		for(int i = 0; i< shifts.size();i++) {
-			String currentShift = shifts.get(i);
-			String[] currentShiftSplit = currentShift.split(";");
-			if(shiftSplit[0].equals(currentShiftSplit[0]) && shiftSplit[1].equals(currentShiftSplit[1])) {
-				return i;
+
+	public Shift findShiftByIdAndDate(String workerID, String stringDate) {
+		LocalDate date = stringToDate(stringDate);
+		for(int i = 0; i <shifts.size(); i++) {
+			if(shifts.get(i).getWorkerID().equals(workerID) && shifts.get(i).getDate().equals(date)) {
+				return shifts.get(i);
 			}
 		}System.out.println("No shifts found"); return 0;
 	}
-	public boolean hasShiftByIdAndDate(String shift) {
-		String[] shiftSplit = shift.split(";");
-		for(String currentShift : shifts) {
-			String[] currentShiftSplit = currentShift.split(";");
-			if(shiftSplit[0].equals(currentShiftSplit[0]) && shiftSplit[1].equals(currentShiftSplit[1])) {
+
+	public boolean hasShiftByIdAndDate(String workerID, String stringDate) {
+		LocalDate date = stringToDate(stringDate);
+		for(int i = 0; i <shifts.size(); i++) {
+			if(shifts.get(i).getWorkerID().equals(workerID) && shifts.get(i).getDate().equals(date)) {
 				return true;
 			}
 		}System.out.println("No shifts found"); return false;
 	}
-	public ArrayList<String> getShifts() {
+
+	public void getWorkerShifts(String stringDate) {
+		LocalDate date = stringToDate(stringDate);
+		for (int i = 0; i < shifts.size(); i++) {
+			if (shifts.get(i).getDate().equals(date)) {
+				System.out.println(shifts.get(i).toString());
+			}
+		}
+	}
+
+
+	public LocalDate stringToDate(String toBeConverted) {
+		String[] stringDate = toBeConverted.split("-");
+		int dInt = Integer.parseInt(stringDate[0]);
+		int mInt = Integer.parseInt(stringDate[1]);
+		int yInt = Integer.parseInt(stringDate[2]);
+
+		Calendar cld = Calendar.getInstance();
+		cld.set(Calendar.YEAR, yInt);
+		cld.set(Calendar.MONTH, mInt);
+		cld.set(Calendar.DAY_OF_MONTH, dInt);
+
+		LocalDate finalDate = LocalDate.of(cld.get(Calendar.YEAR), cld.get(Calendar.MONTH),
+				cld.get(Calendar.DAY_OF_MONTH));
+		return finalDate;
+	}
+	public ArrayList<Shift> getShifts() {
 		return shifts;
 	}
-	public void setShift(int tempShift, String fullDateFormat) {
-		shifts.set(tempShift, fullDateFormat);
+	public void updateTimeLeft() {
+		budgettedHoursLeft = budgettedHoursTotal;
+		for(Shift currentShift : shifts) {
+			budgettedHoursLeft -= currentShift.getHours();
+		}
 	}
+
 }

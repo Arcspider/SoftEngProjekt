@@ -48,4 +48,8 @@ public class Worker {
 		
 	}
 
+	public ArrayList<Activity> getActivities() {
+		return activities;
+	}
+
 }
