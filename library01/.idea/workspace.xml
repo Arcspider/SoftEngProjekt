@@ -36,9 +36,10 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.ProjectManagementApplication">
     <configuration name="AcceptanceTest" type="AndroidJUnit" factoryName="Android JUnit">
       <module name="library01" />
       <option name="PACKAGE_NAME" value="dtu.library.acceptance_tests" />
@@ -51,6 +52,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ProjectManagementApplication" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="dtu.library.app.Application" />
+      <module name="library01" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Android JUnit.AcceptanceTest" />
+      <item itemvalue="Application.ProjectManagementApplication" />
+    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -70,6 +82,7 @@
       <workItem from="1587383666424" duration="1430000" />
       <workItem from="1587898371891" duration="5101000" />
       <workItem from="1588523396342" duration="2853000" />
+      <workItem from="1588591488493" duration="6059000" />
     </task>
     <servers />
   </component>
@@ -77,10 +90,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="414" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585580709033">
+    <state x="414" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588599696947">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="414" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1585580709033" />
+    <state x="414" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1588599696947" />
     <state x="92" y="92" width="1736" height="866" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1586179647576">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -89,10 +102,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="765" y="227" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1587036019242" />
-    <state x="689" y="307" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1585580706963">
+    <state x="689" y="307" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1588599672928">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="689" y="307" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1585580706963" />
+    <state x="689" y="307" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1588599672928" />
     <state x="503" y="440" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1586173563022">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -101,26 +114,34 @@
       <screen x="1920" y="295" width="1920" height="1050" />
     </state>
     <state x="2413" y="295" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1050/1920.295.1920.1050@1920.295.1920.1050" timestamp="1588518271558" />
+    <state x="714" y="365" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1588595280751">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="714" y="365" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1588595280751" />
     <state x="740" y="278" key="FileChooserDialogImpl" timestamp="1587036025537">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="740" y="278" key="FileChooserDialogImpl/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1587036025537" />
-    <state width="1875" height="174" key="GridCell.Tab.0.bottom" timestamp="1588526474766">
+    <state width="1875" height="174" key="GridCell.Tab.0.bottom" timestamp="1588599911833">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1875" height="174" key="GridCell.Tab.0.bottom/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1588526474766" />
-    <state width="1875" height="174" key="GridCell.Tab.0.center" timestamp="1588526474766">
+    <state width="1875" height="174" key="GridCell.Tab.0.bottom/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1588599911833" />
+    <state width="1875" height="174" key="GridCell.Tab.0.center" timestamp="1588599911833">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1875" height="174" key="GridCell.Tab.0.center/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1588526474766" />
-    <state width="1875" height="174" key="GridCell.Tab.0.left" timestamp="1588526474766">
+    <state width="1875" height="174" key="GridCell.Tab.0.center/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1588599911833" />
+    <state width="1875" height="174" key="GridCell.Tab.0.left" timestamp="1588599911833">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1875" height="174" key="GridCell.Tab.0.left/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1588526474766" />
-    <state width="1875" height="174" key="GridCell.Tab.0.right" timestamp="1588526474766">
+    <state width="1875" height="174" key="GridCell.Tab.0.left/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1588599911833" />
+    <state width="1875" height="174" key="GridCell.Tab.0.right" timestamp="1588599911833">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1875" height="174" key="GridCell.Tab.0.right/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1588526474766" />
+    <state width="1875" height="174" key="GridCell.Tab.0.right/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1588599911833" />
+    <state x="461" y="155" key="SettingsEditor" timestamp="1588594841949">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="461" y="155" key="SettingsEditor/0.0.1920.1050/1920.295.1920.1050@0.0.1920.1050" timestamp="1588594841949" />
     <state x="681" y="254" width="585" height="540" key="StructurePopup" timestamp="1586787294431">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>

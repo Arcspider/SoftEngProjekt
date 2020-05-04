@@ -45,47 +45,59 @@ public class ControllerActivity {
 		} else {
 			view.showAvailableCommands(modelApplication.getStage());
 			String nextCommand = getCommand();
-			if (nextCommand.equals("Date")) {
-				view.showMessage("Type \"Start\" to change the start date of the project");
-				view.showMessage("Type \"End\" to change the end date of the project");
-				view.showMessage("Type \"Budget\"to add to budgetted hours");
-				view.showMessage("The date format is \"ww-yyyy\" where ww is week and yyyy is year");
-				view.showMessage("The hours must be added in increments of 0.5");
-				nextCommand = getCommand();
-				if (nextCommand.equals("Start")) {
-					view.showMessage("Write the new start date in the format: ww-yyyy");
-					setActivityStart(getThisProject(), getThisActivity(), timeHanlder.nextLine());
+			switch (nextCommand) {
+				case "Date":
+					view.showMessage("Type \"Start\" to change the start date of the project");
+					view.showMessage("Type \"End\" to change the end date of the project");
+					view.showMessage("Type \"Budget\"to add to budgetted hours");
+					view.showMessage("The date format is \"ww-yyyy\" where ww is week and yyyy is year");
+					view.showMessage("The hours must be added in increments of 0.5");
+					nextCommand = getCommand();
+					switch (nextCommand) {
+						case "Start":
+							view.showMessage("Write the new start date in the format: ww-yyyy");
+							setActivityStart(getThisProject(), getThisActivity(), timeHanlder.nextLine());
 
-				} else if (nextCommand.equals("End")) {
-					view.showMessage("Write the new end date in the format: ww-yyyy");
-					setActivityEnd(getThisProject(), getThisActivity(), timeHanlder.nextLine());
-				} else if (nextCommand.equals("Budget")) {
-					view.showMessage("Please input the additional budgetted hours in increments of 0.5");
+							break;
+						case "End":
+							view.showMessage("Write the new end date in the format: ww-yyyy");
+							setActivityEnd(getThisProject(), getThisActivity(), timeHanlder.nextLine());
+							break;
+						case "Budget":
+							view.showMessage("Please input the additional budgetted hours in increments of 0.5");
 
-				}
-			} else if (nextCommand.equals("Back")) {
-				setHasActivity(false);
-				changeStage("Project");
+							break;
+						
+					}
+					break;
+					case "Back":
+							setHasActivity(false);
+							changeStage("Project");
 
-			} else if (nextCommand.equals("Assign")) {
-				view.showMessage("Please enter the ID of the employee you want to assign to this activity");
-				nextCommand = getCommand();
-				if (modelWorker.workerHasID(nextCommand)) {
-					getThisActivity().assignWorker(modelWorker.getWorker(nextCommand));
-				}
-			} else if (nextCommand.equals("Time")) {
-				view.showMessage("Please supply the following information");
-				view.showMessage("WorkerID: ");
-				String workerID = getCommand();
-				view.showMessage("Date (in the format dd-mm-yyyy: ");
-				String date = getCommand();
-				view.showMessage("Hours (in increments of 0.5): ");
-				String time = getCommand();
-				modelActivity.addShift(getThisActivity(), workerID, date, time);
-			} else if (nextCommand.equals("List")) {
-				getThisActivity().listWorkers();
-			} else if (nextCommand.equals("Check")) {
-				getThisActivity().getBudgettedHours();
+							break;
+				case "Assign":
+					view.showMessage("Please enter the ID of the employee you want to assign to this activity");
+					nextCommand = getCommand();
+					if (modelWorker.workerHasID(nextCommand)) {
+						getThisActivity().assignWorker(modelWorker.getWorker(nextCommand));
+					}
+					break;
+				case "Time":
+					view.showMessage("Please supply the following information");
+					view.showMessage("WorkerID: ");
+					String workerID = getCommand();
+					view.showMessage("Date (in the format: dd-mm-yyyy): ");
+					String date = getCommand();
+					view.showMessage("Time: ");
+					String time = getCommand();
+					modelActivity.addShift(getThisActivity(), workerID, date, time);
+					break;
+				case "List":
+					getThisActivity().listWorkers();
+					break;
+				case "Check":
+					getThisActivity().getBudgettedHours();
+					break;
 			}
 		}
 	}

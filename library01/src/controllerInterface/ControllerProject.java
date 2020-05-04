@@ -56,52 +56,61 @@ public class ControllerProject {
 		}else {
 			view.showAvailableCommands(modelApplication.getStage());
 			String nextCommand = getCommand();
-			if (nextCommand.equals("Description")) {
-				view.showMessage("Please enter a desired description");
-				editProjectDescription(getThisProject(), getDescription());
+			switch (nextCommand) {
+				case "Description":
+					view.showMessage("Please enter a desired description");
+					editProjectDescription(getThisProject(), getDescription());
 
-			} else if (nextCommand.equals("Name")) {
-				view.showMessage("Please enter the new name");
-				editProjectName(getThisProject(), getCommand());
+					break;
+				case "Name":
+					view.showMessage("Please enter the new name");
+					editProjectName(getThisProject(), getCommand());
 
-			} else if (nextCommand.equals("Remove")) {
-				removeProject(getThisProject());
-				setHasProject(false);
-				view.showMessage("The project has been removed.");
-				modelApplication.changeStage("Application");
-				view.showAvailableCommands(modelApplication.getStage());
-			}else if (nextCommand.equals("Add")) {
-				view.showMessage("Please enter a name for the activity");
-				addActivity(getThisProject(), getCommand());
+					break;
+				case "Remove":
+					removeProject(getThisProject());
+					setHasProject(false);
+					view.showMessage("The project has been removed.");
+					modelApplication.changeStage("Application");
+					view.showAvailableCommands(modelApplication.getStage());
+					break;
+				case "Add":
+					view.showMessage("Please enter a name for the activity");
+					addActivity(getThisProject(), getCommand());
 
-			} else if (nextCommand.equals("Edit")) {
-				changeStage("Activity");
-				view.showMessage("Please enter the name of the activity that should be edited");
+					break;
+				case "Edit":
+					changeStage("Activity");
+					view.showMessage("Please enter the name of the activity that should be edited");
 
-			}else if (nextCommand.equals("Time")) {
-				view.showMessage("Type \"Start\" to change the start date of the activity");
-				view.showMessage("Type \"End\" to change the end date of the activity");
-				view.showMessage("The date format is \"ww-yyyy\" where ww is week and yyyy is year");
-				
-				nextCommand = getCommand();
-				if(nextCommand.equals("Start")) {
-					view.showMessage("Write the new start date in the format: ww-yyyy");
-					setProjectStart(getThisProject(),descriptionHandler.nextLine());
-				}else if (nextCommand.equals("End")) {
-					view.showMessage("Write the new end date in the format: ww-yyyy");
-					setProjectEnd(getThisProject(),descriptionHandler.nextLine());
-				}
+					break;
+				case "Time":
+					view.showMessage("Type \"Start\" to change the start date of the activity");
+					view.showMessage("Type \"End\" to change the end date of the activity");
+					view.showMessage("The date format is \"ww-yyyy\" where ww is week and yyyy is year");
 
-			} else if (nextCommand.equals("Leader")) {
-				view.showMessage("Please enter the id of worker you want to lead this project");
-				nextCommand = getCommand();
-				if (modelWorker.workerHasID(nextCommand)) {
-					modelProject.setLeader(getThisProject(), getWorker(nextCommand));
-				}
-			} else if (nextCommand.equals("Back")) {
-				changeStage("Application");
-				setHasProject(false);
-				view.showAvailableCommands(modelApplication.getStage());
+					nextCommand = getCommand();
+					if (nextCommand.equals("Start")) {
+						view.showMessage("Write the new start date in the format: ww-yyyy");
+						setProjectStart(getThisProject(), descriptionHandler.nextLine());
+					} else if (nextCommand.equals("End")) {
+						view.showMessage("Write the new end date in the format: ww-yyyy");
+						setProjectEnd(getThisProject(), descriptionHandler.nextLine());
+					}
+
+					break;
+				case "Leader":
+					view.showMessage("Please enter the id of worker you want to lead this project");
+					nextCommand = getCommand();
+					if (modelWorker.workerHasID(nextCommand)) {
+						modelProject.setLeader(getThisProject(), getWorker(nextCommand));
+					}
+					break;
+				case "Back":
+					changeStage("Application");
+					setHasProject(false);
+					view.showAvailableCommands(modelApplication.getStage());
+					break;
 			}
 		}
 	}

@@ -28,22 +28,27 @@ public class ControllerApplication {
 	}
 
 	public void runCommand(String nextCommand) throws OperationNotAllowedException {
-		if (nextCommand.equals("Create")) {
-			System.out.println("Name the Project: ");
-			String name = getCommand();
-			newProject = createProject(name);
-			  if(checkName(name)) {
-			    	addProject(newProject);
-			  }
-		} else if (nextCommand.equals("Get")) {
-			modelApplication.changeStage("Project");
-			
-		} else if (nextCommand.equals("Exit")) {
-			System.exit(0);
-			
-		} else if (nextCommand.equals("Worker")) {
-			modelApplication.changeStage("Worker");
-			view.showAvailableCommands(modelApplication.getStage());
+		switch (nextCommand) {
+			case "Create":
+				view.showMessage("Name the Project: ");
+				String name = getCommand();
+				newProject = createProject(name);
+				if (checkName(name)) {
+					addProject(newProject);
+					view.showAvailableCommands(modelApplication.getStage());
+				}
+				break;
+			case "Get":
+				modelApplication.changeStage("Project");
+
+				break;
+			case "Exit":
+				System.exit(0);
+
+			case "Worker":
+				modelApplication.changeStage("Worker");
+				view.showAvailableCommands(modelApplication.getStage());
+				break;
 		}
 	}
 

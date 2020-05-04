@@ -74,9 +74,7 @@ public class ModelActivity {
 			int difference = yearInt - currentYear;
 			// �rstallene man arbejder indenfor er 50 �r
 			if (difference >= -50 && difference <= 50) {
-				if (weekInt > 0 && weekInt <= 52) {
-					return true;
-				}
+				return weekInt > 0 && weekInt <= 52;
 			}
 		}
 		return false;
