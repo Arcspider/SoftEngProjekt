@@ -101,7 +101,7 @@ public class Activity implements datesInterface{
 		
 	}
 	public Double getBudgettedHours() {
-		return budgettedHoursTotal;
+		return budgettedHoursLeft;
 	}
 
 	public void addShift(String fullDateFormat) {
