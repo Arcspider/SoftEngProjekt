@@ -47,8 +47,9 @@ public class ControllerActivity {
 			if (nextCommand.equals("Time")) {
 				view.showMessage("Type \"Start\" to change the start date of the project");
 				view.showMessage("Type \"End\" to change the end date of the project");
+				view.showMessage("Type \"Budget\"to add to budgetted hours");
 				view.showMessage("The date format is \"ww-yyyy\" where ww is week and yyyy is year");
-				
+				view.showMessage("The hours must be added in increments of 0.5");
 				nextCommand = getCommand();
 				if (nextCommand.equals("Start")) {
 					view.showMessage("Write the new start date in the format: ww-yyyy");
@@ -58,20 +59,29 @@ public class ControllerActivity {
 					view.showMessage("Write the new end date in the format: ww-yyyy");
 					setActivityEnd(getThisProject(), getThisActivity(), timeHanlder.nextLine());
 				}
-			} else if(nextCommand.equals("Back")) {
-				setHasActivity(false);
-				changeStage("Project");
-				
-			} else if(nextCommand.equals("Assign")) {
-				view.showMessage("Please enter the ID of the employee you want to assign to this activity");
-				nextCommand = getCommand();
-				if(modelWorker.workerHasID(nextCommand)) {
-					getThisActivity().assignWorker(modelWorker.getWorker(nextCommand));
+				else if (nextCommand.equals("Budget")) {
+					view.showMessage("Please input the additional budgetted hours in increments of 0.5");
+
+
+				} else if(nextCommand.equals("Back")) {
+					setHasActivity(false);
+					changeStage("Project");
+
+				} else if(nextCommand.equals("Assign")) {
+					view.showMessage("Please enter the ID of the employee you want to assign to this activity");
+					nextCommand = getCommand();
+					if(modelWorker.workerHasID(nextCommand)) {
+						getThisActivity().assignWorker(modelWorker.getWorker(nextCommand));
+					}
+
 				}
-				
-			}
-			else if(nextCommand.equals("List")) {
-				getThisActivity().listWorkers();
+				else if(nextCommand.equals("List")) {
+					getThisActivity().listWorkers();
+				}
+				else if(nextCommand.equals("Check")) {
+					getThisActivity().getBudgettedHours();
+				}
+
 			}
 		}
 	}
@@ -81,7 +91,7 @@ public class ControllerActivity {
 
 	private void setThisActivity(Activity activity) {
 		modelActivity.setThisActivity(activity);
-		
+
 	}
 
 	private Activity getActivity(Project project, String name) {
@@ -121,7 +131,7 @@ public class ControllerActivity {
 	}
 
 	public boolean addActivity(String string, Project project) throws OperationNotAllowedException {
-		 return modelActivity.addActivity(project, string);
+		return modelActivity.addActivity(project, string);
 	}
 
 	public boolean validDate(String startDate) {
@@ -133,7 +143,7 @@ public class ControllerActivity {
 	}
 
 	public void setActivityEnd(Project project, Activity activity, String endDate) throws OperationNotAllowedException {
-		 modelActivity.setActivityEnd(project,activity,endDate);
-		
+		modelActivity.setActivityEnd(project,activity,endDate);
+
 	}
 }
