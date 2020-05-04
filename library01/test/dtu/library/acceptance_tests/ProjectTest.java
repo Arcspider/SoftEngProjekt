@@ -19,7 +19,7 @@ public class ProjectTest {
 
 
     private ModelProject modelProject;
-   
+
     private ErrorMessageHolder errorMessageHolder;
 
     private Project project;
@@ -42,13 +42,13 @@ public class ProjectTest {
     @Then("the project with the ID is contained in the list")
     public void theProjectWithTheIDIsContainedInTheList() throws OperationNotAllowedException {
         assertTrue(modelProject.hasID(project.getId()));
-        
+
     }
 
     @Given("a user creates another project with name {string}")
     public void aUserCreatesAnotherProjectWithName(String name) throws OperationNotAllowedException {
-          project = modelProject.createProject(name);    
-    } 
+          project = modelProject.createProject(name);
+    }
 
     @Then("the project is not created")
     public void theProjectIsNotCreated() {
@@ -85,9 +85,9 @@ public class ProjectTest {
     @When("the user chooses the project {string} with the id {string}")
     public void theUserChoosesTheProjectWithTheId(String name, String id) throws OperationNotAllowedException {
          project = modelProject.createProject(name);
-         project.setId(id); 
+         project.setId(id);
          modelProject.addProject(project);
-    	
+
     }
 
 	@When("the user changes the name to {string}")
@@ -101,7 +101,7 @@ public class ProjectTest {
     }
 
     @When("the user enters the start and end dates {string} and {string}")
-    public void theUserEntersTheStartAndEndDatesAnd(String startDate, String endDate) { 
+    public void theUserEntersTheStartAndEndDatesAnd(String startDate, String endDate) {
         assertTrue((modelProject.verifyDateFormat(startDate) && modelProject.verifyDateFormat(endDate)));
     }
 

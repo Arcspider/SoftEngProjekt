@@ -60,11 +60,33 @@ public class Activity implements datesInterface{
 	}
 	public void assignWorker(Worker worker) {
 		workers.add(worker);
+		System.out.println("Employee " + worker.getId() + " has been assigned");
 	}
+	
 	public boolean hasWorker(Worker worker) {
 		return workers.contains(worker);
 	}
-	//TODO find et alternativ til at have 2 forskellige hasWorker funktioner. Lige nu bruger timeTest den som bruger hasWorkerId, mens en helt anden fil bruger den almindelige hasWorker.
+	
+	public boolean hasAnyWorkers() {
+		if(workers.size() > 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	public String listWorkers() {
+		if(hasAnyWorkers()) {
+			int noOfWorkers = 0;
+			for(int i = 0; i < workers.size(); i++) {
+				System.out.println(workers.get(i).getId());
+				noOfWorkers = i;
+			}
+			return "These were all the assigned workers";
+		} else {
+			return "There are no workers assigned";
+		}
+	}
+	
 	public boolean hasWorkerId(String id) {
 		for(Worker worker : workers) {
 			if(worker.getId().equals(id)) return true;
@@ -84,17 +106,35 @@ public class Activity implements datesInterface{
 
 	public void addShift(String fullDateFormat) {
 		String[] separated = fullDateFormat.split(";");
+		
 		Double hours = Double.parseDouble(separated[2]);
 		budgettedHoursLeft -= hours;
 		shifts.add(fullDateFormat);		
 	}
+	
+	public int findShiftByIdAndDate(String shift) {
+		String[] shiftSplit = shift.split(";");
+		for(int i = 0; i< shifts.size();i++) {
+			String currentShift = shifts.get(i);
+			String[] currentShiftSplit = currentShift.split(";");
+			if(shiftSplit[0].equals(currentShiftSplit[0]) && shiftSplit[1].equals(currentShiftSplit[1])) {
+				return i;
+			}
+		}System.out.println("No shifts found"); return 0;
+	}
 	public boolean hasShiftByIdAndDate(String shift) {
 		String[] shiftSplit = shift.split(";");
 		for(String currentShift : shifts) {
-			String[] currentShiftSplit = shift.split(";");
+			String[] currentShiftSplit = currentShift.split(";");
 			if(shiftSplit[0].equals(currentShiftSplit[0]) && shiftSplit[1].equals(currentShiftSplit[1])) {
 				return true;
 			}
 		}System.out.println("No shifts found"); return false;
+	}
+	public ArrayList<String> getShifts() {
+		return shifts;
+	}
+	public void setShift(int tempShift, String fullDateFormat) {
+		shifts.set(tempShift, fullDateFormat);
 	}
 }

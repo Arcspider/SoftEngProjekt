@@ -22,7 +22,7 @@ public class AddActivityTest {
 
     private Project project;
     private Worker worker;
-    
+
     Activity newActivity;
 
     public AddActivityTest(View view,ModelProject modelProject, ModelActivity modelActivity, ModelWorker modelWorker,ErrorMessageHolder errorMessageHolder){
@@ -34,7 +34,7 @@ public class AddActivityTest {
 
 	@Given("a project with id {string}")
 	public void aProjectWithId(String string) throws OperationNotAllowedException {
-		project = modelProject.createProject("tom"); 
+		project = modelProject.createProject("tom");
 		project.setId(string);
 	    modelProject.addProject(project);
 	    worker = modelWorker.createWorker("Bob", "tom");

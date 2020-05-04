@@ -22,7 +22,7 @@ public class RemoveProjectTest {
     private View view;
  
     private	ModelProject modelProject;
-    
+
     private ErrorMessageHolder errorMessageHolder;
 
     private Project project;
@@ -34,7 +34,7 @@ public class RemoveProjectTest {
     
         this.modelProject = modelProject;
         this.errorMessageHolder = errorMessageHolder;
-        
+
     }
 
     @Given("the user deletes a project {string}")
@@ -77,10 +77,10 @@ public class RemoveProjectTest {
         System.out.println("Error: " + errorMessage);
     	 assertEquals(errorMessage
                  , this.errorMessageHolder.getErrorMessage());
-     
+
     }
 
 
 
-   
+
 }

@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
 
 public class AssignWorkerTest {
 
- 
+	private Model model;
 	private ModelProject modelProject;
 	private ModelActivity modelActivity;
 	private ModelWorker modelWorker;
@@ -35,13 +35,13 @@ public class AssignWorkerTest {
 		project.setId(projectID);
 		modelProject.addProject(project);
 	}
-	
+
 	@Given("has the activity {string}")
 	public void hasTheActivity(String activityName) throws OperationNotAllowedException {
 		 assertTrue(modelActivity.addActivity(project, activityName));
 		 activity = modelActivity.getActivity(project, activityName);
 	}
-	
+
 	@Given("the worker with id {string} exists'")
 	public void theWorkerWithIdExists(String workerID) {
 	    worker = modelWorker.createWorker("Tom", "Bob");

@@ -6,6 +6,7 @@ import dtu.library.app.Activity;
 import dtu.library.app.ModelActivity;
 import dtu.library.app.ModelApplication;
 import dtu.library.app.ModelProject;
+import dtu.library.app.ModelWorker;
 import dtu.library.app.OperationNotAllowedException;
 import dtu.library.app.Project;
 import dtu.library.app.View;
@@ -14,15 +15,17 @@ public class ControllerActivity {
 	private ModelApplication modelApplication;
 	private ModelProject modelProject;
 	private ModelActivity modelActivity;
+	private ModelWorker modelWorker;
 	private View view;
 	Scanner scanner;
 	Scanner timeHanlder;
 
-	public ControllerActivity(View view,ModelApplication modelApplication, ModelProject modelProject, ModelActivity modelActivity) {
+	public ControllerActivity(View view,ModelApplication modelApplication, ModelProject modelProject, ModelActivity modelActivity, ModelWorker modelWorker) {
 		this.view = view;
 		this.modelApplication = modelApplication;
 		this.modelProject = modelProject;
 		this.modelActivity = modelActivity;
+		this.modelWorker = modelWorker;
 		scanner = new Scanner(System.in);
 		timeHanlder = new Scanner(System.in);
 	}
@@ -57,7 +60,18 @@ public class ControllerActivity {
 				}
 			} else if(nextCommand.equals("Back")) {
 				setHasActivity(false);
-				changeStage("Project"); 
+				changeStage("Project");
+				
+			} else if(nextCommand.equals("Assign")) {
+				view.showMessage("Please enter the ID of the employee you want to assign to this activity");
+				nextCommand = getCommand();
+				if(modelWorker.workerHasID(nextCommand)) {
+					getThisActivity().assignWorker(modelWorker.getWorker(nextCommand));
+				}
+				
+			}
+			else if(nextCommand.equals("List")) {
+				getThisActivity().listWorkers();
 			}
 		}
 	}
