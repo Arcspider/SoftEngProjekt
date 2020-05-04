@@ -7,7 +7,7 @@ Feature: Allocate Time
 	And the activity "Beta" exists in the project
     And the user with id "MIOX" is assigned to the activity 
     Then the user logs "5" hours on day "20-05-2020"
-    Then the time "MIOX;20-05-2020;5" can be found in the activity 
+    Then the time "MIOX" "20-05-2020" "5" can be found in the activity 
 #
 #  Scenario: The user allocates time to an activity they are not assigned to.
 #    Given the user with id "HAH" is not assigned to activity "Beta"

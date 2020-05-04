@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 import dtu.library.app.Activity;
-import dtu.library.app.Model;
 import dtu.library.app.ModelActivity;
 import dtu.library.app.ModelProject;
 import dtu.library.app.ModelWorker;
@@ -73,10 +72,7 @@ public class timeTest {
     	assertTrue(modelActivity.hasShift(activity,workerID,date));
     }
     
-    @Then("the time {string} can be found in the activity")
-    public void theTimeCanBeFoundInTheActivity(String fullDateFormat) {
-
-    }
+   
     
     @Then("the user again logs {string} hours on day {string}")
     public void theUserAgainLogsHoursOnDay(String hours, String day) {
