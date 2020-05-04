@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import dtu.library.app.Activity;
-import dtu.library.app.Model;
+
 import dtu.library.app.ModelActivity;
 import dtu.library.app.ModelProject;
 import dtu.library.app.ModelWorker;

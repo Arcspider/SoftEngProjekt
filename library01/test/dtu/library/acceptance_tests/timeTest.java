@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 import dtu.library.app.Activity;
-import dtu.library.app.Model;
 import dtu.library.app.ModelActivity;
 import dtu.library.app.ModelProject;
 import dtu.library.app.ModelWorker;
@@ -28,12 +27,12 @@ public class timeTest {
     private Activity activity;
     private String ID;
     private List<Project> projects;
-	private Model model;
+
 	private ModelProject modelProject;
 	private ModelActivity modelActivity;
 	private ModelWorker modelWorker;
-	public timeTest(View view,Model model,ModelProject modelProject,ModelActivity modelActivity, ModelWorker modelWorker, ErrorMessageHolder errorMessageHolder){
-    	this.model = model;
+	public timeTest(View view,ModelProject modelProject,ModelActivity modelActivity, ModelWorker modelWorker, ErrorMessageHolder errorMessageHolder){
+
     	this.modelProject = modelProject;
     	this.modelActivity = modelActivity;
     	this.modelWorker = modelWorker;
@@ -67,12 +66,10 @@ public class timeTest {
     public void theUserLogsHoursOnDay(String hours, String day) {
     	assertTrue(modelActivity.allowedHours(hours) && modelActivity.verifyFormatddmmyyyy(day));
     }
-    
-    
-    @Then("the time {string} can be found in the activity")
-    public void theTimeCanBeFoundInTheActivity(String fullDateFormat) {
-    	modelActivity.addShift(activity,fullDateFormat);
-    	assertTrue(modelActivity.hasShift(activity,fullDateFormat));
+    @Then("the time {string} {string} {string} can be found in the activity")
+    public void theTimeCanBeFoundInTheActivity(String workerID, String date, String time) {
+        	modelActivity.addShift(activity,workerID,date,time);
+    	assertTrue(modelActivity.hasShift(activity,workerID,date));
     }
     
     @Then("the user again logs {string} hours on day {string}")

@@ -45,7 +45,6 @@ public class ControllerApplication {
 			modelApplication.changeStage("Worker");
 			view.showAvailableCommands(modelApplication.getStage());
 		}
-	
 	}
 
 

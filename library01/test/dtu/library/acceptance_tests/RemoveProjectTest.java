@@ -1,6 +1,5 @@
 package dtu.library.acceptance_tests;
 
-import dtu.library.app.Model;
 import dtu.library.app.ModelProject;
 import dtu.library.app.OperationNotAllowedException;
 import dtu.library.app.Project;
@@ -21,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 public class RemoveProjectTest {
 
     private View view;
-    private Model model;
+ 
     private	ModelProject modelProject;
 
     private ErrorMessageHolder errorMessageHolder;
@@ -30,9 +29,9 @@ public class RemoveProjectTest {
     private String ID;
     private List<Project> projects;
 
-    public RemoveProjectTest(View view,Model model,ModelProject modelProject, ErrorMessageHolder errorMessageHolder) {
+    public RemoveProjectTest(View view,ModelProject modelProject, ErrorMessageHolder errorMessageHolder) {
         this.view = view;
-        this.model = model;
+    
         this.modelProject = modelProject;
         this.errorMessageHolder = errorMessageHolder;
 
