@@ -3,6 +3,7 @@ package dtu.library.app;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -120,17 +121,11 @@ public class ModelActivity {
 	}
 
 	public boolean verifyLegalActivityName(Project project, String activityName) {
-		if (activityName == null || project.hasActivity(activityName))
-			return false;
-		else
-			return true;
+		return activityName != null && !project.hasActivity(activityName);
 	}
 
 	public boolean legalDescription(String description) {
-		if (description == "" || description == null)
-			return false;
-		else
-			return true;
+		return !description.equals("");
 
 	}
 
@@ -190,7 +185,7 @@ public class ModelActivity {
 	
 	public void addShift(Activity activity, String fullDateFormat) {
 		if(verifyLegalShift(activity,fullDateFormat)) {
-			//Hvis der allerede er et shift, så bare tilføj timerne
+			//Hvis der allerede er et shift, sï¿½ bare tilfï¿½j timerne
 			if(activity.hasShiftByIdAndDate(fullDateFormat)) {
 				String[] separated = fullDateFormat.split(";");
 				
@@ -211,13 +206,26 @@ public class ModelActivity {
 	public boolean allowedHours(String hours) {
 		if(stringIsDouble(hours)) {
 			Double doubleHours = Double.parseDouble(hours);
-			//Skal være enten heltal eller halv times intervaller.
+			//Skal vï¿½re enten heltal eller halv times intervaller.
 				return (doubleHours <=16 && doubleHours >=0 && doubleHours % 0.5 ==0);				
 		}
 		return false;
 	}
-	public boolean hasShifty(Activity activity, String shift) {
+
+	public boolean hasShift(Activity activity, String shift) {
 		return activity.hasShiftByIdAndDate(shift);
+	}
+
+	public ArrayList<String> getShifts(Activity activity){
+		return activity.getShifts();
+	}
+
+	public void getWorkedShifts(Activity activity, String date){
+		for(int i = 0; i < activity.getShifts().size(); i++){
+			if (activity.getShifts().get(i).contains(date)){
+				view.showMessage(activity.getShifts().get(i));
+			}
+		}
 	}
 
 }

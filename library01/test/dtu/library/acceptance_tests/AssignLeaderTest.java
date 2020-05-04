@@ -29,13 +29,13 @@ public class AssignLeaderTest {
     	modelProject.addProject(project);
     	worker = modelWorker.createWorker("Bob", "Gnarty");
     }
-    
+
     @Given("that a project with id {string} does not have a leader")
     public void thatAProjectWithIdDoesNotHaveALeader(String string) {
     	project.setId(string);
         assertFalse(project.hasLeader());
     }
-    
+
     @When("the user adds the worker with id {string} as leader")
     public void theUserAddsTheWorkerWithIdAsLeader(String string) throws OperationNotAllowedException {
     	worker.setID(string);
@@ -47,7 +47,7 @@ public class AssignLeaderTest {
     public void theWorkerWithIdAsLeaderForProject(String string, String string2) {
     	assertEquals(worker, project.getLeader());
     }
-    
+
     @Given("that a worker with id {string} is a leader for project {string}")
     public void thatAWorkerWithIdIsALeaderForProject(String workerID, String projectID) throws OperationNotAllowedException {
     	worker = modelWorker.createWorker(worker.getFirstName(), worker.getLastName());
@@ -65,12 +65,12 @@ public class AssignLeaderTest {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }
     }
-    
+
     @Then("an error message {string} is written")
     public void anErrorMessageIsWritten(String string) {
     	assertEquals(string, this.errorMessageHolder.getErrorMessage());
     }
-    
+
     @Given("that a worker with id {string} is leader for project {string}")
     public void thatAWorkerWithIdIsLeaderForProject(String workerID, String projectID) throws OperationNotAllowedException {
     	worker = modelWorker.createWorker("Mike", "Hunt");
@@ -78,10 +78,10 @@ public class AssignLeaderTest {
     	project = modelProject.createProject("Pro");
     	project.setId(projectID);
     	modelProject.addProject(project);
-    	assertTrue(modelProject.setLeader(project, worker));    	
+    	assertTrue(modelProject.setLeader(project, worker));
     }
 
-    
+
     @When("the user adds the worker with id {string} as a leader for the project")
     public void theUserAddsTheWorkerWithIdAsALeaderForTheProject(String string) {
     	worker = modelWorker.createWorker("Tom", "Bob");
@@ -97,5 +97,5 @@ public class AssignLeaderTest {
     public void anErrorMessageIsWitten(String string) {
     	assertEquals(string, this.errorMessageHolder.getErrorMessage());
     }
-	
+
 }

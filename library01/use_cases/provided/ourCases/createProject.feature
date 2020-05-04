@@ -1,7 +1,7 @@
 Feature: Create Project
     Description: The user creates a project
     Actors: User
-    
+
 Scenario: User creates a project
      Given a user creates a project with name "Alpha"
      Then the project with the ID is contained in the list

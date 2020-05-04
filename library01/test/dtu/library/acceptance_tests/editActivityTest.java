@@ -35,7 +35,7 @@ public class editActivityTest {
 		this.model = model;
 		this.modelProject = modelProject;
 		this.modelActivity = modelActivity;
-		this.errorMessageHolder = errorMessageHolder; 
+		this.errorMessageHolder = errorMessageHolder;
 	}
 	@Given("a project with id {string} has and activity {string}")
 	public void aProjectWithIdHasAndActivity(String id, String name) throws OperationNotAllowedException {
@@ -127,7 +127,7 @@ public class editActivityTest {
 	}
 	@When("the user changes its budgetted time to {string}")
 	public void theUserChangesItsBudgettedTimeTo(String budgettedHours) {
-		
+
 		assertTrue(modelActivity.stringIsInteger(budgettedHours));
 	}
 	@Then("the activity's budgetted time is set to {string}")

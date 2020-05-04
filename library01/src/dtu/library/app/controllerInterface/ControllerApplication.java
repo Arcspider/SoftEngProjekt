@@ -9,16 +9,16 @@ import dtu.library.app.Project;
 import dtu.library.app.View;
 
 public class ControllerApplication {
-	private ModelApplication modelAplication;
+	private ModelApplication modelApplication;
 	private ModelProject modelProject;
 	private View view;
 	private Project newProject;
 	Scanner scanner;
 
-	public ControllerApplication(View view, ModelApplication modelAplication, ModelProject modelProject ) {
+	public ControllerApplication(View view, ModelApplication modelApplication, ModelProject modelProject ) {
 		this.view = view;
 		
-		this.modelAplication = modelAplication;
+		this.modelApplication = modelApplication;
 		this.modelProject = modelProject;
 		scanner = new Scanner(System.in);
 	}
@@ -36,14 +36,14 @@ public class ControllerApplication {
 			    	addProject(newProject);
 			  }
 		} else if (nextCommand.equals("Get")) {
-			modelAplication.changeStage("Project");
+			modelApplication.changeStage("Project");
 			
 		} else if (nextCommand.equals("Exit")) {
 			System.exit(0);
 			
 		} else if (nextCommand.equals("Worker")) {
-			modelAplication.changeStage("Worker");
-			view.showAvailableCommands(modelAplication.getStage());
+			modelApplication.changeStage("Worker");
+			view.showAvailableCommands(modelApplication.getStage());
 		}
 	
 	}
