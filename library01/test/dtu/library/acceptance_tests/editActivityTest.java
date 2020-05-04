@@ -7,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 import java.time.LocalDate;
 
 import dtu.library.app.Activity;
-import dtu.library.app.Model;
 import dtu.library.app.ModelActivity;
 import dtu.library.app.ModelProject;
 import dtu.library.app.OperationNotAllowedException;
@@ -20,7 +19,7 @@ import io.cucumber.java.en.*;
 
 public class editActivityTest {
 
-	private Model model;
+	
 	private ModelProject modelProject;
 	private ModelActivity modelActivity;
 	private ErrorMessageHolder errorMessageHolder;
@@ -31,8 +30,8 @@ public class editActivityTest {
 	private String startDate,endDate;
 	Activity newActivity;
 
-	public editActivityTest(View view, Model model,ModelProject modelProject, ModelActivity modelActivity ,ErrorMessageHolder errorMessageHolder) {
-		this.model = model;
+	public editActivityTest(View view,ModelProject modelProject, ModelActivity modelActivity ,ErrorMessageHolder errorMessageHolder) {
+		
 		this.modelProject = modelProject;
 		this.modelActivity = modelActivity;
 		this.errorMessageHolder = errorMessageHolder;

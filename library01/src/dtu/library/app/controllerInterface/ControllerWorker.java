@@ -31,7 +31,7 @@ public class ControllerWorker {
 			view.showMessage(modelWorker.createWorker(fristname, lastname).toString());
 
 		}else if(nextCommand.equals("Back")) {
-			modelApplication.changeStage("Application");
+			modelApplication.changeStage("Application"); 
 			view.showAvailableCommands(modelApplication.getStage());
 		}
 	}
