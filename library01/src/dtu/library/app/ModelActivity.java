@@ -147,7 +147,7 @@ public class ModelActivity {
 	}
 
 	public Activity getActivity(Project project, String name) {
-		return project.getActivity(name);
+		return project.getActivity(name);  
 	}
 
 	public boolean addActivity(Project project, String name) throws OperationNotAllowedException {
@@ -178,32 +178,17 @@ public class ModelActivity {
 		return false;
 	}
 
-	public boolean verifyLegalShift(Activity activity, String shiftFormat) {
-		String[] arrayFormat = shiftFormat.split("-");
-		if (activity.hasWorkerId(arrayFormat[0]) && verifyFormatddmmyyyy(arrayFormat[1])
-				&& allowedHours(arrayFormat[2])) {
+	public boolean verifyLegalShift(Activity activity, String workerID, String date, String time  ) {
+		if (activity.hasWorkerId(workerID) && verifyFormatddmmyyyy(date)
+				&& allowedHours(time)) {
 			return true;
 		} else
 			return true;
 	}
 
-	public void addShift(Activity activity, String fullDateFormat) {
-		if (verifyLegalShift(activity, fullDateFormat)) {
-			// Hvis der allerede er et shift, s� bare tilf�j timerne
-			if (activity.hasShiftByIdAndDate(fullDateFormat)) {
-				String[] separated = fullDateFormat.split(";");
-
-				ArrayList<String> shifts = activity.getShifts();
-				int shiftLocation = activity.findShiftByIdAndDate(fullDateFormat);
-				String tempShift = shifts.get(shiftLocation);
-				String[] tempShiftSplit = tempShift.split(";");
-
-				double newHours = (Double.parseDouble(separated[2]) + Double.parseDouble(tempShiftSplit[2]));
-				fullDateFormat = separated[0] + separated[1] + newHours;
-				activity.setShift(shiftLocation, fullDateFormat);
-			} else {
-				activity.addShift(fullDateFormat);
-			}
+	public void addShift(Activity activity, String workerID, String date,String time) {
+		if (verifyLegalShift(activity, workerID,date,time)) {
+				activity.addShift(workerID, date, time);
 		} else
 			view.showMessage("shift wasn't added, as something was illegal ");
 	}
@@ -217,20 +202,13 @@ public class ModelActivity {
 		return false;
 	}
 
-	public boolean hasShift(Activity activity, String shift) {
-		return activity.hasShiftByIdAndDate(shift);
+	public boolean hasShift(Activity activity, String workerID, String stringDate) {
+		return activity.hasShiftByIdAndDate(workerID, stringDate);
 	}
 
-	public ArrayList<String> getShifts(Activity activity) {
-		return activity.getShifts();
-	}
 
-	public void getWorkedShifts(Activity activity, String date) {
-		for (int i = 0; i < activity.getShifts().size(); i++) {
-			if (activity.getShifts().get(i).contains(date)) {
-				view.showMessage(activity.getShifts().get(i));
-			}
-		}
+	public void getWorkedShifts(Activity activity, String stringDate) {
+		activity.getWorkerShifts(stringDate);
 	}
 
 }

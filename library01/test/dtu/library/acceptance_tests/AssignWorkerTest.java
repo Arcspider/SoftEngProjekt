@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
 
 public class AssignWorkerTest {
 
-	private Model model;
+
 	private ModelProject modelProject;
 	private ModelActivity modelActivity;
 	private ModelWorker modelWorker;

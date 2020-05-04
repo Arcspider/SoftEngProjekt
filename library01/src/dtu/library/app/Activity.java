@@ -2,23 +2,25 @@ package dtu.library.app;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import dtu.library.app.timeInterface.datesInterface;
 
 public class Activity implements datesInterface{
 	private String name, description;
 	private ArrayList<Worker> workers;
-	private ArrayList<String> shifts;
+	private ArrayList<Shift> shifts;
 	LocalDate startDate, endDate;
 	private Double budgettedHoursTotal;
 	private Double budgettedHoursLeft;
+	private Shift shift;
 
 	public Activity(String name){
 		this.name = name;
 		workers = new ArrayList<>();
 		startDate = null;
 		endDate = null;
-		this.shifts = new ArrayList<String>();
+		this.shifts = new ArrayList<Shift>();
 		budgettedHoursLeft = 0.0;
 	}
 	public String getName() {
@@ -104,37 +106,66 @@ public class Activity implements datesInterface{
 		return budgettedHoursTotal;
 	}
 
-	public void addShift(String fullDateFormat) {
-		String[] separated = fullDateFormat.split(";");
-		
-		Double hours = Double.parseDouble(separated[2]);
-		budgettedHoursLeft -= hours;
-		shifts.add(fullDateFormat);		
+	public void addShift(String workerID, String stringDate, String time ) {
+		boolean newShift = true;
+		LocalDate date = stringToDate(stringDate);
+		for(int i = 0; i <shifts.size(); i++) {
+			if(shifts.get(i).getWorkerID().equals(workerID) && shifts.get(i).getDate().equals(date)) {
+				shifts.get(i).addTime(Double.parseDouble(time));
+				newShift = false;
+				break;
+			}
+		}
+		if(newShift) {
+			shift = new Shift(workerID,date,Double.parseDouble(time));
+			shifts.add(shift);
+		}		
 	}
 	
-	public int findShiftByIdAndDate(String shift) {
-		String[] shiftSplit = shift.split(";");
-		for(int i = 0; i< shifts.size();i++) {
-			String currentShift = shifts.get(i);
-			String[] currentShiftSplit = currentShift.split(";");
-			if(shiftSplit[0].equals(currentShiftSplit[0]) && shiftSplit[1].equals(currentShiftSplit[1])) {
-				return i;
+	public Shift findShiftByIdAndDate(String workerID, String stringDate) {
+		LocalDate date = stringToDate(stringDate);
+		for(int i = 0; i <shifts.size(); i++) {
+			if(shifts.get(i).getWorkerID().equals(workerID) && shifts.get(i).getDate().equals(date)) {
+				return shifts.get(i);
 			}
-		}System.out.println("No shifts found"); return 0;
+		}
+		return null;
 	}
-	public boolean hasShiftByIdAndDate(String shift) {
-		String[] shiftSplit = shift.split(";");
-		for(String currentShift : shifts) {
-			String[] currentShiftSplit = currentShift.split(";");
-			if(shiftSplit[0].equals(currentShiftSplit[0]) && shiftSplit[1].equals(currentShiftSplit[1])) {
+	
+	public boolean hasShiftByIdAndDate(String workerID, String stringDate) {
+		LocalDate date = stringToDate(stringDate);
+		for(int i = 0; i <shifts.size(); i++) {
+			if(shifts.get(i).getWorkerID().equals(workerID) && shifts.get(i).getDate().equals(date)) {
 				return true;
 			}
-		}System.out.println("No shifts found"); return false;
+		}
+		return false;
 	}
-	public ArrayList<String> getShifts() {
-		return shifts;
+	
+	public void getWorkerShifts(String stringDate) {
+		LocalDate date = stringToDate(stringDate);
+		for (int i = 0; i < shifts.size(); i++) {
+		if (shifts.get(i).getDate().equals(date)) {
+			System.out.println(shifts.get(i).toString());
+		}
 	}
-	public void setShift(int tempShift, String fullDateFormat) {
-		shifts.set(tempShift, fullDateFormat);
 	}
+
+	
+	public LocalDate stringToDate(String toBeConverted) {
+		String[] stringDate = toBeConverted.split("-");
+		int dInt = Integer.parseInt(stringDate[0]);
+		int mInt = Integer.parseInt(stringDate[1]);
+		int yInt = Integer.parseInt(stringDate[2]);
+
+		Calendar cld = Calendar.getInstance();
+		cld.set(Calendar.YEAR, yInt);
+		cld.set(Calendar.MONTH, mInt);
+		cld.set(Calendar.DAY_OF_MONTH, dInt);
+
+		LocalDate finalDate = LocalDate.of(cld.get(Calendar.YEAR), cld.get(Calendar.MONTH),
+				cld.get(Calendar.DAY_OF_MONTH));
+		return finalDate;
+	}
+
 }
