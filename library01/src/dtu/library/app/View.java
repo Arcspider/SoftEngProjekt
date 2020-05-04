@@ -26,8 +26,6 @@ public class View {
 		this.controllerProject = new ControllerProject(this, modelApplication, modelProject, modelActivity,modelWorker);
 		this.controllerActivity = new ControllerActivity(this, modelApplication, modelProject, modelActivity, modelWorker);
 		this.controllerWorker = new ControllerWorker(this,modelWorker, modelApplication);
-		showApplicationIntroduction();
-		//startup();
 	}
 
 	public void showMessage(String message) {
@@ -35,14 +33,19 @@ public class View {
 	}
 
 	public void showAvailableCommands(String stage) {
-		if (stage.equals("Application")) {
-			showApplicationIntroduction();
-		} else if (stage.equals("Project")) {
-			showProjectIntroduction(modelProject.getThisProject());
-		} else if (stage.equals("Activity")) {
-			showActivityIntroduction();
-		} else if (stage.equals("Worker")) {
-			showWorkerIntroduction();
+		switch (stage) {
+			case "Application":
+				showApplicationIntroduction();
+				break;
+			case "Project":
+				showProjectIntroduction(modelProject.getThisProject());
+				break;
+			case "Activity":
+				showActivityIntroduction();
+				break;
+			case "Worker":
+				showWorkerIntroduction();
+				break;
 		}
 	}
 
@@ -69,7 +72,7 @@ public class View {
 		return modelApplication.getStage();
 	}
 
-	private void showApplicationIntroduction() {
+	public void showApplicationIntroduction() {
 		System.out.println("Current available commands: Create, Get, Worker, Exit");
 		System.out.println("Create: Creates new project");
 		System.out.println("Get: Access existing project");

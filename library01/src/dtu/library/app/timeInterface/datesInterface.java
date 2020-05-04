@@ -4,9 +4,9 @@ import java.time.LocalDate;
 import java.time.Period;
 
 public interface datesInterface {
-    public LocalDate getStartDate();
-    public LocalDate getEndDate();
-    public boolean isOverdue();
-    public void setStartDate(LocalDate startDate);
-    public void setEndDate(LocalDate endDate);
+    LocalDate getStartDate();
+    LocalDate getEndDate();
+    boolean isOverdue();
+    void setStartDate(LocalDate startDate);
+    void setEndDate(LocalDate endDate);
 }

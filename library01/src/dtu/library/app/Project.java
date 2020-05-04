@@ -107,10 +107,7 @@ public class Project implements datesInterface {
 	}
 	
 	public boolean hasLeader() {
-		if(leader != null) {
-			return true;
-		}
-		return false;
+		return leader != null;
 	}
 	
 	public Worker getLeader() {
