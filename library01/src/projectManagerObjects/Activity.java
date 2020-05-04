@@ -1,10 +1,10 @@
-package dtu.library.app;
+package projectManagerObjects;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import dtu.library.app.timeInterface.datesInterface;
+import timeInterface.datesInterface;
 
 public class Activity implements datesInterface{
 	private String name, description;

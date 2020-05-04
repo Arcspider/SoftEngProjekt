@@ -1,15 +1,17 @@
 package dtu.library.acceptance_tests;
 
 
-import dtu.library.app.ModelProject;
-import dtu.library.app.OperationNotAllowedException;
-import dtu.library.app.Project;
-import dtu.library.app.controllerInterface.ControllerProject;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import projectManagerObjects.ModelProject;
+import projectManagerObjects.OperationNotAllowedException;
+import projectManagerObjects.Project;
+
 import org.junit.Assert;
+
+import controllerInterface.ControllerProject;
 
 import java.util.List;
 

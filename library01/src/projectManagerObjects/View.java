@@ -1,9 +1,9 @@
-package dtu.library.app;
+package projectManagerObjects;
 
-import dtu.library.app.controllerInterface.ControllerActivity;
-import dtu.library.app.controllerInterface.ControllerApplication;
-import dtu.library.app.controllerInterface.ControllerProject;
-import dtu.library.app.controllerInterface.ControllerWorker;
+import controllerInterface.ControllerActivity;
+import controllerInterface.ControllerApplication;
+import controllerInterface.ControllerProject;
+import controllerInterface.ControllerWorker;
 
 public class View {
 
@@ -27,7 +27,7 @@ public class View {
 		this.controllerActivity = new ControllerActivity(this, modelApplication, modelProject, modelActivity, modelWorker);
 		this.controllerWorker = new ControllerWorker(this,modelWorker, modelApplication);
 		showApplicationIntroduction();
-		//startup();
+		startup();
 	}
 
 	public void showMessage(String message) {
