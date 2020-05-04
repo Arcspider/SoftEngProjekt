@@ -72,10 +72,7 @@ public class timeTest {
     	assertTrue(modelActivity.hasShift(activity,workerID,date));
     }
     
-    @Then("the time {string} can be found in the activity")
-    public void theTimeCanBeFoundInTheActivity(String fullDateFormat) {
-
-    }
+   
     
     @Then("the user again logs {string} hours on day {string}")
     public void theUserAgainLogsHoursOnDay(String hours, String day) {
