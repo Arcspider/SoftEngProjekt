@@ -24,7 +24,7 @@ public class View {
 		
 		this.controller = new ControllerApplication(this, modelApplication, modelProject);
 		this.controllerProject = new ControllerProject(this, modelApplication, modelProject, modelActivity,modelWorker);
-		this.controllerActivity = new ControllerActivity(this, modelApplication, modelProject, modelActivity);
+		this.controllerActivity = new ControllerActivity(this, modelApplication, modelProject, modelActivity, modelWorker);
 		this.controllerWorker = new ControllerWorker(this,modelWorker, modelApplication);
 		showApplicationIntroduction();
 		//startup();
@@ -92,8 +92,10 @@ public class View {
 	}
 	
 	private void showActivityIntroduction() {
-		System.out.println("Current available commands: Time, Back");
-		System.out.println("Time: Change the start and end dates of the activity");
+		System.out.println("Current available commands: Time, Assign, List, Back");
+		System.out.println("Time: Change the start and end dates of this activity");
+		System.out.println("Assign: Assign an employee to this activity");
+		System.out.println("List: List all workers assigned to this activity");
 		System.out.println("Back: Exit back to the project");
 	}
 

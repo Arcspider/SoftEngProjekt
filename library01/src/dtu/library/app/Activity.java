@@ -60,11 +60,33 @@ public class Activity implements datesInterface{
 	}
 	public void assignWorker(Worker worker) {
 		workers.add(worker);
+		System.out.println("Employee " + worker.getId() + " has been assigned");
 	}
+	
 	public boolean hasWorker(Worker worker) {
 		return workers.contains(worker);
 	}
-	//TODO find et alternativ til at have 2 forskellige hasWorker funktioner. Lige nu bruger timeTest den som bruger hasWorkerId, mens en helt anden fil bruger den almindelige hasWorker.
+	
+	public boolean hasAnyWorkers() {
+		if(workers.size() > 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	public String listWorkers() {
+		if(hasAnyWorkers()) {
+			int noOfWorkers = 0;
+			for(int i = 0; i < workers.size(); i++) {
+				System.out.println(workers.get(i).getId());
+				noOfWorkers = i;
+			}
+			return "These were all the assigned workers";
+		} else {
+			return "There are no workers assigned";
+		}
+	}
+	
 	public boolean hasWorkerId(String id) {
 		for(Worker worker : workers) {
 			if(worker.getId().equals(id)) return true;
