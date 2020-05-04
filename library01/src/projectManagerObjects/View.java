@@ -1,9 +1,9 @@
-package dtu.library.app;
+package projectManagerObjects;
 
-import dtu.library.app.controllerInterface.ControllerActivity;
-import dtu.library.app.controllerInterface.ControllerApplication;
-import dtu.library.app.controllerInterface.ControllerProject;
-import dtu.library.app.controllerInterface.ControllerWorker;
+import controllerInterface.ControllerActivity;
+import controllerInterface.ControllerApplication;
+import controllerInterface.ControllerProject;
+import controllerInterface.ControllerWorker;
 
 public class View {
 

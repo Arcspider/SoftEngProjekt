@@ -1,4 +1,4 @@
-package dtu.library.app;
+package projectManagerObjects;
 
 import java.util.ArrayList;
 

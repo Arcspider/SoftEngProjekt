@@ -1,7 +1,9 @@
-package dtu.library.app;
+package projectManagerObjects;
 
 import java.util.ArrayList;
-import dtu.library.app.timeInterface.datesInterface;
+
+import timeInterface.datesInterface;
+
 import java.time.LocalDate;
 
 public class Project implements datesInterface {

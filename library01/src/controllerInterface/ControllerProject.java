@@ -1,18 +1,17 @@
-package dtu.library.app.controllerInterface;
-
-import dtu.library.app.ModelActivity;
-import dtu.library.app.ModelApplication;
-import dtu.library.app.ModelProject;
-import dtu.library.app.ModelWorker;
-import dtu.library.app.OperationNotAllowedException;
-import dtu.library.app.Project;
-import dtu.library.app.View;
-//import dtu.library.app.Worker;
-import dtu.library.app.Worker;
+package controllerInterface;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import projectManagerObjects.ModelActivity;
+import projectManagerObjects.ModelApplication;
+import projectManagerObjects.ModelProject;
+import projectManagerObjects.ModelWorker;
+import projectManagerObjects.OperationNotAllowedException;
+import projectManagerObjects.Project;
+import projectManagerObjects.View;
+import projectManagerObjects.Worker;
 
 public class ControllerProject {
 

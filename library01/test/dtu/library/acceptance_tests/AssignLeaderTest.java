@@ -4,12 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import dtu.library.app.ModelProject;
-import dtu.library.app.ModelWorker;
-import dtu.library.app.OperationNotAllowedException;
-import dtu.library.app.Project;
-import dtu.library.app.Worker;
 import io.cucumber.java.en.*;
+import projectManagerObjects.ModelProject;
+import projectManagerObjects.ModelWorker;
+import projectManagerObjects.OperationNotAllowedException;
+import projectManagerObjects.Project;
+import projectManagerObjects.Worker;
 
 public class AssignLeaderTest {
 

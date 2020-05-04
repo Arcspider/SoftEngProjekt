@@ -1,4 +1,4 @@
-package dtu.library.app;
+package projectManagerObjects;
 
 public class ModelApplication {
 	private String stage;

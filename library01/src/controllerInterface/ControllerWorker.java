@@ -1,12 +1,12 @@
-package dtu.library.app.controllerInterface;
+package controllerInterface;
 
 import java.util.Scanner;
 
-import dtu.library.app.ModelApplication;
-import dtu.library.app.ModelWorker;
-import dtu.library.app.OperationNotAllowedException;
-import dtu.library.app.View;
-import dtu.library.app.Worker;
+import projectManagerObjects.ModelApplication;
+import projectManagerObjects.ModelWorker;
+import projectManagerObjects.OperationNotAllowedException;
+import projectManagerObjects.View;
+import projectManagerObjects.Worker;
 
 public class ControllerWorker {
 	private ModelWorker modelWorker;

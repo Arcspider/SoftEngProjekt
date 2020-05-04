@@ -1,4 +1,4 @@
-package dtu.library.app.timeInterface;
+package timeInterface;
 
 import java.time.LocalDate;
 import java.time.Period;
