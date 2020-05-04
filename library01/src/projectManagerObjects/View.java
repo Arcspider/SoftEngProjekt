@@ -92,9 +92,10 @@ public class View {
 	}
 	
 	private void showActivityIntroduction() {
-		System.out.println("Current available commands: Time, Assign, List, Back");
-		System.out.println("Time: Change the start and end dates of this activity");
+		System.out.println("Current available commands: Date, Time, Assign, List, Back");
+		System.out.println("Date: Change the start and end dates of this activity");
 		System.out.println("Assign: Assign an employee to this activity");
+		System.out.println("Time: Allocate time that a worker has spent on this activity");
 		System.out.println("List: List all workers assigned to this activity");
 		System.out.println("Back: Exit back to the project");
 	}
