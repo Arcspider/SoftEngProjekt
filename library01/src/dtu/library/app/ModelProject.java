@@ -113,7 +113,7 @@ public class ModelProject {
 			}
 
 		}
-	}
+	} 
 
 	public LocalDate stringToDate(String toBeConverted) {
 		String[] stringDate = toBeConverted.split("-");

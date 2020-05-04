@@ -90,6 +90,7 @@ public class ModelActivity {
 		}
 		return true;
 	}
+
 	public boolean stringIsDouble(String test) {
 		try {
 			double canIBeConverted = Double.parseDouble(test);
@@ -98,7 +99,6 @@ public class ModelActivity {
 		}
 		return true;
 	}
-	
 
 	public void changeActivityDescription(Project project, Activity activity, String newDescription)
 			throws OperationNotAllowedException {
@@ -160,54 +160,59 @@ public class ModelActivity {
 
 	public boolean verifyFormatddmmyyyy(String day) {
 		String[] stringDate = day.split("-");
-		if (stringDate.length == 3 && stringIsInteger(stringDate[0]) && stringIsInteger(stringDate[1]) && stringIsInteger(stringDate[2])) {
+		if (stringDate.length == 3 && stringIsInteger(stringDate[0]) && stringIsInteger(stringDate[1])
+				&& stringIsInteger(stringDate[2])) {
 			int dayInt = Integer.parseInt(stringDate[0]);
 			int monthInt = Integer.parseInt(stringDate[1]);
 			int yearInt = Integer.parseInt(stringDate[2]);
 			int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 			int difference = yearInt - currentYear;
 			// aarstallene man arbejder indenfor er 50 aar
-			if (difference >= -50 && difference <= 50 && monthInt <=12 && monthInt>0 && dayInt <=30 && dayInt >= 0) {
-					System.out.println("legal dato ");
-					return true;
+			if (difference >= -50 && difference <= 50 && monthInt <= 12 && monthInt > 0 && dayInt <= 30
+					&& dayInt >= 0) {
+				System.out.println("legal dato ");
+				return true;
 			}
 		}
 		System.out.println("Illegal dato weewoo");
 		return false;
 	}
-	public boolean verifyLegalShift(Activity activity,String shiftFormat) {
+
+	public boolean verifyLegalShift(Activity activity, String shiftFormat) {
 		String[] arrayFormat = shiftFormat.split("-");
-		if(activity.hasWorkerId(arrayFormat[0]) && verifyFormatddmmyyyy(arrayFormat[1]) && allowedHours(arrayFormat[2])) {
+		if (activity.hasWorkerId(arrayFormat[0]) && verifyFormatddmmyyyy(arrayFormat[1])
+				&& allowedHours(arrayFormat[2])) {
 			return true;
-		}else return true;
+		} else
+			return true;
 	}
-	
-	
+
 	public void addShift(Activity activity, String fullDateFormat) {
-		if(verifyLegalShift(activity,fullDateFormat)) {
-			//Hvis der allerede er et shift, s� bare tilf�j timerne
-			if(activity.hasShiftByIdAndDate(fullDateFormat)) {
+		if (verifyLegalShift(activity, fullDateFormat)) {
+			// Hvis der allerede er et shift, s� bare tilf�j timerne
+			if (activity.hasShiftByIdAndDate(fullDateFormat)) {
 				String[] separated = fullDateFormat.split(";");
-				
+
 				ArrayList<String> shifts = activity.getShifts();
 				int shiftLocation = activity.findShiftByIdAndDate(fullDateFormat);
 				String tempShift = shifts.get(shiftLocation);
 				String[] tempShiftSplit = tempShift.split(";");
-				
+
 				double newHours = (Double.parseDouble(separated[2]) + Double.parseDouble(tempShiftSplit[2]));
-				fullDateFormat = separated[0] + separated [1] + newHours;
+				fullDateFormat = separated[0] + separated[1] + newHours;
 				activity.setShift(shiftLocation, fullDateFormat);
-			}else {
+			} else {
 				activity.addShift(fullDateFormat);
 			}
-		}else view.showMessage("shift wasn't added, as something was illegal ");
+		} else
+			view.showMessage("shift wasn't added, as something was illegal ");
 	}
 
 	public boolean allowedHours(String hours) {
-		if(stringIsDouble(hours)) {
+		if (stringIsDouble(hours)) {
 			Double doubleHours = Double.parseDouble(hours);
-			//Skal v�re enten heltal eller halv times intervaller.
-				return (doubleHours <=16 && doubleHours >=0 && doubleHours % 0.5 ==0);				
+			// Skal v�re enten heltal eller halv times intervaller.
+			return (doubleHours <= 16 && doubleHours >= 0 && doubleHours % 0.5 == 0);
 		}
 		return false;
 	}
@@ -216,13 +221,13 @@ public class ModelActivity {
 		return activity.hasShiftByIdAndDate(shift);
 	}
 
-	public ArrayList<String> getShifts(Activity activity){
+	public ArrayList<String> getShifts(Activity activity) {
 		return activity.getShifts();
 	}
 
-	public void getWorkedShifts(Activity activity, String date){
-		for(int i = 0; i < activity.getShifts().size(); i++){
-			if (activity.getShifts().get(i).contains(date)){
+	public void getWorkedShifts(Activity activity, String date) {
+		for (int i = 0; i < activity.getShifts().size(); i++) {
+			if (activity.getShifts().get(i).contains(date)) {
 				view.showMessage(activity.getShifts().get(i));
 			}
 		}
