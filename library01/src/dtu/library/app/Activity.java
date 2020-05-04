@@ -84,17 +84,35 @@ public class Activity implements datesInterface{
 
 	public void addShift(String fullDateFormat) {
 		String[] separated = fullDateFormat.split(";");
+		
 		Double hours = Double.parseDouble(separated[2]);
 		budgettedHoursLeft -= hours;
 		shifts.add(fullDateFormat);		
 	}
+	
+	public int findShiftByIdAndDate(String shift) {
+		String[] shiftSplit = shift.split(";");
+		for(int i = 0; i< shifts.size();i++) {
+			String currentShift = shifts.get(i);
+			String[] currentShiftSplit = currentShift.split(";");
+			if(shiftSplit[0].equals(currentShiftSplit[0]) && shiftSplit[1].equals(currentShiftSplit[1])) {
+				return i;
+			}
+		}System.out.println("No shifts found"); return 0;
+	}
 	public boolean hasShiftByIdAndDate(String shift) {
 		String[] shiftSplit = shift.split(";");
 		for(String currentShift : shifts) {
-			String[] currentShiftSplit = shift.split(";");
+			String[] currentShiftSplit = currentShift.split(";");
 			if(shiftSplit[0].equals(currentShiftSplit[0]) && shiftSplit[1].equals(currentShiftSplit[1])) {
 				return true;
 			}
 		}System.out.println("No shifts found"); return false;
+	}
+	public ArrayList<String> getShifts() {
+		return shifts;
+	}
+	public void setShift(int tempShift, String fullDateFormat) {
+		shifts.set(tempShift, fullDateFormat);
 	}
 }

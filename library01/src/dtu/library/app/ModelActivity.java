@@ -3,6 +3,7 @@ package dtu.library.app;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -165,12 +166,13 @@ public class ModelActivity {
 	public boolean verifyFormatddmmyyyy(String day) {
 		String[] stringDate = day.split("-");
 		if (stringDate.length == 3 && stringIsInteger(stringDate[0]) && stringIsInteger(stringDate[1]) && stringIsInteger(stringDate[2])) {
+			int dayInt = Integer.parseInt(stringDate[0]);
 			int monthInt = Integer.parseInt(stringDate[1]);
 			int yearInt = Integer.parseInt(stringDate[2]);
 			int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 			int difference = yearInt - currentYear;
-			// ï¿½rstallene man arbejder indenfor er 50 ï¿½r
-			if (difference >= -50 && difference <= 50 && monthInt <=12 && monthInt>0) {
+			// aarstallene man arbejder indenfor er 50 aar
+			if (difference >= -50 && difference <= 50 && monthInt <=12 && monthInt>0 && dayInt <=30 && dayInt >= 0) {
 					System.out.println("legal dato ");
 					return true;
 			}
@@ -188,7 +190,21 @@ public class ModelActivity {
 	
 	public void addShift(Activity activity, String fullDateFormat) {
 		if(verifyLegalShift(activity,fullDateFormat)) {
-			activity.addShift(fullDateFormat);
+			//Hvis der allerede er et shift, så bare tilføj timerne
+			if(activity.hasShiftByIdAndDate(fullDateFormat)) {
+				String[] separated = fullDateFormat.split(";");
+				
+				ArrayList<String> shifts = activity.getShifts();
+				int shiftLocation = activity.findShiftByIdAndDate(fullDateFormat);
+				String tempShift = shifts.get(shiftLocation);
+				String[] tempShiftSplit = tempShift.split(";");
+				
+				double newHours = (Double.parseDouble(separated[2]) + Double.parseDouble(tempShiftSplit[2]));
+				fullDateFormat = separated[0] + separated [1] + newHours;
+				activity.setShift(shiftLocation, fullDateFormat);
+			}else {
+				activity.addShift(fullDateFormat);
+			}
 		}else view.showMessage("shift wasn't added, as something was illegal ");
 	}
 
@@ -200,7 +216,7 @@ public class ModelActivity {
 		}
 		return false;
 	}
-	public boolean getShifty(Activity activity, String shift) {
+	public boolean hasShifty(Activity activity, String shift) {
 		return activity.hasShiftByIdAndDate(shift);
 	}
 
