@@ -16,14 +16,12 @@ public class ModelProject {
 	private boolean hasProject;
 	private Random random;
 	private DateFormat dateFormat;
-	private Calendar calendar;
-
 	public ModelProject(View view) {
 		this.view = view;
 		projects = new ArrayList<Project>();
 		random = new Random();
 		hasProject = false;
-		this.calendar = new GregorianCalendar();
+		new GregorianCalendar();
 		dateFormat = new SimpleDateFormat("MM-yy");
 	}
 
@@ -113,7 +111,7 @@ public class ModelProject {
 			}
 
 		}
-	}
+	} 
 
 	public LocalDate stringToDate(String toBeConverted) {
 		String[] stringDate = toBeConverted.split("-");

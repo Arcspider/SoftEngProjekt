@@ -20,7 +20,8 @@ public class ControllerActivity {
 	Scanner scanner;
 	Scanner timeHanlder;
 
-	public ControllerActivity(View view,ModelApplication modelApplication, ModelProject modelProject, ModelActivity modelActivity, ModelWorker modelWorker) {
+	public ControllerActivity(View view, ModelApplication modelApplication, ModelProject modelProject,
+			ModelActivity modelActivity, ModelWorker modelWorker) {
 		this.view = view;
 		this.modelApplication = modelApplication;
 		this.modelProject = modelProject;
@@ -31,24 +32,25 @@ public class ControllerActivity {
 	}
 
 	public void runCommand() throws OperationNotAllowedException {
-		if(!hasActivity()) {
+		if (!hasActivity()) {
 			String name = getCommand();
-			if(!activityExists(getThisProject(),name)) {
+			if (!activityExists(getThisProject(), name)) {
 				changeStage("Project");
-				view.showMessage("This project " + getThisProject().getId()+" does not have the activity " + name );
-			}else {
+				view.showMessage("This project " + getThisProject().getId() + " does not have the activity " + name);
+			} else {
 				setHasActivity(true);
 				setThisActivity(getActivity(getThisProject(), name));
 				getThisActivity().toString();
 			}
-		}else{
+		} else {
 			view.showAvailableCommands(modelApplication.getStage());
 			String nextCommand = getCommand();
 			if (nextCommand.equals("Time")) {
 				view.showMessage("Type \"Start\" to change the start date of the project");
 				view.showMessage("Type \"End\" to change the end date of the project");
+				view.showMessage("Type \"Budget\"to add to budgetted hours");
 				view.showMessage("The date format is \"ww-yyyy\" where ww is week and yyyy is year");
-				
+				view.showMessage("The hours must be added in increments of 0.5");
 				nextCommand = getCommand();
 				if (nextCommand.equals("Start")) {
 					view.showMessage("Write the new start date in the format: ww-yyyy");
@@ -57,35 +59,47 @@ public class ControllerActivity {
 				} else if (nextCommand.equals("End")) {
 					view.showMessage("Write the new end date in the format: ww-yyyy");
 					setActivityEnd(getThisProject(), getThisActivity(), timeHanlder.nextLine());
+				} else if (nextCommand.equals("Budget")) {
+					view.showMessage("Please input the additional budgetted hours in increments of 0.5");
+
+				} else if (nextCommand.equals("Back")) {
+					setHasActivity(false);
+					changeStage("Project");
+
 				}
-			} else if(nextCommand.equals("Back")) {
-				setHasActivity(false);
-				changeStage("Project");
-				
-			} else if(nextCommand.equals("Assign")) {
+			} else if (nextCommand.equals("Assign")) {
 				view.showMessage("Please enter the ID of the employee you want to assign to this activity");
 				nextCommand = getCommand();
-				if(modelWorker.workerHasID(nextCommand)) {
+				if (modelWorker.workerHasID(nextCommand)) {
 					getThisActivity().assignWorker(modelWorker.getWorker(nextCommand));
 				}
-				
-			}
-			else if(nextCommand.equals("List")) {
+			}else if (nextCommand.equals("AssignTime")) {
+				view.showMessage("WorkerID: ");
+				String workerID = getCommand();
+				view.showMessage("Date: ");
+				String date = getCommand();
+				view.showMessage("Time: ");
+				String time = getCommand();
+				modelActivity.addShift(getThisActivity(), workerID, date, time);
+			} else if (nextCommand.equals("List")) {
 				getThisActivity().listWorkers();
+			} else if (nextCommand.equals("Check")) {
+				getThisActivity().getBudgettedHours();
 			}
 		}
 	}
+
 	private Activity getThisActivity() {
 		return modelActivity.getThisActivity();
 	}
 
 	private void setThisActivity(Activity activity) {
 		modelActivity.setThisActivity(activity);
-		
+
 	}
 
 	private Activity getActivity(Project project, String name) {
-		return modelActivity.getActivity(project,name);
+		return modelActivity.getActivity(project, name);
 	}
 
 	private void setHasActivity(boolean b) {
@@ -121,19 +135,20 @@ public class ControllerActivity {
 	}
 
 	public boolean addActivity(String string, Project project) throws OperationNotAllowedException {
-		 return modelActivity.addActivity(project, string);
+		return modelActivity.addActivity(project, string);
 	}
 
 	public boolean validDate(String startDate) {
 		return modelActivity.verifyDateFormat(startDate);
 	}
 
-	public void setActivityStart(Project project, Activity activity, String startDate) throws OperationNotAllowedException {
-		modelActivity.setActivityStart(project,activity, startDate);
+	public void setActivityStart(Project project, Activity activity, String startDate)
+			throws OperationNotAllowedException {
+		modelActivity.setActivityStart(project, activity, startDate);
 	}
 
 	public void setActivityEnd(Project project, Activity activity, String endDate) throws OperationNotAllowedException {
-		 modelActivity.setActivityEnd(project,activity,endDate);
-		
+		modelActivity.setActivityEnd(project, activity, endDate);
+
 	}
 }

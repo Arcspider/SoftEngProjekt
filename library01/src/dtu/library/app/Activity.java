@@ -2,6 +2,7 @@ package dtu.library.app;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import dtu.library.app.timeInterface.datesInterface;
 
@@ -12,6 +13,7 @@ public class Activity implements datesInterface{
 	LocalDate startDate, endDate;
 	private Double budgettedHoursTotal;
 	private Double budgettedHoursLeft;
+	private Shift shift;
 
 	public Activity(String name){
 		this.name = name;
@@ -99,7 +101,7 @@ public class Activity implements datesInterface{
 
 	}
 	public Double getBudgettedHours() {
-		return budgettedHoursTotal;
+		return budgettedHoursLeft;
 	}
 
 	public void addShift(String workerID, String stringDate, String time ) {
@@ -125,7 +127,8 @@ public class Activity implements datesInterface{
 			if(shifts.get(i).getWorkerID().equals(workerID) && shifts.get(i).getDate().equals(date)) {
 				return shifts.get(i);
 			}
-		}System.out.println("No shifts found"); return 0;
+		}
+		return null;
 	}
 
 	public boolean hasShiftByIdAndDate(String workerID, String stringDate) {
@@ -134,7 +137,8 @@ public class Activity implements datesInterface{
 			if(shifts.get(i).getWorkerID().equals(workerID) && shifts.get(i).getDate().equals(date)) {
 				return true;
 			}
-		}System.out.println("No shifts found"); return false;
+		}
+		return false;
 	}
 
 	public void getWorkerShifts(String stringDate) {
