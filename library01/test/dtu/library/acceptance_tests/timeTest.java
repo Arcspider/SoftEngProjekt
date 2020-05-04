@@ -72,8 +72,6 @@ public class timeTest {
     	assertTrue(modelActivity.hasShift(activity,workerID,date));
     }
     
-   
-    
     @Then("the user again logs {string} hours on day {string}")
     public void theUserAgainLogsHoursOnDay(String hours, String day) {
     	assertTrue(modelActivity.allowedHours(hours) && modelActivity.verifyFormatddmmyyyy(day));
