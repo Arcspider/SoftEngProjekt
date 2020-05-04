@@ -8,17 +8,22 @@ public class Project implements datesInterface {
     private String description, name, id;
     private LocalDate startDate, endDate;
     private ArrayList<Activity> activities;
+    private Worker leader;
     boolean isOverdue;
 
     public Project(String name, String id) {
         this.name = name;
         this.id = id;
-        description = "";
+        this.startDate = null;
+        this.endDate = null;
+        leader = null;
+        description = "Description yet to be written";
         activities = new ArrayList<Activity>();
     }
 
 	public String toString() {
-		return "This project is named " + name + " with description" + description + " and id " + id;
+		return "This project is named \"" + name + "\" with the description \"" + description + "\" and id: \"" + id + "\"";
+		
 	}
 
     public Project getProject() {
@@ -63,31 +68,76 @@ public class Project implements datesInterface {
     public boolean isOverdue() {
 		return endDate.compareTo(startDate) != 0 && endDate.compareTo(startDate) >= 0;
 	}
-
+    @Override
     public void setStartDate(LocalDate startProjectDate) {
         startDate = startProjectDate;
     }
-
+    @Override
     public void setEndDate(LocalDate endProjectDate) {
         endDate = endProjectDate;
     }
 
-//	public boolean addActivity(String string) throws OperationNotAllowedException {
-//		if (!hasActivity(string)) {
-//			activities.add(new Activity(string));
-//			System.out.println("Has added activity " + string + " to project " + name);
-//			return true;
-//		}
-//		throw new OperationNotAllowedException("The project already has an activity with the name " + string);
-//	}
-//
-//	public boolean hasActivity(String sA) {
-//		for (Activity currentActivity : activities) {
-//			String currentId = currentActivity.getName();
-//			if (currentId.equals(sA)) {
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
+	public boolean addActivity(String activityName) throws OperationNotAllowedException {
+		if (!hasActivity(activityName)) {
+			activities.add(new Activity(activityName));
+			System.out.println("Added activity " + activityName+ " to project " + this.name);
+			return true;
+		}
+		throw new OperationNotAllowedException("The project already has an activity with the name " + name);
+	}
+
+	public boolean hasActivity(String activityName) {
+		for (Activity currentActivity : activities) {
+			String currentId = currentActivity.getName();
+			if (currentId.equals(activityName)) {
+				return true;
+			} 
+		}
+		return false;
+	}
+
+	public Activity getActivity(String activityName) {
+		for (Activity currentActivity : activities) {
+			String currentName = currentActivity.getName();
+			if (currentName.equals(activityName)) {
+				return currentActivity;
+			}
+		}
+		return null;
+	}
+	
+	public boolean hasLeader() {
+		if(leader != null) {
+			return true;
+		}
+		return false;
+	}
+	
+	public Worker getLeader() {
+		return this.leader;
+	}
+
+	
+
+	public void setActivityStartDate(Activity currentActivity, LocalDate startDate) {
+		currentActivity.setStartDate(startDate);
+	}
+
+	public void setActivityEndDate(Activity currentActivity, LocalDate newEnd) {
+		currentActivity.setEndDate(newEnd);
+	}
+
+	public void changeActivityName(Activity activity, String newActivityName) {
+		activity.setName(newActivityName);
+		
+	}
+
+	public void changeActivityDescription(Activity activity, String newDescription) {
+		activity.setDescription(newDescription);
+	}
+
+	public void setLeader(Worker worker) {
+		leader = worker;
+		
+	}
 }
