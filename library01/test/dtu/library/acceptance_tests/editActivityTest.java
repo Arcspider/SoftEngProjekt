@@ -132,6 +132,7 @@ public class editActivityTest {
 	@Then("the activity's budgetted time is set to {string}")
 	public void theActivitySBudgettedTimeIsSetTo(String budgettedHours) {
 		modelActivity.setBudgettedHours(currentActivity,budgettedHours);
-		//assertEquals(currentActivity.getBudgettedHours(), Integer.parseInt(budgettedHours));
+		assertTrue(currentActivity.getBudgettedHoursTotal() == Double.parseDouble(budgettedHours));
 	}
+	
 }

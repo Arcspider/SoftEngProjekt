@@ -180,10 +180,10 @@ public class ModelActivity {
 
 	public boolean verifyLegalShift(Activity activity, String workerID, String date, String time  ) {
 		if (activity.hasWorkerId(workerID) && verifyFormatddmmyyyy(date)
-				&& allowedHours(time)) {
+				&& allowedHours(activity, time) && activity.addHoursAllowed(time)) {
 			return true;
 		} else
-			return true;
+			return false;
 	}
 
 	public void addShift(Activity activity, String workerID, String date,String time) {
@@ -193,11 +193,12 @@ public class ModelActivity {
 			view.showMessage("shift wasn't added, as something was illegal ");
 	}
 
-	public boolean allowedHours(String hours) {
+	public boolean allowedHours(Activity activity, String hours) {
 		if (stringIsDouble(hours)) {
 			Double doubleHours = Double.parseDouble(hours);
 			// Skal v�re enten heltal eller halv times intervaller.
-			return (doubleHours <= 16 && doubleHours >= 0 && doubleHours % 0.5 == 0);
+			System.out.println("THIS IS THE ACTIVITYS HOURS LEFT" + activity.getBudgettedHoursLeft());
+			return (doubleHours <= 16 && doubleHours >= 0 && doubleHours % 0.5 == 0 );
 		}
 		return false;
 	}

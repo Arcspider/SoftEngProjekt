@@ -94,8 +94,11 @@ public class ModelProject {
 	public void setProjectStart(Project project, String startDate) {
 		if (verifyDateFormat(startDate)) {
 			LocalDate startProjectDate = stringToDate(startDate);
-			project.setStartDate(startProjectDate);
-			System.out.println("The project starts: " + startProjectDate);
+			LocalDate endProjectDate = project.getEndDate();
+			if(endProjectDate == null || startProjectDate.isBefore(endProjectDate)) {
+				project.setStartDate(startProjectDate);
+				System.out.println("The project starts: " + startProjectDate);
+			}
 		}
 	}
 
