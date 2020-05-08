@@ -69,7 +69,6 @@ public class ActivityManager {
 	}
 
 	public boolean verifyDateFormat(String dateToVerify) {
-
 		String[] stringDate = dateToVerify.split("-");
 		if (stringDate.length == 2) { // 1
 			if (stringIsInteger(stringDate[0])) { // 2
@@ -81,6 +80,7 @@ public class ActivityManager {
 					if (difference >= -50) { // 4
 						if (difference <= 50) { // 5
 							if (weekInt > 0) { // 6
+								return true;
 							}
 						}
 					}
