@@ -173,11 +173,11 @@ public class ActivityManager {
 			// aarstallene man arbejder indenfor er 50 aar
 			if (difference >= -50 && difference <= 50 && monthInt <= 12 && monthInt > 0 && dayInt <= 30
 					&& dayInt >= 0) {
-				System.out.println("legal dato ");
+				view.showMessage(("legal dato "));
 				return true;
 			}
 		}
-		System.out.println("Illegal dato weewoo");
+		view.showMessage("Illegal dato weewoo");
 		return false;
 	}
 

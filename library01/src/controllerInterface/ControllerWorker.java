@@ -34,7 +34,7 @@ public class ControllerWorker {
 
 		}else if(nextCommand.equals("Get")) {
 			view.showMessage("Please enter the ID of the employee");
-				if(modelWorker.)
+				
 			setHasWorker(true);
 			
 		}else if(nextCommand.equals("Back")) {
