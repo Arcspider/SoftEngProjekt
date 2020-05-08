@@ -14,10 +14,10 @@ public class Shift {
 		this.date = date;
 		this.time = time;
 	}
-	
+
 	public String toString() {
 		return "Worker: " + workerID + " Date: "+ date +" Hours: " + time;
-		
+
 	}
 
 	public String getWorkerID() {
@@ -28,10 +28,18 @@ public class Shift {
 	public LocalDate getDate() {
 		return date;
 	}
-	public void addTime(double timeToAdd) {
-		time = time + timeToAdd;
+
+	public void addTime(double parseDouble) {
+		time += parseDouble;
 	}
-	
-	
+
+	public Double getHours() {
+		return time;
+	}
+
+	public void setTime(double d) {
+		time = d;
+	}
+
 
 }

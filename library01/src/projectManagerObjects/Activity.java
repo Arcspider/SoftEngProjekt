@@ -21,12 +21,13 @@ public class Activity implements datesInterface{
 		startDate = null;
 		endDate = null;
 		this.shifts = new ArrayList<Shift>();
+		budgettedHoursTotal = 0.0;
 		budgettedHoursLeft = 0.0;
 	}
 	public String getName() {
 		return name;
 	}
-	
+
 	public String toString() {
 		return "This activity is named " + name + ", starts at " + startDate + " and ends at " + endDate;
 	}
@@ -64,15 +65,15 @@ public class Activity implements datesInterface{
 		workers.add(worker);
 		System.out.println("Employee " + worker.getId() + " has been assigned");
 	}
-	
+
 	public boolean hasWorker(Worker worker) {
 		return workers.contains(worker);
 	}
-	
+
 	public boolean hasAnyWorkers() {
 		return workers.size() > 0;
 	}
-	
+
 	public String listWorkers() {
 		if(hasAnyWorkers()) {
 			int noOfWorkers = 0;
@@ -85,7 +86,7 @@ public class Activity implements datesInterface{
 			return "There are no workers assigned";
 		}
 	}
-	
+
 	public boolean hasWorkerId(String id) {
 		for(Worker worker : workers) {
 			if(worker.getId().equals(id)) return true;
@@ -93,11 +94,8 @@ public class Activity implements datesInterface{
 		return false;
 	}
 	public void setBudgettedHours(String budgettedHours) {
-		double tempDouble = Double.parseDouble(budgettedHours);
-		if(tempDouble > budgettedHoursLeft) {
-			this.budgettedHoursTotal = tempDouble;
-		}else System.out.println("You can't reduce the budgetted hours below what is already assigned to the project.");
-		
+		this.budgettedHoursTotal = Double.parseDouble(budgettedHours);
+
 	}
 	public Double getBudgettedHours() {
 		return budgettedHoursLeft;
@@ -116,9 +114,10 @@ public class Activity implements datesInterface{
 		if(newShift) {
 			shift = new Shift(workerID,date,Double.parseDouble(time));
 			shifts.add(shift);
-		}		
+		}
+		updateTimeLeft();
 	}
-	
+
 	public Shift findShiftByIdAndDate(String workerID, String stringDate) {
 		LocalDate date = stringToDate(stringDate);
 		for (Shift value : shifts) {
@@ -128,7 +127,7 @@ public class Activity implements datesInterface{
 		}
 		return null;
 	}
-	
+
 	public boolean hasShiftByIdAndDate(String workerID, String stringDate) {
 		LocalDate date = stringToDate(stringDate);
 		for (Shift value : shifts) {
@@ -138,7 +137,7 @@ public class Activity implements datesInterface{
 		}
 		return false;
 	}
-	
+
 	public void getWorkerShifts(String stringDate) {
 		LocalDate date = stringToDate(stringDate);
 		for (Shift value : shifts) {
@@ -148,7 +147,7 @@ public class Activity implements datesInterface{
 		}
 	}
 
-	
+
 	public LocalDate stringToDate(String toBeConverted) {
 		String[] stringDate = toBeConverted.split("-");
 		int dInt = Integer.parseInt(stringDate[0]);
@@ -163,6 +162,15 @@ public class Activity implements datesInterface{
 		LocalDate finalDate = LocalDate.of(cld.get(Calendar.YEAR), cld.get(Calendar.MONTH),
 				cld.get(Calendar.DAY_OF_MONTH));
 		return finalDate;
+	}
+	public ArrayList<Shift> getShifts() {
+		return shifts;
+	}
+	public void updateTimeLeft() {
+		budgettedHoursLeft = budgettedHoursTotal;
+		for(Shift currentShift : shifts) {
+			budgettedHoursLeft -= currentShift.getHours();
+		}
 	}
 
 }
