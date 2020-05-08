@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import projectManagerObjects.Activity;
+import projectManagerObjects.Shift;
 import projectManagerObjects.Worker;
 
 public class workerManager {
@@ -12,11 +13,11 @@ public class workerManager {
     private Random random;
 
     private Worker worker;
-	private ModelTime modelTime;
+	private timeManager modelTime;
 
     public workerManager() {
     
-    	this.modelTime = new ModelTime();
+    	this.modelTime = new timeManager();
 
         workers = new ArrayList<Worker>();
 
