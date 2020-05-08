@@ -102,10 +102,12 @@ public class Activity implements datesInterface{
 	}
 
 	public void addShift(String workerID, String stringDate, String time ) {
+		
 		boolean newShift = true;
 		LocalDate date = stringToDate(stringDate);
 		for (Shift value : shifts) {
 			if (value.getWorkerID().equals(workerID) && value.getDate().equals(date)) {
+				
 				value.addTime(Double.parseDouble(time));
 				newShift = false;
 				break;
@@ -115,6 +117,8 @@ public class Activity implements datesInterface{
 			shift = new Shift(workerID,date,Double.parseDouble(time));
 			shifts.add(shift);
 		}
+		System.out.println(time + " hours have been added to " + workerID + " who will be working the " + stringDate);
+		System.out.println("");
 		updateTimeLeft();
 	}
 

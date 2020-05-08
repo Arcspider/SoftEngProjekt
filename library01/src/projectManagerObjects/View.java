@@ -99,17 +99,20 @@ public class View {
 	}
 	
 	private void showActivityIntroduction() {
-		System.out.println("Current available commands: Date, Time, Assign, List, Back");
+		System.out.println("Current available commands: Date, Time, Assign, List, Shift, Back");
 		System.out.println("Date: Change the start and end dates of this activity");
 		System.out.println("Assign: Assign an employee to this activity");
 		System.out.println("Time: Allocate time that a worker has spent on this activity");
 		System.out.println("List: List all workers assigned to this activity");
+		System.out.println("Shift: Choose a worker and add some work hours to the activity");
 		System.out.println("Back: Exit back to the project");
 	}
 
 	private void showWorkerIntroduction() {
-		System.out.println("Current available commands: Create, Back");
+		System.out.println("Current available commands: Create, Absence, Returned, Back");
 		System.out.println("Create: Add a new employee to the database");
+		System.out.println("Absence: Specify a time interval in which a worker is not able to work");
+		System.out.println("Returned: Inform the system that an employee is no longer absent");
 		System.out.println("Back: Exit back to the main application");
 	}
 }

@@ -7,12 +7,14 @@ public class Worker {
 	private String firstName;
 	private String lastName;
 	private String id;
+	private boolean absent;
 	private ArrayList<Activity> activities;
 	
 	public Worker(String firstname, String lastname , String ID) {
 		this.firstName = firstname;
 		this.lastName = lastname;
 		this.id = ID;
+		absent = false;
 		activities = new ArrayList<Activity>(); 
 	}
 
@@ -41,6 +43,14 @@ public class Worker {
 	public void setID(String id) {
 		this.id = id;
 		
+	}
+	
+	public void setAbsence(boolean absent) {
+		this.absent = absent;
+	}
+	
+	public boolean getAbsence() {
+		return absent;
 	}
 
 	public void assignWorker(Activity activity) {

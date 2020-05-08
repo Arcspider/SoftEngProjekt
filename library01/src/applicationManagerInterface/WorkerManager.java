@@ -58,13 +58,21 @@ public class WorkerManager {
         workers.add(worker);
 
     }
+    
+    public boolean setThisWorker(String id) {
+    	if(workerHasID(id)) {
+    		this.worker = getWorker(id);
+    		return true;
+    	}
+    	return false;
+    }
 
     public void assignWorker(Activity activity, Worker worker) {
         activity.assignWorker(worker);
         worker.assignWorker(activity);
     }
 
-	public void assignAbsence(String userId, String absenceType, String startAbsence, String endAbsence) {
+	public void assignAbsence(String userId, String startAbsence, String endAbsence) {
 		Worker currentWorker = getWorker(userId);
 		LocalDate startDate = modelTime.stringToDate(startAbsence);
 		LocalDate endDate = modelTime.stringToDate(endAbsence);
@@ -79,6 +87,10 @@ public class WorkerManager {
 			}
 			currentActivity.updateTimeLeft();
 		}
+	}
+
+	public Worker getThisWorker() {
+		return this.worker;
 	}
 
 }

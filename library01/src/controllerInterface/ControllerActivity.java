@@ -98,6 +98,21 @@ public class ControllerActivity {
 			case "Check":
 				getThisActivity().getBudgettedHours();
 				break;
+			case "Shift":
+				view.showMessage("Please enter the id of the employee adding a shift");
+				String id = getCommand();
+				view.showMessage("Please enter the date they are working their shift");
+				view.showMessage("The format: dd-mm-yyyy");
+				date = getCommand();
+				view.showMessage("Please enter the amount of hours they will work in increments of 0.5 hours");
+				String hours = getCommand();
+				if(!modelWorker.getWorker(id).getAbsence()) {
+					getThisActivity().addShift(id, date, hours);
+				} else {
+					view.showMessage("This employee is absent, so they cannot get new shifts");
+					view.showMessage("");
+				}
+				break;
 			}
 		}
 	}

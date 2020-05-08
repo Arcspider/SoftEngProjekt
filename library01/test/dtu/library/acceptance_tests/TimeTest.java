@@ -91,6 +91,6 @@ public class TimeTest {
 	}
 	@Then("the user {string} logs absence in the form of {string} in the time period {string} to {string}")
 	public void theUserLogsAbsenceInTheFormOfInTheTimePeriodTo(String userId, String absenceType, String startAbsence, String endAbsence) {
-		modelWorker.assignAbsence(userId,absenceType,startAbsence,endAbsence);
+		modelWorker.assignAbsence(userId,startAbsence,endAbsence);
 	}
 }
