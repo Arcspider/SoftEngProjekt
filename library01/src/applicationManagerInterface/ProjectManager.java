@@ -1,4 +1,4 @@
-package dtu.library.app;
+package applicationManagerInterface;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -8,7 +8,12 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Random;
 
-public class ModelProject {
+import projectManagerObjects.OperationNotAllowedException;
+import projectManagerObjects.Project;
+import projectManagerObjects.View;
+import projectManagerObjects.Worker;
+
+public class ProjectManager {
 	private View view;
 	private ArrayList<Project> projects;
 	private Project newProject;
@@ -16,7 +21,7 @@ public class ModelProject {
 	private boolean hasProject;
 	private Random random;
 	private DateFormat dateFormat;
-	public ModelProject(View view) {
+	public ProjectManager(View view) {
 		this.view = view;
 		projects = new ArrayList<Project>();
 		random = new Random();
@@ -124,8 +129,7 @@ public class ModelProject {
 		Calendar cldStart = Calendar.getInstance();
 		cldStart.set(Calendar.YEAR, yearInt);
 		cldStart.set(Calendar.WEEK_OF_YEAR, weekInt);
-		LocalDate finalDate = LocalDate.of(yearInt, cldStart.get(Calendar.MONTH) + 1, cldStart.get(Calendar.DATE));
-		return finalDate;
+		return LocalDate.of(yearInt, cldStart.get(Calendar.MONTH) + 1, cldStart.get(Calendar.DATE));
 	}
 
 	public boolean verifyDateFormat(String dateToVerify) {
@@ -139,9 +143,7 @@ public class ModelProject {
 			int difference = yearInt - currentYear;
 			// �rstallene man arbejder indenfor er 50 �r
 			if (difference >= -50 && difference <= 50) {
-				if (weekInt > 0 && weekInt <= 52) {
-					return true;
-				}
+				return weekInt > 0 && weekInt <= 52;
 			}
 		}
 		return false;
@@ -172,20 +174,20 @@ public class ModelProject {
 		return newProject;
 	}
 
-	public void setHasProject(boolean is) {
-		hasProject = is;
-	}
-
 	public boolean getHasProject() {
 		return hasProject;
 	}
 
-	public void setThisProject(String id) {
-		thisProject = getProject(id);
+	public void setHasProject(boolean is) {
+		hasProject = is;
 	}
 
 	public Project getThisProject() {
 		return thisProject;
+	}
+
+	public void setThisProject(String id) {
+		thisProject = getProject(id);
 	}
 
 	public boolean setLeader(Project project, Worker worker) throws OperationNotAllowedException {

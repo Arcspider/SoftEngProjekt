@@ -1,4 +1,4 @@
-package dtu.library.app;
+package applicationManagerInterface;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -8,7 +8,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Random;
 
-public class ModelTime {
+import projectManagerObjects.Project;
+
+public class TimeManager {
 
 	private ArrayList<Project> projects;
 	private Project newProject;
@@ -16,7 +18,7 @@ public class ModelTime {
 	private boolean hasProject;
 	private Random random;
 	private DateFormat dateFormat;
-	public ModelTime() {
+	public TimeManager() {
 		projects = new ArrayList<Project>();
 		random = new Random();
 		hasProject = false;

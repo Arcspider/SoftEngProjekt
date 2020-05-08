@@ -1,10 +1,10 @@
-package dtu.library.app;
+package projectManagerObjects;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import dtu.library.app.timeInterface.datesInterface;
+import timeInterface.datesInterface;
 
 public class Activity implements datesInterface{
 	private String name, description;
@@ -71,10 +71,7 @@ public class Activity implements datesInterface{
 	}
 
 	public boolean hasAnyWorkers() {
-		if(workers.size() > 0) {
-			return true;
-		}
-		return false;
+		return workers.size() > 0;
 	}
 
 	public String listWorkers() {
@@ -110,11 +107,13 @@ public class Activity implements datesInterface{
 	}
 
 	public void addShift(String workerID, String stringDate, String time ) {
+		
 		boolean newShift = true;
 		LocalDate date = stringToDate(stringDate);
-		for(int i = 0; i <shifts.size(); i++) {
-			if(shifts.get(i).getWorkerID().equals(workerID) && shifts.get(i).getDate().equals(date)) {
-				shifts.get(i).addTime(Double.parseDouble(time));
+		for (Shift value : shifts) {
+			if (value.getWorkerID().equals(workerID) && value.getDate().equals(date)) {
+				
+				value.addTime(Double.parseDouble(time));
 				newShift = false;
 				break;
 			}
@@ -123,14 +122,16 @@ public class Activity implements datesInterface{
 			shift = new Shift(workerID,date,Double.parseDouble(time));
 			shifts.add(shift);
 		}
+		System.out.println(time + " hours have been added to " + workerID + " who will be working the " + stringDate);
+		System.out.println("");
 		updateTimeLeft();
 	}
 
 	public Shift findShiftByIdAndDate(String workerID, String stringDate) {
 		LocalDate date = stringToDate(stringDate);
-		for(int i = 0; i <shifts.size(); i++) {
-			if(shifts.get(i).getWorkerID().equals(workerID) && shifts.get(i).getDate().equals(date)) {
-				return shifts.get(i);
+		for (Shift value : shifts) {
+			if (value.getWorkerID().equals(workerID) && value.getDate().equals(date)) {
+				return value;
 			}
 		}
 		return null;
@@ -138,8 +139,8 @@ public class Activity implements datesInterface{
 
 	public boolean hasShiftByIdAndDate(String workerID, String stringDate) {
 		LocalDate date = stringToDate(stringDate);
-		for(int i = 0; i <shifts.size(); i++) {
-			if(shifts.get(i).getWorkerID().equals(workerID) && shifts.get(i).getDate().equals(date)) {
+		for (Shift value : shifts) {
+			if (value.getWorkerID().equals(workerID) && value.getDate().equals(date)) {
 				return true;
 			}
 		}
@@ -148,9 +149,9 @@ public class Activity implements datesInterface{
 
 	public void getWorkerShifts(String stringDate) {
 		LocalDate date = stringToDate(stringDate);
-		for (int i = 0; i < shifts.size(); i++) {
-			if (shifts.get(i).getDate().equals(date)) {
-				System.out.println(shifts.get(i).toString());
+		for (Shift value : shifts) {
+			if (value.getDate().equals(date)) {
+				System.out.println(value.toString());
 			}
 		}
 	}

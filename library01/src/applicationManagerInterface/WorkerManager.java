@@ -1,18 +1,23 @@
-package dtu.library.app;
+package applicationManagerInterface;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ModelWorker {
+import projectManagerObjects.Activity;
+import projectManagerObjects.Shift;
+import projectManagerObjects.Worker;
+
+public class WorkerManager {
     private ArrayList<Worker> workers;
     private Random random;
 
     private Worker worker;
-	private ModelTime modelTime;
+	private TimeManager modelTime;
 
-    public ModelWorker() {
-    	this.modelTime = new ModelTime();
+    public WorkerManager() {
+    
+    	this.modelTime = new TimeManager();
 
         workers = new ArrayList<Worker>();
 
@@ -27,9 +32,8 @@ public class ModelWorker {
     }
 
     private String workerGenerateID(String firstname, String lastname) {
-        String id = "" + Character.toUpperCase(firstname.charAt(0)) + Character.toUpperCase(firstname.charAt(1)) + Character.toUpperCase(lastname.charAt(0)) +
+        return "" + Character.toUpperCase(firstname.charAt(0)) + Character.toUpperCase(firstname.charAt(1)) + Character.toUpperCase(lastname.charAt(0)) +
                 Character.toUpperCase(lastname.charAt(1));
-        return id;
     }
 
     public boolean workerHasID(String id) {
@@ -54,13 +58,21 @@ public class ModelWorker {
         workers.add(worker);
 
     }
+    
+    public boolean setThisWorker(String id) {
+    	if(workerHasID(id)) {
+    		this.worker = getWorker(id);
+    		return true;
+    	}
+    	return false;
+    }
 
     public void assignWorker(Activity activity, Worker worker) {
         activity.assignWorker(worker);
         worker.assignWorker(activity);
     }
 
-	public void assignAbsence(String userId, String absenceType, String startAbsence, String endAbsence) {
+	public void assignAbsence(String userId, String startAbsence, String endAbsence) {
 		Worker currentWorker = getWorker(userId);
 		LocalDate startDate = modelTime.stringToDate(startAbsence);
 		LocalDate endDate = modelTime.stringToDate(endAbsence);
@@ -76,6 +88,10 @@ public class ModelWorker {
 			}
 			currentActivity.updateTimeLeft();
 		}
+	}
+
+	public Worker getThisWorker() {
+		return this.worker;
 	}
 
 }

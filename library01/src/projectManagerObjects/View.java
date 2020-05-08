@@ -1,33 +1,35 @@
-package dtu.library.app;
+package projectManagerObjects;
 
-import dtu.library.app.controllerInterface.ControllerActivity;
-import dtu.library.app.controllerInterface.ControllerApplication;
-import dtu.library.app.controllerInterface.ControllerProject;
-import dtu.library.app.controllerInterface.ControllerWorker;
+import applicationManagerInterface.ActivityManager;
+import applicationManagerInterface.ApplicationManager;
+import applicationManagerInterface.ProjectManager;
+import applicationManagerInterface.WorkerManager;
+import controllerInterface.ControllerActivity;
+import controllerInterface.ControllerApplication;
+import controllerInterface.ControllerProject;
+import controllerInterface.ControllerWorker;
 
 public class View {
 
-	private ModelApplication modelApplication;
-	private ModelProject modelProject;
-	private ModelActivity modelActivity;
-	private ModelWorker modelWorker;
+	private ApplicationManager modelApplication;
+	private ProjectManager modelProject;
+	private ActivityManager modelActivity;
+	private WorkerManager modelWorker;
 	private ControllerApplication controller;
 	private ControllerProject controllerProject;
 	private ControllerActivity controllerActivity;
 	private ControllerWorker controllerWorker;
 
 	public View() throws OperationNotAllowedException {
-		this.modelApplication = new ModelApplication(this);
-		this.modelWorker = new ModelWorker();
-		this.modelProject = new ModelProject(this);
-		this.modelActivity = new ModelActivity(this);
+		this.modelApplication = new ApplicationManager(this);
+		this.modelWorker = new WorkerManager();
+		this.modelProject = new ProjectManager(this);
+		this.modelActivity = new ActivityManager(this);
 		
 		this.controller = new ControllerApplication(this, modelApplication, modelProject);
 		this.controllerProject = new ControllerProject(this, modelApplication, modelProject, modelActivity,modelWorker);
 		this.controllerActivity = new ControllerActivity(this, modelApplication, modelProject, modelActivity, modelWorker);
 		this.controllerWorker = new ControllerWorker(this,modelWorker, modelApplication);
-		showApplicationIntroduction();
-		//startup();
 	}
 
 	public void showMessage(String message) {
@@ -35,14 +37,19 @@ public class View {
 	}
 
 	public void showAvailableCommands(String stage) {
-		if (stage.equals("Application")) {
-			showApplicationIntroduction();
-		} else if (stage.equals("Project")) {
-			showProjectIntroduction(modelProject.getThisProject());
-		} else if (stage.equals("Activity")) {
-			showActivityIntroduction();
-		} else if (stage.equals("Worker")) {
-			showWorkerIntroduction();
+		switch (stage) {
+			case "Application":
+				showApplicationIntroduction();
+				break;
+			case "Project":
+				showProjectIntroduction(modelProject.getThisProject());
+				break;
+			case "Activity":
+				showActivityIntroduction();
+				break;
+			case "Worker":
+				showWorkerIntroduction();
+				break;
 		}
 	}
 
@@ -69,7 +76,7 @@ public class View {
 		return modelApplication.getStage();
 	}
 
-	private void showApplicationIntroduction() {
+	public void showApplicationIntroduction() {
 		System.out.println("Current available commands: Create, Get, Worker, Exit");
 		System.out.println("Create: Creates new project");
 		System.out.println("Get: Access existing project");
@@ -92,16 +99,20 @@ public class View {
 	}
 	
 	private void showActivityIntroduction() {
-		System.out.println("Current available commands: Time, Assign, List, Back");
-		System.out.println("Time: Change the start and end dates of this activity");
+		System.out.println("Current available commands: Date, Time, Assign, List, Shift, Back");
+		System.out.println("Date: Change the start and end dates of this activity");
 		System.out.println("Assign: Assign an employee to this activity");
+		System.out.println("Time: Allocate time that a worker has spent on this activity");
 		System.out.println("List: List all workers assigned to this activity");
+		System.out.println("Shift: Choose a worker and add some work hours to the activity");
 		System.out.println("Back: Exit back to the project");
 	}
 
 	private void showWorkerIntroduction() {
-		System.out.println("Current available commands: Create, Back");
+		System.out.println("Current available commands: Create, Absence, Returned, Back");
 		System.out.println("Create: Add a new employee to the database");
+		System.out.println("Absence: Specify a time interval in which a worker is not able to work");
+		System.out.println("Returned: Inform the system that an employee is no longer absent");
 		System.out.println("Back: Exit back to the main application");
 	}
 }

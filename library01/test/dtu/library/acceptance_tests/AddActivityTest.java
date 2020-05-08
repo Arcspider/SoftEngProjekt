@@ -2,21 +2,21 @@ package dtu.library.acceptance_tests;
 
 import static org.junit.Assert.assertTrue;
 
-import dtu.library.app.Activity;
-import dtu.library.app.ModelActivity;
-import dtu.library.app.ModelProject;
-import dtu.library.app.ModelWorker;
-import dtu.library.app.OperationNotAllowedException;
-import dtu.library.app.Project;
-import dtu.library.app.View;
-import dtu.library.app.Worker;
+import applicationManagerInterface.ActivityManager;
+import applicationManagerInterface.ProjectManager;
+import applicationManagerInterface.WorkerManager;
 import io.cucumber.java.en.*;
+import projectManagerObjects.Activity;
+import projectManagerObjects.OperationNotAllowedException;
+import projectManagerObjects.Project;
+import projectManagerObjects.View;
+import projectManagerObjects.Worker;
 
 public class AddActivityTest {
 
-    private ModelProject modelProject;
-    private ModelActivity modelActivity;
-    private ModelWorker modelWorker;
+    private ProjectManager modelProject;
+    private ActivityManager modelActivity;
+    private WorkerManager modelWorker;
     private ErrorMessageHolder errorMessageHolder;
     private String name;
 
@@ -25,7 +25,7 @@ public class AddActivityTest {
 
     Activity newActivity;
 
-    public AddActivityTest(View view,ModelProject modelProject, ModelActivity modelActivity, ModelWorker modelWorker,ErrorMessageHolder errorMessageHolder){
+    public AddActivityTest(View view,ProjectManager modelProject, ActivityManager modelActivity, WorkerManager modelWorker,ErrorMessageHolder errorMessageHolder){
     	this.modelProject = modelProject;
     	this.modelActivity = modelActivity;
     	this.modelWorker = modelWorker;

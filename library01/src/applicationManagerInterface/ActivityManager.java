@@ -1,4 +1,4 @@
-package dtu.library.app;
+package applicationManagerInterface;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -8,14 +8,19 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class ModelActivity {
+import projectManagerObjects.Activity;
+import projectManagerObjects.OperationNotAllowedException;
+import projectManagerObjects.Project;
+import projectManagerObjects.View;
+
+public class ActivityManager {
 	private View view;
 	private Activity thisActivity;
 	private Calendar calendar;
 	private DateFormat dateFormat;
 	private boolean hasActivity;
 
-	public ModelActivity(View view) {
+	public ActivityManager(View view) {
 		this.view = view;
 		hasActivity = false;
 		this.calendar = new GregorianCalendar();
@@ -66,16 +71,19 @@ public class ModelActivity {
 	public boolean verifyDateFormat(String dateToVerify) {
 
 		String[] stringDate = dateToVerify.split("-");
-		if (stringDate.length == 2 && stringIsInteger(stringDate[0]) && stringIsInteger(stringDate[1])) {
-
-			int weekInt = Integer.parseInt(stringDate[0]);
-			int yearInt = Integer.parseInt(stringDate[1]);
-			int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-			int difference = yearInt - currentYear;
-			// �rstallene man arbejder indenfor er 50 �r
-			if (difference >= -50 && difference <= 50) {
-				if (weekInt > 0 && weekInt <= 52) {
-					return true;
+		if (stringDate.length == 2) { // 1
+			if (stringIsInteger(stringDate[0])) { // 2
+ 				if (stringIsInteger(stringDate[1])) { // 3
+					int weekInt = Integer.parseInt(stringDate[0]);
+					int yearInt = Integer.parseInt(stringDate[1]);
+					int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+					int difference = yearInt - currentYear;
+					if (difference >= -50) { // 4
+						if (difference <= 50) { // 5
+							if (weekInt > 0) { // 6
+							}
+						}
+					}
 				}
 			}
 		}
@@ -147,7 +155,7 @@ public class ModelActivity {
 	}
 
 	public Activity getActivity(Project project, String name) {
-		return project.getActivity(name);  
+		return project.getActivity(name);
 	}
 
 	public boolean addActivity(Project project, String name) throws OperationNotAllowedException {
@@ -170,11 +178,11 @@ public class ModelActivity {
 			// aarstallene man arbejder indenfor er 50 aar
 			if (difference >= -50 && difference <= 50 && monthInt <= 12 && monthInt > 0 && dayInt <= 30
 					&& dayInt >= 0) {
-				System.out.println("legal dato ");
+				view.showMessage(("legal dato "));
 				return true;
 			}
 		}
-		System.out.println("Illegal dato weewoo");
+		view.showMessage("Illegal dato weewoo");
 		return false;
 	}
 
@@ -186,9 +194,9 @@ public class ModelActivity {
 			return false;
 	}
 
-	public void addShift(Activity activity, String workerID, String date,String time) {
-		if (verifyLegalShift(activity, workerID,date,time)) {
-				activity.addShift(workerID, date, time);
+	public void addShift(Activity activity, String workerID, String date, String time) {
+		if (verifyLegalShift(activity, workerID, date, time)) {
+			activity.addShift(workerID, date, time);
 		} else
 			view.showMessage("shift wasn't added, as something was illegal ");
 	}
@@ -206,7 +214,6 @@ public class ModelActivity {
 	public boolean hasShift(Activity activity, String workerID, String stringDate) {
 		return activity.hasShiftByIdAndDate(workerID, stringDate);
 	}
-
 
 	public void getWorkedShifts(Activity activity, String stringDate) {
 		activity.getWorkerShifts(stringDate);

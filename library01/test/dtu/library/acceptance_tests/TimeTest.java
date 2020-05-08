@@ -7,19 +7,19 @@ import static org.junit.Assert.assertTrue;
 import java.time.LocalDate;
 import java.util.List;
 
-import dtu.library.app.Activity;
-import dtu.library.app.ModelActivity;
-import dtu.library.app.ModelProject;
-import dtu.library.app.ModelWorker;
-import dtu.library.app.OperationNotAllowedException;
-import dtu.library.app.Project;
-import dtu.library.app.View;
-import dtu.library.app.Worker;
-import dtu.library.app.controllerInterface.ControllerProject;
+import applicationManagerInterface.ActivityManager;
+import applicationManagerInterface.ProjectManager;
+import applicationManagerInterface.WorkerManager;
+import controllerInterface.ControllerProject;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import projectManagerObjects.Activity;
+import projectManagerObjects.OperationNotAllowedException;
+import projectManagerObjects.Project;
+import projectManagerObjects.View;
+import projectManagerObjects.Worker;
 
-public class timeTest {
+public class TimeTest {
 
 	private View view;
 	private ControllerProject controllerProject;
@@ -30,10 +30,10 @@ public class timeTest {
 	private String ID;
 	private List<Project> projects;
 
-	private ModelProject modelProject;
-	private ModelActivity modelActivity;
-	private ModelWorker modelWorker;
-	public timeTest(View view,ModelProject modelProject,ModelActivity modelActivity, ModelWorker modelWorker, ErrorMessageHolder errorMessageHolder){
+	private ProjectManager modelProject;
+	private ActivityManager modelActivity;
+	private WorkerManager modelWorker;
+	public TimeTest(View view,ProjectManager modelProject,ActivityManager modelActivity, WorkerManager modelWorker, ErrorMessageHolder errorMessageHolder){
 
 		this.modelProject = modelProject;
 		this.modelActivity = modelActivity;
@@ -91,7 +91,7 @@ public class timeTest {
 	
 	@Then("the user {string} logs absence in the form of {string} in the time period {string} to {string}")
 	public void theUserLogsAbsenceInTheFormOfInTheTimePeriodTo(String userId, String absenceType, String startAbsence, String endAbsence) {
-		modelWorker.assignAbsence(userId,absenceType,startAbsence,endAbsence);
+		modelWorker.assignAbsence(userId,startAbsence,endAbsence);
 	}
 	
 

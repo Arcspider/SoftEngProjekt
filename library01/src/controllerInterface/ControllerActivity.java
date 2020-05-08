@@ -1,27 +1,27 @@
-package dtu.library.app.controllerInterface;
+package controllerInterface;
 
 import java.util.Scanner;
 
-import dtu.library.app.Activity;
-import dtu.library.app.ModelActivity;
-import dtu.library.app.ModelApplication;
-import dtu.library.app.ModelProject;
-import dtu.library.app.ModelWorker;
-import dtu.library.app.OperationNotAllowedException;
-import dtu.library.app.Project;
-import dtu.library.app.View;
+import applicationManagerInterface.ActivityManager;
+import applicationManagerInterface.ApplicationManager;
+import applicationManagerInterface.ProjectManager;
+import applicationManagerInterface.WorkerManager;
+import projectManagerObjects.Activity;
+import projectManagerObjects.OperationNotAllowedException;
+import projectManagerObjects.Project;
+import projectManagerObjects.View;
 
 public class ControllerActivity {
-	private ModelApplication modelApplication;
-	private ModelProject modelProject;
-	private ModelActivity modelActivity;
-	private ModelWorker modelWorker;
+	private ApplicationManager modelApplication;
+	private ProjectManager modelProject;
+	private ActivityManager modelActivity;
+	private WorkerManager modelWorker;
 	private View view;
 	Scanner scanner;
 	Scanner timeHanlder;
 
-	public ControllerActivity(View view, ModelApplication modelApplication, ModelProject modelProject,
-			ModelActivity modelActivity, ModelWorker modelWorker) {
+	public ControllerActivity(View view, ApplicationManager modelApplication, ProjectManager modelProject,
+			ActivityManager modelActivity, WorkerManager modelWorker) {
 		this.view = view;
 		this.modelApplication = modelApplication;
 		this.modelProject = modelProject;
@@ -45,46 +45,74 @@ public class ControllerActivity {
 		} else {
 			view.showAvailableCommands(modelApplication.getStage());
 			String nextCommand = getCommand();
-			if (nextCommand.equals("Time")) {
+			switch (nextCommand) {
+			case "Date":
 				view.showMessage("Type \"Start\" to change the start date of the project");
 				view.showMessage("Type \"End\" to change the end date of the project");
 				view.showMessage("Type \"Budget\"to add to budgetted hours");
 				view.showMessage("The date format is \"ww-yyyy\" where ww is week and yyyy is year");
 				view.showMessage("The hours must be added in increments of 0.5");
 				nextCommand = getCommand();
-				if (nextCommand.equals("Start")) {
+				switch (nextCommand) {
+				case "Start":
 					view.showMessage("Write the new start date in the format: ww-yyyy");
 					setActivityStart(getThisProject(), getThisActivity(), timeHanlder.nextLine());
 
-				} else if (nextCommand.equals("End")) {
+					break;
+				case "End":
 					view.showMessage("Write the new end date in the format: ww-yyyy");
 					setActivityEnd(getThisProject(), getThisActivity(), timeHanlder.nextLine());
-				} else if (nextCommand.equals("Budget")) {
+					break;
+				case "Budget":
 					view.showMessage("Please input the additional budgetted hours in increments of 0.5");
 
-				} else if (nextCommand.equals("Back")) {
-					setHasActivity(false);
-					changeStage("Project");
+					break;
 
 				}
-			} else if (nextCommand.equals("Assign")) {
+				break;
+			case "Back":
+				setHasActivity(false);
+				changeStage("Project");
+
+				break;
+			case "Assign":
 				view.showMessage("Please enter the ID of the employee you want to assign to this activity");
 				nextCommand = getCommand();
 				if (modelWorker.workerHasID(nextCommand)) {
 					getThisActivity().assignWorker(modelWorker.getWorker(nextCommand));
 				}
-			}else if (nextCommand.equals("AssignTime")) {
+				break;
+			case "Time":
+				view.showMessage("Please supply the following information");
 				view.showMessage("WorkerID: ");
 				String workerID = getCommand();
-				view.showMessage("Date: ");
+				view.showMessage("Date (in the format: dd-mm-yyyy): ");
 				String date = getCommand();
 				view.showMessage("Time: ");
 				String time = getCommand();
 				modelActivity.addShift(getThisActivity(), workerID, date, time);
-			} else if (nextCommand.equals("List")) {
+				break;
+			case "List":
 				getThisActivity().listWorkers();
-			} else if (nextCommand.equals("Check")) {
+				break;
+			case "Check":
 				getThisActivity().getBudgettedHours();
+				break;
+			case "Shift":
+				view.showMessage("Please enter the id of the employee adding a shift");
+				String id = getCommand();
+				view.showMessage("Please enter the date they are working their shift");
+				view.showMessage("The format: dd-mm-yyyy");
+				date = getCommand();
+				view.showMessage("Please enter the amount of hours they will work in increments of 0.5 hours");
+				String hours = getCommand();
+				if(!modelWorker.getWorker(id).getAbsence()) {
+					getThisActivity().addShift(id, date, hours);
+				} else {
+					view.showMessage("This employee is absent, so they cannot get new shifts");
+					view.showMessage("");
+				}
+				break;
 			}
 		}
 	}

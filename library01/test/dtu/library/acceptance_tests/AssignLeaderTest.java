@@ -4,23 +4,23 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import dtu.library.app.ModelProject;
-import dtu.library.app.ModelWorker;
-import dtu.library.app.OperationNotAllowedException;
-import dtu.library.app.Project;
-import dtu.library.app.Worker;
+import applicationManagerInterface.ProjectManager;
+import applicationManagerInterface.WorkerManager;
 import io.cucumber.java.en.*;
+import projectManagerObjects.OperationNotAllowedException;
+import projectManagerObjects.Project;
+import projectManagerObjects.Worker;
 
 public class AssignLeaderTest {
 
-    private ModelProject modelProject;
-    private ModelWorker modelWorker;
+    private ProjectManager modelProject;
+    private WorkerManager modelWorker;
     private ErrorMessageHolder errorMessageHolder;
     private Worker worker;
 
     private Project project;
  
-    public AssignLeaderTest(ModelProject  modelProject, ModelWorker modelWorker,ErrorMessageHolder errorMessageHolder) throws OperationNotAllowedException {
+    public AssignLeaderTest(ProjectManager  modelProject, WorkerManager modelWorker,ErrorMessageHolder errorMessageHolder) throws OperationNotAllowedException {
     	this.modelProject = modelProject;
     	this.modelWorker = modelWorker;
     	this.errorMessageHolder = errorMessageHolder;

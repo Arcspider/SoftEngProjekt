@@ -6,22 +6,22 @@ import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
 
-import dtu.library.app.Activity;
-import dtu.library.app.ModelActivity;
-import dtu.library.app.ModelProject;
-import dtu.library.app.OperationNotAllowedException;
-import dtu.library.app.Project;
-import dtu.library.app.View;
-import dtu.library.app.controllerInterface.ControllerActivity;
-import dtu.library.app.controllerInterface.ControllerApplication;
-import dtu.library.app.controllerInterface.ControllerProject;
+import applicationManagerInterface.ActivityManager;
+import applicationManagerInterface.ProjectManager;
+import controllerInterface.ControllerActivity;
+import controllerInterface.ControllerApplication;
+import controllerInterface.ControllerProject;
 import io.cucumber.java.en.*;
+import projectManagerObjects.Activity;
+import projectManagerObjects.OperationNotAllowedException;
+import projectManagerObjects.Project;
+import projectManagerObjects.View;
 
-public class editActivityTest {
+public class EditActivityTest {
 
 	
-	private ModelProject modelProject;
-	private ModelActivity modelActivity;
+	private ProjectManager modelProject;
+	private ActivityManager modelActivity;
 	private ErrorMessageHolder errorMessageHolder;
 	private String name;
 
@@ -30,7 +30,7 @@ public class editActivityTest {
 	private String startDate,endDate;
 	Activity newActivity;
 
-	public editActivityTest(View view,ModelProject modelProject, ModelActivity modelActivity ,ErrorMessageHolder errorMessageHolder) {
+	public EditActivityTest(View view,ProjectManager modelProject, ActivityManager modelActivity ,ErrorMessageHolder errorMessageHolder) {
 		
 		this.modelProject = modelProject;
 		this.modelActivity = modelActivity;

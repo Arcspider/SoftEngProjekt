@@ -1,15 +1,17 @@
 package dtu.library.acceptance_tests;
 
 
-import dtu.library.app.ModelProject;
-import dtu.library.app.OperationNotAllowedException;
-import dtu.library.app.Project;
-import dtu.library.app.controllerInterface.ControllerProject;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import projectManagerObjects.OperationNotAllowedException;
+import projectManagerObjects.Project;
+
 import org.junit.Assert;
+
+import applicationManagerInterface.ProjectManager;
+import controllerInterface.ControllerProject;
 
 import java.util.List;
 
@@ -18,7 +20,7 @@ import static org.junit.Assert.*;
 public class ProjectTest {
 
 
-    private ModelProject modelProject;
+    private ProjectManager modelProject;
 
     private ErrorMessageHolder errorMessageHolder;
 
@@ -27,7 +29,7 @@ public class ProjectTest {
     private List<Project> projects;
 
 
-    public ProjectTest(ErrorMessageHolder errorMessageHolder, ModelProject modelProject) {
+    public ProjectTest(ErrorMessageHolder errorMessageHolder, ProjectManager modelProject) {
    
         this.modelProject = modelProject;
         this.errorMessageHolder = errorMessageHolder;
