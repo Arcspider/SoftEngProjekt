@@ -10,7 +10,7 @@ import projectManagerObjects.View;
 
 import java.util.List;
 
-import applicationManagerInterface.projectManager;
+import applicationManagerInterface.ProjectManager;
 import controllerInterface.ControllerApplication;
 import controllerInterface.ControllerProject;
 
@@ -22,7 +22,7 @@ public class RemoveProjectTest {
 
     private View view;
  
-    private	projectManager modelProject;
+    private	ProjectManager modelProject;
 
     private ErrorMessageHolder errorMessageHolder;
 
@@ -30,7 +30,7 @@ public class RemoveProjectTest {
     private String ID;
     private List<Project> projects;
 
-    public RemoveProjectTest(View view,projectManager modelProject, ErrorMessageHolder errorMessageHolder) {
+    public RemoveProjectTest(View view,ProjectManager modelProject, ErrorMessageHolder errorMessageHolder) {
         this.view = view;
     
         this.modelProject = modelProject;

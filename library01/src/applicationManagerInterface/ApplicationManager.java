@@ -2,11 +2,11 @@ package applicationManagerInterface;
 
 import projectManagerObjects.View;
 
-public class applicationManager {
+public class ApplicationManager {
 	private String stage;
 	private View view;
 	
-	public applicationManager(View view) {
+	public ApplicationManager(View view) {
 		this.view = view;
 		stage = "Application";
 	}

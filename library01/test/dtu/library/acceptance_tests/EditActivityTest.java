@@ -6,8 +6,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
 
-import applicationManagerInterface.activityManager;
-import applicationManagerInterface.projectManager;
+import applicationManagerInterface.ActivityManager;
+import applicationManagerInterface.ProjectManager;
 import controllerInterface.ControllerActivity;
 import controllerInterface.ControllerApplication;
 import controllerInterface.ControllerProject;
@@ -17,11 +17,11 @@ import projectManagerObjects.OperationNotAllowedException;
 import projectManagerObjects.Project;
 import projectManagerObjects.View;
 
-public class editActivityTest {
+public class EditActivityTest {
 
 	
-	private projectManager modelProject;
-	private activityManager modelActivity;
+	private ProjectManager modelProject;
+	private ActivityManager modelActivity;
 	private ErrorMessageHolder errorMessageHolder;
 	private String name;
 
@@ -30,7 +30,7 @@ public class editActivityTest {
 	private String startDate,endDate;
 	Activity newActivity;
 
-	public editActivityTest(View view,projectManager modelProject, activityManager modelActivity ,ErrorMessageHolder errorMessageHolder) {
+	public EditActivityTest(View view,ProjectManager modelProject, ActivityManager modelActivity ,ErrorMessageHolder errorMessageHolder) {
 		
 		this.modelProject = modelProject;
 		this.modelActivity = modelActivity;

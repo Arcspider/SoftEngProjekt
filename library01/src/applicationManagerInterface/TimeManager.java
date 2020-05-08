@@ -10,7 +10,7 @@ import java.util.Random;
 
 import projectManagerObjects.Project;
 
-public class timeManager {
+public class TimeManager {
 
 	private ArrayList<Project> projects;
 	private Project newProject;
@@ -18,7 +18,7 @@ public class timeManager {
 	private boolean hasProject;
 	private Random random;
 	private DateFormat dateFormat;
-	public timeManager() {
+	public TimeManager() {
 		projects = new ArrayList<Project>();
 		random = new Random();
 		hasProject = false;

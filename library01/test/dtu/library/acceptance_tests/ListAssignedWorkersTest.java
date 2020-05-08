@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import applicationManagerInterface.activityManager;
-import applicationManagerInterface.projectManager;
-import applicationManagerInterface.workerManager;
+import applicationManagerInterface.ActivityManager;
+import applicationManagerInterface.ProjectManager;
+import applicationManagerInterface.WorkerManager;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -18,9 +18,9 @@ import projectManagerObjects.Worker;
 
 public class ListAssignedWorkersTest {
 	
-	private projectManager modelProject;
-	private activityManager modelActivity;
-	private workerManager modelWorker;
+	private ProjectManager modelProject;
+	private ActivityManager modelActivity;
+	private WorkerManager modelWorker;
 	private ErrorMessageHolder errorMessageHolder;
 	private Worker Bob;
 	private Worker Alice;
@@ -28,7 +28,7 @@ public class ListAssignedWorkersTest {
 	private Activity activity;
 	private String name;
 	
-	public ListAssignedWorkersTest(projectManager modelProject, activityManager modelActivity,  workerManager modelWorker ,ErrorMessageHolder errorMessageHolder) {
+	public ListAssignedWorkersTest(ProjectManager modelProject, ActivityManager modelActivity,  WorkerManager modelWorker ,ErrorMessageHolder errorMessageHolder) {
 		this.modelProject = modelProject;
 		this.modelActivity = modelActivity;
 		this.modelWorker = modelWorker;

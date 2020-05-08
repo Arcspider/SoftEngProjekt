@@ -13,14 +13,14 @@ import projectManagerObjects.OperationNotAllowedException;
 import projectManagerObjects.Project;
 import projectManagerObjects.View;
 
-public class activityManager {
+public class ActivityManager {
 	private View view;
 	private Activity thisActivity;
 	private Calendar calendar;
 	private DateFormat dateFormat;
 	private boolean hasActivity;
 
-	public activityManager(View view) {
+	public ActivityManager(View view) {
 		this.view = view;
 		hasActivity = false;
 		this.calendar = new GregorianCalendar();

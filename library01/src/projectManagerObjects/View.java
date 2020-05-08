@@ -1,9 +1,9 @@
 package projectManagerObjects;
 
-import applicationManagerInterface.activityManager;
-import applicationManagerInterface.applicationManager;
-import applicationManagerInterface.projectManager;
-import applicationManagerInterface.workerManager;
+import applicationManagerInterface.ActivityManager;
+import applicationManagerInterface.ApplicationManager;
+import applicationManagerInterface.ProjectManager;
+import applicationManagerInterface.WorkerManager;
 import controllerInterface.ControllerActivity;
 import controllerInterface.ControllerApplication;
 import controllerInterface.ControllerProject;
@@ -11,20 +11,20 @@ import controllerInterface.ControllerWorker;
 
 public class View {
 
-	private applicationManager modelApplication;
-	private projectManager modelProject;
-	private activityManager modelActivity;
-	private workerManager modelWorker;
+	private ApplicationManager modelApplication;
+	private ProjectManager modelProject;
+	private ActivityManager modelActivity;
+	private WorkerManager modelWorker;
 	private ControllerApplication controller;
 	private ControllerProject controllerProject;
 	private ControllerActivity controllerActivity;
 	private ControllerWorker controllerWorker;
 
 	public View() throws OperationNotAllowedException {
-		this.modelApplication = new applicationManager(this);
-		this.modelWorker = new workerManager();
-		this.modelProject = new projectManager(this);
-		this.modelActivity = new activityManager(this);
+		this.modelApplication = new ApplicationManager(this);
+		this.modelWorker = new WorkerManager();
+		this.modelProject = new ProjectManager(this);
+		this.modelActivity = new ActivityManager(this);
 		
 		this.controller = new ControllerApplication(this, modelApplication, modelProject);
 		this.controllerProject = new ControllerProject(this, modelApplication, modelProject, modelActivity,modelWorker);

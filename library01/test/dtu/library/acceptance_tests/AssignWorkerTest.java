@@ -10,22 +10,22 @@ import projectManagerObjects.Worker;
 
 import static org.junit.Assert.assertTrue;
 
-import applicationManagerInterface.activityManager;
-import applicationManagerInterface.projectManager;
-import applicationManagerInterface.workerManager;
+import applicationManagerInterface.ActivityManager;
+import applicationManagerInterface.ProjectManager;
+import applicationManagerInterface.WorkerManager;
 
 public class AssignWorkerTest {
 
 
-	private projectManager modelProject;
-	private activityManager modelActivity;
-	private workerManager modelWorker;
+	private ProjectManager modelProject;
+	private ActivityManager modelActivity;
+	private WorkerManager modelWorker;
 	private Project project;
 	private Activity activity;
 	private Worker worker;
 
 
-	public AssignWorkerTest(View view,projectManager modelProject,activityManager modelActivity,workerManager modelWorker, ErrorMessageHolder errorMessageHolder) {
+	public AssignWorkerTest(View view,ProjectManager modelProject,ActivityManager modelActivity,WorkerManager modelWorker, ErrorMessageHolder errorMessageHolder) {
 		
 		this.modelProject = modelProject;
 		this.modelActivity = modelActivity;

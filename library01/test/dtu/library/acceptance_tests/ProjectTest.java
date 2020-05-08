@@ -10,7 +10,7 @@ import projectManagerObjects.Project;
 
 import org.junit.Assert;
 
-import applicationManagerInterface.projectManager;
+import applicationManagerInterface.ProjectManager;
 import controllerInterface.ControllerProject;
 
 import java.util.List;
@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 public class ProjectTest {
 
 
-    private projectManager modelProject;
+    private ProjectManager modelProject;
 
     private ErrorMessageHolder errorMessageHolder;
 
@@ -29,7 +29,7 @@ public class ProjectTest {
     private List<Project> projects;
 
 
-    public ProjectTest(ErrorMessageHolder errorMessageHolder, projectManager modelProject) {
+    public ProjectTest(ErrorMessageHolder errorMessageHolder, ProjectManager modelProject) {
    
         this.modelProject = modelProject;
         this.errorMessageHolder = errorMessageHolder;

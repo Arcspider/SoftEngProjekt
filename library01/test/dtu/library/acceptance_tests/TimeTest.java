@@ -5,9 +5,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import applicationManagerInterface.activityManager;
-import applicationManagerInterface.projectManager;
-import applicationManagerInterface.workerManager;
+import applicationManagerInterface.ActivityManager;
+import applicationManagerInterface.ProjectManager;
+import applicationManagerInterface.WorkerManager;
 import controllerInterface.ControllerProject;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -17,7 +17,7 @@ import projectManagerObjects.Project;
 import projectManagerObjects.View;
 import projectManagerObjects.Worker;
 
-public class timeTest {
+public class TimeTest {
 
 	private View view;
 	private ControllerProject controllerProject;
@@ -28,10 +28,10 @@ public class timeTest {
 	private String ID;
 	private List<Project> projects;
 
-	private projectManager modelProject;
-	private activityManager modelActivity;
-	private workerManager modelWorker;
-	public timeTest(View view,projectManager modelProject,activityManager modelActivity, workerManager modelWorker, ErrorMessageHolder errorMessageHolder){
+	private ProjectManager modelProject;
+	private ActivityManager modelActivity;
+	private WorkerManager modelWorker;
+	public TimeTest(View view,ProjectManager modelProject,ActivityManager modelActivity, WorkerManager modelWorker, ErrorMessageHolder errorMessageHolder){
 
 		this.modelProject = modelProject;
 		this.modelActivity = modelActivity;

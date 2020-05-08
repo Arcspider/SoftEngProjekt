@@ -8,16 +8,16 @@ import projectManagerObjects.Activity;
 import projectManagerObjects.Shift;
 import projectManagerObjects.Worker;
 
-public class workerManager {
+public class WorkerManager {
     private ArrayList<Worker> workers;
     private Random random;
 
     private Worker worker;
-	private timeManager modelTime;
+	private TimeManager modelTime;
 
-    public workerManager() {
+    public WorkerManager() {
     
-    	this.modelTime = new timeManager();
+    	this.modelTime = new TimeManager();
 
         workers = new ArrayList<Worker>();
 
