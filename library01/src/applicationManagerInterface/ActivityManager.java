@@ -71,15 +71,20 @@ public class ActivityManager {
 	public boolean verifyDateFormat(String dateToVerify) {
 
 		String[] stringDate = dateToVerify.split("-");
-		if (stringDate.length == 2 && stringIsInteger(stringDate[0]) && stringIsInteger(stringDate[1])) {
-
-			int weekInt = Integer.parseInt(stringDate[0]);
-			int yearInt = Integer.parseInt(stringDate[1]);
-			int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-			int difference = yearInt - currentYear;
-			// �rstallene man arbejder indenfor er 50 �r
-			if (difference >= -50 && difference <= 50) {
-				return weekInt > 0 && weekInt <= 52;
+		if (stringDate.length == 2) { // 1
+			if (stringIsInteger(stringDate[0])) { // 2
+ 				if (stringIsInteger(stringDate[1])) { // 3 
+					int weekInt = Integer.parseInt(stringDate[0]);
+					int yearInt = Integer.parseInt(stringDate[1]);
+					int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+					int difference = yearInt - currentYear;
+					if (difference >= -50) { // 4
+						if (difference <= 50) { // 5
+							if (weekInt > 0) { // 6 
+							}
+						}
+					}
+				}
 			}
 		}
 		return false;
@@ -150,7 +155,7 @@ public class ActivityManager {
 	}
 
 	public Activity getActivity(Project project, String name) {
-		return project.getActivity(name);  
+		return project.getActivity(name);
 	}
 
 	public boolean addActivity(Project project, String name) throws OperationNotAllowedException {
@@ -181,17 +186,16 @@ public class ActivityManager {
 		return false;
 	}
 
-	public boolean verifyLegalShift(Activity activity, String workerID, String date, String time  ) {
-		if (activity.hasWorkerId(workerID) && verifyFormatddmmyyyy(date)
-				&& allowedHours(time)) {
+	public boolean verifyLegalShift(Activity activity, String workerID, String date, String time) {
+		if (activity.hasWorkerId(workerID) && verifyFormatddmmyyyy(date) && allowedHours(time)) {
 			return true;
 		} else
 			return true;
 	}
 
-	public void addShift(Activity activity, String workerID, String date,String time) {
-		if (verifyLegalShift(activity, workerID,date,time)) {
-				activity.addShift(workerID, date, time);
+	public void addShift(Activity activity, String workerID, String date, String time) {
+		if (verifyLegalShift(activity, workerID, date, time)) {
+			activity.addShift(workerID, date, time);
 		} else
 			view.showMessage("shift wasn't added, as something was illegal ");
 	}
@@ -208,7 +212,6 @@ public class ActivityManager {
 	public boolean hasShift(Activity activity, String workerID, String stringDate) {
 		return activity.hasShiftByIdAndDate(workerID, stringDate);
 	}
-
 
 	public void getWorkedShifts(Activity activity, String stringDate) {
 		activity.getWorkerShifts(stringDate);
