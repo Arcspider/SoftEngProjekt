@@ -92,7 +92,7 @@ public class ActivityManager {
 
 	public boolean stringIsInteger(String test) {
 		try {
-			int canIBeConverted = Integer.parseInt(test);
+			Integer.parseInt(test);
 		} catch (NumberFormatException e) {
 			return false;
 		}
@@ -101,7 +101,7 @@ public class ActivityManager {
 
 	public boolean stringIsDouble(String test) {
 		try {
-			double canIBeConverted = Double.parseDouble(test);
+			Double.parseDouble(test);
 		} catch (NumberFormatException e) {
 			return false;
 		}
@@ -205,7 +205,6 @@ public class ActivityManager {
 		if (stringIsDouble(hours)) {
 			Double doubleHours = Double.parseDouble(hours);
 			// Skal v�re enten heltal eller halv times intervaller.
-			System.out.println("THIS IS THE ACTIVITYS HOURS LEFT" + activity.getBudgettedHoursLeft());
 			return (doubleHours <= 16 && doubleHours >= 0 && doubleHours % 0.5 == 0 );
 		}
 		return false;
