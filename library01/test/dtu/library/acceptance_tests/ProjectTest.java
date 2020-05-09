@@ -11,6 +11,8 @@ import projectManagerObjects.Project;
 import applicationManagerInterface.ProjectManager;
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 public class ProjectTest {
 
 

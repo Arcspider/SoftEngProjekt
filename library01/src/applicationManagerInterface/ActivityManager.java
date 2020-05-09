@@ -183,7 +183,7 @@ public class ActivityManager {
 
 	public boolean verifyLegalShift(Activity activity, String workerID, String date, String time  ) {
 		if (activity.hasWorkerId(workerID) && verifyFormatddmmyyyy(date)
-				&& allowedHours(activity, time) && activity.addHoursAllowed(time)) {
+				&& allowedHours(time) && activity.addHoursAllowed(time)) {
 			return true;
 		} else
 			return false;
@@ -212,8 +212,6 @@ public class ActivityManager {
 		return activity.hasShiftByIdAndDate(workerID, stringDate);
 	}
 
-//	public void getWorkedShifts(Activity activity, String stringDate) {
-//		activity.getWorkerShifts(stringDate);
-//	}
+
 
 }
