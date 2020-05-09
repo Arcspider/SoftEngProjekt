@@ -26,5 +26,3 @@ Scenario: change budgetted hours of activity
 	When the user chooses the activity "charlie"
 	And the user changes its budgetted time to "150"
 	Then the activity's budgetted time is set to "150"
-
-	

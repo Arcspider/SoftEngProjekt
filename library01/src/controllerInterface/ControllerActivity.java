@@ -49,9 +49,10 @@ public class ControllerActivity {
 			case "Date":
 				view.showMessage("Type \"Start\" to change the start date of the project");
 				view.showMessage("Type \"End\" to change the end date of the project");
-				view.showMessage("Type \"Budget\"to add to budgetted hours");
+				view.showMessage("Type \"Budget\"to set the total hours on a budget");
+				view.showMessage("Type \"Getbudget\"to get information regarding the budgetted hours on the activity");
 				view.showMessage("The date format is \"ww-yyyy\" where ww is week and yyyy is year");
-				view.showMessage("The hours must be added in increments of 0.5");
+				
 				nextCommand = getCommand();
 				switch (nextCommand) {
 				case "Start":
@@ -65,9 +66,10 @@ public class ControllerActivity {
 					break;
 				case "Budget":
 					view.showMessage("Please input the additional budgetted hours in increments of 0.5");
-
+					getThisActivity().setBudgettedHours(timeHanlder.nextLine());
 					break;
-
+				case "Getbudget":
+					view.showMessage("There is a total of " + getThisActivity().getBudgettedHoursTotal() + " Allocated on the budget, and has " + getThisActivity().getBudgettedHoursLeft()  + " hours left");	
 				}
 				break;
 			case "Back":
@@ -82,7 +84,7 @@ public class ControllerActivity {
 					getThisActivity().assignWorker(modelWorker.getWorker(nextCommand));
 				}
 				break;
-			case "Time":
+			case "Shift":
 				view.showMessage("Please supply the following information");
 				view.showMessage("WorkerID: ");
 				String workerID = getCommand();
@@ -91,28 +93,38 @@ public class ControllerActivity {
 				view.showMessage("Time: ");
 				String time = getCommand();
 				modelActivity.addShift(getThisActivity(), workerID, date, time);
-				break;
-			case "List":
-				getThisActivity().listWorkers();
-				break;
-			case "Check":
-				getThisActivity().getBudgettedHours();
-				break;
-			case "Shift":
-				view.showMessage("Please enter the id of the employee adding a shift");
-				String id = getCommand();
-				view.showMessage("Please enter the date they are working their shift");
-				view.showMessage("The format: dd-mm-yyyy");
-				date = getCommand();
-				view.showMessage("Please enter the amount of hours they will work in increments of 0.5 hours");
-				String hours = getCommand();
-				if(!modelWorker.getWorker(id).getAbsence()) {
-					getThisActivity().addShift(id, date, hours);
+				if(!modelWorker.getWorker(workerID).getAbsence()) {
+					getThisActivity().addShift(workerID, date, time);
 				} else {
 					view.showMessage("This employee is absent, so they cannot get new shifts");
 					view.showMessage("");
 				}
 				break;
+			case "List":
+				getThisActivity().listWorkers();
+				break;
+			case "Check":
+				getThisActivity().getBudgettedHoursLeft();
+				break;
+			
+			case "Removeshift":
+				view.showMessage("Please enter the id of the employee");
+				String workerId = getCommand();
+				view.showMessage("Please enter the date of the shift");
+				date = getCommand();
+				Activity currentActivity = getThisActivity();
+				if(currentActivity.removeShift(workerId,currentActivity.stringToDate(date))) {
+					view.showMessage("The shift was removed");
+				}else {
+					view.showMessage("Shift not found");
+				}
+				break;
+			case "View":
+				getThisActivity().printShifts();
+				break;
+					
+				
+					
 			}
 		}
 	}
