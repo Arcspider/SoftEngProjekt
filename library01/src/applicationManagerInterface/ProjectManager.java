@@ -99,8 +99,11 @@ public class ProjectManager {
 	public void setProjectStart(Project project, String startDate) {
 		if (verifyDateFormat(startDate)) {
 			LocalDate startProjectDate = stringToDate(startDate);
-			project.setStartDate(startProjectDate);
-			System.out.println("The project starts: " + startProjectDate);
+			LocalDate endProjectDate = project.getEndDate();
+			if(endProjectDate == null || startProjectDate.isBefore(endProjectDate)) {
+				project.setStartDate(startProjectDate);
+				System.out.println("The project starts: " + startProjectDate);
+			}
 		}
 	}
 
@@ -114,6 +117,7 @@ public class ProjectManager {
 			} else {
 				System.out.println("Date wasn't set, as it was invalid.");
 			}
+
 		}
 	} 
 
@@ -147,7 +151,7 @@ public class ProjectManager {
 
 	public boolean stringIsNumeric(String test) {
 		try {
-			Integer.parseInt(test);
+			int pls = Integer.parseInt(test);
 		} catch (NumberFormatException e) {
 			return false;
 		}
@@ -165,7 +169,7 @@ public class ProjectManager {
 	public Project createProject(String name) throws OperationNotAllowedException {
 		String id = projectGenerateID();
 		newProject = new Project(name, id);
-		System.out.println("Project " + name + " has been created with ID: " + id);
+		view.showMessage("Project " + name + " has been created with ID: " + id);
 
 		return newProject;
 	}
@@ -184,7 +188,7 @@ public class ProjectManager {
 
 	public void setThisProject(String id) {
 		thisProject = getProject(id);
-	} 
+	}
 
 	public boolean setLeader(Project project, Worker worker) throws OperationNotAllowedException {
 		if (!project.hasLeader()) {

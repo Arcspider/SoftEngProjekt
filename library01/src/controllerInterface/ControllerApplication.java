@@ -43,7 +43,6 @@ public class ControllerApplication {
 
 				break;
 			case "Exit":
-				view.showMessage("Shutting down");
 				System.exit(0);
 
 			case "Worker":
@@ -56,6 +55,10 @@ public class ControllerApplication {
 
 	private Project createProject(String name) throws OperationNotAllowedException {
 		return modelProject.createProject(name);
+	}
+
+	private boolean hasID(String id) {
+		return modelProject.hasID(id);
 	}
 
 	private boolean checkName(String name) throws OperationNotAllowedException {
