@@ -81,6 +81,7 @@ public class ActivityManager {
 					if (difference >= -50) { // 4
 						if (difference <= 50) { // 5
 							if (weekInt > 0) { // 6 
+								return weekInt <= 52; // 7
 							}
 						}
 					}

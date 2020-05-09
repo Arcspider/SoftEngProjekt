@@ -91,7 +91,7 @@ public class AssignLeaderTest {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }
     }
-
+ 
     @Then("an error message {string} is witten")
     public void anErrorMessageIsWitten(String string) {
     	assertEquals(string, this.errorMessageHolder.getErrorMessage());
