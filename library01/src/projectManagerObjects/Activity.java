@@ -93,10 +93,15 @@ public class Activity implements datesInterface{
 	}
 	public void setBudgettedHours(String budgettedHours) {
 		this.budgettedHoursTotal = Double.parseDouble(budgettedHours);
-
+		updateTimeLeft();
 	}
-	public Double getBudgettedHours() {
+	
+	public Double getBudgettedHoursLeft() {
 		return budgettedHoursLeft;
+	}
+
+	public Double getBudgettedHoursTotal() {
+		return budgettedHoursTotal;
 	}
 
 	public void addShift(String workerID, String stringDate, String time ) {
@@ -115,7 +120,7 @@ public class Activity implements datesInterface{
 			shift = new Shift(workerID,date,Double.parseDouble(time));
 			shifts.add(shift);
 		}
-		System.out.println(time + " hours have been added to " + workerID + " who will be working the " + stringDate);
+		System.out.println(time + " hours have been added to " + workerID + " who will be working the a shift on" + stringDate);
 		System.out.println("");
 		updateTimeLeft();
 	}
@@ -153,6 +158,25 @@ public class Activity implements datesInterface{
 		for(Shift currentShift : shifts) {
 			budgettedHoursLeft -= currentShift.getHours();
 		}
+	}
+	public boolean addHoursAllowed(String time) {
+		Double add = Double.parseDouble(time);
+		return budgettedHoursLeft >= add;
+	}
+	public boolean removeShift(String workerID, LocalDate date) {
+		for(int i = 0; i<shifts.size(); i++) {
+			if(workerID.equals(shifts.get(i).getWorkerID()) && date.equals(shifts.get(i).getDate())) {
+				shifts.remove(i);
+				return true;
+			}
+		}
+		return false;
+	}
+	public void printShifts() {
+		for(Shift currentShift : shifts) {
+			System.out.println("The user " + currentShift.getWorkerID() + " is assigned to work " + currentShift.getHours() + " Hours on day " + currentShift.getDate().toString());
+		}
+		
 	}
 
 }
