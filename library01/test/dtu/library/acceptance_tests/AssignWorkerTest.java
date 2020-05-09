@@ -17,42 +17,42 @@ import applicationManagerInterface.WorkerManager;
 public class AssignWorkerTest {
 
 
-	private ProjectManager projectManager;
-	private ActivityManager activityManager;
-	private WorkerManager workerManager;
+	private ProjectManager modelProject;
+	private ActivityManager modelActivity;
+	private WorkerManager modelWorker;
 	private Project project;
 	private Activity activity;
 	private Worker worker;
 
 
-	public AssignWorkerTest(View view,ProjectManager projectManager,ActivityManager activityManager,WorkerManager workerManager, ErrorMessageHolder errorMessageHolder) {
+	public AssignWorkerTest(View view,ProjectManager modelProject,ActivityManager modelActivity,WorkerManager modelWorker, ErrorMessageHolder errorMessageHolder) {
 		
-		this.projectManager = projectManager;
-		this.activityManager = activityManager;
-		this.workerManager = workerManager;
+		this.modelProject = modelProject;
+		this.modelActivity = modelActivity;
+		this.modelWorker = modelWorker;
 	}
 	@Given("a project with  id {string}")
 	public void aProjectWithId(String projectID) throws OperationNotAllowedException {
-		project = projectManager.createProject("Tom");
+		project = modelProject.createProject("Tom");
 		project.setId(projectID);
-		projectManager.addProject(project);
+		modelProject.addProject(project);
 	}
 
 	@Given("has the activity {string}")
 	public void hasTheActivity(String activityName) throws OperationNotAllowedException {
-		 assertTrue(activityManager.addActivity(project, activityName));
-		 activity = activityManager.getActivity(project, activityName);
+		 assertTrue(modelActivity.addActivity(project, activityName));
+		 activity = modelActivity.getActivity(project, activityName);
 	}
 
 	@Given("the worker with id {string} exists'")
 	public void theWorkerWithIdExists(String workerID) {
-	    worker = workerManager.createWorker("Tom", "Bob");
+	    worker = modelWorker.createWorker("Tom", "Bob");
 	    worker.setID(workerID);
-	    workerManager.addWorker(worker);
+	    modelWorker.addWorker(worker);
 	}
 	@Then("the user assign the worker to the activity")
 	public void theUserAssignTheWorkerToTheActivity() {
-		workerManager.assignWorker(activity,worker);
+		modelWorker.assignWorker(activity,worker);
 		assertTrue(activity.hasWorker(worker));
 	}
 }

@@ -9,42 +9,34 @@ import applicationManagerInterface.ProjectManager;
 import applicationManagerInterface.WorkerManager;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import projectManagerObjects.Activity;
 import projectManagerObjects.OperationNotAllowedException;
 import projectManagerObjects.Project;
-import projectManagerObjects.View;
 import projectManagerObjects.Worker;
 
 public class ListAssignedWorkersTest {
-
-	private ProjectManager projectManager;
-	private ActivityManager activityManager;
-	private WorkerManager workerManager;
-	private ErrorMessageHolder errorMessageHolder;
+	
+	private ProjectManager modelProject;
+	private WorkerManager modelWorker;
 	private Worker Bob;
 	private Worker Alice;
 	private Project project;
 	private Activity activity;
-	private String name;
-
-	public ListAssignedWorkersTest(ProjectManager projectManager, ActivityManager activityManager,  WorkerManager workerManager ,ErrorMessageHolder errorMessageHolder) {
-		this.projectManager = projectManager;
-		this.activityManager = activityManager;
-		this.workerManager = workerManager;
-		this.errorMessageHolder = errorMessageHolder;
+	public ListAssignedWorkersTest(ProjectManager modelProject, ActivityManager modelActivity,  WorkerManager modelWorker ,ErrorMessageHolder errorMessageHolder) {
+		this.modelProject = modelProject;
+		this.modelWorker = modelWorker; 
 	}
 
 	@Given("an activity {string} has workers assigned to it")
 	public void anActivityHasWorkersAssignedToIt(String string) throws OperationNotAllowedException {
-		Bob = workerManager.createWorker("Bob", "Test");
-		Alice = workerManager.createWorker("Alice", "Test");
-	    project = projectManager.createProject("Coolness");
+		Bob = modelWorker.createWorker("Bob", "Test");
+		Alice = modelWorker.createWorker("Alice", "Test");
+	    project = modelProject.createProject("Coolness");
 	    project.addActivity(string);
 	    activity = project.getActivity(string);
 	    activity.assignWorker(Bob);
 	    activity.assignWorker(Alice);
-
+	    
 	    assertTrue(activity.hasAnyWorkers());
 	}
 
@@ -55,17 +47,17 @@ public class ListAssignedWorkersTest {
 
 	@Given("an activity {string} that has no workers assigned to it")
 	public void anActivityThatHasNoWorkersAssignedToIt(String string) throws OperationNotAllowedException {
-		project = projectManager.createProject("Coolness");
+		project = modelProject.createProject("Coolness");
 	    project.addActivity(string);
 	    activity = project.getActivity(string);
-
+	    
 	    assertFalse(activity.hasAnyWorkers());
 	}
-
+	
 
 	@Then("the message {string} is displayed")
 	public void theMessageIsDisplayed(String string) {
 	    assertEquals(activity.listWorkers(), "There are no workers assigned");
 	}
-
+	
 }

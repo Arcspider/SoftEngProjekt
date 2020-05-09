@@ -13,11 +13,8 @@ public class ControllerWorker {
 	private ApplicationManager modelApplication;	
 	private View view;
 	Scanner scanner;
-	private boolean hasWorker;
-
 	public ControllerWorker(View view, WorkerManager modelWorker, ApplicationManager modelApplication) {
 		this.view = view;
-		hasWorker = false;
 		this.modelWorker = modelWorker;
 		scanner = new Scanner(System.in);
 		this.modelApplication = modelApplication;

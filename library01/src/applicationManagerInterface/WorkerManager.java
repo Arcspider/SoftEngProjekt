@@ -10,8 +10,6 @@ import projectManagerObjects.Worker;
 
 public class WorkerManager {
     private ArrayList<Worker> workers;
-    private Random random;
-
     private Worker worker;
 	private TimeManager modelTime;
 
@@ -21,7 +19,7 @@ public class WorkerManager {
 
         workers = new ArrayList<Worker>();
 
-        random = new Random();
+        new Random();
     }
 
     public Worker createWorker(String firstname, String lastname) {
@@ -79,11 +77,10 @@ public class WorkerManager {
 		ArrayList<Activity> workersAssignedActivities = currentWorker.getActivities(); 
 		for(Activity currentActivity : workersAssignedActivities ) {
 			ArrayList<Shift> activityShifts = currentActivity.getShifts();
-			for(int i = 0; i< activityShifts.size(); i++) {
-				Shift currentShift = activityShifts.get(i);
+			for(Shift currentShift : activityShifts) {
 				LocalDate shiftDate = currentShift.getDate();
 				if(startDate.isBefore(shiftDate) && endDate.isAfter(shiftDate)) {
-					currentActivity.removeShift(currentShift.getWorkerID(),currentShift.getDate());
+					currentShift.setTime(0.0);
 				}
 			}
 			currentActivity.updateTimeLeft();

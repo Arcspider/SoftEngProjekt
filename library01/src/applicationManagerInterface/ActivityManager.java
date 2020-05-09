@@ -1,10 +1,7 @@
 package applicationManagerInterface;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -16,15 +13,13 @@ import projectManagerObjects.View;
 public class ActivityManager {
 	private View view;
 	private Activity thisActivity;
-	private Calendar calendar;
-	private DateFormat dateFormat;
 	private boolean hasActivity;
 
 	public ActivityManager(View view) {
 		this.view = view;
 		hasActivity = false;
-		this.calendar = new GregorianCalendar();
-		dateFormat = new SimpleDateFormat("MM-yy");
+		new GregorianCalendar();
+		new SimpleDateFormat("MM-yy");
 	}
 
 	public void setActivityStart(Project project, Activity currentActivity, String startDate)
@@ -69,10 +64,11 @@ public class ActivityManager {
 	}
 
 	public boolean verifyDateFormat(String dateToVerify) {
+
 		String[] stringDate = dateToVerify.split("-");
 		if (stringDate.length == 2) { // 1
 			if (stringIsInteger(stringDate[0])) { // 2
- 				if (stringIsInteger(stringDate[1])) { // 3
+				if (stringIsInteger(stringDate[1])) { // 3
 					int weekInt = Integer.parseInt(stringDate[0]);
 					int yearInt = Integer.parseInt(stringDate[1]);
 					int currentYear = Calendar.getInstance().get(Calendar.YEAR);
@@ -186,12 +182,11 @@ public class ActivityManager {
 		return false;
 	}
 
-	public boolean verifyLegalShift(Activity activity, String workerID, String date, String time  ) {
-		if (activity.hasWorkerId(workerID) && verifyFormatddmmyyyy(date)
-				&& allowedHours(time) && activity.addHoursAllowed(time)) {
+	public boolean verifyLegalShift(Activity activity, String workerID, String date, String time) {
+		if (activity.hasWorkerId(workerID) && verifyFormatddmmyyyy(date) && allowedHours(time)) {
 			return true;
 		} else
-			return false;
+			return true;
 	}
 
 	public void addShift(Activity activity, String workerID, String date, String time) {
@@ -217,8 +212,5 @@ public class ActivityManager {
 		return activity.hasShiftByIdAndDate(workerID, stringDate);
 	}
 
-	public void getWorkedShifts(Activity activity, String stringDate) {
-		activity.getWorkerShifts(stringDate);
-	}
 
 }
