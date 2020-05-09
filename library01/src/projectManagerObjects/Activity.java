@@ -76,10 +76,8 @@ public class Activity implements datesInterface{
 
 	public String listWorkers() {
 		if(hasAnyWorkers()) {
-			int noOfWorkers = 0;
 			for(int i = 0; i < workers.size(); i++) {
 				System.out.println(workers.get(i).getId());
-				noOfWorkers = i;
 			}
 			return "These were all the assigned workers";
 		} else {

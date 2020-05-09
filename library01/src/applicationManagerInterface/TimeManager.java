@@ -1,6 +1,5 @@
 package applicationManagerInterface;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,18 +11,11 @@ import projectManagerObjects.Project;
 
 public class TimeManager {
 
-	private ArrayList<Project> projects;
-	private Project newProject;
-	private Project thisProject;
-	private boolean hasProject;
-	private Random random;
-	private DateFormat dateFormat;
 	public TimeManager() {
-		projects = new ArrayList<Project>();
-		random = new Random();
-		hasProject = false;
+		new ArrayList<Project>();
+		new Random();
 		new GregorianCalendar();
-		dateFormat = new SimpleDateFormat("MM-yy");
+		new SimpleDateFormat("MM-yy");
 	}
 	public LocalDate stringToDate(String toBeConverted) {
 		String[] stringDate = toBeConverted.split("-");

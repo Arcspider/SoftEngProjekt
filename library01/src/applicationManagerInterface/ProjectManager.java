@@ -147,7 +147,7 @@ public class ProjectManager {
 
 	public boolean stringIsNumeric(String test) {
 		try {
-			int pls = Integer.parseInt(test);
+			Integer.parseInt(test);
 		} catch (NumberFormatException e) {
 			return false;
 		}

@@ -1,8 +1,6 @@
 package projectManagerObjects;
 
-import java.text.DateFormat;
 import java.time.LocalDate;
-import java.util.Calendar;
 
 public class Shift {
 	private String workerID;

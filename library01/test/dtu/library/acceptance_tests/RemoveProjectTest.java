@@ -1,38 +1,24 @@
 package dtu.library.acceptance_tests;
 
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import projectManagerObjects.OperationNotAllowedException;
 import projectManagerObjects.Project;
 import projectManagerObjects.View;
 
-import java.util.List;
-
 import applicationManagerInterface.ProjectManager;
-import controllerInterface.ControllerApplication;
-import controllerInterface.ControllerProject;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class RemoveProjectTest {
 
-    private View view;
- 
     private	ProjectManager modelProject;
 
     private ErrorMessageHolder errorMessageHolder;
 
     private Project project;
-    private String ID;
-    private List<Project> projects;
-
     public RemoveProjectTest(View view,ProjectManager modelProject, ErrorMessageHolder errorMessageHolder) {
-        this.view = view;
-    
         this.modelProject = modelProject;
         this.errorMessageHolder = errorMessageHolder;
 
