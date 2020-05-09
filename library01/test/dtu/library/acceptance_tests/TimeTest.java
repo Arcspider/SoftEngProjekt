@@ -48,14 +48,6 @@ public class TimeTest {
 	}
 
 
-	@Given("the activity {string} exists in the project {string}")
-	public void theActivityExistsInTheProject(String activityName, String projectID) throws OperationNotAllowedException {
-		project = modelProject.getProject(projectID);
-		modelActivity.addActivity(project,activityName);
-		activity = project.getActivity(activityName);
-
-	}
-
 	@Given("the activity {string} exists in the project")
 	public void theActivityExistsInTheProject(String activityName) throws OperationNotAllowedException {
 		modelActivity.addActivity(project,activityName);

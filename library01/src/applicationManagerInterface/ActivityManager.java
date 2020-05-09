@@ -73,14 +73,14 @@ public class ActivityManager {
 		String[] stringDate = dateToVerify.split("-");
 		if (stringDate.length == 2) { // 1
 			if (stringIsInteger(stringDate[0])) { // 2
- 				if (stringIsInteger(stringDate[1])) { // 3 
+				if (stringIsInteger(stringDate[1])) { // 3
 					int weekInt = Integer.parseInt(stringDate[0]);
 					int yearInt = Integer.parseInt(stringDate[1]);
 					int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 					int difference = yearInt - currentYear;
 					if (difference >= -50) { // 4
 						if (difference <= 50) { // 5
-							if (weekInt > 0) { // 6 
+							if (weekInt > 0) { // 6
 								return weekInt <= 52; // 7
 							}
 						}
@@ -202,10 +202,13 @@ public class ActivityManager {
 	}
 
 	public boolean allowedHours(String hours) {
-		if (stringIsDouble(hours)) {
+		if (stringIsDouble(hours)) { // 1
 			Double doubleHours = Double.parseDouble(hours);
-			// Skal v�re enten heltal eller halv times intervaller.
-			return (doubleHours <= 16 && doubleHours >= 0 && doubleHours % 0.5 == 0);
+			if (doubleHours <= 16) { // 2
+				if (doubleHours >= 0) { // 3
+					return doubleHours % 0.5 == 0; // 4
+				}
+			}
 		}
 		return false;
 	}

@@ -75,6 +75,46 @@ public class WhiteBoxTest {
 		assertEquals(null, project.getEndDate());
 	}
 	
+	@Test
+	public void setProectEndInputC() throws OperationNotAllowedException {
+		project = projectManager.createProject("Tom");
+		projectManager.setProjectEnd(project, "18-2020");
+		assertEquals(stringToDate("18-2020"), project.getEndDate());
+	}
+	@Test
+	public void setProectEndInputD() throws OperationNotAllowedException {
+		project = projectManager.createProject("Tom");
+		projectManager.setProjectStart(project,"20-2020" );
+		projectManager.setProjectEnd(project, "22-2020");
+		assertEquals(stringToDate("22-2020"), project.getEndDate());
+	}
+	
+	@Test
+	public void allowedhoursInputA() {
+		assertFalse(activityManager.allowedHours("test"));
+	}
+	@Test
+	public void allowedhoursInputB() {
+		assertFalse(activityManager.allowedHours("60"));
+	}
+	
+	@Test
+	public void allowedhoursInputC() {
+		assertFalse(activityManager.allowedHours("-2"));
+	}
+	@Test
+	public void allowedhoursInputD() {
+		assertFalse(activityManager.allowedHours("0.3"));
+	}
+	
+	@Test
+	public void allowedhoursInputE() {
+		assertTrue(activityManager.allowedHours("4.5"));
+	}
+	
+	
+	
+	
 	
 	public LocalDate stringToDate(String toBeConverted) {
 		String[] stringDate = toBeConverted.split("-");
