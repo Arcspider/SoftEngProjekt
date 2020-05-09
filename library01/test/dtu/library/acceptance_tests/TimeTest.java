@@ -79,7 +79,7 @@ public class TimeTest {
 		activity = activityManager.getActivity(project, activityName);
 		activityManager.addShift(activity,workerID,date,time);
 	}
-	
+
 	@Then("the time {string} {string} {string} can be found in the activity {string}")
 	public void theTimeCanBeFoundInTheActivity(String workerID, String date, String time, String activityName) {
 		activity = activityManager.getActivity(project, activityName);
@@ -88,12 +88,12 @@ public class TimeTest {
 
 
 
-	
+
 	@Then("the user {string} logs absence in the form of {string} in the time period {string} to {string}")
 	public void theUserLogsAbsenceInTheFormOfInTheTimePeriodTo(String userId, String absenceType, String startAbsence, String endAbsence) {
 		workerManager.assignAbsence(userId,startAbsence,endAbsence);
 	}
-	
+
 
 
 	@Given("the activity {string} has a total of {string} hours budgetted")
@@ -108,13 +108,13 @@ public class TimeTest {
 	public void theActivityHasHoursLeft(String budgettedHoursLeft) {
 		assertTrue(activity.getBudgettedHoursLeft() == Double.parseDouble(budgettedHoursLeft));
 	}
-	
+
 	@Then("the time {string} {string} {string} can not be found in the activity {string}")
 	public void theTimeCanNotBeFoundInTheActivity(String workerID, String date, String time, String activityName) {
 		activity = activityManager.getActivity(project, activityName);
 		assertFalse(activityManager.hasShift(activity,workerID,date));
 	}
-	
+
 	@Then("the user {string} removes the shift {string} in the activity {string}")
 	public void theUserRemovesTheShiftInTheActivity(String workerID, String date, String activityName) {
 		activity = project.getActivity(activityName);

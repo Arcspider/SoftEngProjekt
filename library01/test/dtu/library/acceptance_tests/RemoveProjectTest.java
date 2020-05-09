@@ -21,7 +21,7 @@ import static org.junit.Assert.assertTrue;
 public class RemoveProjectTest {
 
     private View view;
- 
+
     private	ProjectManager projectManager;
 
     private ErrorMessageHolder errorMessageHolder;
@@ -32,7 +32,7 @@ public class RemoveProjectTest {
 
     public RemoveProjectTest(View view,ProjectManager projectManager, ErrorMessageHolder errorMessageHolder) {
         this.view = view;
-    
+
         this.projectManager = projectManager;
         this.errorMessageHolder = errorMessageHolder;
 

@@ -17,7 +17,7 @@ import projectManagerObjects.View;
 import projectManagerObjects.Worker;
 
 public class ListAssignedWorkersTest {
-	
+
 	private ProjectManager projectManager;
 	private ActivityManager activityManager;
 	private WorkerManager workerManager;
@@ -27,12 +27,12 @@ public class ListAssignedWorkersTest {
 	private Project project;
 	private Activity activity;
 	private String name;
-	
+
 	public ListAssignedWorkersTest(ProjectManager projectManager, ActivityManager activityManager,  WorkerManager workerManager ,ErrorMessageHolder errorMessageHolder) {
 		this.projectManager = projectManager;
 		this.activityManager = activityManager;
 		this.workerManager = workerManager;
-		this.errorMessageHolder = errorMessageHolder; 
+		this.errorMessageHolder = errorMessageHolder;
 	}
 
 	@Given("an activity {string} has workers assigned to it")
@@ -44,7 +44,7 @@ public class ListAssignedWorkersTest {
 	    activity = project.getActivity(string);
 	    activity.assignWorker(Bob);
 	    activity.assignWorker(Alice);
-	    
+
 	    assertTrue(activity.hasAnyWorkers());
 	}
 
@@ -58,14 +58,14 @@ public class ListAssignedWorkersTest {
 		project = projectManager.createProject("Coolness");
 	    project.addActivity(string);
 	    activity = project.getActivity(string);
-	    
+
 	    assertFalse(activity.hasAnyWorkers());
 	}
-	
+
 
 	@Then("the message {string} is displayed")
 	public void theMessageIsDisplayed(String string) {
 	    assertEquals(activity.listWorkers(), "There are no workers assigned");
 	}
-	
+
 }

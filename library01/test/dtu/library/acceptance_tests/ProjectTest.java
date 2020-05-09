@@ -30,7 +30,7 @@ public class ProjectTest {
 
 
     public ProjectTest(ErrorMessageHolder errorMessageHolder, ProjectManager projectManager) {
-   
+
         this.projectManager = projectManager;
         this.errorMessageHolder = errorMessageHolder;
     }

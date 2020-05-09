@@ -80,7 +80,7 @@ public class ActivityManager {
 					if (difference >= -50) { // 4
 						if (difference <= 50) { // 5
 							if (weekInt > 0) { // 6
-								return true;
+								return weekInt <= 52; // 7
 							}
 						}
 					}
@@ -201,11 +201,14 @@ public class ActivityManager {
 			view.showMessage("shift wasn't added, as something was illegal ");
 	}
 
-	public boolean allowedHours(Activity activity, String hours) {
-		if (stringIsDouble(hours)) {
+	public boolean allowedHours(String hours) {
+		if (stringIsDouble(hours)) { // 1
 			Double doubleHours = Double.parseDouble(hours);
-			// Skal v�re enten heltal eller halv times intervaller.
-			return (doubleHours <= 16 && doubleHours >= 0 && doubleHours % 0.5 == 0 );
+			if (doubleHours <= 16) { // 2
+				if (doubleHours >= 0) { // 3
+					return doubleHours % 0.5 == 0; // 4
+				}
+			}
 		}
 		return false;
 	}
