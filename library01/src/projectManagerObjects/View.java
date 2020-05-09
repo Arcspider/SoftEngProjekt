@@ -102,9 +102,10 @@ public class View {
 		System.out.println("Current available commands: Date, Time, Assign, List, Shift, Back");
 		System.out.println("Date: Change the start and end dates of this activity");
 		System.out.println("Assign: Assign an employee to this activity");
-		System.out.println("Time: Allocate time that a worker has spent on this activity");
 		System.out.println("List: List all workers assigned to this activity");
+		System.out.println("View: List all shifts in this activity");
 		System.out.println("Shift: Choose a worker and add some work hours to the activity");
+		System.out.println("Remove: a workers shift from this activity");
 		System.out.println("Back: Exit back to the project");
 	}
 

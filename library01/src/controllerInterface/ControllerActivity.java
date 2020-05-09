@@ -107,7 +107,7 @@ public class ControllerActivity {
 				getThisActivity().getBudgettedHoursLeft();
 				break;
 			
-			case "Removeshift":
+			case "Remove":
 				view.showMessage("Please enter the id of the employee");
 				String workerId = getCommand();
 				view.showMessage("Please enter the date of the shift");
