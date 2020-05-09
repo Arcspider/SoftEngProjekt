@@ -10,8 +10,6 @@ import projectManagerObjects.Worker;
 
 public class WorkerManager {
     private ArrayList<Worker> workers;
-    private Random random;
-
     private Worker worker;
 	private TimeManager modelTime;
 
@@ -21,7 +19,7 @@ public class WorkerManager {
 
         workers = new ArrayList<Worker>();
 
-        random = new Random();
+        new Random();
     }
 
     public Worker createWorker(String firstname, String lastname) {

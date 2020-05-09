@@ -1,16 +1,10 @@
 package dtu.library.acceptance_tests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import java.time.LocalDate;
 
 import applicationManagerInterface.ActivityManager;
 import applicationManagerInterface.ProjectManager;
-import controllerInterface.ControllerActivity;
-import controllerInterface.ControllerApplication;
-import controllerInterface.ControllerProject;
 import io.cucumber.java.en.*;
 import projectManagerObjects.Activity;
 import projectManagerObjects.OperationNotAllowedException;
@@ -23,8 +17,6 @@ public class EditActivityTest {
 	private ProjectManager modelProject;
 	private ActivityManager modelActivity;
 	private ErrorMessageHolder errorMessageHolder;
-	private String name;
-
 	private Project project;
 	private Activity currentActivity;
 	private String startDate,endDate;

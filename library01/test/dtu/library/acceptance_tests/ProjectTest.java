@@ -8,13 +8,7 @@ import io.cucumber.java.en.When;
 import projectManagerObjects.OperationNotAllowedException;
 import projectManagerObjects.Project;
 
-import org.junit.Assert;
-
 import applicationManagerInterface.ProjectManager;
-import controllerInterface.ControllerProject;
-
-import java.util.List;
-
 import static org.junit.Assert.*;
 
 public class ProjectTest {
@@ -25,10 +19,6 @@ public class ProjectTest {
     private ErrorMessageHolder errorMessageHolder;
 
     private Project project;
-    private String ID;
-    private List<Project> projects;
-
-
     public ProjectTest(ErrorMessageHolder errorMessageHolder, ProjectManager modelProject) {
    
         this.modelProject = modelProject;

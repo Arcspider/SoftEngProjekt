@@ -9,30 +9,22 @@ import applicationManagerInterface.ProjectManager;
 import applicationManagerInterface.WorkerManager;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import projectManagerObjects.Activity;
 import projectManagerObjects.OperationNotAllowedException;
 import projectManagerObjects.Project;
-import projectManagerObjects.View;
 import projectManagerObjects.Worker;
 
 public class ListAssignedWorkersTest {
 	
 	private ProjectManager modelProject;
-	private ActivityManager modelActivity;
 	private WorkerManager modelWorker;
-	private ErrorMessageHolder errorMessageHolder;
 	private Worker Bob;
 	private Worker Alice;
 	private Project project;
 	private Activity activity;
-	private String name;
-	
 	public ListAssignedWorkersTest(ProjectManager modelProject, ActivityManager modelActivity,  WorkerManager modelWorker ,ErrorMessageHolder errorMessageHolder) {
 		this.modelProject = modelProject;
-		this.modelActivity = modelActivity;
-		this.modelWorker = modelWorker;
-		this.errorMessageHolder = errorMessageHolder; 
+		this.modelWorker = modelWorker; 
 	}
 
 	@Given("an activity {string} has workers assigned to it")
