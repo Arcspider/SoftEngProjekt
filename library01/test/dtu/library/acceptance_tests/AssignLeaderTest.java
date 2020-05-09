@@ -13,20 +13,20 @@ import projectManagerObjects.Worker;
 
 public class AssignLeaderTest {
 
-    private ProjectManager modelProject;
-    private WorkerManager modelWorker;
+    private ProjectManager projectManager;
+    private WorkerManager workerManager;
     private ErrorMessageHolder errorMessageHolder;
     private Worker worker;
 
     private Project project;
  
-    public AssignLeaderTest(ProjectManager  modelProject, WorkerManager modelWorker,ErrorMessageHolder errorMessageHolder) throws OperationNotAllowedException {
-    	this.modelProject = modelProject;
-    	this.modelWorker = modelWorker;
+    public AssignLeaderTest(ProjectManager  projectManager, WorkerManager workerManager,ErrorMessageHolder errorMessageHolder) throws OperationNotAllowedException {
+    	this.projectManager = projectManager;
+    	this.workerManager = workerManager;
     	this.errorMessageHolder = errorMessageHolder;
-    	project = modelProject.createProject("Tom");
-    	modelProject.addProject(project);
-    	worker = modelWorker.createWorker("Bob", "Gnarty");
+    	project = projectManager.createProject("Tom");
+    	projectManager.addProject(project);
+    	worker = workerManager.createWorker("Bob", "Gnarty");
     }
 
     @Given("that a project with id {string} does not have a leader")
@@ -38,8 +38,8 @@ public class AssignLeaderTest {
     @When("the user adds the worker with id {string} as leader")
     public void theUserAddsTheWorkerWithIdAsLeader(String string) throws OperationNotAllowedException {
     	worker.setID(string);
-    	assertTrue(modelWorker.workerHasID(string));
-        assertTrue(modelProject.setLeader(project,worker));
+    	assertTrue(workerManager.workerHasID(string));
+        assertTrue(projectManager.setLeader(project,worker));
     }
 
     @Then("the worker with id {string} as leader for project {string}")
@@ -49,17 +49,17 @@ public class AssignLeaderTest {
 
     @Given("that a worker with id {string} is a leader for project {string}")
     public void thatAWorkerWithIdIsALeaderForProject(String workerID, String projectID) throws OperationNotAllowedException {
-    	worker = modelWorker.createWorker(worker.getFirstName(), worker.getLastName());
+    	worker = workerManager.createWorker(worker.getFirstName(), worker.getLastName());
     	worker.setID(workerID);
     	project.setId(projectID);
-    	assertTrue(modelProject.setLeader(project, worker));
+    	assertTrue(projectManager.setLeader(project, worker));
     	assertEquals(worker, project.getLeader());
     }
 
     @When("the user adds the worker with id {string} as leader to the project")
     public void theUserAddsTheWorkerWithIdAsLeaderToTheProject(String string) {
     	try {
-    	assertFalse(modelProject.setLeader(project, worker));
+    	assertFalse(projectManager.setLeader(project, worker));
         } catch (OperationNotAllowedException e) {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }
@@ -72,21 +72,21 @@ public class AssignLeaderTest {
 
     @Given("that a worker with id {string} is leader for project {string}")
     public void thatAWorkerWithIdIsLeaderForProject(String workerID, String projectID) throws OperationNotAllowedException {
-    	worker = modelWorker.createWorker("Mike", "Hunt");
+    	worker = workerManager.createWorker("Mike", "Hunt");
     	worker.setID(workerID);
-    	project = modelProject.createProject("Pro");
+    	project = projectManager.createProject("Pro");
     	project.setId(projectID);
-    	modelProject.addProject(project);
-    	assertTrue(modelProject.setLeader(project, worker));
+    	projectManager.addProject(project);
+    	assertTrue(projectManager.setLeader(project, worker));
     }
 
 
     @When("the user adds the worker with id {string} as a leader for the project")
     public void theUserAddsTheWorkerWithIdAsALeaderForTheProject(String string) {
-    	worker = modelWorker.createWorker("Tom", "Bob");
+    	worker = workerManager.createWorker("Tom", "Bob");
     	worker.setID(string);
     	try {
-    	assertFalse(modelProject.setLeader(project, worker));
+    	assertFalse(projectManager.setLeader(project, worker));
         } catch (OperationNotAllowedException e) {
             errorMessageHolder.setErrorMessage(e.getMessage());
         }

@@ -30,60 +30,60 @@ public class TimeTest {
 	private String ID;
 	private List<Project> projects;
 
-	private ProjectManager modelProject;
-	private ActivityManager modelActivity;
-	private WorkerManager modelWorker;
-	public TimeTest(View view,ProjectManager modelProject,ActivityManager modelActivity, WorkerManager modelWorker, ErrorMessageHolder errorMessageHolder){
+	private ProjectManager projectManager;
+	private ActivityManager activityManager;
+	private WorkerManager workerManager;
+	public TimeTest(View view,ProjectManager projectManager,ActivityManager activityManager, WorkerManager workerManager, ErrorMessageHolder errorMessageHolder){
 
-		this.modelProject = modelProject;
-		this.modelActivity = modelActivity;
-		this.modelWorker = modelWorker;
+		this.projectManager = projectManager;
+		this.activityManager = activityManager;
+		this.workerManager = workerManager;
 		this.errorMessageHolder  = errorMessageHolder;
 	}
 
 	@Given("a project with  id {string} exists")
 	public void aProjectWithIdExists(String projectId) throws OperationNotAllowedException {
-		project = modelProject.createProject("testName");
+		project = projectManager.createProject("testName");
 		project.setId(projectId);
-		modelProject.addProject(project);
-		assertTrue(modelProject.hasID(projectId));
+		projectManager.addProject(project);
+		assertTrue(projectManager.hasID(projectId));
 	}
 
 
 	@Given("the activity {string} exists in the project {string}")
 	public void theActivityExistsInTheProject(String activityName, String projectID) throws OperationNotAllowedException {
-		project = modelProject.getProject(projectID);
-		modelActivity.addActivity(project,activityName);
-		activity = modelActivity.getActivity(project,activityName);
+		project = projectManager.getProject(projectID);
+		activityManager.addActivity(project,activityName);
+		activity = activityManager.getActivity(project,activityName);
 
 	}
 
 	@Given("the activity {string} exists in the project")
 	public void theActivityExistsInTheProject(String activityName) throws OperationNotAllowedException {
-		modelActivity.addActivity(project,activityName);
-		activity = modelActivity.getActivity(project,activityName);
+		activityManager.addActivity(project,activityName);
+		activity = activityManager.getActivity(project,activityName);
 
-		assertTrue(modelActivity.activityExists(project, activityName));
+		assertTrue(activityManager.activityExists(project, activityName));
 	}
 	@Given("the user with id {string} is assigned to the activity {string}")
 	public void theUserWithIdIsAssignedToTheActivity(String userId, String activityName) {
-		activity = modelActivity.getActivity(project,activityName);
-		modelWorker.createWorker("Mike", "Oxlong");
-		Worker mike = modelWorker.getWorker(userId);
-		modelWorker.assignWorker(activity, mike);
+		activity = activityManager.getActivity(project,activityName);
+		workerManager.createWorker("Mike", "Oxlong");
+		Worker mike = workerManager.getWorker(userId);
+		workerManager.assignWorker(activity, mike);
 		assertTrue(activity.hasWorker(mike));
 	}
 
 	@Then("the user {string} logs {string} hours on day {string} in the activity {string}")
 	public void theUserLogsHoursOnDayInTheActivity(String workerID, String time, String date, String activityName) {
-		activity = modelActivity.getActivity(project, activityName);
-		modelActivity.addShift(activity,workerID,date,time);
+		activity = activityManager.getActivity(project, activityName);
+		activityManager.addShift(activity,workerID,date,time);
 	}
 	
 	@Then("the time {string} {string} {string} can be found in the activity {string}")
 	public void theTimeCanBeFoundInTheActivity(String workerID, String date, String time, String activityName) {
-		activity = modelActivity.getActivity(project, activityName);
-		assertTrue(modelActivity.hasShift(activity,workerID,date));
+		activity = activityManager.getActivity(project, activityName);
+		assertTrue(activityManager.hasShift(activity,workerID,date));
 	}
 
 
@@ -91,7 +91,7 @@ public class TimeTest {
 	
 	@Then("the user {string} logs absence in the form of {string} in the time period {string} to {string}")
 	public void theUserLogsAbsenceInTheFormOfInTheTimePeriodTo(String userId, String absenceType, String startAbsence, String endAbsence) {
-		modelWorker.assignAbsence(userId,startAbsence,endAbsence);
+		workerManager.assignAbsence(userId,startAbsence,endAbsence);
 	}
 	
 
@@ -111,8 +111,8 @@ public class TimeTest {
 	
 	@Then("the time {string} {string} {string} can not be found in the activity {string}")
 	public void theTimeCanNotBeFoundInTheActivity(String workerID, String date, String time, String activityName) {
-		activity = modelActivity.getActivity(project, activityName);
-		assertFalse(modelActivity.hasShift(activity,workerID,date));
+		activity = activityManager.getActivity(project, activityName);
+		assertFalse(activityManager.hasShift(activity,workerID,date));
 	}
 	
 	@Then("the user {string} removes the shift {string} in the activity {string}")

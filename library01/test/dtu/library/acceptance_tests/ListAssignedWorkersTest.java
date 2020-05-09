@@ -18,9 +18,9 @@ import projectManagerObjects.Worker;
 
 public class ListAssignedWorkersTest {
 	
-	private ProjectManager modelProject;
-	private ActivityManager modelActivity;
-	private WorkerManager modelWorker;
+	private ProjectManager projectManager;
+	private ActivityManager activityManager;
+	private WorkerManager workerManager;
 	private ErrorMessageHolder errorMessageHolder;
 	private Worker Bob;
 	private Worker Alice;
@@ -28,18 +28,18 @@ public class ListAssignedWorkersTest {
 	private Activity activity;
 	private String name;
 	
-	public ListAssignedWorkersTest(ProjectManager modelProject, ActivityManager modelActivity,  WorkerManager modelWorker ,ErrorMessageHolder errorMessageHolder) {
-		this.modelProject = modelProject;
-		this.modelActivity = modelActivity;
-		this.modelWorker = modelWorker;
+	public ListAssignedWorkersTest(ProjectManager projectManager, ActivityManager activityManager,  WorkerManager workerManager ,ErrorMessageHolder errorMessageHolder) {
+		this.projectManager = projectManager;
+		this.activityManager = activityManager;
+		this.workerManager = workerManager;
 		this.errorMessageHolder = errorMessageHolder; 
 	}
 
 	@Given("an activity {string} has workers assigned to it")
 	public void anActivityHasWorkersAssignedToIt(String string) throws OperationNotAllowedException {
-		Bob = modelWorker.createWorker("Bob", "Test");
-		Alice = modelWorker.createWorker("Alice", "Test");
-	    project = modelProject.createProject("Coolness");
+		Bob = workerManager.createWorker("Bob", "Test");
+		Alice = workerManager.createWorker("Alice", "Test");
+	    project = projectManager.createProject("Coolness");
 	    project.addActivity(string);
 	    activity = project.getActivity(string);
 	    activity.assignWorker(Bob);
@@ -55,7 +55,7 @@ public class ListAssignedWorkersTest {
 
 	@Given("an activity {string} that has no workers assigned to it")
 	public void anActivityThatHasNoWorkersAssignedToIt(String string) throws OperationNotAllowedException {
-		project = modelProject.createProject("Coolness");
+		project = projectManager.createProject("Coolness");
 	    project.addActivity(string);
 	    activity = project.getActivity(string);
 	    
