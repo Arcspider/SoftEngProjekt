@@ -120,7 +120,6 @@ public class Activity implements datesInterface{
 		updateTimeLeft();
 	}
 
-
 	public boolean hasShiftByIdAndDate(String workerID, String stringDate) {
 		LocalDate date = stringToDate(stringDate);
 		for (Shift value : shifts) {
