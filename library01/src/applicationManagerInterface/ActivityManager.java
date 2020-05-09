@@ -212,8 +212,8 @@ public class ActivityManager {
 		return activity.hasShiftByIdAndDate(workerID, stringDate);
 	}
 
-	public void getWorkedShifts(Activity activity, String stringDate) {
-		activity.getWorkerShifts(stringDate);
-	}
+//	public void getWorkedShifts(Activity activity, String stringDate) {
+//		activity.getWorkerShifts(stringDate);
+//	}
 
 }
