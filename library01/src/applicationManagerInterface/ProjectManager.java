@@ -105,15 +105,16 @@ public class ProjectManager {
 	}
 
 	public void setProjectEnd(Project project, String endDate) {
-		if (verifyDateFormat(endDate)) {
+		if (verifyDateFormat(endDate)) {	// 1
 			LocalDate startProjectDate = project.getStartDate();
 			LocalDate endProjectDate = stringToDate(endDate);
-			if (startProjectDate == null || endProjectDate.isAfter(startProjectDate)) {
+			if (startProjectDate == null || endProjectDate.isAfter(startProjectDate)) { // 2
 				project.setEndDate(endProjectDate);
 				System.out.println("The project ends: " + endProjectDate);
 			} else {
 				System.out.println("Date wasn't set, as it was invalid.");
 			}
+			System.out.println("Date wasn't set, as it was invalid.");
 		}
 	} 
 

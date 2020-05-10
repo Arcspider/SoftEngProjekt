@@ -168,7 +168,7 @@ public class ActivityManager {
 
 	public boolean verifyFormatddmmyyyy(String day) {
 		String[] stringDate = day.split("-");
-		if (stringDate.length == 3 && stringIsInteger(stringDate[0]) && stringIsInteger(stringDate[1])
+		if (stringDate.length == 3 && stringIsInteger(stringDate[0]) && stringIsInteger(stringDate[1]) // 1
 				&& stringIsInteger(stringDate[2])) {
 			int dayInt = Integer.parseInt(stringDate[0]);
 			int monthInt = Integer.parseInt(stringDate[1]);
