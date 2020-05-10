@@ -14,7 +14,6 @@ import projectManagerObjects.View;
 import projectManagerObjects.Worker;
 
 public class ProjectManager {
-	private View view;
 	private ArrayList<Project> projects;
 	private Project newProject;
 	private Project thisProject;
@@ -22,7 +21,6 @@ public class ProjectManager {
 	private Random random;
 	private DateFormat dateFormat;
 	public ProjectManager(View view) {
-		this.view = view;
 		projects = new ArrayList<Project>();
 		random = new Random();
 		hasProject = false;
