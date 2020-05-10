@@ -100,9 +100,9 @@ public class ProjectManager {
 			LocalDate endProjectDate = project.getEndDate();
 			if(endProjectDate == null || endProjectDate.isAfter(startProjectDate)) {				
 				project.setStartDate(startProjectDate);
-				view.showMessage("The project starts: " + startProjectDate);
+				System.out.println("The project starts: " + startProjectDate);
 			}else {
-				view.showMessage("Date wasn't set, as it was invalid.");
+				System.out.println("Date wasn't set, as it was invalid.");
 			}
 		}
 	}
@@ -140,7 +140,6 @@ public class ProjectManager {
 			int yearInt = Integer.parseInt(stringDate[1]);
 			int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 			int difference = yearInt - currentYear;
-			// �rstallene man arbejder indenfor er 50 �r
 			if (difference >= -50 && difference <= 50) {
 				return weekInt > 0 && weekInt <= 52;
 			}
