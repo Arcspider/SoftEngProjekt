@@ -11,14 +11,19 @@ import org.junit.Test;
 
 import applicationManagerInterface.ActivityManager;
 import applicationManagerInterface.ProjectManager;
+import applicationManagerInterface.WorkerManager;
+import projectManagerObjects.Activity;
 import projectManagerObjects.OperationNotAllowedException;
 import projectManagerObjects.Project;
+import projectManagerObjects.Worker;
 
 public class WhiteBoxTest {
 	private ActivityManager activityManager = new ActivityManager(null);
 	private  ProjectManager projectManager = new ProjectManager(null);
+	private WorkerManager workerManager = new WorkerManager();
 	private Project project;
-	
+	private Activity activity;
+	private Worker worker;
 	@Test
 	public void verifyDateFormatTextInputA() {
 		assertFalse(activityManager.verifyDateFormat("2"));
@@ -113,7 +118,61 @@ public class WhiteBoxTest {
 	}
 	
 	
+	@Test
+	public void verifyLegalShiftInputA() throws OperationNotAllowedException { 
+		project = projectManager.createProject("Alfa");
+		activityManager.addActivity(project, "Beta");
+		activity = activityManager.getActivity(project, "Beta");
+		worker = workerManager.createWorker("Tom", "Bob");
+		assertFalse(activityManager.verifyLegalShift(activity, worker.getId(), "20-7-2020", "10"));
+	}
+	@Test
+	public void verifyLegalShiftInputB() throws OperationNotAllowedException { 
+		project = projectManager.createProject("Alfa");
+		activityManager.addActivity(project, "Beta");
+		activity = activityManager.getActivity(project, "Beta");
+		worker = workerManager.createWorker("Tom", "Bob");
+		workerManager.assignWorker(activity, worker);
+		assertFalse(activityManager.verifyLegalShift(activity, worker.getId(), "80-10-2020", "10"));
+	}
 	
+	@Test
+	public void verifyLegalShiftInputC() throws OperationNotAllowedException { 
+		project = projectManager.createProject("Alfa");
+		activityManager.addActivity(project, "Beta");
+		activity = activityManager.getActivity(project, "Beta");
+		worker = workerManager.createWorker("Tom", "Bob");
+		workerManager.assignWorker(activity, worker);
+		assertFalse(activityManager.verifyLegalShift(activity, worker.getId(), "1-10-2020", "2.3"));
+	}
+	
+
+	
+	@Test
+	public void verifyLegalShiftInputD() throws OperationNotAllowedException { 
+		project = projectManager.createProject("AlfaE");
+		activityManager.addActivity(project, "BetaE");
+		activity = activityManager.getActivity(project, "BetaE");
+		worker = workerManager.createWorker("Tom", "Bob");
+		
+		workerManager.assignWorker(activity, worker);
+		activityManager.setBudgettedHours(activity,"10");
+		
+		assertFalse(activityManager.verifyLegalShift(activity, worker.getId(), "1-10-2020", "11"));
+	}
+	
+	@Test
+	public void verifyLegalShiftInputF() throws OperationNotAllowedException { 
+		project = projectManager.createProject("AlfaF");
+		activityManager.addActivity(project, "BetaF");
+		activity = activityManager.getActivity(project, "BetaF");
+		worker = workerManager.createWorker("Tom", "Bob");
+		
+		workerManager.assignWorker(activity, worker);
+		activityManager.setBudgettedHours(activity,"30");
+		
+		assertTrue(activityManager.verifyLegalShift(activity, worker.getId(), "1-10-2020", "11"));
+	}
 	
 	
 	public LocalDate stringToDate(String toBeConverted) {

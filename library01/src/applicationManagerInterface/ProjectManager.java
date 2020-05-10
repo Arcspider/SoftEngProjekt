@@ -45,7 +45,6 @@ public class ProjectManager {
 			if (currentId.equals(id)) {
 				return currentProject;
 			}
-
 		}
 		return null;
 	}
@@ -53,8 +52,7 @@ public class ProjectManager {
 	public String projectGenerateID() {
 		String date = dateFormat.format(Calendar.getInstance().getTime());
 		String id = date + "-" + random.nextInt(100);
-		while (hasID(id))
-			id = date + "-" + random.nextInt(100);
+		while (hasID(id)) id = date + "-" + random.nextInt(100);
 		return id;
 	}
 
@@ -99,8 +97,13 @@ public class ProjectManager {
 	public void setProjectStart(Project project, String startDate) {
 		if (verifyDateFormat(startDate)) {
 			LocalDate startProjectDate = stringToDate(startDate);
-			project.setStartDate(startProjectDate);
-			System.out.println("The project starts: " + startProjectDate);
+			LocalDate endProjectDate = project.getEndDate();
+			if(endProjectDate == null || endProjectDate.isAfter(startProjectDate)) {				
+				project.setStartDate(startProjectDate);
+				System.out.println("The project starts: " + startProjectDate);
+			}else {
+				System.out.println("Date wasn't set, as it was invalid.");
+			}
 		}
 	}
 
@@ -138,7 +141,6 @@ public class ProjectManager {
 			int yearInt = Integer.parseInt(stringDate[1]);
 			int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 			int difference = yearInt - currentYear;
-			// �rstallene man arbejder indenfor er 50 �r
 			if (difference >= -50 && difference <= 50) {
 				return weekInt > 0 && weekInt <= 52;
 			}
@@ -188,13 +190,13 @@ public class ProjectManager {
 	} 
 
 	public boolean setLeader(Project project, Worker worker) throws OperationNotAllowedException {
-		if (!project.hasLeader()) {
+		if (!project.hasLeader()) { // 1
 			project.setLeader(worker);
-			view.showMessage(worker.getId() + " is now the leader for this project");
+			System.out.println(worker.getId() + " is now the leader for this project");
 			return true;
-		} else if (project.hasLeader() && project.getLeader().equals(worker)) {
+		} else if (project.getLeader().equals(worker)) { // 2
 			throw new OperationNotAllowedException("This worker is already leader for the project");	
-		}else {
+		}else { 
 			throw new OperationNotAllowedException("This project already has a leader");
 		}
 	}
