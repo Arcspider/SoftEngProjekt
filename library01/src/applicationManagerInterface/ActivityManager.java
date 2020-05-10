@@ -182,7 +182,7 @@ public class ActivityManager {
 				return true;
 			}
 		}
-		view.showMessage("Illegal dato weewoo");
+		view.showMessage("Illegal dato ");
 		return false;
 	}
 

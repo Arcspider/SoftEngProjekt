@@ -52,8 +52,7 @@ public class ProjectManager {
 	public String projectGenerateID() {
 		String date = dateFormat.format(Calendar.getInstance().getTime());
 		String id = date + "-" + random.nextInt(100);
-		while (hasID(id))
-			id = date + "-" + random.nextInt(100);
+		while (hasID(id)) id = date + "-" + random.nextInt(100);
 		return id;
 	}
 
@@ -98,8 +97,13 @@ public class ProjectManager {
 	public void setProjectStart(Project project, String startDate) {
 		if (verifyDateFormat(startDate)) {
 			LocalDate startProjectDate = stringToDate(startDate);
-			project.setStartDate(startProjectDate);
-			System.out.println("The project starts: " + startProjectDate);
+			LocalDate endProjectDate = project.getEndDate();
+			if(endProjectDate == null || endProjectDate.isAfter(startProjectDate)) {				
+				project.setStartDate(startProjectDate);
+				view.showMessage("The project starts: " + startProjectDate);
+			}else {
+				view.showMessage("Date wasn't set, as it was invalid.");
+			}
 		}
 	}
 
