@@ -146,18 +146,10 @@ public class WhiteBoxTest {
 		assertFalse(activityManager.verifyLegalShift(activity, worker.getId(), "1-10-2020", "2.3"));
 	}
 	
-	@Test
-	public void verifyLegalShiftInputD() throws OperationNotAllowedException { 
-		project = projectManager.createProject("Alfa");
-		activityManager.addActivity(project, "Beta");
-		activity = activityManager.getActivity(project, "Beta");
-		worker = workerManager.createWorker("Tom", "Bob");
-		workerManager.assignWorker(activity, worker);
-		assertFalse(activityManager.verifyLegalShift(activity, worker.getId(), "1-10-2020", "2.5"));
-	}
+
 	
 	@Test
-	public void verifyLegalShiftInputE() throws OperationNotAllowedException { 
+	public void verifyLegalShiftInputD() throws OperationNotAllowedException { 
 		project = projectManager.createProject("AlfaE");
 		activityManager.addActivity(project, "BetaE");
 		activity = activityManager.getActivity(project, "BetaE");
