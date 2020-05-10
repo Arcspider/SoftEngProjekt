@@ -1,5 +1,5 @@
 package controllerInterface;
-
+//Tobias(194616), Jakob(s194623) har haft ansvaret for denne klasse.
 import java.util.Scanner;
 
 import applicationManagerInterface.ApplicationManager;

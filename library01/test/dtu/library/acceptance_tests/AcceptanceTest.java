@@ -1,5 +1,5 @@
 package dtu.library.acceptance_tests;
-
+//Alle har haft ansvaret for denne klasse.
 import org.junit.runner.RunWith;
 
 import io.cucumber.junit.Cucumber;

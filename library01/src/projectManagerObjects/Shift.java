@@ -1,5 +1,5 @@
 package projectManagerObjects;
-
+//Daniel(s194592) har haft ansvaret for denne klasse.
 import java.time.LocalDate;
 
 public class Shift {

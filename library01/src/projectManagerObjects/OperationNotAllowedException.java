@@ -1,5 +1,5 @@
 package projectManagerObjects;
-
+//Alle har haft ansvaret for denne klasse.
 /**
  * The class represents an exception that is thrown to indicate that the 
  * intended operation is not allowed. In most cases, it is thrown, when the

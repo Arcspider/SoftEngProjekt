@@ -1,5 +1,5 @@
 package dtu.library.acceptance_tests;
-
+//Daniel(s194592), Jakob(s194623) har haft ansvaret for denne klasse.
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;

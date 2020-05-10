@@ -1,5 +1,5 @@
 package dtu.library.acceptance_tests;
-
+//Tobias(194616) har haft ansvaret for denne klasse.
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import projectManagerObjects.Activity;

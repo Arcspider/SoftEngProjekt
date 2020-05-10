@@ -1,5 +1,5 @@
 package dtu.library.acceptance_tests;
-
+//Søren(s194630), Jakob(s194623) har haft ansvaret for denne klasse.
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

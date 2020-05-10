@@ -1,5 +1,5 @@
 package applicationManagerInterface;
-
+//Søren(s194630) har haft ansvaret for denne klasse.
 import projectManagerObjects.View;
 
 public class ApplicationManager {
