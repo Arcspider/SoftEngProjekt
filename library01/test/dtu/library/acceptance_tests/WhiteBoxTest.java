@@ -162,7 +162,7 @@ public class WhiteBoxTest {
 	}
 	
 	@Test
-	public void verifyLegalShiftInputF() throws OperationNotAllowedException { 
+	public void verifyLegalShiftInputE() throws OperationNotAllowedException { 
 		project = projectManager.createProject("AlfaF");
 		activityManager.addActivity(project, "BetaF");
 		activity = activityManager.getActivity(project, "BetaF");
