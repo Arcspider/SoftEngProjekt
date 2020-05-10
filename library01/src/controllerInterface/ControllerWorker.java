@@ -9,15 +9,15 @@ import projectManagerObjects.View;
 import projectManagerObjects.Worker;
 
 public class ControllerWorker {
-	private WorkerManager modelWorker;
-	private ApplicationManager modelApplication;	
+	private WorkerManager workerManager;
+	private ApplicationManager applicationManager;	
 	private View view;
 	Scanner scanner;
 	public ControllerWorker(View view, WorkerManager modelWorker, ApplicationManager modelApplication) {
 		this.view = view;
-		this.modelWorker = modelWorker;
+		this.workerManager = modelWorker;
 		scanner = new Scanner(System.in);
-		this.modelApplication = modelApplication;
+		this.applicationManager = modelApplication;
 	}
 
 	public void runCommand() throws OperationNotAllowedException {
@@ -27,7 +27,7 @@ public class ControllerWorker {
 			String fristname = getCommand();
 			view.showMessage("Please enter the new employee's last name");
 			String lastname = getCommand();
-			view.showMessage(modelWorker.createWorker(fristname, lastname).toString());
+			view.showMessage(workerManager.createWorker(fristname, lastname).toString());
 		
 		}else if(nextCommand.equals("Absence")) {
 			String id = requestWorkerId();
@@ -37,10 +37,10 @@ public class ControllerWorker {
 			view.showMessage("Please clarify when they will be back and ready to work");
 			view.showMessage("the date format: dd-mm-yyyy");
 			String endAbsence = getCommand();
-			modelWorker.assignAbsence(id, startAbsence, endAbsence);
+			workerManager.assignAbsence(id, startAbsence, endAbsence);
 			getThisWorker().setAbsence(true);
 			view.showMessage("Absent days noted");
-			view.showAvailableCommands(modelApplication.getStage());
+			view.showAvailableCommands(applicationManager.getStage());
 			
 		}else if(nextCommand.equals("Returned")) {
 			requestWorkerId();
@@ -52,8 +52,8 @@ public class ControllerWorker {
 			}
 			
 		}else if(nextCommand.equals("Back")) {
-			modelApplication.changeStage("Application"); 
-			view.showAvailableCommands(modelApplication.getStage());
+			applicationManager.changeStage("Application"); 
+			view.showAvailableCommands(applicationManager.getStage());
 		}
 	}
 
@@ -65,15 +65,15 @@ public class ControllerWorker {
 	}
 
 	private void setWorker(String id) {
-		modelWorker.setThisWorker(id);
+		workerManager.setThisWorker(id);
 	}
 
 	private Worker getThisWorker() {
-		return modelWorker.getThisWorker();
+		return workerManager.getThisWorker();
 	}
 
 	public Worker createWorker(String fristname, String lastname) {
-		return modelWorker.createWorker(fristname, lastname);
+		return workerManager.createWorker(fristname, lastname);
 	}
 
 	private String getCommand() {
@@ -81,7 +81,7 @@ public class ControllerWorker {
 	}
 
 	public boolean workerHasID(String id) {
-		return modelWorker.workerHasID(id);
+		return workerManager.workerHasID(id);
 	}
 
 }
