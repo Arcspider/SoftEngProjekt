@@ -1,5 +1,5 @@
 package applicationManagerInterface;
-
+//Daniel(s194592), Søren(s194630) har haft ansvaret for denne klasse.
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;

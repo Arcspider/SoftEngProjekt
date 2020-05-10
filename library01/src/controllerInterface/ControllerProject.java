@@ -1,5 +1,5 @@
 package controllerInterface;
-
+//Daniel(s194592), Kasper(s194579) har haft ansvaret for denne klasse.
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;

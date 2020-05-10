@@ -1,5 +1,5 @@
 package dtu.library.acceptance_tests;
-
+//Daniel(s194592) har haft ansvaret for denne klasse.
 import static org.junit.Assert.assertTrue;
 
 import applicationManagerInterface.ActivityManager;

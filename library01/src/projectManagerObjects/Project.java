@@ -1,5 +1,5 @@
 package projectManagerObjects;
-
+//Kasper(s194579), Jakob(s194623), Daniel(s194692) har haft ansvaret for denne klasse.
 import java.util.ArrayList;
 
 import timeInterface.datesInterface;

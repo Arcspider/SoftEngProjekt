@@ -1,5 +1,5 @@
 package projectManagerObjects;
-
+//Kasper(s194579), Søren(s194630) har haft ansvaret for denne klasse.
 import java.util.ArrayList;
 
 

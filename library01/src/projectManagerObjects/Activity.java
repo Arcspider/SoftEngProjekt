@@ -1,5 +1,5 @@
 package projectManagerObjects;
-
+//Alle har haft ansvaret for denne klasse.
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;

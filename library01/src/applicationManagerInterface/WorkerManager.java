@@ -1,5 +1,5 @@
 package applicationManagerInterface;
-
+//Kasper(s194579), Søren(s194630), Jakob(s194623) har haft ansvaret for denne klasse.
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;

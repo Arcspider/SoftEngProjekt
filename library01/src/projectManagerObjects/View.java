@@ -1,5 +1,5 @@
 package projectManagerObjects;
-
+//Kasper(s194579) har haft ansvaret for denne klasse.
 import applicationManagerInterface.ActivityManager;
 import applicationManagerInterface.ApplicationManager;
 import applicationManagerInterface.ProjectManager;
