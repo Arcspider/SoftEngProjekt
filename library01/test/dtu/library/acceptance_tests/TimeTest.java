@@ -1,16 +1,12 @@
 package dtu.library.acceptance_tests;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
-import java.util.List;
-
 import applicationManagerInterface.ActivityManager;
 import applicationManagerInterface.ProjectManager;
 import applicationManagerInterface.WorkerManager;
-import controllerInterface.ControllerProject;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import projectManagerObjects.Activity;
@@ -21,15 +17,8 @@ import projectManagerObjects.Worker;
 
 public class TimeTest {
 
-	private View view;
-	private ControllerProject controllerProject;
-	private ErrorMessageHolder errorMessageHolder;
-
 	private Project project;
 	private Activity activity;
-	private String ID;
-	private List<Project> projects;
-
 	private ProjectManager projectManager;
 	private ActivityManager activityManager;
 	private WorkerManager workerManager;
@@ -38,7 +27,6 @@ public class TimeTest {
 		this.projectManager = projectManager;
 		this.activityManager = activityManager;
 		this.workerManager = workerManager;
-		this.errorMessageHolder  = errorMessageHolder;
 	}
 
 	@Given("a project with  id {string} exists")

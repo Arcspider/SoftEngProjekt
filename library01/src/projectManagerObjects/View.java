@@ -11,25 +11,25 @@ import controllerInterface.ControllerWorker;
 
 public class View {
 
-	private ApplicationManager modelApplication;
-	private ProjectManager modelProject;
-	private ActivityManager modelActivity;
-	private WorkerManager modelWorker;
+	private ApplicationManager applicationManager;
+	private ProjectManager projectManager;
+	private ActivityManager activityManager;
+	private WorkerManager workerManager;
 	private ControllerApplication controller;
 	private ControllerProject controllerProject;
 	private ControllerActivity controllerActivity;
 	private ControllerWorker controllerWorker;
 
 	public View() throws OperationNotAllowedException {
-		this.modelApplication = new ApplicationManager(this);
-		this.modelWorker = new WorkerManager();
-		this.modelProject = new ProjectManager(this);
-		this.modelActivity = new ActivityManager(this);
+		this.applicationManager = new ApplicationManager(this);
+		this.workerManager = new WorkerManager();
+		this.projectManager = new ProjectManager(this);
+		this.activityManager = new ActivityManager(this);
 		
-		this.controller = new ControllerApplication(this, modelApplication, modelProject);
-		this.controllerProject = new ControllerProject(this, modelApplication, modelProject, modelActivity,modelWorker);
-		this.controllerActivity = new ControllerActivity(this, modelApplication, modelProject, modelActivity, modelWorker);
-		this.controllerWorker = new ControllerWorker(this,modelWorker, modelApplication);
+		this.controller = new ControllerApplication(this, applicationManager, projectManager);
+		this.controllerProject = new ControllerProject(this, applicationManager, projectManager, activityManager,workerManager);
+		this.controllerActivity = new ControllerActivity(this, applicationManager, projectManager, activityManager, workerManager);
+		this.controllerWorker = new ControllerWorker(this,workerManager, applicationManager);
 	}
 
 	public void showMessage(String message) {
@@ -42,7 +42,7 @@ public class View {
 				showApplicationIntroduction();
 				break;
 			case "Project":
-				showProjectIntroduction(modelProject.getThisProject());
+				showProjectIntroduction(projectManager.getThisProject());
 				break;
 			case "Activity":
 				showActivityIntroduction();
@@ -73,7 +73,7 @@ public class View {
 	}
 
 	private String getStage() {
-		return modelApplication.getStage();
+		return applicationManager.getStage();
 	}
 
 	public void showApplicationIntroduction() {

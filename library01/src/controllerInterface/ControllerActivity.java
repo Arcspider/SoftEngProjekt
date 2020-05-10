@@ -12,21 +12,21 @@ import projectManagerObjects.Project;
 import projectManagerObjects.View;
 
 public class ControllerActivity {
-	private ApplicationManager modelApplication;
-	private ProjectManager modelProject;
-	private ActivityManager modelActivity;
-	private WorkerManager modelWorker;
+	private ApplicationManager applicationManager;
+	private ProjectManager projectManager;
+	private ActivityManager activityManager;
+	private WorkerManager workerManager;
 	private View view;
 	Scanner scanner;
 	Scanner timeHanlder;
 
-	public ControllerActivity(View view, ApplicationManager modelApplication, ProjectManager modelProject,
-			ActivityManager modelActivity, WorkerManager modelWorker) {
+	public ControllerActivity(View view, ApplicationManager applicationManager, ProjectManager projectManager,
+			ActivityManager activityManager, WorkerManager workerManager) {
 		this.view = view;
-		this.modelApplication = modelApplication;
-		this.modelProject = modelProject;
-		this.modelActivity = modelActivity;
-		this.modelWorker = modelWorker;
+		this.applicationManager = applicationManager;
+		this.projectManager = projectManager;
+		this.activityManager = activityManager;
+		this.workerManager = workerManager;
 		scanner = new Scanner(System.in);
 		timeHanlder = new Scanner(System.in);
 	}
@@ -43,7 +43,7 @@ public class ControllerActivity {
 				getThisActivity().toString();
 			}
 		} else {
-			view.showAvailableCommands(modelApplication.getStage());
+			view.showAvailableCommands(applicationManager.getStage());
 			String nextCommand = getCommand();
 			switch (nextCommand) {
 			case "Date":
@@ -80,8 +80,8 @@ public class ControllerActivity {
 			case "Assign":
 				view.showMessage("Please enter the ID of the employee you want to assign to this activity");
 				nextCommand = getCommand();
-				if (modelWorker.workerHasID(nextCommand)) {
-					getThisActivity().assignWorker(modelWorker.getWorker(nextCommand));
+				if (workerManager.workerHasID(nextCommand)) {
+					getThisActivity().assignWorker(workerManager.getWorker(nextCommand));
 				}
 				break;
 			case "Shift":
@@ -92,8 +92,8 @@ public class ControllerActivity {
 				String date = getCommand();
 				view.showMessage("Time: ");
 				String time = getCommand();
-				modelActivity.addShift(getThisActivity(), workerID, date, time);
-				if(!modelWorker.getWorker(workerID).getAbsence()) {
+				activityManager.addShift(getThisActivity(), workerID, date, time);
+				if(!workerManager.getWorker(workerID).getAbsence()) {
 					getThisActivity().addShift(workerID, date, time);
 				} else {
 					view.showMessage("This employee is absent, so they cannot get new shifts");
@@ -127,36 +127,36 @@ public class ControllerActivity {
 	}
 
 	private Activity getThisActivity() {
-		return modelActivity.getThisActivity();
+		return activityManager.getThisActivity();
 	}
 
 	private void setThisActivity(Activity activity) {
-		modelActivity.setThisActivity(activity);
+		activityManager.setThisActivity(activity);
 
 	}
 
 	private Activity getActivity(Project project, String name) {
-		return modelActivity.getActivity(project, name);
+		return activityManager.getActivity(project, name);
 	}
 
 	private void setHasActivity(boolean b) {
-		modelActivity.setHasActivity(b);
+		activityManager.setHasActivity(b);
 	}
 
 	private void changeStage(String stage) {
-		modelApplication.changeStage(stage);
+		applicationManager.changeStage(stage);
 	}
 
 	private Project getThisProject() {
-		return modelProject.getThisProject();
+		return projectManager.getThisProject();
 	}
 
 	private boolean activityExists(Project project, String name) {
-		return modelActivity.activityExists(project, name);
+		return activityManager.activityExists(project, name);
 	}
 
 	private boolean hasActivity() {
-		return modelActivity.hasActiviy();
+		return activityManager.hasActiviy();
 	}
 
 	private String getCommand() {
@@ -164,28 +164,28 @@ public class ControllerActivity {
 	}
 
 	public void addProject(Project project) throws OperationNotAllowedException {
-		modelProject.addProject(project);
+		projectManager.addProject(project);
 	}
 
 	public boolean hasProject(String string) {
-		return modelProject.hasID(string);
+		return projectManager.hasID(string);
 	}
 
 	public boolean addActivity(String string, Project project) throws OperationNotAllowedException {
-		return modelActivity.addActivity(project, string);
+		return activityManager.addActivity(project, string);
 	}
 
 	public boolean validDate(String startDate) {
-		return modelActivity.verifyDateFormat(startDate);
+		return activityManager.verifyDateFormat(startDate);
 	}
 
 	public void setActivityStart(Project project, Activity activity, String startDate)
 			throws OperationNotAllowedException {
-		modelActivity.setActivityStart(project, activity, startDate);
+		activityManager.setActivityStart(project, activity, startDate);
 	}
 
 	public void setActivityEnd(Project project, Activity activity, String endDate) throws OperationNotAllowedException {
-		modelActivity.setActivityEnd(project, activity, endDate);
+		activityManager.setActivityEnd(project, activity, endDate);
 
 	}
 }

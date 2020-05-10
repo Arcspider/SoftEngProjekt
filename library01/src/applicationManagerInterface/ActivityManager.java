@@ -1,10 +1,7 @@
 package applicationManagerInterface;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -16,15 +13,13 @@ import projectManagerObjects.View;
 public class ActivityManager {
 	private View view;
 	private Activity thisActivity;
-	private Calendar calendar;
-	private DateFormat dateFormat;
 	private boolean hasActivity;
 
 	public ActivityManager(View view) {
 		this.view = view;
 		hasActivity = false;
-		this.calendar = new GregorianCalendar();
-		dateFormat = new SimpleDateFormat("MM-yy");
+		new GregorianCalendar();
+		new SimpleDateFormat("MM-yy");
 	}
 
 	public void setActivityStart(Project project, Activity currentActivity, String startDate)
@@ -168,7 +163,7 @@ public class ActivityManager {
 
 	public boolean verifyFormatddmmyyyy(String day) {
 		String[] stringDate = day.split("-");
-		if (stringDate.length == 3 && stringIsInteger(stringDate[0]) && stringIsInteger(stringDate[1])
+		if (stringDate.length == 3 && stringIsInteger(stringDate[0]) && stringIsInteger(stringDate[1]) // 1
 				&& stringIsInteger(stringDate[2])) {
 			int dayInt = Integer.parseInt(stringDate[0]);
 			int monthInt = Integer.parseInt(stringDate[1]);

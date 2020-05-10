@@ -14,7 +14,6 @@ import projectManagerObjects.View;
 import projectManagerObjects.Worker;
 
 public class ProjectManager {
-	private View view;
 	private ArrayList<Project> projects;
 	private Project newProject;
 	private Project thisProject;
@@ -22,7 +21,6 @@ public class ProjectManager {
 	private Random random;
 	private DateFormat dateFormat;
 	public ProjectManager(View view) {
-		this.view = view;
 		projects = new ArrayList<Project>();
 		random = new Random();
 		hasProject = false;
@@ -108,15 +106,16 @@ public class ProjectManager {
 	}
 
 	public void setProjectEnd(Project project, String endDate) {
-		if (verifyDateFormat(endDate)) {
+		if (verifyDateFormat(endDate)) {	// 1
 			LocalDate startProjectDate = project.getStartDate();
 			LocalDate endProjectDate = stringToDate(endDate);
-			if (startProjectDate == null || endProjectDate.isAfter(startProjectDate)) {
+			if (startProjectDate == null || endProjectDate.isAfter(startProjectDate)) { // 2
 				project.setEndDate(endProjectDate);
 				System.out.println("The project ends: " + endProjectDate);
 			} else {
 				System.out.println("Date wasn't set, as it was invalid.");
 			}
+			System.out.println("Date wasn't set, as it was invalid.");
 		}
 	} 
 
