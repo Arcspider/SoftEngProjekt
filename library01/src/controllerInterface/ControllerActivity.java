@@ -121,10 +121,7 @@ public class ControllerActivity {
 				break;
 			case "View":
 				getThisActivity().printShifts();
-				break;
-					
-				
-					
+				break;		
 			}
 		}
 	}

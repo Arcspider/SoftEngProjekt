@@ -72,7 +72,7 @@ public class ActivityManager {
 		String[] stringDate = dateToVerify.split("-");
 		if (stringDate.length == 2) { // 1
 			if (stringIsInteger(stringDate[0])) { // 2
- 				if (stringIsInteger(stringDate[1])) { // 3
+				if (stringIsInteger(stringDate[1])) { // 3
 					int weekInt = Integer.parseInt(stringDate[0]);
 					int yearInt = Integer.parseInt(stringDate[1]);
 					int currentYear = Calendar.getInstance().get(Calendar.YEAR);
@@ -175,23 +175,27 @@ public class ActivityManager {
 			int yearInt = Integer.parseInt(stringDate[2]);
 			int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 			int difference = yearInt - currentYear;
-			// aarstallene man arbejder indenfor er 50 aar
 			if (difference >= -50 && difference <= 50 && monthInt <= 12 && monthInt > 0 && dayInt <= 30
 					&& dayInt >= 0) {
-				view.showMessage(("legal dato "));
+				System.out.println(("legal dato "));
 				return true;
 			}
 		}
-		view.showMessage("Illegal dato ");
+		System.out.println(("Illegal dato "));
 		return false;
 	}
 
-	public boolean verifyLegalShift(Activity activity, String workerID, String date, String time  ) {
-		if (activity.hasWorkerId(workerID) && verifyFormatddmmyyyy(date)
-				&& allowedHours(time) && activity.addHoursAllowed(time)) {
-			return true;
-		} else
-			return false;
+	public boolean verifyLegalShift(Activity activity, String workerID, String date, String time) {
+		if (activity.hasWorkerId(workerID)) {
+			if (verifyFormatddmmyyyy(date)) {
+				if (allowedHours(time)) {
+					if (activity.addHoursAllowed(time)) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	public void addShift(Activity activity, String workerID, String date, String time) {
@@ -216,6 +220,5 @@ public class ActivityManager {
 	public boolean hasShift(Activity activity, String workerID, String stringDate) {
 		return activity.hasShiftByIdAndDate(workerID, stringDate);
 	}
-
 
 }
