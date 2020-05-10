@@ -127,16 +127,6 @@ public class Activity implements datesInterface{
 		updateTimeLeft();
 	}
 
-	public Shift findShiftByIdAndDate(String workerID, String stringDate) {
-		LocalDate date = stringToDate(stringDate);
-		for (Shift value : shifts) {
-			if (value.getWorkerID().equals(workerID) && value.getDate().equals(date)) {
-				return value;
-			}
-		}
-		return null;
-	}
-
 	public boolean hasShiftByIdAndDate(String workerID, String stringDate) {
 		LocalDate date = stringToDate(stringDate);
 		for (Shift value : shifts) {
@@ -145,15 +135,6 @@ public class Activity implements datesInterface{
 			}
 		}
 		return false;
-	}
-
-	public void getWorkerShifts(String stringDate) {
-		LocalDate date = stringToDate(stringDate);
-		for (Shift value : shifts) {
-			if (value.getDate().equals(date)) {
-				System.out.println(value.toString());
-			}
-		}
 	}
 
 
