@@ -114,7 +114,7 @@ public class WhiteBoxTest {
 	
 	@Test
 	public void allowedhoursInputE() {
-		assertTrue(activityManager.allowedHours("4.5"));
+		assertTrue(activityManager.allowedHours("4.5"));   
 	}
 	
 	
